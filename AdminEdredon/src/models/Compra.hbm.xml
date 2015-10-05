@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 3/10/2015 12:34:52 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="adminedredon" name="pojos.Compra" optimistic-lock="version" table="compra">
+    <id name="idCompras" type="int">
+      <column name="idCompras"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="fechaCompra" type="timestamp">
+      <column length="19" name="fechaCompra"/>
+    </property>
+    <property name="fechaCompraSaldada" type="timestamp">
+      <column length="19" name="fechaCompraSaldada"/>
+    </property>
+    <property name="fechaUltimoAbono" type="timestamp">
+      <column length="19" name="fechaUltimoAbono"/>
+    </property>
+    <property name="sucursal" type="java.lang.Integer">
+      <column name="sucursal"/>
+    </property>
+    <property name="nombreSucursal" type="string">
+      <column length="45" name="nombreSucursal"/>
+    </property>
+    <property name="detalleCompra" type="java.lang.Integer">
+      <column name="detalleCompra"/>
+    </property>
+    <property name="observacion" type="string">
+      <column length="200" name="observacion"/>
+    </property>
+    <property name="abono" type="java.lang.Double">
+      <column name="abono" precision="22" scale="0"/>
+    </property>
+    <property name="importe" type="java.lang.Double">
+      <column name="importe" precision="22" scale="0"/>
+    </property>
+    <property name="estatus" type="java.lang.Boolean">
+      <column name="estatus"/>
+    </property>
+    <property name="tipoDeGasto" type="string">
+      <column length="45" name="tipoDeGasto"/>
+    </property>
+    <property name="proveedorCompra" type="java.lang.Integer">
+      <column name="proveedorCompra"/>
+    </property>
+    <property name="nombreProveedor" type="string">
+      <column length="45" name="nombreProveedor"/>
+    </property>
+    <property name="credito" type="java.lang.Boolean">
+      <column name="credito"/>
+    </property>
+    <property name="tipoGasto" type="string">
+      <column length="45" name="tipoGasto"/>
+    </property>
+    <property name="metodoPago" type="string">
+      <column length="45" name="metodoPago"/>
+    </property>
+  </class>
+</hibernate-mapping>

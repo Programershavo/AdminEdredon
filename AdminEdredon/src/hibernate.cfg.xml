@@ -7,6 +7,19 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/adminEdredon?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">root</property>
+    <mapping resource="models/Producto.hbm.xml"/>
+    <mapping resource="models/Sucursales.hbm.xml"/>
+    <mapping resource="models/Almacen.hbm.xml"/>
+    <mapping resource="models/Venta.hbm.xml"/>
+    <mapping resource="models/Permiso.hbm.xml"/>
+    <mapping resource="models/Proveedores.hbm.xml"/>
+    <mapping resource="models/Clientes.hbm.xml"/>
+    <mapping resource="models/Detalleventa.hbm.xml"/>
+    <mapping resource="models/Entidad.hbm.xml"/>
+    <mapping resource="models/Detallecompra.hbm.xml"/>
+    <mapping resource="models/Usuarios.hbm.xml"/>
+    <mapping resource="models/Detalledegasto.hbm.xml"/>
+    <mapping resource="models/Detallepermiso.hbm.xml"/>
     <mapping resource="models/Compra.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminedredon;
+package ventanas;
 
 import controlBD.AccesoBD;
 import java.util.Date;
@@ -443,8 +443,8 @@ public class RegistrarGastos extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cmbProveedor;
     private javax.swing.JComboBox cmbSucursal;
     private javax.swing.JComboBox cmbTipoDeGasto;
-    private java.util.List<adminedredon.Compra> compraList;
-    private java.util.List<adminedredon.Compra> compraList1;
+    private java.util.List<ventanas.Compra> compraList;
+    private java.util.List<ventanas.Compra> compraList1;
     private javax.persistence.Query compraQuery;
     private javax.persistence.Query compraQuery1;
     private javax.persistence.EntityManager entityManager;

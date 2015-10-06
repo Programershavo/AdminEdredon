@@ -1,4 +1,4 @@
-package adminedredon;
+package ventanas;
 
 import java.beans.PropertyVetoException;
 

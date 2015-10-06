@@ -22,7 +22,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;adminedredon.Compra&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;ventanas.Compra&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.persistence.Query" name="compraQuery1">
@@ -40,7 +40,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;adminedredon.Compra&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;ventanas.Compra&gt;"/>
       </AuxValues>
     </Component>
   </NonVisualComponents>

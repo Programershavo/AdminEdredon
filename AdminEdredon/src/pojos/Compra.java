@@ -1,10 +1,12 @@
 package pojos;
-// Generated 3/10/2015 12:34:48 PM by Hibernate Tools 4.3.1
+// Generated 6/10/2015 12:22:35 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,11 +22,10 @@ import javax.persistence.TemporalType;
 public class Compra  implements java.io.Serializable {
 
 
-     private int idCompras;
+     private Integer idCompras;
      private Date fechaCompra;
      private Date fechaCompraSaldada;
      private Date fechaUltimoAbono;
-     private Integer sucursal;
      private String nombreSucursal;
      private Integer detalleCompra;
      private String observacion;
@@ -32,7 +33,6 @@ public class Compra  implements java.io.Serializable {
      private Double importe;
      private Boolean estatus;
      private String tipoDeGasto;
-     private Integer proveedorCompra;
      private String nombreProveedor;
      private Boolean credito;
      private String tipoGasto;
@@ -41,16 +41,10 @@ public class Compra  implements java.io.Serializable {
     public Compra() {
     }
 
-	
-    public Compra(int idCompras) {
-        this.idCompras = idCompras;
-    }
-    public Compra(int idCompras, Date fechaCompra, Date fechaCompraSaldada, Date fechaUltimoAbono, Integer sucursal, String nombreSucursal, Integer detalleCompra, String observacion, Double abono, Double importe, Boolean estatus, String tipoDeGasto, Integer proveedorCompra, String nombreProveedor, Boolean credito, String tipoGasto, String metodoPago) {
-       this.idCompras = idCompras;
+    public Compra(Date fechaCompra, Date fechaCompraSaldada, Date fechaUltimoAbono, String nombreSucursal, Integer detalleCompra, String observacion, Double abono, Double importe, Boolean estatus, String tipoDeGasto, String nombreProveedor, Boolean credito, String tipoGasto, String metodoPago) {
        this.fechaCompra = fechaCompra;
        this.fechaCompraSaldada = fechaCompraSaldada;
        this.fechaUltimoAbono = fechaUltimoAbono;
-       this.sucursal = sucursal;
        this.nombreSucursal = nombreSucursal;
        this.detalleCompra = detalleCompra;
        this.observacion = observacion;
@@ -58,22 +52,21 @@ public class Compra  implements java.io.Serializable {
        this.importe = importe;
        this.estatus = estatus;
        this.tipoDeGasto = tipoDeGasto;
-       this.proveedorCompra = proveedorCompra;
        this.nombreProveedor = nombreProveedor;
        this.credito = credito;
        this.tipoGasto = tipoGasto;
        this.metodoPago = metodoPago;
     }
    
-     @Id 
+     @Id @GeneratedValue(strategy=IDENTITY)
 
     
     @Column(name="idCompras", unique=true, nullable=false)
-    public int getIdCompras() {
+    public Integer getIdCompras() {
         return this.idCompras;
     }
     
-    public void setIdCompras(int idCompras) {
+    public void setIdCompras(Integer idCompras) {
         this.idCompras = idCompras;
     }
 
@@ -105,16 +98,6 @@ public class Compra  implements java.io.Serializable {
     
     public void setFechaUltimoAbono(Date fechaUltimoAbono) {
         this.fechaUltimoAbono = fechaUltimoAbono;
-    }
-
-    
-    @Column(name="sucursal")
-    public Integer getSucursal() {
-        return this.sucursal;
-    }
-    
-    public void setSucursal(Integer sucursal) {
-        this.sucursal = sucursal;
     }
 
     
@@ -185,16 +168,6 @@ public class Compra  implements java.io.Serializable {
     
     public void setTipoDeGasto(String tipoDeGasto) {
         this.tipoDeGasto = tipoDeGasto;
-    }
-
-    
-    @Column(name="proveedorCompra")
-    public Integer getProveedorCompra() {
-        return this.proveedorCompra;
-    }
-    
-    public void setProveedorCompra(Integer proveedorCompra) {
-        this.proveedorCompra = proveedorCompra;
     }
 
     

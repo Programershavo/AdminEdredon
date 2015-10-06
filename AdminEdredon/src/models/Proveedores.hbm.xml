@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 6/10/2015 12:22:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="adminedredon" name="pojos.Proveedores" optimistic-lock="version" table="proveedores">
+    <id name="idProveedor" type="int">
+      <column name="idProveedor"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="nombre" type="string">
+      <column length="45" name="nombre" not-null="true"/>
+    </property>
+    <property name="rfc" type="string">
+      <column length="20" name="RFC"/>
+    </property>
+    <property name="calle" type="string">
+      <column length="45" name="calle"/>
+    </property>
+    <property name="noExterior" type="java.lang.Integer">
+      <column name="noExterior"/>
+    </property>
+    <property name="noInterior" type="java.lang.Integer">
+      <column name="noInterior"/>
+    </property>
+    <property name="referencia" type="string">
+      <column length="100" name="referencia"/>
+    </property>
+    <property name="cp" type="string">
+      <column length="10" name="cp"/>
+    </property>
+    <property name="telFijo" type="string">
+      <column length="45" name="telFijo"/>
+    </property>
+    <property name="telMovil" type="string">
+      <column length="45" name="telMovil"/>
+    </property>
+    <property name="email" type="string">
+      <column length="45" name="email"/>
+    </property>
+    <property name="pais" type="string">
+      <column length="45" name="pais"/>
+    </property>
+    <property name="estado" type="string">
+      <column length="45" name="estado"/>
+    </property>
+    <property name="localidad" type="string">
+      <column length="45" name="localidad"/>
+    </property>
+  </class>
+</hibernate-mapping>

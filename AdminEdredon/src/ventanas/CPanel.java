@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminedredon;
+package ventanas;
 
+import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
@@ -16,12 +17,17 @@ import javax.swing.JOptionPane;
  */
 public class CPanel extends javax.swing.JFrame {
 
+    public Image imagen = new ImageIcon(getClass().getResource("/IconosGenerales/MoneyBag.png")).getImage();
+
     /**
      * Creates new form CPanel
      */
     public CPanel() {
         initComponents();
         jmiGastos.setEnabled(true);
+        this.setExtendedState(MAXIMIZED_BOTH);
+        this.setTitle("Colchas Castillo");
+        this.setIconImage(imagen);
     }
 
     /**
@@ -68,7 +74,6 @@ public class CPanel extends javax.swing.JFrame {
         mnuAcercaDeSalesTeDispatcher = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(909, 580));
 
         menuBar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
@@ -462,14 +467,14 @@ public class CPanel extends javax.swing.JFrame {
 
     private void jmiClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiClienteActionPerformed
         try {
-            registroProducto regProducto = new registroProducto();
-            if (exist(regProducto) == false) {
-                desktop.add(regProducto);
-                regProducto.setVisible(true);
-                regProducto.setLocation((desktop.getWidth() - regProducto.getWidth()) / 2,
-                        (desktop.getHeight() - regProducto.getHeight()) / 2);
+            RegistroCliente registroCliente = new RegistroCliente();
+            if (exist(registroCliente) == false) {
+                desktop.add(registroCliente);
+                registroCliente.setVisible(true);
+                registroCliente.setLocation((desktop.getWidth() - registroCliente.getWidth()) / 2,
+                        (desktop.getHeight() - registroCliente.getHeight()) / 2);
             } else {
-                regProducto.dispose();
+                registroCliente.dispose();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);

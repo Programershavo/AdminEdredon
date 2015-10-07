@@ -1,9 +1,11 @@
 package pojos;
-// Generated 6/10/2015 12:22:35 PM by Hibernate Tools 4.3.1
+// Generated 6/10/2015 10:41:12 PM by Hibernate Tools 4.3.1
 
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -17,60 +19,66 @@ import javax.persistence.Table;
 public class Proveedores  implements java.io.Serializable {
 
 
-     private int idProveedor;
+     private Integer idProveedor;
+     private Integer folio;
      private String nombre;
      private String rfc;
      private String calle;
      private Integer noExterior;
      private Integer noInterior;
-     private String referencia;
+     private String colonia;
      private String cp;
      private String telFijo;
      private String telMovil;
      private String email;
      private String pais;
      private String estado;
-     private String localidad;
+     private String municipio;
 
     public Proveedores() {
     }
 
-	
-    public Proveedores(int idProveedor, String nombre) {
-        this.idProveedor = idProveedor;
-        this.nombre = nombre;
-    }
-    public Proveedores(int idProveedor, String nombre, String rfc, String calle, Integer noExterior, Integer noInterior, String referencia, String cp, String telFijo, String telMovil, String email, String pais, String estado, String localidad) {
-       this.idProveedor = idProveedor;
+    public Proveedores(Integer folio, String nombre, String rfc, String calle, Integer noExterior, Integer noInterior, String colonia, String cp, String telFijo, String telMovil, String email, String pais, String estado, String municipio) {
+       this.folio = folio;
        this.nombre = nombre;
        this.rfc = rfc;
        this.calle = calle;
        this.noExterior = noExterior;
        this.noInterior = noInterior;
-       this.referencia = referencia;
+       this.colonia = colonia;
        this.cp = cp;
        this.telFijo = telFijo;
        this.telMovil = telMovil;
        this.email = email;
        this.pais = pais;
        this.estado = estado;
-       this.localidad = localidad;
+       this.municipio = municipio;
     }
    
-     @Id 
+     @Id @GeneratedValue(strategy=IDENTITY)
 
     
     @Column(name="idProveedor", unique=true, nullable=false)
-    public int getIdProveedor() {
+    public Integer getIdProveedor() {
         return this.idProveedor;
     }
     
-    public void setIdProveedor(int idProveedor) {
+    public void setIdProveedor(Integer idProveedor) {
         this.idProveedor = idProveedor;
     }
 
     
-    @Column(name="nombre", nullable=false, length=45)
+    @Column(name="folio")
+    public Integer getFolio() {
+        return this.folio;
+    }
+    
+    public void setFolio(Integer folio) {
+        this.folio = folio;
+    }
+
+    
+    @Column(name="nombre", length=45)
     public String getNombre() {
         return this.nombre;
     }
@@ -120,13 +128,13 @@ public class Proveedores  implements java.io.Serializable {
     }
 
     
-    @Column(name="referencia", length=100)
-    public String getReferencia() {
-        return this.referencia;
+    @Column(name="colonia", length=50)
+    public String getColonia() {
+        return this.colonia;
     }
     
-    public void setReferencia(String referencia) {
-        this.referencia = referencia;
+    public void setColonia(String colonia) {
+        this.colonia = colonia;
     }
 
     
@@ -190,13 +198,13 @@ public class Proveedores  implements java.io.Serializable {
     }
 
     
-    @Column(name="localidad", length=45)
-    public String getLocalidad() {
-        return this.localidad;
+    @Column(name="municipio", length=45)
+    public String getMunicipio() {
+        return this.municipio;
     }
     
-    public void setLocalidad(String localidad) {
-        this.localidad = localidad;
+    public void setMunicipio(String municipio) {
+        this.municipio = municipio;
     }
 
 

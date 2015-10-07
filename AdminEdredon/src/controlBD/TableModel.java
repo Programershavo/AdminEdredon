@@ -68,7 +68,7 @@ public class TableModel extends AbstractTableModel {
 
     private String[] getColumnNames() {
         switch (tablaACargar) {
-            case "Compras":
+            case "Compra":
                 titulosDeColumnas = headerCompra;
                 break;
         }
@@ -87,7 +87,7 @@ public class TableModel extends AbstractTableModel {
         //Elige la accion por el nombre de la pestaña activa
         switch (tablaACargar) {
             //Carga los pagos de los clietes
-            case "Compras":
+            case "Compra":
                 try {
                     while (listaDeObjetos.hasNext()) {
                         while (contCol < numColumnas && listaDeObjetos.hasNext()) {

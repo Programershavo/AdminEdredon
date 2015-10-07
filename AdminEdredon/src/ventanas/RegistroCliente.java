@@ -6,6 +6,7 @@
 package ventanas;
 
 import controlBD.AccesoBD;
+import java.beans.PropertyVetoException;
 import pojos.Clientes;
 
 /**
@@ -191,6 +192,11 @@ public class RegistroCliente extends javax.swing.JInternalFrame {
         btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(153, 0, 0));
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 102, 153));
@@ -256,15 +262,15 @@ public class RegistroCliente extends javax.swing.JInternalFrame {
                         .addGap(10, 10, 10)
                         .addComponent(jLabel14))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addContainerGap()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNoExterior, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtNoInterior, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNoExterior, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCPostal, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -378,13 +384,16 @@ public class RegistroCliente extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(18, 18, 18)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtNoInterior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtNoExterior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCPostal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCPostal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel9))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(txtNoInterior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(txtNoExterior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -395,7 +404,7 @@ public class RegistroCliente extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(lblPais))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -453,22 +462,34 @@ public class RegistroCliente extends javax.swing.JInternalFrame {
         cliente.setNombre(txtNombre.getText());
         cliente.setRfc(txtRFC.getText());
         cliente.setCalle(txtCalle.getText());
-        //cliente.setColonia(txtColonia.getText());
-        //cliente.setNoInterior(Integer.parseInt(txtNoInterior.getText()));
-        //cliente.setNoExterior(Integer.parseInt(txtNoExterior.getText()));
+        cliente.setColonia(txtColonia.getText());
+        if (!txtNoInterior.getText().trim().equals("")) {
+            cliente.setNoInterior(Integer.parseInt(txtNoInterior.getText()));
+        }
+        if (!txtNoExterior.getText().trim().equals("")) {
+            cliente.setNoExterior(Integer.parseInt(txtNoExterior.getText()));
+        }
         cliente.setCp(txtCPostal.getText());
-        //cliente.setMunicipio(txtMunicipio.getText());
+        cliente.setMunicipio(txtMunicipio.getText());
         cliente.setEstado(cmbEstado.getSelectedItem().toString());
         cliente.setTelFijo(txtTelefonoFijo.getText());
         cliente.setTelMovil(txtTelefonoCelular.getText());
         cliente.setEmail(txtEmail.getText());
         cliente.setPais("Mexico");
-        //cliente.setLimiteCredito(txtLimiteCredito.getText());
-        cliente.setCreditoAprobado(Double.parseDouble(txtCreditoAprobado.getText()));
         acceso.add(cliente);
         limpiar();
     }//GEN-LAST:event_btnAceptarActionPerformed
-    
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        try {
+            this.setClosed(true);
+            System.gc();
+        } catch (PropertyVetoException ex) {
+            this.dispose();
+            System.gc();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
     private void limpiar() {
         txtNombre.setText("");
         txtCPostal.setText("");
@@ -482,6 +503,8 @@ public class RegistroCliente extends javax.swing.JInternalFrame {
         txtNoInterior.setText("");
         cmbEstado.setSelectedIndex(0);
         txtRFC.setText("");
+        txtMunicipio.setText("");
+        txtCalle.setText("");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;

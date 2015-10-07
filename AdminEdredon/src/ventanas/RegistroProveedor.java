@@ -6,6 +6,7 @@
 package ventanas;
 
 import controlBD.AccesoBD;
+import java.beans.PropertyVetoException;
 import pojos.Proveedores;
 
 /**
@@ -164,6 +165,11 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
         btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(153, 0, 0));
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 102, 153));
@@ -363,11 +369,15 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
         proveedor.setNombre(txtNombre.getText());
         proveedor.setRfc(txtRFC.getText());
         proveedor.setCalle(txtCalle.getText());
-        //proveedor.setColonia(txtColonia.getText());
-        //cliente.setNoInterior(Integer.parseInt(txtNoInterior.getText()));
-        //cliente.setNoExterior(Integer.parseInt(txtNoExterior.getText()));
+        proveedor.setColonia(txtColonia.getText());
+        if (!txtNoInterior.getText().trim().equals("")) {
+            proveedor.setNoInterior(Integer.parseInt(txtNoInterior.getText()));
+        }
+        if (!txtNoExterior.getText().trim().equals("")) {
+            proveedor.setNoExterior(Integer.parseInt(txtNoExterior.getText()));
+        }
         proveedor.setCp(txtCPostal.getText());
-        //cliente.setMunicipio(txtMunicipio.getText());
+        proveedor.setMunicipio(txtMunicipio.getText());
         proveedor.setEstado(cmbEstado.getSelectedItem().toString());
         proveedor.setTelFijo(txtTelefonoFijo.getText());
         proveedor.setEmail(txtEmail.getText());
@@ -375,6 +385,16 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
         acceso.add(proveedor);
         limpiar();
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        try {
+            this.setClosed(true);
+            System.gc();
+        } catch (PropertyVetoException ex) {
+            this.dispose();
+            System.gc();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void limpiar() {
         txtNombre.setText("");

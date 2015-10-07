@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 6/10/2015 12:22:36 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 6/10/2015 10:41:13 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
   <class catalog="adminedredon" name="pojos.Proveedores" optimistic-lock="version" table="proveedores">
-    <id name="idProveedor" type="int">
+    <id name="idProveedor" type="java.lang.Integer">
       <column name="idProveedor"/>
-      <generator class="assigned"/>
+      <generator class="identity"/>
     </id>
+    <property name="folio" type="java.lang.Integer">
+      <column name="folio"/>
+    </property>
     <property name="nombre" type="string">
-      <column length="45" name="nombre" not-null="true"/>
+      <column length="45" name="nombre"/>
     </property>
     <property name="rfc" type="string">
       <column length="20" name="RFC"/>
@@ -22,8 +25,8 @@
     <property name="noInterior" type="java.lang.Integer">
       <column name="noInterior"/>
     </property>
-    <property name="referencia" type="string">
-      <column length="100" name="referencia"/>
+    <property name="colonia" type="string">
+      <column length="50" name="colonia"/>
     </property>
     <property name="cp" type="string">
       <column length="10" name="cp"/>
@@ -43,8 +46,8 @@
     <property name="estado" type="string">
       <column length="45" name="estado"/>
     </property>
-    <property name="localidad" type="string">
-      <column length="45" name="localidad"/>
+    <property name="municipio" type="string">
+      <column length="45" name="municipio"/>
     </property>
   </class>
 </hibernate-mapping>

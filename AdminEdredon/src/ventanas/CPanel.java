@@ -6,6 +6,8 @@
 package ventanas;
 
 import java.awt.Image;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
@@ -28,6 +30,16 @@ public class CPanel extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setTitle("Colchas Castillo");
         this.setIconImage(imagen);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
+                mensajeSalir();
+            }
+        });
+        //hacer invisibles los menus de respaldar y restablecer DB
+        //funcionalidad agregada posteriormente
+        mnuProgramaRespaldo.setVisible(false);
+        mnuProgramaRestaurar.setVisible(false);
     }
 
     /**
@@ -352,7 +364,7 @@ public class CPanel extends javax.swing.JFrame {
         int res = JOptionPane.showConfirmDialog(this, "¿Estas seguro que quieres cerrar el programa?", "Salir", 0);
         if (res == 0) {
             Icon icono = new ImageIcon(getClass().getResource("/IconosEspecializados/Smile.png"));
-            JOptionPane.showMessageDialog(this, "Sales Tea Dispatcher te desea" + "\n" + "un excelente día.", "Gracias por tu trabajo", JOptionPane.PLAIN_MESSAGE, icono);
+            JOptionPane.showMessageDialog(this, "Colchas Castillo te desea" + "\n" + "un excelente día.", "Gracias por tu trabajo", JOptionPane.PLAIN_MESSAGE, icono);
             System.exit(0);
         }
     }
@@ -377,13 +389,13 @@ public class CPanel extends javax.swing.JFrame {
     }
     private void jmiGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGastosActionPerformed
         try {
-            RegistrarGastos regGasto = new RegistrarGastos();
-            if (exist(regGasto) == false) {
-                desktop.add(regGasto);
-                regGasto.setVisible(true);
-                regGasto.setLocation((desktop.getWidth() - regGasto.getWidth()) / 2, (desktop.getHeight() - regGasto.getHeight()) / 2);
+            RegistroGasto registroGasto = new RegistroGasto();
+            if (exist(registroGasto) == false) {
+                desktop.add(registroGasto);
+                registroGasto.setVisible(true);
+                registroGasto.setLocation((desktop.getWidth() - registroGasto.getWidth()) / 2, (desktop.getHeight() - registroGasto.getHeight()) / 2);
             } else {
-                regGasto.dispose();
+                registroGasto.dispose();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);

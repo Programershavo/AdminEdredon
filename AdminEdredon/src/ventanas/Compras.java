@@ -45,7 +45,7 @@ import javax.persistence.Transient;
     @NamedQuery(name = "Compra.findByCredito", query = "SELECT c FROM Compra c WHERE c.credito = :credito"),
     @NamedQuery(name = "Compra.findByTipoGasto", query = "SELECT c FROM Compra c WHERE c.tipoGasto = :tipoGasto"),
     @NamedQuery(name = "Compra.findByMetodoPago", query = "SELECT c FROM Compra c WHERE c.metodoPago = :metodoPago")})
-public class Compra implements Serializable {
+public class Compras implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
@@ -90,10 +90,10 @@ public class Compra implements Serializable {
     @Column(name = "metodoPago")
     private String metodoPago;
 
-    public Compra() {
+    public Compras() {
     }
 
-    public Compra(Integer idCompras) {
+    public Compras(Integer idCompras) {
         this.idCompras = idCompras;
     }
 
@@ -277,10 +277,10 @@ public class Compra implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Compra)) {
+        if (!(object instanceof Compras)) {
             return false;
         }
-        Compra other = (Compra) object;
+        Compras other = (Compras) object;
         if ((this.idCompras == null && other.idCompras != null) || (this.idCompras != null && !this.idCompras.equals(other.idCompras))) {
             return false;
         }

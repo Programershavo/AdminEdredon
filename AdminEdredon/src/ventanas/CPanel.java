@@ -80,7 +80,7 @@ public class CPanel extends javax.swing.JFrame {
         mnuCatalogosEmpleados = new javax.swing.JMenuItem();
         mnuCatalogosProveedores = new javax.swing.JMenuItem();
         mnuCatalogosStock = new javax.swing.JMenuItem();
-        mnuCatalogosCategorias = new javax.swing.JMenuItem();
+        mnuCatalogoGastos = new javax.swing.JMenuItem();
         mnuCatalogosSubcategorias = new javax.swing.JMenuItem();
         mnuCatalogosPermisos = new javax.swing.JMenuItem();
         mnuAcercaDe = new javax.swing.JMenu();
@@ -255,7 +255,7 @@ public class CPanel extends javax.swing.JFrame {
         });
         mnuCatalogos.add(mnuCatalogosProductos);
 
-        mnuCatalogosEmpleados.setText("Empleados");
+        mnuCatalogosEmpleados.setText("Clientes");
         mnuCatalogosEmpleados.setEnabled(false);
         mnuCatalogosEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -282,14 +282,13 @@ public class CPanel extends javax.swing.JFrame {
         });
         mnuCatalogos.add(mnuCatalogosStock);
 
-        mnuCatalogosCategorias.setText("Categorias");
-        mnuCatalogosCategorias.setEnabled(false);
-        mnuCatalogosCategorias.addActionListener(new java.awt.event.ActionListener() {
+        mnuCatalogoGastos.setText("Gastos");
+        mnuCatalogoGastos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCatalogosCategoriasActionPerformed(evt);
+                mnuCatalogoGastosActionPerformed(evt);
             }
         });
-        mnuCatalogos.add(mnuCatalogosCategorias);
+        mnuCatalogos.add(mnuCatalogoGastos);
 
         mnuCatalogosSubcategorias.setText("Subcategorias");
         mnuCatalogosSubcategorias.setEnabled(false);
@@ -458,9 +457,20 @@ public class CPanel extends javax.swing.JFrame {
 
     }//GEN-LAST:event_mnuCatalogosStockActionPerformed
 
-    private void mnuCatalogosCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCatalogosCategoriasActionPerformed
-
-    }//GEN-LAST:event_mnuCatalogosCategoriasActionPerformed
+    private void mnuCatalogoGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCatalogoGastosActionPerformed
+        try {
+            CatalogoGastos catalogoGastos = new CatalogoGastos();
+            if (exist(catalogoGastos) == false) {
+                desktop.add(catalogoGastos);
+                catalogoGastos.setVisible(true);
+                catalogoGastos.setLocation((desktop.getWidth() - catalogoGastos.getWidth()) / 2, (desktop.getHeight() - catalogoGastos.getHeight()) / 2);
+            } else {
+                catalogoGastos.dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+        }
+    }//GEN-LAST:event_mnuCatalogoGastosActionPerformed
 
     private void mnuCatalogosSubcategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCatalogosSubcategoriasActionPerformed
 
@@ -520,7 +530,7 @@ public class CPanel extends javax.swing.JFrame {
 
     private void jmiProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiProductoActionPerformed
         try {
-            RegistroProducto registroProducto = new RegistroProducto();
+            RegistrarProducto registroProducto = new RegistrarProducto();
             if (exist(registroProducto) == false) {
                 desktop.add(registroProducto);
                 registroProducto.setVisible(true);
@@ -581,8 +591,8 @@ public class CPanel extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu mnuAcercaDe;
     private javax.swing.JMenuItem mnuAcercaDeSalesTeDispatcher;
+    private javax.swing.JMenuItem mnuCatalogoGastos;
     private javax.swing.JMenu mnuCatalogos;
-    private javax.swing.JMenuItem mnuCatalogosCategorias;
     private javax.swing.JMenuItem mnuCatalogosEmpleados;
     private javax.swing.JMenuItem mnuCatalogosPermisos;
     private javax.swing.JMenuItem mnuCatalogosProductos;

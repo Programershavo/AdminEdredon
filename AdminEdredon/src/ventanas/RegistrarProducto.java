@@ -13,12 +13,12 @@ import pojos.Producto;
  *
  * @author Daniel
  */
-public class RegistroProducto extends javax.swing.JInternalFrame {
+public class RegistrarProducto extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form registroProducto
      */
-    public RegistroProducto() {
+    public RegistrarProducto() {
         initComponents();
     }
 
@@ -405,7 +405,7 @@ public class RegistroProducto extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 583, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
         );

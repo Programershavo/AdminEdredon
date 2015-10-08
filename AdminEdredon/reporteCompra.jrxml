@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b0cd253f-6274-407f-87b2-0d7c333131ca">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="320"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="Compra" uuid="26145a69-ae60-49ac-a725-6bac93318a86">
+		<queryString language="SQL">
+			<![CDATA[SELECT nombreSucursal, fechaCompra, tipoDeGasto, nombreProveedor, metodoPago, observacion, importe from adminedredon.compra;]]>
+		</queryString>
+		<field name="nombreSucursal" class="java.lang.String"/>
+		<field name="fechaCompra" class="java.sql.Timestamp"/>
+		<field name="tipoDeGasto" class="java.lang.String"/>
+		<field name="nombreProveedor" class="java.lang.String"/>
+		<field name="metodoPago" class="java.lang.String"/>
+		<field name="observacion" class="java.lang.String"/>
+		<field name="importe" class="java.lang.Double"/>
+	</subDataset>
+	<queryString>
+		<![CDATA[SELECT nombreSucursal, fechaCompra, tipoDeGasto, nombreProveedor, metodoPago, observacion, importe from adminedredon.compra;]]>
+	</queryString>
+	<field name="nombreSucursal" class="java.lang.String"/>
+	<field name="fechaCompra" class="java.sql.Timestamp"/>
+	<field name="tipoDeGasto" class="java.lang.String"/>
+	<field name="nombreProveedor" class="java.lang.String"/>
+	<field name="metodoPago" class="java.lang.String"/>
+	<field name="observacion" class="java.lang.String"/>
+	<field name="importe" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="dee7d9af-81ce-412a-ae6c-a6dad2f89a3c" x="251" y="23" width="301" height="32" forecolor="#666666"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de Gastos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<line>
+				<reportElement uuid="f61ff6af-1676-4f07-ab38-95580cef2574" x="11" y="30" width="780" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="75c9d406-664c-43cb-b62c-1fe52c04c762" x="8" y="6" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Sucursal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d3c275ad-ac03-4c5b-99c4-009e3153c3dd" x="119" y="6" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Fecha de Compra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2224c34e-9366-487c-9d36-bfd5cc20f367" x="230" y="6" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Tipo Gasto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fb5063c8-6178-4fc4-a427-1c807fd4a2c1" x="341" y="6" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Proveedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="80ba693b-1bae-4fd8-acf0-d5b23bf5e75c" x="452" y="6" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Forma de Pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9bd3abe0-c5a9-49ec-82a4-93f5b94deaed" x="563" y="6" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Observación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a04900af-3296-4c2e-a649-63f09e67a208" x="682" y="6" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[importe]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<line>
+				<reportElement uuid="bb29268d-dbd3-4745-b0e4-c4d86be46ea5" x="11" y="25" width="780" height="1" forecolor="#CCCCCC"/>
+			</line>
+			<textField>
+				<reportElement uuid="1c6fa588-17fc-42a0-8dab-e96f136fd55c" x="8" y="4" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombreSucursal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a8e277d4-84c5-433f-975f-51708c35d3f2" x="119" y="4" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{fechaCompra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8bc1b60-839e-4e55-a22b-d610980b0389" x="230" y="4" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tipoDeGasto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3762155f-80eb-4758-b221-b0f6627487d6" x="341" y="4" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombreProveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0dd7d550-a2c3-46be-8362-3f28df164d78" x="452" y="4" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{metodoPago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7fb225e9-e325-46e0-a94c-375bad26f161" x="563" y="4" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{observacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d17e79df-1e49-485e-949a-8379b74df1a6" x="682" y="4" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{importe}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="28" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement uuid="ed7277fe-c357-4272-a856-2c37c85bbc2f" x="8" y="5" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d48603ce-07ee-418f-a61b-fd0202859b3f" x="682" y="5" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="34586cf7-060b-4d6c-8054-800a22dcd80d" x="762" y="5" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

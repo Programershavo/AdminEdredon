@@ -69,6 +69,7 @@ public class CPanel extends javax.swing.JFrame {
         mnuProveedoresEliminarEditarProveedor = new javax.swing.JMenuItem();
         jmiCliente = new javax.swing.JMenuItem();
         jmiAltaGasto = new javax.swing.JMenuItem();
+        jmiProducto = new javax.swing.JMenuItem();
         mnuReporteEmpleados = new javax.swing.JMenu();
         mnuReportesReporteVenta = new javax.swing.JMenuItem();
         mnuReportesReporteStock = new javax.swing.JMenuItem();
@@ -190,6 +191,14 @@ public class CPanel extends javax.swing.JFrame {
             }
         });
         mnuProveedores.add(jmiAltaGasto);
+
+        jmiProducto.setText("Producto");
+        jmiProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiProductoActionPerformed(evt);
+            }
+        });
+        mnuProveedores.add(jmiProducto);
 
         menuBar.add(mnuProveedores);
 
@@ -509,6 +518,22 @@ public class CPanel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmiAltaGastoActionPerformed
 
+    private void jmiProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiProductoActionPerformed
+        try {
+            RegistroProducto registroProducto = new RegistroProducto();
+            if (exist(registroProducto) == false) {
+                desktop.add(registroProducto);
+                registroProducto.setVisible(true);
+                registroProducto.setLocation((desktop.getWidth() - registroProducto.getWidth()) / 2,
+                        (desktop.getHeight() - registroProducto.getHeight()) / 2);
+            } else {
+                registroProducto.dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+        }
+    }//GEN-LAST:event_jmiProductoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -552,6 +577,7 @@ public class CPanel extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiAltaGasto;
     private javax.swing.JMenuItem jmiCliente;
     private javax.swing.JMenuItem jmiGastos;
+    private javax.swing.JMenuItem jmiProducto;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu mnuAcercaDe;
     private javax.swing.JMenuItem mnuAcercaDeSalesTeDispatcher;

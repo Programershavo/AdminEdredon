@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 7/10/2015 10:48:47 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="adminedredon" name="pojos.Producto" optimistic-lock="version" table="producto">
+    <id name="idProducto" type="java.lang.Integer">
+      <column name="idProducto"/>
+      <generator class="identity"/>
+    </id>
+    <property name="codigoDeBarras" type="string">
+      <column length="45" name="codigoDeBarras"/>
+    </property>
+    <property name="nombre" type="string">
+      <column length="45" name="nombre"/>
+    </property>
+    <property name="size" type="string">
+      <column length="45" name="size"/>
+    </property>
+    <property name="linea" type="string">
+      <column length="45" name="linea"/>
+    </property>
+    <property name="sublinea" type="string">
+      <column length="45" name="sublinea"/>
+    </property>
+    <property name="unidadMedida" type="string">
+      <column length="45" name="unidadMedida"/>
+    </property>
+    <property name="precioVenta" type="java.lang.Double">
+      <column name="precioVenta" precision="22" scale="0"/>
+    </property>
+    <property name="precioCompra" type="java.lang.Double">
+      <column name="precioCompra" precision="22" scale="0"/>
+    </property>
+    <property name="iva" type="java.lang.Double">
+      <column name="iva" precision="22" scale="0"/>
+    </property>
+    <property name="controlStock" type="java.lang.Boolean">
+      <column name="controlStock"/>
+    </property>
+  </class>
+</hibernate-mapping>

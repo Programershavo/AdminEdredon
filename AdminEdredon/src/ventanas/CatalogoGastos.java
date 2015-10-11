@@ -55,6 +55,7 @@ public class CatalogoGastos extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        setTitle("Catálogo de gastos");
 
         jPanel1.setBackground(new java.awt.Color(240, 79, 90));
 
@@ -283,18 +284,30 @@ public class CatalogoGastos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbProveedorActionPerformed
 
     private void btnReiniciaBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciaBuscarActionPerformed
-        sucursal="";
-        tipoDeGasto="";
-        proveedor="";
+        sucursal = "";
+        tipoDeGasto = "";
+        proveedor = "";
         llenarTabla();
     }//GEN-LAST:event_btnReiniciaBuscarActionPerformed
 
     private void btnCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCatalogoActionPerformed
-        try {
-            reportMaker.ReportMaker reporte = new reportMaker.ReportMaker("FROM Compra","Compra");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ha ocurrido un error generando el reporte: " + e, "Error", 0);
-        }      
+
+        //Verifico que la tabla no este vacia
+        if (jtTabla.getRowCount() > 0) {
+            //Si hay registros en la BD genero el reporte
+            reportMaker.ReportMakerNDB reporte = new reportMaker.ReportMakerNDB(jtTabla, "Compra");
+        } else {
+            //Si no existen registros en la base de datos lo reporto al usuario
+            JOptionPane.showMessageDialog(this, "No hay pagos de gasto"
+                    + "existentes." + "\n" + "Introdusca al menos un gasto para "
+                    + "poder generar el reporte.", "No hay gasto", 0);
+        }
+
+//        try {
+//            reportMaker.ReportMaker reporte = new reportMaker.ReportMaker("FROM Compra", "Compra");
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this, "Ha ocurrido un error generando el reporte: " + e, "Error", 0);
+//        }
     }//GEN-LAST:event_btnCatalogoActionPerformed
     private void obtenConsultaPorCombosSelectos() {
         //SOLO LA SUCURSAL

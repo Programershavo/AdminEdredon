@@ -78,6 +78,7 @@ public class RegistroCliente extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        setTitle("Registro de Clientes");
 
         jPanel1.setBackground(new java.awt.Color(240, 79, 90));
 

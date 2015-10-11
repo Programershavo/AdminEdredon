@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class CPanel extends javax.swing.JFrame {
 
-    public Image imagen = new ImageIcon(getClass().getResource("/IconosGenerales/MoneyBag.png")).getImage();
+    public Image imagen = new ImageIcon(getClass().getResource("/IconosEspecializados/iconCastillo.png")).getImage();
 
     /**
      * Creates new form CPanel
@@ -65,10 +65,10 @@ public class CPanel extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnuProgramaSalir = new javax.swing.JMenuItem();
         mnuProveedores = new javax.swing.JMenu();
+        jmiDiarioDeCaja = new javax.swing.JMenuItem();
         jmiGastos = new javax.swing.JMenuItem();
         mnuProveedoresEliminarEditarProveedor = new javax.swing.JMenuItem();
         jmiCliente = new javax.swing.JMenuItem();
-        jmiAltaGasto = new javax.swing.JMenuItem();
         jmiProducto = new javax.swing.JMenuItem();
         mnuReporteEmpleados = new javax.swing.JMenu();
         mnuReportesReporteVenta = new javax.swing.JMenuItem();
@@ -87,6 +87,9 @@ public class CPanel extends javax.swing.JFrame {
         mnuAcercaDeSalesTeDispatcher = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        desktop.setBackground(new java.awt.Color(255, 255, 255));
+        desktop.setImagenDeFondo(new javax.swing.ImageIcon(getClass().getResource("/IconosEspecializados/castilloLogo.png"))); // NOI18N
 
         menuBar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
@@ -158,6 +161,14 @@ public class CPanel extends javax.swing.JFrame {
         mnuProveedores.setText("Registros");
         mnuProveedores.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
+        jmiDiarioDeCaja.setText("Diario de Caja");
+        jmiDiarioDeCaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiDiarioDeCajaActionPerformed(evt);
+            }
+        });
+        mnuProveedores.add(jmiDiarioDeCaja);
+
         jmiGastos.setMnemonic('c');
         jmiGastos.setText("Gastos");
         jmiGastos.addActionListener(new java.awt.event.ActionListener() {
@@ -183,14 +194,6 @@ public class CPanel extends javax.swing.JFrame {
             }
         });
         mnuProveedores.add(jmiCliente);
-
-        jmiAltaGasto.setText("Crear Gasto");
-        jmiAltaGasto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiAltaGastoActionPerformed(evt);
-            }
-        });
-        mnuProveedores.add(jmiAltaGasto);
 
         jmiProducto.setText("Producto");
         jmiProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -358,7 +361,7 @@ public class CPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuProgramaCorteCajaActionPerformed
 
     private void mnuProgramaCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProgramaCerrarSesionActionPerformed
-        Icon icono = new ImageIcon(getClass().getResource("/IconosEspecializados/Smile.png"));
+        Icon icono = new ImageIcon(getClass().getResource("/IconosEspecializados/iconCastillo.png"));
         JOptionPane.showMessageDialog(this, "Sales Tea Dispatcher te desea" + "\n" + "Que tengas un excelente día.", "Gracias por tu trabajo", JOptionPane.PLAIN_MESSAGE, icono);
         Login log = new Login();
         log.setVisible(true);
@@ -371,14 +374,13 @@ public class CPanel extends javax.swing.JFrame {
     private void mensajeSalir() {
         int res = JOptionPane.showConfirmDialog(this, "¿Estas seguro que quieres cerrar el programa?", "Salir", 0);
         if (res == 0) {
-            Icon icono = new ImageIcon(getClass().getResource("/IconosEspecializados/Smile.png"));
+            Icon icono = new ImageIcon(getClass().getResource("/IconosEspecializados/castilloLogo.png"));
             JOptionPane.showMessageDialog(this, "Colchas Castillo te desea" + "\n" + "un excelente día.", "Gracias por tu trabajo", JOptionPane.PLAIN_MESSAGE, icono);
             System.exit(0);
         }
     }
 
     public boolean exist(JInternalFrame frame) throws Exception {
-
         try {
             JInternalFrame iframes[] = desktop.getAllFrames();
             for (int i = 0; i < iframes.length; i++) {
@@ -512,21 +514,21 @@ public class CPanel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmiClienteActionPerformed
 
-    private void jmiAltaGastoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAltaGastoActionPerformed
+    private void jmiDiarioDeCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiDiarioDeCajaActionPerformed
         try {
-            altaGasto altGasto = new altaGasto();
-            if (exist(altGasto) == false) {
-                desktop.add(altGasto);
-                altGasto.setVisible(true);
-                altGasto.setLocation((desktop.getWidth() - altGasto.getWidth()) / 2,
-                        (desktop.getHeight() - altGasto.getHeight()) / 2);
+            DiarioDeCaja diarioDeCaja = new DiarioDeCaja();
+            if (exist(diarioDeCaja) == false) {
+                desktop.add(diarioDeCaja);
+                diarioDeCaja.setVisible(true);
+                diarioDeCaja.setLocation((desktop.getWidth() - diarioDeCaja.getWidth()) / 2,
+                        (desktop.getHeight() - diarioDeCaja.getHeight()) / 2);
             } else {
-                altGasto.dispose();
+                diarioDeCaja.dispose();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
         }
-    }//GEN-LAST:event_jmiAltaGastoActionPerformed
+    }//GEN-LAST:event_jmiDiarioDeCajaActionPerformed
 
     private void jmiProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiProductoActionPerformed
         try {
@@ -584,8 +586,8 @@ public class CPanel extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator6;
-    private javax.swing.JMenuItem jmiAltaGasto;
     private javax.swing.JMenuItem jmiCliente;
+    private javax.swing.JMenuItem jmiDiarioDeCaja;
     private javax.swing.JMenuItem jmiGastos;
     private javax.swing.JMenuItem jmiProducto;
     private javax.swing.JMenuBar menuBar;

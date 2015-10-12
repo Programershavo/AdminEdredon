@@ -76,4 +76,14 @@ public class FechaHerramienta {
             return null;
         }
     }
+
+    //Devuele un java.util.Date desde un String en formato dd-MM-yyyy
+    public static synchronized String formatoYMD(Date fecha) {
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            return formatoDelTexto.format(fecha);
+        } catch (Exception ex) {
+            return null;
+        }
+    }
 }

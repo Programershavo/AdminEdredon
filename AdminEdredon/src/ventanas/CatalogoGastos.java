@@ -6,6 +6,8 @@
 package ventanas;
 
 import controlBD.AccesoBD;
+import herramienta.FechaHerramienta;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,9 +20,11 @@ public class CatalogoGastos extends javax.swing.JInternalFrame {
     String tipoDeGasto = "";
     String proveedor = "";
     String HQL = "";
+    Date fechaInicio;
 
     public CatalogoGastos() {
         initComponents();
+        jdcFecha.setDate(new Date());
         llenarTabla();
     }
 
@@ -312,41 +316,49 @@ public class CatalogoGastos extends javax.swing.JInternalFrame {
     private void obtenConsultaPorCombosSelectos() {
         //SOLO LA SUCURSAL
         if (!sucursal.isEmpty() && tipoDeGasto.isEmpty() && proveedor.isEmpty()) {
-            HQL = "From Compra c WHERE c.nombreSucursal = '" + sucursal + "'";
+            HQL = "From Compra c WHERE c.nombreSucursal = '" + sucursal
+                    + "' AND c.fechaCompra = '" + FechaHerramienta.formatoYMD(jdcFecha.getDate()) + " '";
         }
         //SOLO LA SUCURSAL Y EL TIPO DE GASTO
         if (!sucursal.isEmpty() && !tipoDeGasto.isEmpty() && proveedor.isEmpty()) {
             HQL = "From Compra c WHERE c.nombreSucursal = '" + sucursal
-                    + "' AND " + "c.tipoDeGasto = '" + tipoDeGasto + "' ";
+                    + "' AND " + "c.tipoDeGasto = '" + tipoDeGasto 
+                    + "' AND c.fechaCompra = '" + FechaHerramienta.formatoYMD(jdcFecha.getDate()) + " '";
         }
 
         //SOLO LA SUCURSAL Y EL PROVEEDOR
         if (!sucursal.isEmpty() && tipoDeGasto.isEmpty() && !proveedor.isEmpty()) {
             HQL = "From Compra c WHERE c.nombreSucursal = '" + sucursal
-                    + "' AND " + "c.nombreProveedor = '" + proveedor + "' ";
+                    + "' AND " + "c.nombreProveedor = '" + proveedor
+                    + "' AND c.fechaCompra = '" + FechaHerramienta.formatoYMD(jdcFecha.getDate()) + " '";
         }
         //SOLO LA SUCURSAL, EL TIPO DE GASTO Y EL PROVEEDOR
         if (!sucursal.isEmpty() && !tipoDeGasto.isEmpty() && !proveedor.isEmpty()) {
             HQL = "From Compra c WHERE c.nombreSucursal = '" + sucursal
                     + "' AND " + "c.tipoDeGasto = '" + tipoDeGasto + "' "
-                    + "' AND " + "c.nombreProveedor = '" + proveedor + "' ";
+                    + "' AND " + "c.nombreProveedor = '" + proveedor
+                    + "' AND c.fechaCompra = '" + FechaHerramienta.formatoYMD(jdcFecha.getDate()) + " '";
         }
         //SOLO EL PROVEEDOR Y EL TIPO DE GASTO
         if (!sucursal.isEmpty() && tipoDeGasto.isEmpty() && !proveedor.isEmpty()) {
             HQL = "From Compra c WHERE c.nombreProveedor = '" + proveedor
-                    + "' AND " + "c.tipoDeGasto = '" + tipoDeGasto + "' ";
+                    + "' AND " + "c.tipoDeGasto = '" + tipoDeGasto 
+                    + "' AND c.fechaCompra = '" + FechaHerramienta.formatoYMD(jdcFecha.getDate()) + " '";
         }
         //SOLO EL TIPO DE GASTO
         if (sucursal.isEmpty() && !tipoDeGasto.isEmpty() && proveedor.isEmpty()) {
-            HQL = "From Compra c WHERE c.tipoDeGasto = '" + tipoDeGasto + "'";
+            HQL = "From Compra c WHERE c.tipoDeGasto = '" + tipoDeGasto
+                    + "' AND c.fechaCompra = '" + FechaHerramienta.formatoYMD(jdcFecha.getDate()) + " '";
         }
         //SOLO EL PROVEEDOR
         if (sucursal.isEmpty() && tipoDeGasto.isEmpty() && !proveedor.isEmpty()) {
-            HQL = "From Compra c WHERE c.nombreProveedor = '" + proveedor + "'";
+            HQL = "From Compra c WHERE c.nombreProveedor = '" + proveedor
+                    + "' AND c.fechaCompra = '" + FechaHerramienta.formatoYMD(jdcFecha.getDate()) + " '";
         }
         //TODOS LOS REGISTROS
         if (sucursal.isEmpty() && tipoDeGasto.isEmpty() && proveedor.isEmpty()) {
-            HQL = "From Compra";
+            HQL = "From Compra c WHERE " + "' c.fechaCompra' = '"
+                    + FechaHerramienta.formatoYMD(jdcFecha.getDate()) + " '";
         }
     }
 

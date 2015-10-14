@@ -630,7 +630,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
 
     private void btnBuscarTiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarTiendaActionPerformed
         try {
-            RegistroSucursales catalogoSucursal = new RegistroSucursales();
+            RegistroSucursal catalogoSucursal = new RegistroSucursal();
             if (exist(catalogoSucursal) == false) {
                 CPanel.desktop.add(catalogoSucursal);
                 catalogoSucursal.setVisible(true);

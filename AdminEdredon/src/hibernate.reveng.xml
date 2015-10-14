@@ -2,8 +2,12 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="adminEdredon"/>
-  <table-filter match-name="proveedores"/>
+  <table-filter match-name="sublinea"/>
+  <table-filter match-name="sucursal"/>
+  <table-filter match-name="linea"/>
   <table-filter match-name="producto"/>
-  <table-filter match-name="compra"/>
   <table-filter match-name="clientes"/>
+  <table-filter match-name="compra"/>
+  <table-filter match-name="proveedores"/>
+  <table-filter match-name="venta"/>
 </hibernate-reverse-engineering>

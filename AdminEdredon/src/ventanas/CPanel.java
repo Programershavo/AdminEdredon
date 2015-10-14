@@ -68,10 +68,15 @@ public class CPanel extends javax.swing.JFrame {
         mnuProveedores = new javax.swing.JMenu();
         jmiDiarioDeCaja = new javax.swing.JMenuItem();
         jmiGastos = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
         mnuProveedoresEliminarEditarProveedor = new javax.swing.JMenuItem();
         jmiCliente = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
         jmiProducto = new javax.swing.JMenuItem();
         jmiRegistroSucursales = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        jmiRegistroSublinea = new javax.swing.JMenuItem();
+        jmiRegistroLinea = new javax.swing.JMenuItem();
         mnuReporteEmpleados = new javax.swing.JMenu();
         mnuReportesReporteVenta = new javax.swing.JMenuItem();
         mnuReportesReporteStock = new javax.swing.JMenuItem();
@@ -187,16 +192,17 @@ public class CPanel extends javax.swing.JFrame {
         mnuProveedores.add(jmiDiarioDeCaja);
 
         jmiGastos.setMnemonic('c');
-        jmiGastos.setText("Gastos");
+        jmiGastos.setText("Gastos administrativos");
         jmiGastos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiGastosActionPerformed(evt);
             }
         });
         mnuProveedores.add(jmiGastos);
+        mnuProveedores.add(jSeparator5);
 
         mnuProveedoresEliminarEditarProveedor.setMnemonic('a');
-        mnuProveedoresEliminarEditarProveedor.setText("Proveedores");
+        mnuProveedoresEliminarEditarProveedor.setText("Proveedor");
         mnuProveedoresEliminarEditarProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuProveedoresEliminarEditarProveedorActionPerformed(evt);
@@ -204,13 +210,14 @@ public class CPanel extends javax.swing.JFrame {
         });
         mnuProveedores.add(mnuProveedoresEliminarEditarProveedor);
 
-        jmiCliente.setText("Clientes");
+        jmiCliente.setText("Cliente");
         jmiCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiClienteActionPerformed(evt);
             }
         });
         mnuProveedores.add(jmiCliente);
+        mnuProveedores.add(jSeparator4);
 
         jmiProducto.setText("Producto");
         jmiProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -220,13 +227,30 @@ public class CPanel extends javax.swing.JFrame {
         });
         mnuProveedores.add(jmiProducto);
 
-        jmiRegistroSucursales.setText("Sucursales");
+        jmiRegistroSucursales.setText("Sucursal");
         jmiRegistroSucursales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiRegistroSucursalesActionPerformed(evt);
             }
         });
         mnuProveedores.add(jmiRegistroSucursales);
+        mnuProveedores.add(jSeparator3);
+
+        jmiRegistroSublinea.setText("Linea");
+        jmiRegistroSublinea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiRegistroSublineaActionPerformed(evt);
+            }
+        });
+        mnuProveedores.add(jmiRegistroSublinea);
+
+        jmiRegistroLinea.setText("Sublinea");
+        jmiRegistroLinea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiRegistroLineaActionPerformed(evt);
+            }
+        });
+        mnuProveedores.add(jmiRegistroLinea);
 
         menuBar.add(mnuProveedores);
 
@@ -572,7 +596,7 @@ public class CPanel extends javax.swing.JFrame {
 
     private void jmiRegistroSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRegistroSucursalesActionPerformed
         try {
-            RegistroSucursales registroSucursales = new RegistroSucursales();
+            RegistroSucursal registroSucursales = new RegistroSucursal();
             if (exist(registroSucursales) == false) {
                 desktop.add(registroSucursales);
                 registroSucursales.setVisible(true);
@@ -599,6 +623,36 @@ public class CPanel extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
         }
     }//GEN-LAST:event_jmiCatalogoCreditosActionPerformed
+
+    private void jmiRegistroSublineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRegistroSublineaActionPerformed
+        try {
+            RegistroSublinea registroSublinea = new RegistroSublinea();
+            if (exist(registroSublinea) == false) {
+                desktop.add(registroSublinea);
+                registroSublinea.setVisible(true);
+                registroSublinea.setLocation((desktop.getWidth() - registroSublinea.getWidth()) / 2, (desktop.getHeight() - registroSublinea.getHeight()) / 2);
+            } else {
+                registroSublinea.dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+        }
+    }//GEN-LAST:event_jmiRegistroSublineaActionPerformed
+
+    private void jmiRegistroLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRegistroLineaActionPerformed
+        try {
+            RegistroLinea registroLinea = new RegistroLinea();
+            if (exist(registroLinea) == false) {
+                desktop.add(registroLinea);
+                registroLinea.setVisible(true);
+                registroLinea.setLocation((desktop.getWidth() - registroLinea.getWidth()) / 2, (desktop.getHeight() - registroLinea.getHeight()) / 2);
+            } else {
+                registroLinea.dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+        }
+    }//GEN-LAST:event_jmiRegistroLineaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -639,6 +693,9 @@ public class CPanel extends javax.swing.JFrame {
     public static JCDesktopPane.JCDesktopPane desktop;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JMenuItem jmiCatalogoClientes;
     private javax.swing.JMenuItem jmiCatalogoCreditos;
@@ -648,6 +705,8 @@ public class CPanel extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiDiarioDeCaja;
     private javax.swing.JMenuItem jmiGastos;
     private javax.swing.JMenuItem jmiProducto;
+    private javax.swing.JMenuItem jmiRegistroLinea;
+    private javax.swing.JMenuItem jmiRegistroSublinea;
     private javax.swing.JMenuItem jmiRegistroSucursales;
     private javax.swing.JPanel jpPrincipal;
     private javax.swing.JMenuBar menuBar;

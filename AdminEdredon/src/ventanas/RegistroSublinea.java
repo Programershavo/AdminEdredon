@@ -7,6 +7,7 @@ package ventanas;
 
 import controlBD.AccesoBD;
 import java.beans.PropertyVetoException;
+import pojos.Sublinea;
 
 /**
  *
@@ -211,16 +212,15 @@ public class RegistroSublinea extends javax.swing.JInternalFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         AccesoBD acceso = new AccesoBD();
-        //        Linea producto = new Linea();
-        //        producto.setNombre(txtNombre.getText());
-        //        producto.setCodigoDeBarras(txtCodigoBarras.getText());
-        //        producto.setLinea(txtLinea.getText());
-        //        producto.setSublinea(txtSublinea.getText());
-        //        producto.setUnidadMedida("Pieza");
-        //        acceso.add(producto);
-        //        limpiar();
+        Sublinea sublinea = new Sublinea();
+        sublinea.setNombre(txtNombre.getText());
+        acceso.add(sublinea);
+        limpiar();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    private void limpiar(){
+        txtNombre.setText("");
+    }
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         try {
             this.setClosed(true);

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/10/2015 08:49:06 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="adminedredon" name="pojos.Sublinea" optimistic-lock="version" table="sublinea">
+    <id name="idSublinea" type="java.lang.Integer">
+      <column name="idSublinea"/>
+      <generator class="identity"/>
+    </id>
+    <property name="nombre" type="string">
+      <column length="45" name="nombre"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -8,6 +8,10 @@
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">root</property>
     <mapping resource="models/Producto.hbm.xml"/>
+    <mapping resource="models/Sublinea.hbm.xml"/>
+    <mapping resource="models/Venta.hbm.xml"/>
+    <mapping resource="models/Linea.hbm.xml"/>
+    <mapping resource="models/Sucursal.hbm.xml"/>
     <mapping resource="models/Proveedores.hbm.xml"/>
     <mapping resource="models/Compra.hbm.xml"/>
     <mapping resource="models/Clientes.hbm.xml"/>

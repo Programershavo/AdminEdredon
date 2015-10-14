@@ -51,6 +51,7 @@ public class CPanel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jpPrincipal = new javax.swing.JPanel();
         desktop = new JCDesktopPane.JCDesktopPane();
         menuBar = new javax.swing.JMenuBar();
         mnuPrograma = new javax.swing.JMenu();
@@ -70,26 +71,42 @@ public class CPanel extends javax.swing.JFrame {
         mnuProveedoresEliminarEditarProveedor = new javax.swing.JMenuItem();
         jmiCliente = new javax.swing.JMenuItem();
         jmiProducto = new javax.swing.JMenuItem();
+        jmiRegistroSucursales = new javax.swing.JMenuItem();
         mnuReporteEmpleados = new javax.swing.JMenu();
         mnuReportesReporteVenta = new javax.swing.JMenuItem();
         mnuReportesReporteStock = new javax.swing.JMenuItem();
         mnuReportesReporteProductos = new javax.swing.JMenuItem();
         mnuReportesReporteEmpleados = new javax.swing.JMenuItem();
         mnuCatalogos = new javax.swing.JMenu();
-        mnuCatalogosProductos = new javax.swing.JMenuItem();
-        mnuCatalogosEmpleados = new javax.swing.JMenuItem();
-        mnuCatalogosProveedores = new javax.swing.JMenuItem();
-        mnuCatalogosStock = new javax.swing.JMenuItem();
         mnuCatalogoGastos = new javax.swing.JMenuItem();
-        mnuCatalogosSubcategorias = new javax.swing.JMenuItem();
-        mnuCatalogosPermisos = new javax.swing.JMenuItem();
+        jmiCatalogoClientes = new javax.swing.JMenuItem();
+        jmiCatalogoLineas = new javax.swing.JMenuItem();
+        jmiCatalogoSublineas = new javax.swing.JMenuItem();
+        jmiCatalogoCreditos = new javax.swing.JMenuItem();
         mnuAcercaDe = new javax.swing.JMenu();
         mnuAcercaDeSalesTeDispatcher = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jpPrincipal.setBackground(new java.awt.Color(255, 255, 255));
 
         desktop.setBackground(new java.awt.Color(255, 255, 255));
         desktop.setImagenDeFondo(new javax.swing.ImageIcon(getClass().getResource("/IconosEspecializados/castilloLogo.png"))); // NOI18N
+        desktop.setOpaque(false);
+
+        javax.swing.GroupLayout jpPrincipalLayout = new javax.swing.GroupLayout(jpPrincipal);
+        jpPrincipal.setLayout(jpPrincipalLayout);
+        jpPrincipalLayout.setHorizontalGroup(
+            jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPrincipalLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 910, Short.MAX_VALUE))
+        );
+        jpPrincipalLayout.setVerticalGroup(
+            jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+        );
 
         menuBar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
@@ -203,6 +220,14 @@ public class CPanel extends javax.swing.JFrame {
         });
         mnuProveedores.add(jmiProducto);
 
+        jmiRegistroSucursales.setText("Sucursales");
+        jmiRegistroSucursales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiRegistroSucursalesActionPerformed(evt);
+            }
+        });
+        mnuProveedores.add(jmiRegistroSucursales);
+
         menuBar.add(mnuProveedores);
 
         mnuReporteEmpleados.setText("Reportes");
@@ -249,42 +274,6 @@ public class CPanel extends javax.swing.JFrame {
         mnuCatalogos.setText("Catalogos");
         mnuCatalogos.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        mnuCatalogosProductos.setText("Productos");
-        mnuCatalogosProductos.setEnabled(false);
-        mnuCatalogosProductos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCatalogosProductosActionPerformed(evt);
-            }
-        });
-        mnuCatalogos.add(mnuCatalogosProductos);
-
-        mnuCatalogosEmpleados.setText("Clientes");
-        mnuCatalogosEmpleados.setEnabled(false);
-        mnuCatalogosEmpleados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCatalogosEmpleadosActionPerformed(evt);
-            }
-        });
-        mnuCatalogos.add(mnuCatalogosEmpleados);
-
-        mnuCatalogosProveedores.setText("Proveedores");
-        mnuCatalogosProveedores.setEnabled(false);
-        mnuCatalogosProveedores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCatalogosProveedoresActionPerformed(evt);
-            }
-        });
-        mnuCatalogos.add(mnuCatalogosProveedores);
-
-        mnuCatalogosStock.setText("Stock");
-        mnuCatalogosStock.setEnabled(false);
-        mnuCatalogosStock.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCatalogosStockActionPerformed(evt);
-            }
-        });
-        mnuCatalogos.add(mnuCatalogosStock);
-
         mnuCatalogoGastos.setText("Gastos");
         mnuCatalogoGastos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -293,23 +282,37 @@ public class CPanel extends javax.swing.JFrame {
         });
         mnuCatalogos.add(mnuCatalogoGastos);
 
-        mnuCatalogosSubcategorias.setText("Subcategorias");
-        mnuCatalogosSubcategorias.setEnabled(false);
-        mnuCatalogosSubcategorias.addActionListener(new java.awt.event.ActionListener() {
+        jmiCatalogoClientes.setText("Clientes");
+        jmiCatalogoClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCatalogosSubcategoriasActionPerformed(evt);
+                jmiCatalogoClientesActionPerformed(evt);
             }
         });
-        mnuCatalogos.add(mnuCatalogosSubcategorias);
+        mnuCatalogos.add(jmiCatalogoClientes);
 
-        mnuCatalogosPermisos.setText("Permisos de los usuarios");
-        mnuCatalogosPermisos.setEnabled(false);
-        mnuCatalogosPermisos.addActionListener(new java.awt.event.ActionListener() {
+        jmiCatalogoLineas.setText("Lineas");
+        jmiCatalogoLineas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCatalogosPermisosActionPerformed(evt);
+                jmiCatalogoLineasActionPerformed(evt);
             }
         });
-        mnuCatalogos.add(mnuCatalogosPermisos);
+        mnuCatalogos.add(jmiCatalogoLineas);
+
+        jmiCatalogoSublineas.setText("Sublineas");
+        jmiCatalogoSublineas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCatalogoSublineasActionPerformed(evt);
+            }
+        });
+        mnuCatalogos.add(jmiCatalogoSublineas);
+
+        jmiCatalogoCreditos.setText("Creditos");
+        jmiCatalogoCreditos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCatalogoCreditosActionPerformed(evt);
+            }
+        });
+        mnuCatalogos.add(jmiCatalogoCreditos);
 
         menuBar.add(mnuCatalogos);
 
@@ -332,13 +335,13 @@ public class CPanel extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 902, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -443,45 +446,6 @@ public class CPanel extends javax.swing.JFrame {
 
     }//GEN-LAST:event_mnuReportesReporteEmpleadosActionPerformed
 
-    private void mnuCatalogosProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCatalogosProductosActionPerformed
-
-    }//GEN-LAST:event_mnuCatalogosProductosActionPerformed
-
-    private void mnuCatalogosEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCatalogosEmpleadosActionPerformed
-
-    }//GEN-LAST:event_mnuCatalogosEmpleadosActionPerformed
-
-    private void mnuCatalogosProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCatalogosProveedoresActionPerformed
-
-    }//GEN-LAST:event_mnuCatalogosProveedoresActionPerformed
-
-    private void mnuCatalogosStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCatalogosStockActionPerformed
-
-    }//GEN-LAST:event_mnuCatalogosStockActionPerformed
-
-    private void mnuCatalogoGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCatalogoGastosActionPerformed
-        try {
-            CatalogoGastos catalogoGastos = new CatalogoGastos();
-            if (exist(catalogoGastos) == false) {
-                desktop.add(catalogoGastos);
-                catalogoGastos.setVisible(true);
-                catalogoGastos.setLocation((desktop.getWidth() - catalogoGastos.getWidth()) / 2, (desktop.getHeight() - catalogoGastos.getHeight()) / 2);
-            } else {
-                catalogoGastos.dispose();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
-        }
-    }//GEN-LAST:event_mnuCatalogoGastosActionPerformed
-
-    private void mnuCatalogosSubcategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCatalogosSubcategoriasActionPerformed
-
-    }//GEN-LAST:event_mnuCatalogosSubcategoriasActionPerformed
-
-    private void mnuCatalogosPermisosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCatalogosPermisosActionPerformed
-
-    }//GEN-LAST:event_mnuCatalogosPermisosActionPerformed
-
     private void mnuAcercaDeSalesTeDispatcherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAcercaDeSalesTeDispatcherActionPerformed
         try {
             AcercaDe ad = new AcercaDe();
@@ -546,6 +510,96 @@ public class CPanel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmiProductoActionPerformed
 
+    private void mnuCatalogoGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCatalogoGastosActionPerformed
+        try {
+            CatalogoGastos catalogoGastos = new CatalogoGastos();
+            if (exist(catalogoGastos) == false) {
+                desktop.add(catalogoGastos);
+                catalogoGastos.setVisible(true);
+                catalogoGastos.setLocation((desktop.getWidth() - catalogoGastos.getWidth()) / 2, (desktop.getHeight() - catalogoGastos.getHeight()) / 2);
+            } else {
+                catalogoGastos.dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+        }
+    }//GEN-LAST:event_mnuCatalogoGastosActionPerformed
+
+    private void jmiCatalogoClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCatalogoClientesActionPerformed
+        try {
+            CatalogoClientes catalogoClientes = new CatalogoClientes();
+            if (exist(catalogoClientes) == false) {
+                desktop.add(catalogoClientes);
+                catalogoClientes.setVisible(true);
+                catalogoClientes.setLocation((desktop.getWidth() - catalogoClientes.getWidth()) / 2, (desktop.getHeight() - catalogoClientes.getHeight()) / 2);
+            } else {
+                catalogoClientes.dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+        }
+    }//GEN-LAST:event_jmiCatalogoClientesActionPerformed
+
+    private void jmiCatalogoLineasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCatalogoLineasActionPerformed
+        try {
+            CatalogoLineas catalogoLineas = new CatalogoLineas();
+            if (exist(catalogoLineas) == false) {
+                desktop.add(catalogoLineas);
+                catalogoLineas.setVisible(true);
+                catalogoLineas.setLocation((desktop.getWidth() - catalogoLineas.getWidth()) / 2, (desktop.getHeight() - catalogoLineas.getHeight()) / 2);
+            } else {
+                catalogoLineas.dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+        }
+    }//GEN-LAST:event_jmiCatalogoLineasActionPerformed
+
+    private void jmiCatalogoSublineasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCatalogoSublineasActionPerformed
+        try {
+            CatalogoSublineas catalogoSublineas = new CatalogoSublineas();
+            if (exist(catalogoSublineas) == false) {
+                desktop.add(catalogoSublineas);
+                catalogoSublineas.setVisible(true);
+                catalogoSublineas.setLocation((desktop.getWidth() - catalogoSublineas.getWidth()) / 2, (desktop.getHeight() - catalogoSublineas.getHeight()) / 2);
+            } else {
+                catalogoSublineas.dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+        }
+    }//GEN-LAST:event_jmiCatalogoSublineasActionPerformed
+
+    private void jmiRegistroSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRegistroSucursalesActionPerformed
+        try {
+            RegistroSucursales registroSucursales = new RegistroSucursales();
+            if (exist(registroSucursales) == false) {
+                desktop.add(registroSucursales);
+                registroSucursales.setVisible(true);
+                registroSucursales.setLocation((desktop.getWidth() - registroSucursales.getWidth()) / 2, (desktop.getHeight() - registroSucursales.getHeight()) / 2);
+            } else {
+                registroSucursales.dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+        }
+    }//GEN-LAST:event_jmiRegistroSucursalesActionPerformed
+
+    private void jmiCatalogoCreditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCatalogoCreditosActionPerformed
+        try {
+            CatalogoCreditos catalogoCreditos = new CatalogoCreditos();
+            if (exist(catalogoCreditos) == false) {
+                desktop.add(catalogoCreditos);
+                catalogoCreditos.setVisible(true);
+                catalogoCreditos.setLocation((desktop.getWidth() - catalogoCreditos.getWidth()) / 2, (desktop.getHeight() - catalogoCreditos.getHeight()) / 2);
+            } else {
+                catalogoCreditos.dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+        }
+    }//GEN-LAST:event_jmiCatalogoCreditosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -582,25 +636,25 @@ public class CPanel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JCDesktopPane.JCDesktopPane desktop;
+    public static JCDesktopPane.JCDesktopPane desktop;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator6;
+    private javax.swing.JMenuItem jmiCatalogoClientes;
+    private javax.swing.JMenuItem jmiCatalogoCreditos;
+    private javax.swing.JMenuItem jmiCatalogoLineas;
+    private javax.swing.JMenuItem jmiCatalogoSublineas;
     private javax.swing.JMenuItem jmiCliente;
     private javax.swing.JMenuItem jmiDiarioDeCaja;
     private javax.swing.JMenuItem jmiGastos;
     private javax.swing.JMenuItem jmiProducto;
+    private javax.swing.JMenuItem jmiRegistroSucursales;
+    private javax.swing.JPanel jpPrincipal;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu mnuAcercaDe;
     private javax.swing.JMenuItem mnuAcercaDeSalesTeDispatcher;
     private javax.swing.JMenuItem mnuCatalogoGastos;
     private javax.swing.JMenu mnuCatalogos;
-    private javax.swing.JMenuItem mnuCatalogosEmpleados;
-    private javax.swing.JMenuItem mnuCatalogosPermisos;
-    private javax.swing.JMenuItem mnuCatalogosProductos;
-    private javax.swing.JMenuItem mnuCatalogosProveedores;
-    private javax.swing.JMenuItem mnuCatalogosStock;
-    private javax.swing.JMenuItem mnuCatalogosSubcategorias;
     private javax.swing.JMenu mnuPrograma;
     private javax.swing.JMenuItem mnuProgramaAbrirPV;
     private javax.swing.JMenuItem mnuProgramaCerrarSesion;

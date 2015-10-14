@@ -46,6 +46,8 @@ public class RegistroSucursal extends javax.swing.JInternalFrame {
         btnAgregarTienda = new javax.swing.JButton();
         btnQuitarTienda = new javax.swing.JButton();
 
+        setClosable(true);
+        setIconifiable(true);
         setTitle("Registro de Tiendas");
 
         jPanel1.setBackground(new java.awt.Color(240, 79, 90));

@@ -7,6 +7,9 @@ package ventanas;
 
 import controlBD.AccesoBD;
 import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JInternalFrame;
 import pojos.Producto;
 
 /**
@@ -431,7 +434,7 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
         producto.setUnidadMedida("Pieza");
         if (rbtnSi.isSelected()) {
             producto.setControlStock(true);
-        }else{
+        } else {
             producto.setControlStock(false);
         }
         producto.setIva(Double.parseDouble(txtPrecioCompra.getText()) * (0.16));
@@ -454,6 +457,25 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
         txtSublinea.setText("");
         rbtnSi.setSelected(true);
     }
+
+    public boolean exist(JInternalFrame frame) throws Exception {
+
+        try {
+            JInternalFrame iframes[] = CPanel.desktop.getAllFrames();
+            for (int i = 0; i < iframes.length; i++) {
+                if (iframes[i].getTitle().equals(frame.getTitle())) {
+                    iframes[i].moveToFront();
+                    iframes[i].setSelected(true);
+                    iframes[i].setLocation((CPanel.desktop.getWidth() - iframes[i].getWidth()) / 2,
+                            (CPanel.desktop.getHeight() - iframes[i].getHeight()) / 2);
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return false;
+    }
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         try {
             this.setClosed(true);
@@ -465,19 +487,67 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnNuevaLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaLineaActionPerformed
-        // TODO add your handling code here:
+        try {
+            RegistroLinea registrarLinea = new RegistroLinea();
+            if (exist(registrarLinea) == false) {
+                CPanel.desktop.add(registrarLinea);
+                registrarLinea.setVisible(true);
+                registrarLinea.setLocation((CPanel.desktop.getWidth() - registrarLinea.getWidth()) / 2,
+                        (CPanel.desktop.getHeight() - registrarLinea.getHeight()) / 2);
+            } else {
+                registrarLinea.dispose();
+            }        // TODO add your handling code here:
+        } catch (Exception ex) {
+            Logger.getLogger(RegistrarProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnNuevaLineaActionPerformed
 
     private void btnBuscarLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLineaActionPerformed
-        // TODO add your handling code here:
+        try {
+            CatalogoLineas catalogoLineas = new CatalogoLineas();
+            if (exist(catalogoLineas) == false) {
+                CPanel.desktop.add(catalogoLineas);
+                catalogoLineas.setVisible(true);
+                catalogoLineas.setLocation((CPanel.desktop.getWidth() - catalogoLineas.getWidth()) / 2,
+                        (CPanel.desktop.getHeight() - catalogoLineas.getHeight()) / 2);
+            } else {
+                catalogoLineas.dispose();
+            }        // TODO add your handling code here:
+        } catch (Exception ex) {
+            Logger.getLogger(RegistrarProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }  
     }//GEN-LAST:event_btnBuscarLineaActionPerformed
 
     private void btnNuevaSublineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaSublineaActionPerformed
-        // TODO add your handling code here:
+        try {
+            RegistroSublinea registrarSublinea = new RegistroSublinea();
+            if (exist(registrarSublinea) == false) {
+                CPanel.desktop.add(registrarSublinea);
+                registrarSublinea.setVisible(true);
+                registrarSublinea.setLocation((CPanel.desktop.getWidth() - registrarSublinea.getWidth()) / 2,
+                        (CPanel.desktop.getHeight() - registrarSublinea.getHeight()) / 2);
+            } else {
+                registrarSublinea.dispose();
+            }        // TODO add your handling code here:
+        } catch (Exception ex) {
+            Logger.getLogger(RegistrarProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_btnNuevaSublineaActionPerformed
 
     private void btnBuscarSublineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarSublineaActionPerformed
-        // TODO add your handling code here:
+         try {
+            CatalogoSublineas catalogoSublineas = new CatalogoSublineas();
+            if (exist(catalogoSublineas) == false) {
+                CPanel.desktop.add(catalogoSublineas);
+                catalogoSublineas.setVisible(true);
+                catalogoSublineas.setLocation((CPanel.desktop.getWidth() - catalogoSublineas.getWidth()) / 2,
+                        (CPanel.desktop.getHeight() - catalogoSublineas.getHeight()) / 2);
+            } else {
+                catalogoSublineas.dispose();
+            }        // TODO add your handling code here:
+        } catch (Exception ex) {
+            Logger.getLogger(RegistrarProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }  
     }//GEN-LAST:event_btnBuscarSublineaActionPerformed
 
     private void rbtnNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnNoActionPerformed

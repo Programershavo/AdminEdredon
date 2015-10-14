@@ -5,6 +5,10 @@
  */
 package ventanas;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JInternalFrame;
+
 /**
  *
  * @author Daniel
@@ -16,6 +20,25 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
      */
     public DiarioDeCaja() {
         initComponents();
+    }
+
+    public boolean exist(JInternalFrame frame) throws Exception {
+
+        try {
+            JInternalFrame iframes[] = CPanel.desktop.getAllFrames();
+            for (int i = 0; i < iframes.length; i++) {
+                if (iframes[i].getTitle().equals(frame.getTitle())) {
+                    iframes[i].moveToFront();
+                    iframes[i].setSelected(true);
+                    iframes[i].setLocation((CPanel.desktop.getWidth() - iframes[i].getWidth()) / 2,
+                            (CPanel.desktop.getHeight() - iframes[i].getHeight()) / 2);
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return false;
     }
 
     /**
@@ -425,6 +448,11 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
 
         btnBuscarTienda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/Search.png"))); // NOI18N
         btnBuscarTienda.setText("Buscar");
+        btnBuscarTienda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarTiendaActionPerformed(evt);
+            }
+        });
 
         btnQuitarTienda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/menos.png"))); // NOI18N
         btnQuitarTienda.setText("Quitar");
@@ -541,11 +569,35 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
-        // TODO add your handling code here:
+        try {
+            CatalogoClientes catalogoClientes = new CatalogoClientes();
+            if (exist(catalogoClientes) == false) {
+                CPanel.desktop.add(catalogoClientes);
+                catalogoClientes.setVisible(true);
+                catalogoClientes.setLocation((CPanel.desktop.getWidth() - catalogoClientes.getWidth()) / 2,
+                        (CPanel.desktop.getHeight() - catalogoClientes.getHeight()) / 2);
+            } else {
+                catalogoClientes.dispose();
+            }        // TODO add your handling code here:
+        } catch (Exception ex) {
+            Logger.getLogger(RegistrarProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnBuscarClienteActionPerformed
 
     private void btnRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarClienteActionPerformed
-        // TODO add your handling code here:
+        try {
+            RegistroCliente registroCliente = new RegistroCliente();
+            if (exist(registroCliente) == false) {
+                CPanel.desktop.add(registroCliente);
+                registroCliente.setVisible(true);
+                registroCliente.setLocation((CPanel.desktop.getWidth() - registroCliente.getWidth()) / 2,
+                        (CPanel.desktop.getHeight() - registroCliente.getHeight()) / 2);
+            } else {
+                registroCliente.dispose();
+            }        // TODO add your handling code here:
+        } catch (Exception ex) {
+            Logger.getLogger(RegistrarProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }            // TODO add your handling code here:
     }//GEN-LAST:event_btnRegistrarClienteActionPerformed
 
     private void btnAnotarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnotarActionPerformed
@@ -553,7 +605,19 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAnotarActionPerformed
 
     private void btnBuscarClienteAbonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteAbonoActionPerformed
-        // TODO add your handling code here:
+        try {
+            CatalogoClientes catalogoClientes = new CatalogoClientes();
+            if (exist(catalogoClientes) == false) {
+                CPanel.desktop.add(catalogoClientes);
+                catalogoClientes.setVisible(true);
+                catalogoClientes.setLocation((CPanel.desktop.getWidth() - catalogoClientes.getWidth()) / 2,
+                        (CPanel.desktop.getHeight() - catalogoClientes.getHeight()) / 2);
+            } else {
+                catalogoClientes.dispose();
+            }        // TODO add your handling code here:
+        } catch (Exception ex) {
+            Logger.getLogger(RegistrarProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }           // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarClienteAbonoActionPerformed
 
     private void btnRegistrarCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarCliente1ActionPerformed
@@ -563,6 +627,22 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     private void btnRegistrarCliente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarCliente2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegistrarCliente2ActionPerformed
+
+    private void btnBuscarTiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarTiendaActionPerformed
+        try {
+            RegistroSucursales catalogoSucursal = new RegistroSucursales();
+            if (exist(catalogoSucursal) == false) {
+                CPanel.desktop.add(catalogoSucursal);
+                catalogoSucursal.setVisible(true);
+                catalogoSucursal.setLocation((CPanel.desktop.getWidth() - catalogoSucursal.getWidth()) / 2,
+                        (CPanel.desktop.getHeight() - catalogoSucursal.getHeight()) / 2);
+            } else {
+                catalogoSucursal.dispose();
+            }        // TODO add your handling code here:
+        } catch (Exception ex) {
+            Logger.getLogger(RegistrarProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }          // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarTiendaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

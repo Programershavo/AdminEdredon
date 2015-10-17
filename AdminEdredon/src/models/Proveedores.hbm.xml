@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 13/10/2015 08:49:06 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 15/10/2015 08:46:08 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
   <class catalog="adminedredon" name="pojos.Proveedores" optimistic-lock="version" table="proveedores">
     <id name="idProveedor" type="java.lang.Integer">

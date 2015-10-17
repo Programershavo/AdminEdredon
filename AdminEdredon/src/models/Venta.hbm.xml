@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 13/10/2015 08:49:06 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 15/10/2015 08:46:08 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
   <class catalog="adminedredon" name="pojos.Venta" optimistic-lock="version" table="venta">
     <id name="idVenta" type="java.lang.Integer">
       <column name="idVenta"/>
       <generator class="identity"/>
     </id>
+    <property name="nota" type="string">
+      <column length="45" name="nota"/>
+    </property>
     <property name="fechaVenta" type="timestamp">
       <column length="19" name="fechaVenta" not-null="true"/>
     </property>
@@ -20,25 +23,34 @@
       <column name="detalleVenta"/>
     </property>
     <property name="descripcion" type="string">
-      <column length="200" name="descripcion" not-null="true"/>
+      <column length="200" name="descripcion"/>
     </property>
     <property name="abono" type="java.lang.Double">
       <column name="abono" precision="22" scale="0"/>
     </property>
-    <property name="total" type="double">
-      <column name="total" not-null="true" precision="22" scale="0"/>
+    <property name="estatus" type="string">
+      <column length="45" name="estatus"/>
     </property>
-    <property name="estatus" type="boolean">
-      <column name="estatus" not-null="true"/>
-    </property>
-    <property name="usuarioUltimoAjuste" type="int">
-      <column name="usuarioUltimoAjuste" not-null="true"/>
+    <property name="usuarioUltimoAjuste" type="java.lang.Integer">
+      <column name="usuarioUltimoAjuste"/>
     </property>
     <property name="credito" type="java.lang.Boolean">
       <column name="credito"/>
     </property>
     <property name="metodoPago" type="string">
       <column length="45" name="metodoPago"/>
+    </property>
+    <property name="nombreCliente" type="string">
+      <column length="100" name="nombreCliente"/>
+    </property>
+    <property name="saldoRestante" type="java.lang.Double">
+      <column name="saldoRestante" precision="22" scale="0"/>
+    </property>
+    <property name="importe" type="java.lang.Double">
+      <column name="Importe" precision="22" scale="0"/>
+    </property>
+    <property name="nombreTienda" type="string">
+      <column length="45" name="nombreTienda"/>
     </property>
   </class>
 </hibernate-mapping>

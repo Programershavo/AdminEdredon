@@ -150,7 +150,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiRegistroSublinea">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Linea"/>
+                <Property name="text" type="java.lang.String" value="Sublinea"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiRegistroSublineaActionPerformed"/>
@@ -158,7 +158,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiRegistroLinea">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Sublinea"/>
+                <Property name="text" type="java.lang.String" value="Linea"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiRegistroLineaActionPerformed"/>
@@ -252,12 +252,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiCatalogoSublineasActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiCatalogoCreditos">
+            <MenuItem class="javax.swing.JMenuItem" name="jmiVentas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Creditos"/>
+                <Property name="text" type="java.lang.String" value="Ventas"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiCatalogoCreditosActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiVentasActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

@@ -45,6 +45,7 @@ public class RegistroSublinea extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        setTitle("Registro de Sublineas");
 
         jPanel1.setBackground(new java.awt.Color(240, 79, 90));
 

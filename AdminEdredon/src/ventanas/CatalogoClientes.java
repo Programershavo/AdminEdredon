@@ -5,6 +5,7 @@
  */
 package ventanas;
 
+import controlBD.AccesoBD;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,11 +14,26 @@ import javax.swing.JOptionPane;
  */
 public class CatalogoClientes extends javax.swing.JInternalFrame {
 
+    String HQL = "";
+
     /**
      * Creates new form CatalogoClientes
      */
     public CatalogoClientes() {
         initComponents();
+        llenarTabla();
+    }
+
+    private void llenarTabla() {
+        HQL = "From Clientes";
+        //Reviso si que la consulta no vaya vacia
+        if (!HQL.isEmpty()) {
+            AccesoBD acceso = new AccesoBD();
+            jtTabla.setVisible(false);
+            jtTabla.removeAll();
+            jtTabla.setModel(acceso.retornaModelo("Cliente", HQL));
+            jtTabla.setVisible(true);
+        }
     }
 
     /**
@@ -41,6 +57,7 @@ public class CatalogoClientes extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Catalogo de Clientes");
+        setPreferredSize(new java.awt.Dimension(1024, 498));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -79,7 +96,7 @@ public class CatalogoClientes extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -97,7 +114,7 @@ public class CatalogoClientes extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -114,7 +131,7 @@ public class CatalogoClientes extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addContainerGap(761, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,8 +153,7 @@ public class CatalogoClientes extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -152,15 +168,15 @@ public class CatalogoClientes extends javax.swing.JInternalFrame {
         } else {
             //Si no existen registros en la base de datos lo reporto al usuario
             JOptionPane.showMessageDialog(this, "No hay pagos de gasto"
-                + "existentes." + "\n" + "Introdusca al menos un gasto para "
-                + "poder generar el reporte.", "No hay gasto", 0);
+                    + "existentes." + "\n" + "Introdusca al menos un gasto para "
+                    + "poder generar el reporte.", "No hay gasto", 0);
         }
 
         //        try {
-            //            reportMaker.ReportMaker reporte = new reportMaker.ReportMaker("FROM Compra", "Compra");
-            //        } catch (Exception e) {
-            //            JOptionPane.showMessageDialog(this, "Ha ocurrido un error generando el reporte: " + e, "Error", 0);
-            //        }
+        //            reportMaker.ReportMaker reporte = new reportMaker.ReportMaker("FROM Compra", "Compra");
+        //        } catch (Exception e) {
+        //            JOptionPane.showMessageDialog(this, "Ha ocurrido un error generando el reporte: " + e, "Error", 0);
+        //        }
     }//GEN-LAST:event_btnCatalogoActionPerformed
 
 

@@ -8,7 +8,7 @@ public class TableModel extends AbstractTableModel {
 
     private String[] headerCompra = {"Clave", "Nombre Sucursal",
         "Fecha Compra", "Tipo de gasto", "Nombre Proveedor", "Metodo pago", "Observacion", "Importe"};
-    private String[] headerVenta = {"Clave", "Fecha de venta",
+    private String[] headerVenta = {"Clave", "Cliente","Fecha de venta",
         "Fecha venta saldada", "Fecha ultimo abono", "Descripcion",
         "Abono cantidad", "Credito", "Forma de pago", "Estatus", "Importe"};
     private String[] headerProducto = {"Clave", "Codigo de Barras",
@@ -22,8 +22,8 @@ public class TableModel extends AbstractTableModel {
     private String[] headerSucursal = {"Clave", "Nombre",
         "Calle", "No Exterior", "No Interior", "Colonia",
         "CP", "Estado", "Municipio"};
-    private String[] headerLinea = {"Clave", "Nombre Sucursal"};
-    private String[] headerSublinea = {"Clave", "Nombre Sucursal"};
+    private String[] headerLinea = {"Clave", "Linea"};
+    private String[] headerSublinea = {"Clave", "Sublinea"};
     //Este arreglo guarda los encabezados y lo registros
     public Object[][] tableModel;
     //Recibe el nombre de la tabla que se va a cargar
@@ -87,6 +87,27 @@ public class TableModel extends AbstractTableModel {
             case "Compra":
                 titulosDeColumnas = headerCompra;
                 break;
+            case "Producto":
+                titulosDeColumnas = headerProducto;
+                break;
+            case "Proveedor":
+                titulosDeColumnas = headerProveedor;
+                break;
+            case "Cliente":
+                titulosDeColumnas = headerCliente;
+                break;
+            case "Sucursal":
+                titulosDeColumnas = headerSucursal;
+                break;
+            case "Linea":
+                titulosDeColumnas = headerLinea;
+                break;
+            case "Sublinea":
+                titulosDeColumnas = headerSublinea;
+                break;
+            case "Venta":
+                titulosDeColumnas = headerVenta;
+                break;
         }
         return titulosDeColumnas;
     }
@@ -139,6 +160,8 @@ public class TableModel extends AbstractTableModel {
                             pojos.Venta venta = (pojos.Venta) listaDeObjetos.next();
                             tableModel[contFila][contCol] = venta.getIdVenta();
                             contCol++;
+                            tableModel[contFila][contCol] = venta.getNombreCliente();
+                            contCol++;
                             tableModel[contFila][contCol] = venta.getFechaVenta();
                             contCol++;
                             tableModel[contFila][contCol] = venta.getFechaVentaSaldada();
@@ -153,9 +176,9 @@ public class TableModel extends AbstractTableModel {
                             contCol++;
                             tableModel[contFila][contCol] = venta.getMetodoPago();
                             contCol++;
-                            tableModel[contFila][contCol] = venta.isEstatus();
+                            tableModel[contFila][contCol] = venta.getEstatus();
                             contCol++;
-                            tableModel[contFila][contCol] = venta.getTotal();
+                            tableModel[contFila][contCol] = String.valueOf(venta.getImporte());
                             contCol++;
                         }
                         contCol = 0;
@@ -216,8 +239,6 @@ public class TableModel extends AbstractTableModel {
                             tableModel[contFila][contCol] = cliente.getCp();
                             contCol++;
                             tableModel[contFila][contCol] = cliente.getTelFijo();
-                            contCol++;
-                            tableModel[contFila][contCol] = cliente.getTelMovil();
                             contCol++;
                             tableModel[contFila][contCol] = cliente.getTelMovil();
                             contCol++;

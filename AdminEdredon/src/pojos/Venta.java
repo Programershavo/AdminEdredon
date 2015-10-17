@@ -1,5 +1,5 @@
 package pojos;
-// Generated 13/10/2015 08:49:05 PM by Hibernate Tools 4.3.1
+// Generated 15/10/2015 08:46:07 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -23,41 +23,45 @@ public class Venta  implements java.io.Serializable {
 
 
      private Integer idVenta;
+     private String nota;
      private Date fechaVenta;
      private Date fechaVentaSaldada;
      private Date fechaUltimoAbono;
      private Integer detalleVenta;
      private String descripcion;
      private Double abono;
-     private double total;
-     private boolean estatus;
-     private int usuarioUltimoAjuste;
+     private String estatus;
+     private Integer usuarioUltimoAjuste;
      private Boolean credito;
      private String metodoPago;
+     private String nombreCliente;
+     private Double saldoRestante;
+     private Double importe;
+     private String nombreTienda;
 
     public Venta() {
     }
 
 	
-    public Venta(Date fechaVenta, String descripcion, double total, boolean estatus, int usuarioUltimoAjuste) {
+    public Venta(Date fechaVenta) {
         this.fechaVenta = fechaVenta;
-        this.descripcion = descripcion;
-        this.total = total;
-        this.estatus = estatus;
-        this.usuarioUltimoAjuste = usuarioUltimoAjuste;
     }
-    public Venta(Date fechaVenta, Date fechaVentaSaldada, Date fechaUltimoAbono, Integer detalleVenta, String descripcion, Double abono, double total, boolean estatus, int usuarioUltimoAjuste, Boolean credito, String metodoPago) {
+    public Venta(String nota, Date fechaVenta, Date fechaVentaSaldada, Date fechaUltimoAbono, Integer detalleVenta, String descripcion, Double abono, String estatus, Integer usuarioUltimoAjuste, Boolean credito, String metodoPago, String nombreCliente, Double saldoRestante, Double importe, String nombreTienda) {
+       this.nota = nota;
        this.fechaVenta = fechaVenta;
        this.fechaVentaSaldada = fechaVentaSaldada;
        this.fechaUltimoAbono = fechaUltimoAbono;
        this.detalleVenta = detalleVenta;
        this.descripcion = descripcion;
        this.abono = abono;
-       this.total = total;
        this.estatus = estatus;
        this.usuarioUltimoAjuste = usuarioUltimoAjuste;
        this.credito = credito;
        this.metodoPago = metodoPago;
+       this.nombreCliente = nombreCliente;
+       this.saldoRestante = saldoRestante;
+       this.importe = importe;
+       this.nombreTienda = nombreTienda;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -70,6 +74,16 @@ public class Venta  implements java.io.Serializable {
     
     public void setIdVenta(Integer idVenta) {
         this.idVenta = idVenta;
+    }
+
+    
+    @Column(name="nota", length=45)
+    public String getNota() {
+        return this.nota;
+    }
+    
+    public void setNota(String nota) {
+        this.nota = nota;
     }
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -113,7 +127,7 @@ public class Venta  implements java.io.Serializable {
     }
 
     
-    @Column(name="descripcion", nullable=false, length=200)
+    @Column(name="descripcion", length=200)
     public String getDescripcion() {
         return this.descripcion;
     }
@@ -133,32 +147,22 @@ public class Venta  implements java.io.Serializable {
     }
 
     
-    @Column(name="total", nullable=false, precision=22, scale=0)
-    public double getTotal() {
-        return this.total;
-    }
-    
-    public void setTotal(double total) {
-        this.total = total;
-    }
-
-    
-    @Column(name="estatus", nullable=false)
-    public boolean isEstatus() {
+    @Column(name="estatus", length=45)
+    public String getEstatus() {
         return this.estatus;
     }
     
-    public void setEstatus(boolean estatus) {
+    public void setEstatus(String estatus) {
         this.estatus = estatus;
     }
 
     
-    @Column(name="usuarioUltimoAjuste", nullable=false)
-    public int getUsuarioUltimoAjuste() {
+    @Column(name="usuarioUltimoAjuste")
+    public Integer getUsuarioUltimoAjuste() {
         return this.usuarioUltimoAjuste;
     }
     
-    public void setUsuarioUltimoAjuste(int usuarioUltimoAjuste) {
+    public void setUsuarioUltimoAjuste(Integer usuarioUltimoAjuste) {
         this.usuarioUltimoAjuste = usuarioUltimoAjuste;
     }
 
@@ -180,6 +184,46 @@ public class Venta  implements java.io.Serializable {
     
     public void setMetodoPago(String metodoPago) {
         this.metodoPago = metodoPago;
+    }
+
+    
+    @Column(name="nombreCliente", length=100)
+    public String getNombreCliente() {
+        return this.nombreCliente;
+    }
+    
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
+    }
+
+    
+    @Column(name="saldoRestante", precision=22, scale=0)
+    public Double getSaldoRestante() {
+        return this.saldoRestante;
+    }
+    
+    public void setSaldoRestante(Double saldoRestante) {
+        this.saldoRestante = saldoRestante;
+    }
+
+    
+    @Column(name="Importe", precision=22, scale=0)
+    public Double getImporte() {
+        return this.importe;
+    }
+    
+    public void setImporte(Double importe) {
+        this.importe = importe;
+    }
+
+    
+    @Column(name="nombreTienda", length=45)
+    public String getNombreTienda() {
+        return this.nombreTienda;
+    }
+    
+    public void setNombreTienda(String nombreTienda) {
+        this.nombreTienda = nombreTienda;
     }
 
 

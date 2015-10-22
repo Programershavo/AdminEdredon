@@ -458,7 +458,7 @@ public class RegistroCliente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        AccesoBD acceso = new AccesoBD();
+        AccesoBD accesoBD = new AccesoBD();
         Clientes cliente = new Clientes();
         cliente.setNombre(txtNombre.getText());
         cliente.setRfc(txtRFC.getText());
@@ -477,7 +477,7 @@ public class RegistroCliente extends javax.swing.JInternalFrame {
         cliente.setTelMovil(txtTelefonoCelular.getText());
         cliente.setEmail(txtEmail.getText());
         cliente.setPais("Mexico");
-        acceso.add(cliente);
+        accesoBD.add(cliente);
         limpiar();
     }//GEN-LAST:event_btnAceptarActionPerformed
 

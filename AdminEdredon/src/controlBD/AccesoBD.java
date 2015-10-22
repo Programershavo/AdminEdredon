@@ -36,12 +36,14 @@ public class AccesoBD {
         return null;
     }
 
-    public void add(Object objeto) {
+    public boolean add(Object objeto) {
         try {
             iniciaSF();
             session.save(objeto);
+            return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "error: " + e, "Ha ocurrido un error", 0);
+            return false;            
         } finally {
             cierraSF();
         }

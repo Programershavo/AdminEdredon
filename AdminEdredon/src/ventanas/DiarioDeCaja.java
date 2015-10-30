@@ -45,6 +45,8 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         jdcFechaInicio.setDate(new Date());
         jdcFechaFin.setDate(new Date());
         jdcFechaGasto.setDate(new Date());
+        jdcFechaInicioResumen.setDate(new Date());
+        jdcFechaFinResumen.setDate(new Date());
         cmbClienteAbono.setVisible(false);
         addActions();
     }
@@ -180,6 +182,14 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         jpResumen = new javax.swing.JPanel();
         btnSalirResumen = new javax.swing.JButton();
         jLabel27 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jdcFechaInicioResumen = new com.toedter.calendar.JDateChooser();
+        jLabel26 = new javax.swing.JLabel();
+        jdcFechaFinResumen = new com.toedter.calendar.JDateChooser();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        lblTiendasAbiertas = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -722,6 +732,11 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         btnSalirRegistroGastos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnSalirRegistroGastos.setForeground(new java.awt.Color(0, 153, 51));
         btnSalirRegistroGastos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/exit2.png"))); // NOI18N
+        btnSalirRegistroGastos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirRegistroGastosActionPerformed(evt);
+            }
+        });
 
         jLabel30.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(0, 102, 153));
@@ -901,14 +916,51 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         jtpDiario.addTab("Gastos", jpGastos);
 
         jpResumen.setBackground(new java.awt.Color(255, 255, 255));
+        jpResumen.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jpResumenComponentShown(evt);
+            }
+        });
 
         btnSalirResumen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnSalirResumen.setForeground(new java.awt.Color(0, 153, 51));
         btnSalirResumen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/exit2.png"))); // NOI18N
+        btnSalirResumen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirResumenActionPerformed(evt);
+            }
+        });
 
         jLabel27.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(0, 102, 153));
         jLabel27.setText("Salir");
+
+        jLabel21.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel21.setText("Inicio");
+
+        jLabel26.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel26.setText("Fin");
+
+        jLabel31.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(0, 51, 102));
+        jLabel31.setText("Establecer el periodo de tiempo trabajado");
+
+        jLabel32.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(0, 51, 102));
+        jLabel32.setText("Resultados");
+
+        jLabel33.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel33.setText("Tiendas abiertas:");
+
+        lblTiendasAbiertas.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        lblTiendasAbiertas.setForeground(new java.awt.Color(102, 102, 102));
+        lblTiendasAbiertas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTiendasAbiertas.setText("0");
+        lblTiendasAbiertas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jpResumenLayout = new javax.swing.GroupLayout(jpResumen);
         jpResumen.setLayout(jpResumenLayout);
@@ -916,15 +968,47 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
             jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpResumenLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnSalirResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel27)
-                .addContainerGap(743, Short.MAX_VALUE))
+                .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpResumenLayout.createSequentialGroup()
+                        .addComponent(btnSalirResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel27))
+                    .addComponent(jLabel31)
+                    .addComponent(jLabel32)
+                    .addGroup(jpResumenLayout.createSequentialGroup()
+                        .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpResumenLayout.createSequentialGroup()
+                                .addComponent(jLabel33)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblTiendasAbiertas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpResumenLayout.createSequentialGroup()
+                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jdcFechaInicioResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jdcFechaFinResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(463, Short.MAX_VALUE))
         );
         jpResumenLayout.setVerticalGroup(
             jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpResumenLayout.createSequentialGroup()
-                .addContainerGap(461, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel21)
+                    .addComponent(jdcFechaInicioResumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel26)
+                    .addComponent(jdcFechaFinResumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel33)
+                    .addComponent(lblTiendasAbiertas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 345, Short.MAX_VALUE)
                 .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel27)
                     .addComponent(btnSalirResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1080,7 +1164,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnRegistrarVentasActionPerformed
     private void limpiarTablas(JTable jtTabla) {
         jtTabla.setVisible(false);
-       //Obtengo el modelo
+        //Obtengo el modelo
         DefaultTableModel modelo = (DefaultTableModel) jtTabla.getModel();
         //Borro las todas las rows
         while (modelo.getRowCount() > 0) {
@@ -1199,10 +1283,29 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                 }
             }
         });
-
+        if (jdcFechaInicioResumen.isVisible()) {
+            jdcFechaInicioResumen.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
+                public void propertyChange(PropertyChangeEvent e) {
+                    lblTiendasAbiertas.setText(String.valueOf(getTiendasAbiertas()));
+                }
+            });
+            jdcFechaFinResumen.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
+                public void propertyChange(PropertyChangeEvent e) {
+                    lblTiendasAbiertas.setText(String.valueOf(getTiendasAbiertas()));
+                }
+            });
+        }
         this.cmbClienteAbono.addItemListener(changeClick);
         this.cmbSucursalAbonos.addItemListener(changeClick);
     }
+
+    private int getTiendasAbiertas() {
+        AccesoBD acceso = new AccesoBD();
+        String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioResumen.getDate());
+        String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinResumen.getDate());
+        return acceso.rowCountByDate("Venta v", "v.nombreTienda", "v.fechaVenta", fechaInicioResumen, fechaFinResumen);
+    }
+
     private void cmbClienteAbonoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbClienteAbonoItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbClienteAbonoItemStateChanged
@@ -1344,11 +1447,36 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                 controlBD.add(gasto);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e, "Error", 0);
-            }       }
+            }
+        }
         limpiarGastos();
         limpiarTablas(jtTablaGastos);
         JOptionPane.showMessageDialog(this, "Ventas registradas correctamente", "Datos registrados", 1);        // TODO add your handling code here:
     }//GEN-LAST:event_btnRegistrarGastoActionPerformed
+
+    private void jpResumenComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpResumenComponentShown
+        lblTiendasAbiertas.setText(String.valueOf(getTiendasAbiertas()));
+    }//GEN-LAST:event_jpResumenComponentShown
+
+    private void btnSalirRegistroGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirRegistroGastosActionPerformed
+        try {
+            this.setClosed(true);
+            System.gc();
+        } catch (PropertyVetoException ex) {
+            this.dispose();
+            System.gc();
+        }
+    }//GEN-LAST:event_btnSalirRegistroGastosActionPerformed
+
+    private void btnSalirResumenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirResumenActionPerformed
+        try {
+            this.setClosed(true);
+            System.gc();
+        } catch (PropertyVetoException ex) {
+            this.dispose();
+            System.gc();
+        }
+    }//GEN-LAST:event_btnSalirResumenActionPerformed
     private void cargaTabla(final JTable jtTabla, String HQL, String Encabezado) {
         //Reviso si que la consulta no vaya vacia
         if (!HQL.isEmpty()) {
@@ -1397,15 +1525,20 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1418,8 +1551,10 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private com.toedter.calendar.JDateChooser jdcFechaCredito;
     private com.toedter.calendar.JDateChooser jdcFechaFin;
+    private com.toedter.calendar.JDateChooser jdcFechaFinResumen;
     private com.toedter.calendar.JDateChooser jdcFechaGasto;
     private com.toedter.calendar.JDateChooser jdcFechaInicio;
+    private com.toedter.calendar.JDateChooser jdcFechaInicioResumen;
     private javax.swing.JPanel jpAbonos;
     private javax.swing.JPanel jpCreditos;
     private javax.swing.JPanel jpGastos;
@@ -1428,6 +1563,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     private javax.swing.JTable jtTablaCreditos;
     private javax.swing.JTable jtTablaGastos;
     private javax.swing.JTabbedPane jtpDiario;
+    private javax.swing.JLabel lblTiendasAbiertas;
     private javax.swing.JTextField txtAbonoInicial;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtImporteGasto;

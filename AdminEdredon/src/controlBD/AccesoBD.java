@@ -1,5 +1,6 @@
 package controlBD;
 
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
@@ -36,6 +37,23 @@ public class AccesoBD {
         return null;
     }
 
+    public int rowCountByDate(String Clase, String columnaAContar, String columnaFecha, String fechaInicio, String fechaFin) {
+        int count = 0;
+        try {
+            iniciaSF();
+            String Query = "SELECT COUNT(" + columnaAContar + ") FROM " + Clase
+                    + " WHERE " + columnaFecha + " BETWEEN '"
+                    + fechaInicio + "' AND '"
+                    + fechaFin + "'";
+            count = ((Long) session.createQuery(Query).uniqueResult()).intValue();
+        } catch (HibernateException e) {
+            JOptionPane.showMessageDialog(null, "error: " + e, "Ha ocurrido un error", 0);
+        } finally {
+            cierraSF();
+        }
+        return count;
+    }
+
     public boolean add(Object objeto) {
         try {
             iniciaSF();
@@ -43,7 +61,7 @@ public class AccesoBD {
             return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "error: " + e, "Ha ocurrido un error", 0);
-            return false;            
+            return false;
         } finally {
             cierraSF();
         }

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0a6ef944-3f85-484c-b861-5a77ac66cbe5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nombreTienda" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaInicio" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaFin" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombreCliente" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from Venta where
+nombreCliente =  $P{nombreCliente}
+AND fechaVenta BETWEEN  $P{fechaInicio} AND $P{fechaFin};]]>
+	</queryString>
+	<field name="idVenta" class="java.lang.Integer"/>
+	<field name="nota" class="java.lang.String"/>
+	<field name="fechaVenta" class="java.sql.Timestamp"/>
+	<field name="fechaVentaSaldada" class="java.sql.Timestamp"/>
+	<field name="fechaUltimoAbono" class="java.sql.Timestamp"/>
+	<field name="detalleVenta" class="java.lang.Integer"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="abono" class="java.lang.Double"/>
+	<field name="estatus" class="java.lang.String"/>
+	<field name="usuarioUltimoAjuste" class="java.lang.Integer"/>
+	<field name="credito" class="java.lang.Boolean"/>
+	<field name="metodoPago" class="java.lang.String"/>
+	<field name="nombreCliente" class="java.lang.String"/>
+	<field name="saldoRestante" class="java.lang.Double"/>
+	<field name="Importe" class="java.lang.Double"/>
+	<field name="nombreTienda" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="99" splitType="Stretch">
+			<image>
+				<reportElement uuid="642beb6e-67ea-4db4-8045-f085444a24c3" x="11" y="11" width="83" height="82"/>
+				<imageExpression><![CDATA["C:\\Users\\Daniel\\Desktop\\castilloLogo.jpg"]]></imageExpression>
+			</image>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement uuid="ed7277fe-c357-4272-a856-2c37c85bbc2f" x="442" y="11" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="dee7d9af-81ce-412a-ae6c-a6dad2f89a3c" x="136" y="11" width="271" height="32" forecolor="#666666"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de Ventas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dca8641c-7d64-4150-9974-e7d1267ef401" x="102" y="57" width="82" height="26" forecolor="#F04F5A"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tienda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dee7d9af-81ce-412a-ae6c-a6dad2f89a3c" x="194" y="57" width="213" height="26" forecolor="#666666"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Todas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="480b4c83-bd50-4ea4-9691-5bb072276be6" x="104" y="7" width="55" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Del:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a715432c-79b1-4a4d-b10a-df260dfe844c" x="302" y="7" width="55" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Al:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="bc3b256f-0b20-4e03-a24d-d35377f080ad" x="168" y="7" width="100" height="20" forecolor="#006666"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechaInicio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="daf9c72b-46fd-4a32-9c5f-cb14cbcf1ea4" x="365" y="7" width="100" height="20" forecolor="#006666"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechaFin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="dc753341-2f8b-400f-8e29-79907df607b1" x="89" y="6" width="68" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="777b9e7b-9766-4cb3-b692-48b450cc3a9b" x="162" y="6" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[CLIENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b25b203d-9aef-4434-a6b1-4444c581d56d" x="7" y="6" width="76" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="74bf2d58-9ab1-4041-8a09-52568d49270b" x="266" y="6" width="67" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[ABONO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5c84f232-eb4b-403f-ae56-8398ec8a756d" x="488" y="6" width="61" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[IMPORTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ea7e12ce-cfe2-4f83-b1a2-cca4dac83eeb" x="418" y="6" width="64" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[ESTATUS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b343307-2ec3-41d9-b174-7cb0e1499736" x="337" y="6" width="70" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[PAGO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement uuid="41453273-2812-4fe6-a90f-50569642fba5" x="89" y="5" width="68" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nota}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f9707e84-840a-4154-bbaa-3c0306e29c4b" x="162" y="5" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombreCliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e2806cc8-7c28-4cd2-aa2f-cab94535c593" x="7" y="5" width="76" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fechaVenta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="e280f019-c1d2-4b63-a0b2-863da8348bd6" x="266" y="5" width="67" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{abono}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="30ac0f99-0017-4d1e-962c-7e1f43b386ba" x="488" y="5" width="61" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Importe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cd983f13-60ae-4fdf-9940-7e63910a6daa" x="418" y="5" width="64" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{estatus}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="f24edb2a-48bd-48c5-83ab-e8fa10448bc1" x="337" y="5" width="70" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{metodoPago}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement uuid="34586cf7-060b-4d6c-8054-800a22dcd80d" x="293" y="17" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d48603ce-07ee-418f-a61b-fd0202859b3f" x="213" y="17" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

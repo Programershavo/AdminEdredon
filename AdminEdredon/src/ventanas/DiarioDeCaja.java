@@ -9,16 +9,22 @@ import controlBD.AccesoBD;
 import herramienta.FechaHerramienta;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyVetoException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import pojos.Clientes;
+import pojos.Compra;
 import pojos.Venta;
 
 /**
@@ -27,15 +33,19 @@ import pojos.Venta;
  */
 public class DiarioDeCaja extends javax.swing.JInternalFrame {
 
-    String clienteAbono = "";
+    private String fechaInicioAbono = "";
+    private String fechaFinAbono = "";
+    private String clienteAbono = "";
+    private String tiendaAbono = "";
+    private String HQL = "";
 
     public DiarioDeCaja() {
         initComponents();
         jdcFechaCredito.setDate(new Date());
-        jdcFechaAbono.setDate(new Date());
         jdcFechaInicio.setDate(new Date());
         jdcFechaFin.setDate(new Date());
         jdcFechaGasto.setDate(new Date());
+        cmbClienteAbono.setVisible(false);
         addActions();
     }
 
@@ -49,11 +59,13 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
             cmbClienteCredito.setEnabled(true);
             cmbClienteAbono.setEnabled(true);
             try {
+                cmbClienteAbono.addItem("Todos");
+                cmbClienteCredito.addItem("Publico");
                 //Crea la lista de categorias
-                for (int i = 0; i < listaObjetos.size(); i++) {
-                    Clientes cliente = (Clientes) listaObjetos.get(i);
-                    cmbClienteCredito.addItem(cliente.getIdCliente() + "-" + cliente.getNombre());
-                    cmbClienteAbono.addItem(cliente.getIdCliente() + "-" + cliente.getNombre());
+                for (Object listaObjeto : listaObjetos) {
+                    Clientes cliente = (Clientes) listaObjeto;
+                    cmbClienteCredito.addItem(cliente.getNombre());
+                    cmbClienteAbono.addItem(cliente.getNombre());
                 }
                 cmbClienteAbono.setSelectedIndex(0);
             } catch (Exception e) {
@@ -116,8 +128,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         btnRegistrarVentas = new javax.swing.JButton();
         btnBorrarCredito = new javax.swing.JButton();
         cmbClienteCredito = new javax.swing.JComboBox();
-        jLabel2 = new javax.swing.JLabel();
-        cmbSucursal = new javax.swing.JComboBox();
+        cmbSucursalCreditos = new javax.swing.JComboBox();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -126,6 +137,8 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         txtAbonoInicial = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        chkSinNota = new javax.swing.JCheckBox();
         jpAbonos = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jdcFechaInicio = new com.toedter.calendar.JDateChooser();
@@ -135,31 +148,35 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jtTablaAbonos = new javax.swing.JTable();
         btnAbonar = new javax.swing.JButton();
-        jLabel19 = new javax.swing.JLabel();
-        jdcFechaAbono = new com.toedter.calendar.JDateChooser();
-        jLabel20 = new javax.swing.JLabel();
-        txtCantidadAbono = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cmbClienteAbono = new javax.swing.JComboBox();
         btnSalirAbonos = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
-        chkTodosLosClientes = new javax.swing.JCheckBox();
+        btnPDFCreditos = new javax.swing.JButton();
+        cmbSucursalAbonos = new javax.swing.JComboBox();
+        jLabel19 = new javax.swing.JLabel();
         jpGastos = new javax.swing.JPanel();
-        jLabel21 = new javax.swing.JLabel();
-        jdcFechaGasto = new com.toedter.calendar.JDateChooser();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        cmbSucursalGasto = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        cmbTipoDeGasto = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
-        txtImporte = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtObservaciones = new javax.swing.JTextArea();
+        txtImporteGasto = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        cmbProveedorGasto = new javax.swing.JComboBox();
+        jLabel10 = new javax.swing.JLabel();
+        cmbMetodoDePagoGasto = new javax.swing.JComboBox();
+        jdcFechaGasto = new com.toedter.calendar.JDateChooser();
+        jLabel29 = new javax.swing.JLabel();
+        btnSalirRegistroGastos = new javax.swing.JButton();
+        jLabel30 = new javax.swing.JLabel();
+        btnAnotarGasto = new javax.swing.JButton();
+        btnBorrarGasto = new javax.swing.JButton();
+        btnRegistrarGasto = new javax.swing.JButton();
+        txtObservacionGasto = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         jtTablaGastos = new javax.swing.JTable();
-        jLabel6 = new javax.swing.JLabel();
-        btnAnotar1 = new javax.swing.JButton();
-        btnGuardarCreditos1 = new javax.swing.JButton();
-        txtConcepto = new javax.swing.JTextField();
-        btnSalirGastos = new javax.swing.JButton();
-        jLabel26 = new javax.swing.JLabel();
         jpResumen = new javax.swing.JPanel();
         btnSalirResumen = new javax.swing.JButton();
         jLabel27 = new javax.swing.JLabel();
@@ -195,6 +212,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         );
 
         jtpDiario.setForeground(new java.awt.Color(255, 102, 0));
+        jtpDiario.setTabPlacement(javax.swing.JTabbedPane.LEFT);
         jtpDiario.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
 
         jpCreditos.setBackground(new java.awt.Color(255, 255, 255));
@@ -224,7 +242,11 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
 
         jLabel11.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel11.setText("Fecha de Compra");
+        jLabel11.setText("Fecha");
+
+        txtNota.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        txtNota.setForeground(new java.awt.Color(204, 0, 0));
+        txtNota.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel14.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 102, 153));
@@ -257,6 +279,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         if (jtTablaCreditos.getColumnModel().getColumnCount() > 0) {
             jtTablaCreditos.getColumnModel().getColumn(0).setResizable(false);
             jtTablaCreditos.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jtTablaCreditos.getColumnModel().getColumn(0).setHeaderValue("");
             jtTablaCreditos.getColumnModel().getColumn(1).setResizable(false);
             jtTablaCreditos.getColumnModel().getColumn(1).setPreferredWidth(50);
             jtTablaCreditos.getColumnModel().getColumn(2).setResizable(false);
@@ -306,13 +329,9 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         cmbClienteCredito.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         cmbClienteCredito.setForeground(new java.awt.Color(0, 102, 153));
 
-        jLabel2.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 51, 102));
-        jLabel2.setText("Tienda donde se hizo el cargo");
-
-        cmbSucursal.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        cmbSucursal.setForeground(new java.awt.Color(0, 102, 153));
-        cmbSucursal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cuaracurio 2", "General", "La Comadre", "La Flor", "La Flor Texti", "Local 2", "Local B5", "Local D7", "Local E15", "Moroleón", " " }));
+        cmbSucursalCreditos.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        cmbSucursalCreditos.setForeground(new java.awt.Color(0, 102, 153));
+        cmbSucursalCreditos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cuaracurio 2", "General", "La Comadre", "La Flor", "La Flor Texti", "Local 2", "Local B5", "Local D7", "Local E15", "Moroleón", " " }));
 
         jLabel22.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(0, 102, 153));
@@ -347,68 +366,81 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         jLabel28.setForeground(new java.awt.Color(0, 102, 153));
         jLabel28.setText("Abono Inic.");
 
+        jLabel20.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel20.setText("Tienda");
+
+        chkSinNota.setBackground(new java.awt.Color(255, 255, 255));
+        chkSinNota.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        chkSinNota.setForeground(new java.awt.Color(153, 0, 0));
+        chkSinNota.setText("Sin Nota");
+        chkSinNota.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                chkSinNotaMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpCreditosLayout = new javax.swing.GroupLayout(jpCreditos);
         jpCreditos.setLayout(jpCreditosLayout);
         jpCreditosLayout.setHorizontalGroup(
             jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpCreditosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
                     .addGroup(jpCreditosLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCreditosLayout.createSequentialGroup()
-                        .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cmbSucursal, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBorrarCredito)
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRegistrarVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpCreditosLayout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtObservacion, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtAbonoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRegistrarCliente)
+                            .addComponent(btnAnotar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpCreditosLayout.createSequentialGroup()
+                        .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbSucursalCreditos, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jpCreditosLayout.createSequentialGroup()
-                                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel24)
+                                .addComponent(txtNota, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(chkSinNota)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel22)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBorrarCredito)
-                                .addGap(40, 40, 40)
-                                .addComponent(jLabel23)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnRegistrarVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jdcFechaCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cmbMetodoDePago, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jpCreditosLayout.createSequentialGroup()
-                                .addComponent(jLabel18)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtObservacion, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtAbonoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnRegistrarCliente)
-                                    .addComponent(btnAnotar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jpCreditosLayout.createSequentialGroup()
-                                .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jpCreditosLayout.createSequentialGroup()
-                                        .addComponent(txtNota, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(79, 79, 79)
-                                        .addComponent(jLabel11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jdcFechaCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cmbMetodoDePago, 0, 0, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCreditosLayout.createSequentialGroup()
-                                        .addComponent(cmbClienteCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(126, 126, 126)))))
-                        .addGap(124, 124, 124))))
+                                .addComponent(cmbClienteCredito, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(126, 126, 126)))))
+                .addGap(165, 165, 165))
         );
 
         jpCreditosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAnotar, btnRegistrarCliente});
@@ -416,9 +448,10 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         jpCreditosLayout.setVerticalGroup(
             jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpCreditosLayout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbSucursalCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20))
                 .addGap(15, 15, 15)
                 .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel12)
@@ -431,7 +464,8 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                     .addComponent(jLabel11)
                     .addComponent(jdcFechaCredito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(cmbMetodoDePago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbMetodoDePago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chkSinNota))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
@@ -442,14 +476,14 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                     .addComponent(jLabel28)
                     .addComponent(txtAbonoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel22)
                     .addComponent(btnBorrarCredito)
                     .addComponent(btnRegistrarVentas)
                     .addComponent(jLabel23)
-                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(btnSalir)
                     .addComponent(jLabel24))
                 .addContainerGap())
         );
@@ -514,14 +548,11 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
 
         btnAbonar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/dollar.png"))); // NOI18N
         btnAbonar.setText("Abonar");
-
-        jLabel19.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel19.setText("Fecha del abono");
-
-        jLabel20.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel20.setText("Cantidad");
+        btnAbonar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAbonarActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 51, 102));
@@ -553,15 +584,21 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         jLabel25.setForeground(new java.awt.Color(0, 102, 153));
         jLabel25.setText("Salir");
 
-        chkTodosLosClientes.setBackground(new java.awt.Color(255, 255, 255));
-        chkTodosLosClientes.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        chkTodosLosClientes.setForeground(new java.awt.Color(0, 102, 153));
-        chkTodosLosClientes.setText("Mostrar todos");
-        chkTodosLosClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                chkTodosLosClientesMouseClicked(evt);
+        btnPDFCreditos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/pdf.png"))); // NOI18N
+        btnPDFCreditos.setText("PDF");
+        btnPDFCreditos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPDFCreditosActionPerformed(evt);
             }
         });
+
+        cmbSucursalAbonos.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        cmbSucursalAbonos.setForeground(new java.awt.Color(0, 102, 153));
+        cmbSucursalAbonos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todas", "Cuaracurio 2", "General", "La Comadre", "La Flor", "La Flor Texti", "Local 2", "Local B5", "Local D7", "Local E15", "Moroleón", " " }));
+
+        jLabel19.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel19.setText("Tienda");
 
         javax.swing.GroupLayout jpAbonosLayout = new javax.swing.GroupLayout(jpAbonos);
         jpAbonos.setLayout(jpAbonosLayout);
@@ -569,44 +606,41 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
             jpAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpAbonosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpAbonosLayout.createSequentialGroup()
                         .addComponent(btnSalirAbonos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel25)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jdcFechaAbono, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCantidadAbono, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(31, 31, 31)
+                        .addComponent(btnPDFCreditos)
+                        .addGap(480, 480, 480)
                         .addComponent(btnAbonar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpAbonosLayout.createSequentialGroup()
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbClienteAbono, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(chkTodosLosClientes)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jdcFechaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jdcFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpAbonosLayout.createSequentialGroup()
-                        .addGroup(jpAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 776, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addGroup(jpAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jpAbonosLayout.createSequentialGroup()
+                            .addGroup(jpAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jpAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jpAbonosLayout.createSequentialGroup()
+                                    .addComponent(cmbClienteAbono, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jdcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jdcFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cmbSucursalAbonos, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel3)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 785, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jpAbonosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel19, jdcFechaAbono});
+        jpAbonosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jdcFechaFin, jdcFechaInicio});
+
+        jpAbonosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel15, jLabel16});
 
         jpAbonosLayout.setVerticalGroup(
             jpAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -618,104 +652,147 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                     .addComponent(jdcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16)
                     .addComponent(jdcFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbClienteAbono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chkTodosLosClientes))
+                    .addComponent(cmbClienteAbono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbSucursalAbonos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel19)
-                    .addComponent(jdcFechaAbono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20)
-                    .addComponent(txtCantidadAbono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAbonar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jpAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                        .addComponent(btnSalirAbonos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel25)))
+                    .addComponent(btnSalirAbonos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel25)
+                    .addComponent(btnPDFCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         jtpDiario.addTab("Abonos", jpAbonos);
 
         jpGastos.setBackground(new java.awt.Color(255, 255, 255));
-        jpGastos.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jpGastosComponentShown(evt);
-            }
-        });
 
-        jLabel21.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel21.setText("Fecha");
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel7.setText("Sucursal");
 
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel4.setText("Concepto");
+        cmbSucursalGasto.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        cmbSucursalGasto.setForeground(new java.awt.Color(0, 102, 153));
+        cmbSucursalGasto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cuaracurio 2", "General", "La Comadre", "La Flor", "La Flor Texti", "Local 2", "Local B5", "Local D7", "Local E15", "Moroleón", " " }));
+
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel2.setText("Tipo de Gasto");
+
+        cmbTipoDeGasto.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        cmbTipoDeGasto.setForeground(new java.awt.Color(0, 102, 153));
+        cmbTipoDeGasto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Comisiones", "Electricidad/CFE ", "Empaques", "Gasolina", "Honorarios Contador", "Imprenta", "Mantenimiento", "Pago de impuestos", "Rentas", "Telefono", "Varios/Personales", "Compra de productos", " ", " " }));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Importe");
 
-        txtObservaciones.setColumns(20);
-        txtObservaciones.setRows(5);
-        jScrollPane1.setViewportView(txtObservaciones);
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel6.setText("Observaciones");
+
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel8.setText("Proveedor");
+
+        cmbProveedorGasto.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        cmbProveedorGasto.setForeground(new java.awt.Color(0, 102, 153));
+        cmbProveedorGasto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TELEFONOS DE MEXICO SAB DECV", "TEXTILES PONCE DE LEON SA DE CV ", "SELENE", "VIÑA SABANA", "BLANCOS PARAISO", "AMERICA COLCHA ", "COMISION FEDERAL DE ELECTRICIDAD", "GASOLINERA", " ", " " }));
+
+        jLabel10.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel10.setText("Método de Pago");
+
+        cmbMetodoDePagoGasto.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        cmbMetodoDePagoGasto.setForeground(new java.awt.Color(0, 102, 153));
+        cmbMetodoDePagoGasto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "EFECTIVO", "TRANSFERENCIA BANCARIA", "DEVOLUCION", "NOTA DE CREDITO", "CHEQUE", " ", " " }));
+
+        jLabel29.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel29.setText("Fecha");
+
+        btnSalirRegistroGastos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSalirRegistroGastos.setForeground(new java.awt.Color(0, 153, 51));
+        btnSalirRegistroGastos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/exit2.png"))); // NOI18N
+
+        jLabel30.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel30.setText("Salir");
+
+        btnAnotarGasto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAnotarGasto.setForeground(new java.awt.Color(0, 153, 51));
+        btnAnotarGasto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/list.png"))); // NOI18N
+        btnAnotarGasto.setText("Anotar");
+        btnAnotarGasto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnotarGastoActionPerformed(evt);
+            }
+        });
+
+        btnBorrarGasto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnBorrarGasto.setForeground(new java.awt.Color(0, 153, 51));
+        btnBorrarGasto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/menos.png"))); // NOI18N
+        btnBorrarGasto.setText("Quitar");
+        btnBorrarGasto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarGastoActionPerformed(evt);
+            }
+        });
+
+        btnRegistrarGasto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRegistrarGasto.setForeground(new java.awt.Color(0, 153, 51));
+        btnRegistrarGasto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/mas.png"))); // NOI18N
+        btnRegistrarGasto.setText("Registrar");
+        btnRegistrarGasto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarGastoActionPerformed(evt);
+            }
+        });
 
         jtTablaGastos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Fecha", "Concepto", "Observaciones", "Importe"
+                "Fecha", "Tienda", "Tipo de Gasto", "Proveedor", "Forma de Pago", "Observaciones", "Importe"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane4.setViewportView(jtTablaGastos);
-
-        jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel6.setText("Observaciones");
-
-        btnAnotar1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnAnotar1.setForeground(new java.awt.Color(0, 153, 51));
-        btnAnotar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/apply.png"))); // NOI18N
-        btnAnotar1.setText("Anotar");
-        btnAnotar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnotar1ActionPerformed(evt);
-            }
-        });
-
-        btnGuardarCreditos1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnGuardarCreditos1.setForeground(new java.awt.Color(0, 153, 51));
-        btnGuardarCreditos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/mas.png"))); // NOI18N
-        btnGuardarCreditos1.setText("Guardar Gasto");
-        btnGuardarCreditos1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarCreditos1ActionPerformed(evt);
-            }
-        });
-
-        btnSalirGastos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnSalirGastos.setForeground(new java.awt.Color(0, 153, 51));
-        btnSalirGastos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/exit2.png"))); // NOI18N
-        btnSalirGastos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirGastosActionPerformed(evt);
-            }
-        });
-
-        jLabel26.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel26.setText("Salir");
+        if (jtTablaGastos.getColumnModel().getColumnCount() > 0) {
+            jtTablaGastos.getColumnModel().getColumn(0).setResizable(false);
+            jtTablaGastos.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jtTablaGastos.getColumnModel().getColumn(1).setResizable(false);
+            jtTablaGastos.getColumnModel().getColumn(2).setResizable(false);
+            jtTablaGastos.getColumnModel().getColumn(3).setResizable(false);
+            jtTablaGastos.getColumnModel().getColumn(4).setResizable(false);
+            jtTablaGastos.getColumnModel().getColumn(4).setPreferredWidth(100);
+            jtTablaGastos.getColumnModel().getColumn(5).setResizable(false);
+            jtTablaGastos.getColumnModel().getColumn(6).setResizable(false);
+            jtTablaGastos.getColumnModel().getColumn(6).setPreferredWidth(50);
+        }
 
         javax.swing.GroupLayout jpGastosLayout = new javax.swing.GroupLayout(jpGastos);
         jpGastos.setLayout(jpGastosLayout);
@@ -723,58 +800,101 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
             jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpGastosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
+                .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpGastosLayout.createSequentialGroup()
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jdcFechaGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpGastosLayout.createSequentialGroup()
-                        .addComponent(btnSalirGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel26)
+                        .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpGastosLayout.createSequentialGroup()
+                                .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jpGastosLayout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jLabel29, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jdcFechaGasto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                    .addComponent(txtObservacionGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbSucursalGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jpGastosLayout.createSequentialGroup()
+                                        .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cmbTipoDeGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cmbProveedorGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jpGastosLayout.createSequentialGroup()
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtImporteGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jpGastosLayout.createSequentialGroup()
+                                .addGap(139, 139, 139)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnGuardarCreditos1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpGastosLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbMetodoDePagoGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jpGastosLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAnotarGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpGastosLayout.createSequentialGroup()
+                        .addComponent(btnSalirRegistroGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtImporte, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBorrarGasto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAnotar1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(btnRegistrarGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(171, 171, 171))
         );
+
+        jpGastosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmbMetodoDePagoGasto, cmbProveedorGasto, cmbSucursalGasto, cmbTipoDeGasto, jLabel5, txtImporteGasto, txtObservacionGasto});
+
+        jpGastosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAnotarGasto, btnBorrarGasto, btnRegistrarGasto});
+
         jpGastosLayout.setVerticalGroup(
             jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpGastosLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel21)
-                    .addComponent(jdcFechaGasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtImporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAnotar1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpGastosLayout.createSequentialGroup()
+                        .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jLabel29)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(cmbSucursalGasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbTipoDeGasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jdcFechaGasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jpGastosLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbProveedorGasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpGastosLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbMetodoDePagoGasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGuardarCreditos1)
-                    .addComponent(btnSalirGastos, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel26, javax.swing.GroupLayout.Alignment.CENTER))
+                    .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtObservacionGasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)
+                        .addComponent(txtImporteGasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAnotarGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel30)
+                        .addComponent(btnBorrarGasto)
+                        .addComponent(btnRegistrarGasto))
+                    .addComponent(btnSalirRegistroGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -799,12 +919,12 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                 .addComponent(btnSalirResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel27)
-                .addContainerGap(722, Short.MAX_VALUE))
+                .addContainerGap(743, Short.MAX_VALUE))
         );
         jpResumenLayout.setVerticalGroup(
             jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpResumenLayout.createSequentialGroup()
-                .addContainerGap(400, Short.MAX_VALUE)
+                .addContainerGap(461, Short.MAX_VALUE)
                 .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel27)
                     .addComponent(btnSalirResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -818,7 +938,9 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jtpDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 801, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jtpDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 895, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -873,7 +995,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                 }
                 model.addRow(new String[]{txtNota.getText(),
                     FechaHerramienta.formatoYMD(jdcFechaCredito.getDate()),
-                    cmbSucursal.getSelectedItem().toString(),
+                    cmbSucursalCreditos.getSelectedItem().toString(),
                     cmbClienteCredito.getSelectedItem().toString(), txtObservacion.getText(),
                     cmbMetodoDePago.getSelectedItem().toString(),
                     abonoInicial,
@@ -883,25 +1005,34 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, e, "Error", 0);
             }
         } else {
-            if (txtNota.getText().equals("")) {
-                JOptionPane.showMessageDialog(rootPane, "Falto de llenar la Nota");
+            if (txtObservacionGasto.getText().equals("")) {
+                JOptionPane.showMessageDialog(rootPane, "Falto de llenar la observación");
             }
-            if (txtObservacion.getText().equals("")) {
-                JOptionPane.showMessageDialog(rootPane, "Falto de llenar la Observación");
-            }
-            if (txtCantidad.getText().equals("")) {
-                JOptionPane.showMessageDialog(rootPane, "Falto de llenar la Cantidad");
+            if (txtImporteGasto.getText().equals("")) {
+                JOptionPane.showMessageDialog(rootPane, "Falto de llenar el importe");
             }
         }
     }//GEN-LAST:event_btnAnotarActionPerformed
 
     private void limpiarCreditos() {
         txtNota.setText("");
+        txtNota.setEditable(true);
         jdcFechaCredito.setDate(new Date());
         cmbClienteCredito.setSelectedIndex(0);
         txtObservacion.setText("");
         txtCantidad.setText("");
         txtAbonoInicial.setText("");
+        chkSinNota.setSelected(false);
+    }
+
+    private void limpiarGastos() {
+        jdcFechaGasto.getDate();
+        cmbSucursalGasto.setSelectedIndex(0);
+        cmbTipoDeGasto.setSelectedIndex(0);
+        cmbProveedorGasto.setSelectedIndex(0);
+        cmbMetodoDePagoGasto.setSelectedIndex(0);
+        txtObservacionGasto.setText("");
+        txtImporteGasto.setText("");
     }
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         try {
@@ -917,46 +1048,46 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         AccesoBD controlBD = new AccesoBD();
         Venta venta = new Venta();
         String fecha = "";
-        venta.setNota(jtTablaCreditos.getValueAt(
-                0, 0).toString());
-        fecha = jtTablaCreditos.getValueAt(0, 1).toString();
-        venta.setFechaVenta(FechaHerramienta.convertirStringEnDate(fecha));
-        venta.setNombreTienda(jtTablaCreditos.getValueAt(
-                0, 2).toString());
-        String[] nombreCliente = jtTablaCreditos.getValueAt(0, 3).toString().split("-");
-        venta.setNombreCliente(nombreCliente[0]);
-        venta.setDescripcion(jtTablaCreditos.getValueAt(
-                0, 4).toString());
-        venta.setMetodoPago(jtTablaCreditos.getValueAt(
-                0, 5).toString());
-        double abonoInicial = Double.parseDouble(jtTablaCreditos.getValueAt(0, 6).toString());
-        venta.setAbono(abonoInicial);
-        double Importe = Double.parseDouble(jtTablaCreditos.getValueAt(0, 7).toString());
-        venta.setImporte(Importe);
-        double saldoRestante = Importe - abonoInicial;
-        venta.setSaldoRestante(saldoRestante);
-        if (saldoRestante > 0) {
-            venta.setEstatus("Vigente");
-        } else {
-            venta.setEstatus("Saldado");
+        for (int i = 0; i < jtTablaCreditos.getRowCount(); i++) {
+            venta.setNota(jtTablaCreditos.getValueAt(
+                    i, 0).toString());
+            fecha = jtTablaCreditos.getValueAt(i, 1).toString();
+            venta.setFechaVenta(FechaHerramienta.convertirStringEnDate(fecha));
+            venta.setNombreTienda(jtTablaCreditos.getValueAt(
+                    i, 2).toString());
+            String nombreCliente = jtTablaCreditos.getValueAt(i, 3).toString();
+            venta.setNombreCliente(nombreCliente);
+            venta.setDescripcion(jtTablaCreditos.getValueAt(
+                    i, 4).toString());
+            venta.setMetodoPago(jtTablaCreditos.getValueAt(
+                    i, 5).toString());
+            double abonoInicial = Double.parseDouble(jtTablaCreditos.getValueAt(i, 6).toString());
+            venta.setAbono(abonoInicial);
+            double Importe = Double.parseDouble(jtTablaCreditos.getValueAt(i, 7).toString());
+            venta.setImporte(Importe);
+            double saldoRestante = Importe - abonoInicial;
+            venta.setSaldoRestante(saldoRestante);
+            if (saldoRestante > 0) {
+                venta.setEstatus("Vigente");
+            } else {
+                venta.setEstatus("Saldado");
+            }
+            controlBD.add(venta);
         }
-        if (controlBD.add(venta)) {
-            limpiarCreditos();
-            JOptionPane.showMessageDialog(this, "Ventas registradas correctamente", "Datos registrados", 1);
-        } else {
-            JOptionPane.showMessageDialog(this, "Las ventas no se registraron", "Problemas al guardar", 0);
-        }
-
+        limpiarCreditos();
+        limpiarTablas(jtTablaCreditos);
+        JOptionPane.showMessageDialog(this, "Ventas registradas correctamente", "Datos registrados", 1);
     }//GEN-LAST:event_btnRegistrarVentasActionPerformed
-
-    private void btnAnotar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnotar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAnotar1ActionPerformed
-
-    private void btnGuardarCreditos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCreditos1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardarCreditos1ActionPerformed
-
+    private void limpiarTablas(JTable jtTabla) {
+        jtTabla.setVisible(false);
+       //Obtengo el modelo
+        DefaultTableModel modelo = (DefaultTableModel) jtTabla.getModel();
+        //Borro las todas las rows
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+        jtTabla.setVisible(true);
+    }
     private void btnBorrarCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarCreditoActionPerformed
         if (jtTablaCreditos.getSelectedRow() > -1) {
             DefaultTableModel model = (DefaultTableModel) jtTablaCreditos.getModel();
@@ -969,36 +1100,20 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
 
     private void jpAbonosComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpAbonosComponentShown
         llenarCombos();
-        String fechaInicioAbono = FechaHerramienta.formatoYMD(jdcFechaInicio.getDate());
-        String fechaFinAbono = FechaHerramienta.formatoYMD(jdcFechaFin.getDate());
-        String HQL = "From Venta v WHERE v.nombreCliente = '"
-                + cmbClienteAbono.getSelectedItem().toString() + "'"
-                + " AND v.fechaVenta BETWEEN '" + fechaInicioAbono + "' and '" + fechaFinAbono + "'";
+        cmbClienteAbono.setVisible(true);
+        crearConsultaGlobal();
         cmbClienteAbono.setSelectedIndex(0);
         cargaTabla(jtTablaAbonos, HQL, "Venta");
         jdcFechaCredito.setDate(new Date());
-        jdcFechaAbono.setDate(new Date());
         jdcFechaInicio.setDate(new Date());
         jdcFechaFin.setDate(new Date());
         jdcFechaGasto.setDate(new Date());
 
     }//GEN-LAST:event_jpAbonosComponentShown
 
-    private void jpGastosComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpGastosComponentShown
-        llenarCombos();
-        cargaTabla(jtTablaGastos, "From Compra", "Compra");
-        jdcFechaCredito.setDate(new Date());
-        jdcFechaAbono.setDate(new Date());
-        jdcFechaInicio.setDate(new Date());
-        jdcFechaFin.setDate(new Date());
-        jdcFechaGasto.setDate(new Date());
-
-    }//GEN-LAST:event_jpGastosComponentShown
-
     private void jpCreditosComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpCreditosComponentShown
         llenarCombos();
         jdcFechaCredito.setDate(new Date());
-        jdcFechaAbono.setDate(new Date());
         jdcFechaInicio.setDate(new Date());
         jdcFechaFin.setDate(new Date());
         jdcFechaGasto.setDate(new Date());
@@ -1015,56 +1130,225 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         }             // TODO add your handling code here:
     }//GEN-LAST:event_btnSalirAbonosActionPerformed
 
-    private void btnSalirGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirGastosActionPerformed
-        try {
-            this.setClosed(true);
-            System.gc();
-        } catch (PropertyVetoException ex) {
-            this.dispose();
-            System.gc();
-        }             // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalirGastosActionPerformed
-
     private void cmbClienteAbonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClienteAbonoActionPerformed
 
     }//GEN-LAST:event_cmbClienteAbonoActionPerformed
+
+    private void crearConsultaGlobal() {
+        fechaInicioAbono = FechaHerramienta.formatoYMD(jdcFechaInicio.getDate());
+        fechaFinAbono = FechaHerramienta.formatoYMD(jdcFechaFin.getDate());
+        clienteAbono = cmbClienteAbono.getSelectedItem().toString();
+        tiendaAbono = cmbSucursalAbonos.getSelectedItem().toString();
+        if (clienteAbono.equals("Todos") && tiendaAbono.equals("Todas")) {
+            HQL = "From Venta v WHERE "
+                    + "v.fechaVenta BETWEEN '"
+                    + fechaInicioAbono + "' AND '"
+                    + fechaFinAbono + "'";
+        }
+        if (!clienteAbono.equals("Todos") && tiendaAbono.equals("Todas")) {
+            HQL = "From Venta v WHERE "
+                    + "v.nombreCliente = '"
+                    + clienteAbono
+                    + "' AND v.fechaVenta BETWEEN '"
+                    + fechaInicioAbono + "' AND '"
+                    + fechaFinAbono + "'";
+        }
+        if (clienteAbono.equals("Todos") && !tiendaAbono.equals("Todas")) {
+            HQL = "From Venta v WHERE "
+                    + " v.nombreTienda = '"
+                    + tiendaAbono
+                    + "' AND v.fechaVenta BETWEEN '"
+                    + fechaInicioAbono + "' AND '"
+                    + fechaFinAbono + "'";
+        }
+        if (!clienteAbono.equals("Todos") && !tiendaAbono.equals("Todas")) {
+            HQL = "From Venta v WHERE "
+                    + "v.nombreCliente = '"
+                    + clienteAbono
+                    + "' AND v.nombreTienda = '"
+                    + tiendaAbono
+                    + "' AND v.fechaVenta BETWEEN '"
+                    + fechaInicioAbono + "' AND '"
+                    + fechaFinAbono + "'";
+        }
+    }
+
     public final void addActions() {
+
         final ItemListener changeClick = new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (cmbClienteAbono.getItemCount() > 0) {
                     if (cmbClienteAbono.getSelectedItem().equals(e.getItem())) {
-                        String fechaInicioAbono = FechaHerramienta.formatoYMD(jdcFechaInicio.getDate());
-                        String fechaFinAbono = FechaHerramienta.formatoYMD(jdcFechaFin.getDate());
-                        String HQL = "From Venta v WHERE v.nombreCliente = '"
-                                + cmbClienteAbono.getSelectedItem().toString() + "'"
-                                + " AND v.fechaVenta BETWEEN '" + fechaInicioAbono + "' and '" + fechaFinAbono + "'";
+                        crearConsultaGlobal();
+                        cargaTabla(jtTablaAbonos, HQL, "Venta");
+                    }
+                }
+                if (cmbSucursalAbonos.getItemCount() > 0) {
+                    if (cmbSucursalAbonos.getSelectedItem().equals(e.getItem())) {
+                        crearConsultaGlobal();
+                        cargaTabla(jtTablaAbonos, HQL, "Venta");
                     }
                 }
             }
         };
+        jdcFechaInicio.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
+            public void propertyChange(PropertyChangeEvent e) {
+                if (cmbClienteAbono.isVisible()) {
+                    crearConsultaGlobal();
+                    cargaTabla(jtTablaAbonos, HQL, "Venta");
+                }
+            }
+        });
 
         this.cmbClienteAbono.addItemListener(changeClick);
+        this.cmbSucursalAbonos.addItemListener(changeClick);
     }
-    private void chkTodosLosClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chkTodosLosClientesMouseClicked
-        if (chkTodosLosClientes.isSelected()) {
-            cmbClienteAbono.setEnabled(false);
-            cargaTabla(jtTablaAbonos, "From Venta", "Venta");
-        } else {
-            cmbClienteAbono.setEnabled(true);
-            String fechaInicioAbono = FechaHerramienta.formatoYMD(jdcFechaInicio.getDate());
-            String fechaFinAbono = FechaHerramienta.formatoYMD(jdcFechaFin.getDate());
-            String HQL = "From Venta v WHERE v.nombreCliente = '"
-                    + cmbClienteAbono.getSelectedItem().toString() + "'"
-                    + " AND v.fechaVenta BETWEEN '" + fechaInicioAbono + "' and '" + fechaFinAbono + "'";
-            cargaTabla(jtTablaAbonos, HQL, "Venta");
-        }
-
-
-    }//GEN-LAST:event_chkTodosLosClientesMouseClicked
-
     private void cmbClienteAbonoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbClienteAbonoItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbClienteAbonoItemStateChanged
+
+    private void btnAbonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbonarActionPerformed
+        if (jtTablaAbonos.getSelectedRow() != -1) {
+            String estatus = jtTablaAbonos.getValueAt(jtTablaAbonos.getSelectedRow(), 7).toString();
+            if (!estatus.equals("Saldada")) {
+                String clave = jtTablaAbonos.getValueAt(jtTablaAbonos.getSelectedRow(), 1).toString();
+                try {
+                    RegistroAbonoCliente registroAbonoCliente = new RegistroAbonoCliente(clave);
+                    if (exist(registroAbonoCliente) == false) {
+                        CPanel.desktop.add(registroAbonoCliente);
+                        registroAbonoCliente.setVisible(true);
+                        registroAbonoCliente.setLocation((CPanel.desktop.getWidth() - registroAbonoCliente.getWidth()) / 2,
+                                (CPanel.desktop.getHeight() - registroAbonoCliente.getHeight()) / 2);
+                    } else {
+                        registroAbonoCliente.dispose();
+                    }        // TODO add your handling code here:
+                } catch (Exception ex) {
+                    Logger.getLogger(RegistrarProducto.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Esta venta ya está Saldada");
+            }
+
+        }
+    }//GEN-LAST:event_btnAbonarActionPerformed
+
+    private void btnPDFCreditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFCreditosActionPerformed
+        Map parametros = new HashMap();
+        if (jtTablaAbonos.getRowCount() > 0) {
+            crearConsultaGlobal();
+            java.sql.Date fechaInicio = new java.sql.Date(jdcFechaInicio.getDate().getTime());
+            java.sql.Date fechaFin = new java.sql.Date(jdcFechaFin.getDate().getTime());
+            parametros.put("nombreTienda", cmbSucursalAbonos.getSelectedItem().toString());
+            parametros.put("nombreCliente", jtTablaAbonos.getValueAt(0, 3).toString());
+            parametros.put("fechaInicio", fechaInicio);
+            parametros.put("fechaFin", fechaFin);
+
+            if (tiendaAbono.equals("Todas") && !clienteAbono.equals("Todos")) {
+                try {
+                    reportMaker.ReportMaker reporte = new reportMaker.ReportMaker(HQL, "VentaTienda", parametros, false);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error generando el reporte: " + e, "Error", 0);
+                }
+            }
+            if (!tiendaAbono.equals("Todas") && clienteAbono.equals("Todos")) {
+                try {
+                    reportMaker.ReportMaker reporte = new reportMaker.ReportMaker(HQL, "VentaCliente", parametros, false);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error generando el reporte: " + e, "Error", 0);
+                }
+            }
+            if (tiendaAbono.equals("Todas") && clienteAbono.equals("Todos")) {
+
+                try {
+                    reportMaker.ReportMaker reporte = new reportMaker.ReportMaker(HQL, "VentaTodos", parametros, false);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error generando el reporte: " + e, "Error", 0);
+                }
+            }
+            if (!tiendaAbono.equals("Todas") && !clienteAbono.equals("Todos")) {
+
+                try {
+                    reportMaker.ReportMaker reporte = new reportMaker.ReportMaker(HQL, "VentaEspecifica", parametros, false);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error generando el reporte: " + e, "Error", 0);
+                }
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "No hay resultados que imprimir");
+        }
+
+    }//GEN-LAST:event_btnPDFCreditosActionPerformed
+
+    private void chkSinNotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chkSinNotaMouseClicked
+        if (chkSinNota.isSelected()) {
+            txtNota.setText("Sin nota");
+            txtNota.setEditable(false);
+        } else {
+            txtNota.setText("");
+            txtNota.setEditable(true);
+        }
+    }//GEN-LAST:event_chkSinNotaMouseClicked
+
+    private void btnAnotarGastoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnotarGastoActionPerformed
+        if (!txtImporteGasto.getText().isEmpty()
+                || !txtObservacionGasto.getText().isEmpty()) {
+            DefaultTableModel model = (DefaultTableModel) jtTablaGastos.getModel();
+            try {
+
+                model.addRow(new String[]{
+                    FechaHerramienta.formatoYMD(jdcFechaGasto.getDate()),
+                    cmbSucursalGasto.getSelectedItem().toString(),
+                    cmbTipoDeGasto.getSelectedItem().toString(),
+                    cmbProveedorGasto.getSelectedItem().toString(),
+                    cmbMetodoDePagoGasto.getSelectedItem().toString(),
+                    txtObservacionGasto.getText(),
+                    txtImporteGasto.getText()
+                });
+                limpiarGastos();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e, "Error", 0);
+            }
+        } else {
+            if (txtNota.getText().equals("")) {
+                JOptionPane.showMessageDialog(rootPane, "Falto de llenar la Nota");
+            }
+            if (txtObservacion.getText().equals("")) {
+                JOptionPane.showMessageDialog(rootPane, "Falto de llenar la Observación");
+            }
+            if (txtCantidad.getText().equals("")) {
+                JOptionPane.showMessageDialog(rootPane, "Falto de llenar la Cantidad");
+            }
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAnotarGastoActionPerformed
+
+    private void btnBorrarGastoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarGastoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBorrarGastoActionPerformed
+
+    private void btnRegistrarGastoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarGastoActionPerformed
+        AccesoBD controlBD = new AccesoBD();
+        Compra gasto = new Compra();
+        String fecha = "";
+        for (int i = 0; i < jtTablaGastos.getRowCount(); i++) {
+            try {
+                pojos.Compra compra = new pojos.Compra();
+                fecha = jtTablaGastos.getValueAt(i, 0).toString();
+                compra.setFechaCompra(FechaHerramienta.convertirStringEnDate(fecha));
+                compra.setNombreSucursal(jtTablaGastos.getValueAt(i, 1).toString());
+                compra.setTipoDeGasto(jtTablaGastos.getValueAt(i, 2).toString());
+                compra.setNombreProveedor(jtTablaGastos.getValueAt(i, 3).toString());
+                compra.setMetodoPago(jtTablaGastos.getValueAt(i, 4).toString());
+                compra.setObservacion(jtTablaGastos.getValueAt(i, 5).toString());
+                compra.setImporte(Double.parseDouble(jtTablaGastos.getValueAt(i, 6).toString()));
+                controlBD.add(gasto);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e, "Error", 0);
+            }       }
+        limpiarGastos();
+        limpiarTablas(jtTablaGastos);
+        JOptionPane.showMessageDialog(this, "Ventas registradas correctamente", "Datos registrados", 1);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarGastoActionPerformed
     private void cargaTabla(final JTable jtTabla, String HQL, String Encabezado) {
         //Reviso si que la consulta no vaya vacia
         if (!HQL.isEmpty()) {
@@ -1079,21 +1363,29 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAbonar;
     private javax.swing.JButton btnAnotar;
-    private javax.swing.JButton btnAnotar1;
+    private javax.swing.JButton btnAnotarGasto;
     private javax.swing.JButton btnBorrarCredito;
-    private javax.swing.JButton btnGuardarCreditos1;
+    private javax.swing.JButton btnBorrarGasto;
+    private javax.swing.JButton btnPDFCreditos;
     private javax.swing.JButton btnRegistrarCliente;
+    private javax.swing.JButton btnRegistrarGasto;
     private javax.swing.JButton btnRegistrarVentas;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnSalirAbonos;
-    private javax.swing.JButton btnSalirGastos;
+    private javax.swing.JButton btnSalirRegistroGastos;
     private javax.swing.JButton btnSalirResumen;
-    private javax.swing.JCheckBox chkTodosLosClientes;
+    private javax.swing.JCheckBox chkSinNota;
     private javax.swing.JComboBox cmbClienteAbono;
     private javax.swing.JComboBox cmbClienteCredito;
     private javax.swing.JComboBox cmbMetodoDePago;
-    private javax.swing.JComboBox cmbSucursal;
+    private javax.swing.JComboBox cmbMetodoDePagoGasto;
+    private javax.swing.JComboBox cmbProveedorGasto;
+    private javax.swing.JComboBox cmbSucursalAbonos;
+    private javax.swing.JComboBox cmbSucursalCreditos;
+    private javax.swing.JComboBox cmbSucursalGasto;
+    private javax.swing.JComboBox cmbTipoDeGasto;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -1105,26 +1397,25 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private com.toedter.calendar.JDateChooser jdcFechaAbono;
     private com.toedter.calendar.JDateChooser jdcFechaCredito;
     private com.toedter.calendar.JDateChooser jdcFechaFin;
     private com.toedter.calendar.JDateChooser jdcFechaGasto;
@@ -1139,11 +1430,9 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     private javax.swing.JTabbedPane jtpDiario;
     private javax.swing.JTextField txtAbonoInicial;
     private javax.swing.JTextField txtCantidad;
-    private javax.swing.JTextField txtCantidadAbono;
-    private javax.swing.JTextField txtConcepto;
-    private javax.swing.JTextField txtImporte;
+    private javax.swing.JTextField txtImporteGasto;
     private javax.swing.JTextField txtNota;
     private javax.swing.JTextField txtObservacion;
-    private javax.swing.JTextArea txtObservaciones;
+    private javax.swing.JTextField txtObservacionGasto;
     // End of variables declaration//GEN-END:variables
 }

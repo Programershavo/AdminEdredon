@@ -6,12 +6,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperPrintManager;
+//import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 
@@ -25,10 +26,25 @@ public class ReportMaker {
     String consultaHQL = null;//Consulta para la base de datos
     String nombreReporte = null;//Nombre del reporte que se va a mostrar en pantalla
     List listTablaConsultada = null;//Lista que se llenará con los datos consultados en consultaHQL
+    Map parametros;
+    boolean imprimir;
 
     //Recibo la consulta de la tabla, y el nombre del reporte que llenare con la tabla consultada
-    public ReportMaker(String consultaHQL, String nombreReporte) {
+    public ReportMaker(String consultaHQL, String nombreReporte, boolean imprimirInmediato) {
         Conexion();
+        this.imprimir = imprimirInmediato;
+        this.consultaHQL = consultaHQL;
+        this.nombreReporte = nombreReporte;
+        this.parametros = new HashMap();
+        llamarReporte();
+    }
+
+    //Recibo la consulta de la tabla, y el nombre del reporte que llenare con la tabla consultada
+    public ReportMaker(String consultaHQL, String nombreReporte, Map parametrosRecibidos, boolean imprimirInmediato) {
+        Conexion();
+        this.imprimir = imprimirInmediato;
+        this.parametros = new HashMap();
+        this.parametros = parametrosRecibidos;
         this.consultaHQL = consultaHQL;
         this.nombreReporte = nombreReporte;
         llamarReporte();
@@ -57,6 +73,22 @@ public class ReportMaker {
                 nombreReporte = System.getProperty("user.dir") + "/reporteCompra.jrxml";
 //              nombreReporte = getClass().getResource("/reportes/Reporte/reporteCompra.jrxml").getPath();
                 break;
+            case "VentaEspecifica":
+                nombreReporte = System.getProperty("user.dir") + "/reporteVenta.jrxml";
+//              nombreReporte = getClass().getResource("/reportes/Reporte/reporteCompra.jrxml").getPath();
+                break;
+            case "VentaTienda":
+                nombreReporte = System.getProperty("user.dir") + "/reporteVentaTiendas.jrxml";
+//              nombreReporte = getClass().getResource("/reportes/Reporte/reporteCompra.jrxml").getPath();
+                break;
+            case "VentaCliente":
+                nombreReporte = System.getProperty("user.dir") + "/reporteVentaClientes.jrxml";
+//              nombreReporte = getClass().getResource("/reportes/Reporte/reporteCompra.jrxml").getPath();
+                break;
+            case "VentaTodos":
+                nombreReporte = System.getProperty("user.dir") + "/reporteVentaTodos.jrxml";
+//              nombreReporte = getClass().getResource("/reportes/Reporte/reporteCompra.jrxml").getPath();
+                break;
         }
         return nombreReporte;
     }
@@ -65,10 +97,7 @@ public class ReportMaker {
     private boolean hayRegistrosEnTabla(String HQL) {
         AccesoBD acceso = new AccesoBD();
         listTablaConsultada = acceso.select(HQL);
-        if (listTablaConsultada.isEmpty()) {
-            return false;
-        }
-        return true;
+        return !listTablaConsultada.isEmpty();
     }
 
     private void llamarReporte() {
@@ -79,17 +108,21 @@ public class ReportMaker {
                     JOptionPane.showMessageDialog(null, "Error al cargar reporte",
                             "Generar Reporte", JOptionPane.ERROR_MESSAGE);
                 }
-                JasperReport masterReport = null;
+                JasperReport reporteMaestro = null;
                 try {
-                    masterReport = JasperCompileManager.compileReport(rutaReporte);
+                    reporteMaestro = JasperCompileManager.compileReport(rutaReporte);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e,
                             "Error al cargar reporte", JOptionPane.ERROR_MESSAGE);
                     System.out.println(e);
                 }
-                JasperPrint jasperPrint = JasperFillManager.fillReport(masterReport, new HashMap(), conexionSQL);
-                JasperViewer.viewReport(jasperPrint, false);
-                //JasperPrintManager.printReport(jasperPrint,true);
+                if (parametros.isEmpty()) {
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(reporteMaestro, new HashMap(), conexionSQL);
+                    JasperViewer.viewReport(jasperPrint, imprimir);
+                } else {
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(reporteMaestro, parametros, conexionSQL);
+                    JasperViewer.viewReport(jasperPrint, imprimir);
+                }
                 cerrar();
             } catch (JRException e) {
                 JOptionPane.showMessageDialog(null, "Error al compilar reporte",

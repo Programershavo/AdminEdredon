@@ -8,9 +8,8 @@ public class TableModel extends AbstractTableModel {
 
     private String[] headerCompra = {"Clave", "Nombre Sucursal",
         "Fecha Compra", "Tipo de gasto", "Nombre Proveedor", "Metodo pago", "Observacion", "Importe"};
-    private String[] headerVenta = {"Clave", "Cliente","Fecha de venta",
-        "Fecha venta saldada", "Fecha ultimo abono", "Descripcion",
-        "Abono cantidad", "Credito", "Forma de pago", "Estatus", "Importe"};
+    private String[] headerVenta = {"Clave", "Nota", "Tienda", "Cliente", "Fecha de venta",
+        "Total Abonado", "Forma de pago", "Estatus", "Importe"};
     private String[] headerProducto = {"Clave", "Codigo de Barras",
         "Nombre", "Tamaño", "Linea", "Sublinea", "Precio de venta", "Precio de Compra"};
     private String[] headerProveedor = {"Clave", "Folio", "Nombre",
@@ -64,13 +63,7 @@ public class TableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int row, int column) {
-        // Aquí devolvemos true o false según queramos que una celda
-        // identificada por fila,columna (row,column), sea o no editable
-        if (column == 0 || column == 1) {
-            return false;
-        } else {
-            return true;
-        }
+        return false;
     }
 
     @Override
@@ -130,20 +123,28 @@ public class TableModel extends AbstractTableModel {
                         while (contCol < numColumnas && listaDeObjetos.hasNext()) {
                             pojos.Compra compra = (pojos.Compra) listaDeObjetos.next();
                             tableModel[contFila][contCol] = compra.getIdCompras();
+                            this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = compra.getFechaCompra();
+                            this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = compra.getNombreSucursal();
+                            this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = compra.getTipoDeGasto();
+                            this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = compra.getNombreProveedor();
+                            this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = compra.getMetodoPago();
+                            this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = compra.getObservacion();
+                            this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = compra.getImporte();
+                            this.isCellEditable(contFila, contCol);
                             contCol++;
                         }
                         contCol = 0;
@@ -159,26 +160,31 @@ public class TableModel extends AbstractTableModel {
                         while (contCol < numColumnas && listaDeObjetos.hasNext()) {
                             pojos.Venta venta = (pojos.Venta) listaDeObjetos.next();
                             tableModel[contFila][contCol] = venta.getIdVenta();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = venta.getNota();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = venta.getNombreTienda();
+                            this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = venta.getNombreCliente();
+                            this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = venta.getFechaVenta();
-                            contCol++;
-                            tableModel[contFila][contCol] = venta.getFechaVentaSaldada();
-                            contCol++;
-                            tableModel[contFila][contCol] = venta.getFechaUltimoAbono();
-                            contCol++;
-                            tableModel[contFila][contCol] = venta.getDescripcion();
+                            this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = venta.getAbono();
-                            contCol++;
-                            tableModel[contFila][contCol] = venta.getCredito();
+                            this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = venta.getMetodoPago();
+                            this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = venta.getEstatus();
+                            this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = String.valueOf(venta.getImporte());
+                            this.isCellEditable(contFila, contCol);
                             contCol++;
                         }
                         contCol = 0;

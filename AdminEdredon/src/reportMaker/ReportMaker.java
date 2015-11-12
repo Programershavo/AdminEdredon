@@ -14,6 +14,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 //import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.view.JasperViewer;
 
 /**
@@ -118,9 +119,11 @@ public class ReportMaker {
                 }
                 if (parametros.isEmpty()) {
                     JasperPrint jasperPrint = JasperFillManager.fillReport(reporteMaestro, new HashMap(), conexionSQL);
+                    jasperPrint.setProperty("net.sf.jasperreports.export.xls.ignore.graphics", "true");
                     JasperViewer.viewReport(jasperPrint, imprimir);
                 } else {
                     JasperPrint jasperPrint = JasperFillManager.fillReport(reporteMaestro, parametros, conexionSQL);
+                    jasperPrint.setProperty("net.sf.jasperreports.export.xls.ignore.graphics", "true");
                     JasperViewer.viewReport(jasperPrint, imprimir);
                 }
                 cerrar();

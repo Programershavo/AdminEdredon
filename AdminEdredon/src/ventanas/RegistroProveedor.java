@@ -407,6 +407,7 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
         txtNoInterior.setText("");
         cmbEstado.setSelectedIndex(0);
         txtRFC.setText("");
+        txtMunicipio.setText("");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;

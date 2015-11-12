@@ -66,8 +66,10 @@ public class CPanel extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnuProgramaSalir = new javax.swing.JMenuItem();
         mnuProveedores = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
         jmiDiarioDeCaja = new javax.swing.JMenuItem();
         jmiGastos = new javax.swing.JMenuItem();
+        jmiComprasAProveedor = new javax.swing.JMenuItem();
         jSeparator5 = new javax.swing.JPopupMenu.Separator();
         mnuProveedoresEliminarEditarProveedor = new javax.swing.JMenuItem();
         jmiCliente = new javax.swing.JMenuItem();
@@ -183,22 +185,34 @@ public class CPanel extends javax.swing.JFrame {
         mnuProveedores.setText("Registros");
         mnuProveedores.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jmiDiarioDeCaja.setText("Diario de Caja");
+        jMenu1.setText("Diarios");
+
+        jmiDiarioDeCaja.setText("Ventas de Tiendas");
         jmiDiarioDeCaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiDiarioDeCajaActionPerformed(evt);
             }
         });
-        mnuProveedores.add(jmiDiarioDeCaja);
+        jMenu1.add(jmiDiarioDeCaja);
 
         jmiGastos.setMnemonic('c');
-        jmiGastos.setText("Gastos administrativos");
+        jmiGastos.setText("Gastos Personales");
         jmiGastos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiGastosActionPerformed(evt);
             }
         });
-        mnuProveedores.add(jmiGastos);
+        jMenu1.add(jmiGastos);
+
+        jmiComprasAProveedor.setText("Compras a Proveedores");
+        jmiComprasAProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiComprasAProveedorActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmiComprasAProveedor);
+
+        mnuProveedores.add(jMenu1);
         mnuProveedores.add(jSeparator5);
 
         mnuProveedoresEliminarEditarProveedor.setMnemonic('a');
@@ -654,6 +668,21 @@ public class CPanel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmiVentasActionPerformed
 
+    private void jmiComprasAProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiComprasAProveedorActionPerformed
+        try {
+            DiarioDeComprasProveedores diarioComprasProveedor = new DiarioDeComprasProveedores();
+            if (exist(diarioComprasProveedor) == false) {
+                desktop.add(diarioComprasProveedor);
+                diarioComprasProveedor.setVisible(true);
+                diarioComprasProveedor.setLocation((desktop.getWidth() - diarioComprasProveedor.getWidth()) / 2, (desktop.getHeight() - diarioComprasProveedor.getHeight()) / 2);
+            } else {
+                diarioComprasProveedor.dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+        }
+    }//GEN-LAST:event_jmiComprasAProveedorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -691,6 +720,7 @@ public class CPanel extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static JCDesktopPane.JCDesktopPane desktop;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
@@ -701,6 +731,7 @@ public class CPanel extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiCatalogoLineas;
     private javax.swing.JMenuItem jmiCatalogoSublineas;
     private javax.swing.JMenuItem jmiCliente;
+    private javax.swing.JMenuItem jmiComprasAProveedor;
     private javax.swing.JMenuItem jmiDiarioDeCaja;
     private javax.swing.JMenuItem jmiGastos;
     private javax.swing.JMenuItem jmiProducto;

@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 15/10/2015 08:46:08 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 7/11/2015 02:25:33 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
   <class catalog="adminedredon" name="pojos.Compra" optimistic-lock="version" table="compra">
     <id name="idCompras" type="java.lang.Integer">
       <column name="idCompras"/>
       <generator class="identity"/>
     </id>
+    <property name="nota" type="string">
+      <column length="45" name="nota"/>
+    </property>
     <property name="fechaCompra" type="timestamp">
       <column length="19" name="fechaCompra"/>
     </property>
@@ -31,8 +34,8 @@
     <property name="importe" type="java.lang.Double">
       <column name="importe" precision="22" scale="0"/>
     </property>
-    <property name="estatus" type="java.lang.Boolean">
-      <column name="estatus"/>
+    <property name="estatus" type="string">
+      <column length="15" name="estatus"/>
     </property>
     <property name="tipoDeGasto" type="string">
       <column length="45" name="tipoDeGasto"/>
@@ -48,6 +51,18 @@
     </property>
     <property name="metodoPago" type="string">
       <column length="45" name="metodoPago"/>
+    </property>
+    <property name="nombreProducto" type="string">
+      <column length="45" name="nombreProducto"/>
+    </property>
+    <property name="noPiezas" type="java.lang.Integer">
+      <column name="noPiezas"/>
+    </property>
+    <property name="saldoRestante" type="java.lang.Double">
+      <column name="saldoRestante" precision="22" scale="0"/>
+    </property>
+    <property name="precioUnitario" type="java.lang.Double">
+      <column name="precioUnitario" precision="22" scale="0"/>
     </property>
   </class>
 </hibernate-mapping>

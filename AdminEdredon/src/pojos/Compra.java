@@ -1,5 +1,5 @@
 package pojos;
-// Generated 15/10/2015 08:46:07 PM by Hibernate Tools 4.3.1
+// Generated 7/11/2015 02:25:29 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -23,6 +23,7 @@ public class Compra  implements java.io.Serializable {
 
 
      private Integer idCompras;
+     private String nota;
      private Date fechaCompra;
      private Date fechaCompraSaldada;
      private Date fechaUltimoAbono;
@@ -31,17 +32,22 @@ public class Compra  implements java.io.Serializable {
      private String observacion;
      private Double abono;
      private Double importe;
-     private Boolean estatus;
+     private String estatus;
      private String tipoDeGasto;
      private String nombreProveedor;
      private Boolean credito;
      private String tipoGasto;
      private String metodoPago;
+     private String nombreProducto;
+     private Integer noPiezas;
+     private Double saldoRestante;
+     private Double precioUnitario;
 
     public Compra() {
     }
 
-    public Compra(Date fechaCompra, Date fechaCompraSaldada, Date fechaUltimoAbono, String nombreSucursal, Integer detalleCompra, String observacion, Double abono, Double importe, Boolean estatus, String tipoDeGasto, String nombreProveedor, Boolean credito, String tipoGasto, String metodoPago) {
+    public Compra(String nota, Date fechaCompra, Date fechaCompraSaldada, Date fechaUltimoAbono, String nombreSucursal, Integer detalleCompra, String observacion, Double abono, Double importe, String estatus, String tipoDeGasto, String nombreProveedor, Boolean credito, String tipoGasto, String metodoPago, String nombreProducto, Integer noPiezas, Double saldoRestante, Double precioUnitario) {
+       this.nota = nota;
        this.fechaCompra = fechaCompra;
        this.fechaCompraSaldada = fechaCompraSaldada;
        this.fechaUltimoAbono = fechaUltimoAbono;
@@ -56,6 +62,10 @@ public class Compra  implements java.io.Serializable {
        this.credito = credito;
        this.tipoGasto = tipoGasto;
        this.metodoPago = metodoPago;
+       this.nombreProducto = nombreProducto;
+       this.noPiezas = noPiezas;
+       this.saldoRestante = saldoRestante;
+       this.precioUnitario = precioUnitario;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -68,6 +78,16 @@ public class Compra  implements java.io.Serializable {
     
     public void setIdCompras(Integer idCompras) {
         this.idCompras = idCompras;
+    }
+
+    
+    @Column(name="nota", length=45)
+    public String getNota() {
+        return this.nota;
+    }
+    
+    public void setNota(String nota) {
+        this.nota = nota;
     }
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -151,12 +171,12 @@ public class Compra  implements java.io.Serializable {
     }
 
     
-    @Column(name="estatus")
-    public Boolean getEstatus() {
+    @Column(name="estatus", length=15)
+    public String getEstatus() {
         return this.estatus;
     }
     
-    public void setEstatus(Boolean estatus) {
+    public void setEstatus(String estatus) {
         this.estatus = estatus;
     }
 
@@ -208,6 +228,46 @@ public class Compra  implements java.io.Serializable {
     
     public void setMetodoPago(String metodoPago) {
         this.metodoPago = metodoPago;
+    }
+
+    
+    @Column(name="nombreProducto", length=45)
+    public String getNombreProducto() {
+        return this.nombreProducto;
+    }
+    
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
+
+    
+    @Column(name="noPiezas")
+    public Integer getNoPiezas() {
+        return this.noPiezas;
+    }
+    
+    public void setNoPiezas(Integer noPiezas) {
+        this.noPiezas = noPiezas;
+    }
+
+    
+    @Column(name="saldoRestante", precision=22, scale=0)
+    public Double getSaldoRestante() {
+        return this.saldoRestante;
+    }
+    
+    public void setSaldoRestante(Double saldoRestante) {
+        this.saldoRestante = saldoRestante;
+    }
+
+    
+    @Column(name="precioUnitario", precision=22, scale=0)
+    public Double getPrecioUnitario() {
+        return this.precioUnitario;
+    }
+    
+    public void setPrecioUnitario(Double precioUnitario) {
+        this.precioUnitario = precioUnitario;
     }
 
 

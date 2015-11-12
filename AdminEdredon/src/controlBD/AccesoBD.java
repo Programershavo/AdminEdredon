@@ -37,21 +37,34 @@ public class AccesoBD {
         return null;
     }
 
-    public int rowCountByDate(String Clase, String columnaAContar, String columnaFecha, String fechaInicio, String fechaFin) {
+    public int rowCount(String HQL) {
         int count = 0;
         try {
             iniciaSF();
-            String Query = "SELECT COUNT(" + columnaAContar + ") FROM " + Clase
-                    + " WHERE " + columnaFecha + " BETWEEN '"
-                    + fechaInicio + "' AND '"
-                    + fechaFin + "'";
-            count = ((Long) session.createQuery(Query).uniqueResult()).intValue();
+            count = ((Long) session.createQuery(HQL).uniqueResult()).intValue();
         } catch (HibernateException e) {
             JOptionPane.showMessageDialog(null, "error: " + e, "Ha ocurrido un error", 0);
         } finally {
             cierraSF();
         }
         return count;
+    }
+
+    public double sumRows(String HQL) {
+        double suma = 0;
+        try {
+            iniciaSF();
+            if (session.createQuery(HQL).list().get(0) != null) {
+                suma = ((Double) session.createQuery(HQL).uniqueResult());
+            } else {
+                suma = 0;
+            }
+        } catch (HibernateException e) {
+            JOptionPane.showMessageDialog(null, "error: " + e, "Ha ocurrido un error", 0);
+        } finally {
+            cierraSF();
+        }
+        return suma;
     }
 
     public boolean add(Object objeto) {

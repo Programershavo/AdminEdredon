@@ -22,7 +22,6 @@ import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import pojos.Clientes;
 import pojos.Compra;
 import pojos.Venta;
@@ -190,6 +189,12 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         lblTiendasAbiertas = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        lblRecumenTotalVentas = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        lblResumenTotalGastos = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        cmbSucursalResumen = new javax.swing.JComboBox();
 
         setClosable(true);
         setIconifiable(true);
@@ -289,7 +294,6 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         if (jtTablaCreditos.getColumnModel().getColumnCount() > 0) {
             jtTablaCreditos.getColumnModel().getColumn(0).setResizable(false);
             jtTablaCreditos.getColumnModel().getColumn(0).setPreferredWidth(50);
-            jtTablaCreditos.getColumnModel().getColumn(0).setHeaderValue("");
             jtTablaCreditos.getColumnModel().getColumn(1).setResizable(false);
             jtTablaCreditos.getColumnModel().getColumn(1).setPreferredWidth(50);
             jtTablaCreditos.getColumnModel().getColumn(2).setResizable(false);
@@ -954,13 +958,41 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
 
         jLabel33.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel33.setText("Tiendas abiertas:");
+        jLabel33.setText("Número de ventas");
 
         lblTiendasAbiertas.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblTiendasAbiertas.setForeground(new java.awt.Color(102, 102, 102));
         lblTiendasAbiertas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTiendasAbiertas.setText("0");
         lblTiendasAbiertas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel34.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel34.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel34.setText("Total de ventas");
+
+        lblRecumenTotalVentas.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        lblRecumenTotalVentas.setForeground(new java.awt.Color(102, 102, 102));
+        lblRecumenTotalVentas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRecumenTotalVentas.setText("0");
+        lblRecumenTotalVentas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel35.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel35.setText("Total de gastos");
+
+        lblResumenTotalGastos.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        lblResumenTotalGastos.setForeground(new java.awt.Color(102, 102, 102));
+        lblResumenTotalGastos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblResumenTotalGastos.setText("0");
+        lblResumenTotalGastos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel36.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel36.setText("Tienda");
+
+        cmbSucursalResumen.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        cmbSucursalResumen.setForeground(new java.awt.Color(0, 102, 153));
+        cmbSucursalResumen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todas", "Cuaracurio 2", "General", "La Comadre", "La Flor", "La Flor Texti", "Local 2", "Local B5", "Local D7", "Local E15", "Moroleón", " " }));
 
         javax.swing.GroupLayout jpResumenLayout = new javax.swing.GroupLayout(jpResumen);
         jpResumen.setLayout(jpResumenLayout);
@@ -973,42 +1005,63 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                         .addComponent(btnSalirResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel27))
-                    .addComponent(jLabel31)
                     .addComponent(jLabel32)
                     .addGroup(jpResumenLayout.createSequentialGroup()
-                        .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpResumenLayout.createSequentialGroup()
-                                .addComponent(jLabel33)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblTiendasAbiertas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpResumenLayout.createSequentialGroup()
-                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jdcFechaInicioResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jdcFechaFinResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(463, Short.MAX_VALUE))
+                        .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel33)
+                            .addComponent(jLabel34)
+                            .addComponent(jLabel35))
+                        .addGap(18, 18, 18)
+                        .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblResumenTotalGastos, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                            .addComponent(lblRecumenTotalVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblTiendasAbiertas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpResumenLayout.createSequentialGroup()
+                            .addComponent(jLabel31)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jdcFechaInicioResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(10, 10, 10)
+                            .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jdcFechaFinResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpResumenLayout.createSequentialGroup()
+                            .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cmbSucursalResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jpResumenLayout.setVerticalGroup(
             jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpResumenLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel31)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
+                .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbSucursalResumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel36))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel21)
                     .addComponent(jdcFechaInicioResumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel26)
-                    .addComponent(jdcFechaFinResumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jdcFechaFinResumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel31))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel32)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
                     .addComponent(lblTiendasAbiertas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 345, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel34)
+                    .addComponent(lblRecumenTotalVentas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel35)
+                    .addComponent(lblResumenTotalGastos))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 282, Short.MAX_VALUE)
                 .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel27)
                     .addComponent(btnSalirResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1273,6 +1326,11 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                         cargaTabla(jtTablaAbonos, HQL, "Venta");
                     }
                 }
+                if (cmbSucursalResumen.getItemCount() > 0) {
+                    if (cmbSucursalResumen.getSelectedItem().equals(e.getItem())) {
+                        crearResumen();
+                    }
+                }
             }
         };
         jdcFechaInicio.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
@@ -1286,24 +1344,90 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         if (jdcFechaInicioResumen.isVisible()) {
             jdcFechaInicioResumen.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
                 public void propertyChange(PropertyChangeEvent e) {
-                    lblTiendasAbiertas.setText(String.valueOf(getTiendasAbiertas()));
+                    crearResumen();
                 }
             });
             jdcFechaFinResumen.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
                 public void propertyChange(PropertyChangeEvent e) {
-                    lblTiendasAbiertas.setText(String.valueOf(getTiendasAbiertas()));
+                    crearResumen();
                 }
             });
         }
         this.cmbClienteAbono.addItemListener(changeClick);
         this.cmbSucursalAbonos.addItemListener(changeClick);
+        this.cmbSucursalResumen.addItemListener(changeClick);
+    }
+
+    private void crearResumen() {
+        lblTiendasAbiertas.setText(String.valueOf(getTiendasAbiertas()));
+        lblRecumenTotalVentas.setText(String.valueOf(getTotalVentas()));
+        lblResumenTotalGastos.setText(String.valueOf(getTotalGastos()));
     }
 
     private int getTiendasAbiertas() {
         AccesoBD acceso = new AccesoBD();
         String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioResumen.getDate());
         String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinResumen.getDate());
-        return acceso.rowCountByDate("Venta v", "v.nombreTienda", "v.fechaVenta", fechaInicioResumen, fechaFinResumen);
+        String nombreTienda = cmbSucursalResumen.getSelectedItem().toString();
+        if (nombreTienda.equals("Todas")) {
+            HQL = "Select COUNT(v.nombreTienda) From Venta v WHERE "
+                    + "v.fechaVenta BETWEEN '"
+                    + fechaInicioResumen + "' AND '"
+                    + fechaFinResumen + "'";
+            return acceso.rowCount(HQL);
+        } else {
+            HQL = "Select COUNT(v.nombreTienda) From Venta v WHERE "
+                    + "v.nombreTienda = '"
+                    + nombreTienda
+                    + "' AND v.fechaVenta BETWEEN '"
+                    + fechaInicioResumen + "' AND '"
+                    + fechaFinResumen + "'";
+            return acceso.rowCount(HQL);
+        }
+    }
+
+    private double getTotalVentas() {
+        AccesoBD acceso = new AccesoBD();
+        String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioResumen.getDate());
+        String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinResumen.getDate());
+        String nombreTienda = cmbSucursalResumen.getSelectedItem().toString();
+        if (nombreTienda.equals("Todas")) {
+            HQL = "Select SUM(v.importe) From Venta v WHERE "
+                    + "v.fechaVenta BETWEEN '"
+                    + fechaInicioResumen + "' AND '"
+                    + fechaFinResumen + "'";
+            return acceso.sumRows(HQL);
+        } else {
+            HQL = "Select SUM(v.importe) From Venta v WHERE "
+                    + "v.nombreTienda = '"
+                    + nombreTienda
+                    + "' AND v.fechaVenta BETWEEN '"
+                    + fechaInicioResumen + "' AND '"
+                    + fechaFinResumen + "'";
+            return acceso.sumRows(HQL);
+        }
+    }
+
+    private double getTotalGastos() {
+        AccesoBD acceso = new AccesoBD();
+        String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioResumen.getDate());
+        String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinResumen.getDate());
+        String nombreTienda = cmbSucursalResumen.getSelectedItem().toString();
+        if (nombreTienda.equals("Todas")) {
+            HQL = "Select SUM(c.importe) From Compra c WHERE c.tipoGasto = 'Gastos de tienda' AND "
+                    + "c.fechaCompra BETWEEN '"
+                    + fechaInicioResumen + "' AND '"
+                    + fechaFinResumen + "'";
+            return acceso.sumRows(HQL);
+        } else {
+            HQL = "Select SUM(c.importe) From Compra c WHERE c.tipoGasto = 'Gastos de tienda' AND "
+                    + "c.nombreSucursal = '"
+                    + nombreTienda
+                    + "' AND c.fechaCompra BETWEEN '"
+                    + fechaInicioResumen + "' AND '"
+                    + fechaFinResumen + "'";
+            return acceso.sumRows(HQL);
+        }
     }
 
     private void cmbClienteAbonoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbClienteAbonoItemStateChanged
@@ -1324,9 +1448,11 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                                 (CPanel.desktop.getHeight() - registroAbonoCliente.getHeight()) / 2);
                     } else {
                         registroAbonoCliente.dispose();
+
                     }        // TODO add your handling code here:
                 } catch (Exception ex) {
-                    Logger.getLogger(RegistrarProducto.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(RegistrarProducto.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Esta venta ya está Saldada");
@@ -1444,6 +1570,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                 compra.setMetodoPago(jtTablaGastos.getValueAt(i, 4).toString());
                 compra.setObservacion(jtTablaGastos.getValueAt(i, 5).toString());
                 compra.setImporte(Double.parseDouble(jtTablaGastos.getValueAt(i, 6).toString()));
+                compra.setTipoGasto("Gastos de tienda");
                 controlBD.add(gasto);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e, "Error", 0);
@@ -1511,6 +1638,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cmbSucursalAbonos;
     private javax.swing.JComboBox cmbSucursalCreditos;
     private javax.swing.JComboBox cmbSucursalGasto;
+    private javax.swing.JComboBox cmbSucursalResumen;
     private javax.swing.JComboBox cmbTipoDeGasto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1539,6 +1667,9 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1563,6 +1694,8 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     private javax.swing.JTable jtTablaCreditos;
     private javax.swing.JTable jtTablaGastos;
     private javax.swing.JTabbedPane jtpDiario;
+    private javax.swing.JLabel lblRecumenTotalVentas;
+    private javax.swing.JLabel lblResumenTotalGastos;
     private javax.swing.JLabel lblTiendasAbiertas;
     private javax.swing.JTextField txtAbonoInicial;
     private javax.swing.JTextField txtCantidad;

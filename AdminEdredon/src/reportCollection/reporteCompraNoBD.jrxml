@@ -26,6 +26,10 @@
 				</textElement>
 				<text><![CDATA[Reporte de Gastos Generados]]></text>
 			</staticText>
+			<image>
+				<reportElement uuid="4958c0a7-fec8-4e41-8fa9-9cf1f5778984" x="0" y="0" width="91" height="79"/>
+				<imageExpression><![CDATA["C:\\Users\\Daniel\\Documents\\NetBeansProjects\\AdminEdredon\\AdminEdredon\\src\\IconosEspecializados\\castilloLogo.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<columnHeader>

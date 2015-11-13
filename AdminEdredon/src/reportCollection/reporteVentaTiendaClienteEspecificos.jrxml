@@ -16,8 +16,8 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select * from Venta where
-nombreCliente =  $P{nombreCliente}
+		<![CDATA[select * from Venta where nombreTienda = $P{nombreTienda}
+AND nombreCliente =  $P{nombreCliente}
 AND fechaVenta BETWEEN  $P{fechaInicio} AND $P{fechaFin};]]>
 	</queryString>
 	<field name="idVenta" class="java.lang.Integer"/>
@@ -43,7 +43,7 @@ AND fechaVenta BETWEEN  $P{fechaInicio} AND $P{fechaFin};]]>
 		<band height="99" splitType="Stretch">
 			<image>
 				<reportElement uuid="642beb6e-67ea-4db4-8045-f085444a24c3" x="11" y="11" width="83" height="82"/>
-				<imageExpression><![CDATA["C:\\Users\\Daniel\\Desktop\\castilloLogo.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["C:\\Users\\Daniel\\Documents\\NetBeansProjects\\AdminEdredon\\AdminEdredon\\src\\IconosEspecializados\\castilloLogo.jpg"]]></imageExpression>
 			</image>
 			<textField pattern="MMMMM dd, yyyy">
 				<reportElement uuid="ed7277fe-c357-4272-a856-2c37c85bbc2f" x="442" y="11" width="100" height="20"/>
@@ -64,13 +64,13 @@ AND fechaVenta BETWEEN  $P{fechaInicio} AND $P{fechaFin};]]>
 				</textElement>
 				<text><![CDATA[Tienda]]></text>
 			</staticText>
-			<staticText>
-				<reportElement uuid="dee7d9af-81ce-412a-ae6c-a6dad2f89a3c" x="194" y="57" width="213" height="26" forecolor="#666666"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="18" isBold="true"/>
+			<textField>
+				<reportElement uuid="977eb592-0544-43dc-9578-6b99e237a55e" x="191" y="57" width="269" height="28"/>
+				<textElement verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Todas]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$P{nombreTienda}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>

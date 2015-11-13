@@ -1472,24 +1472,24 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
             parametros.put("fechaInicio", fechaInicio);
             parametros.put("fechaFin", fechaFin);
 
+            if (tiendaAbono.equals("Todas") && clienteAbono.equals("Todos")) {
+                try {
+                    reportMaker.ReportMaker reporte = new reportMaker.ReportMaker(HQL, "VentaTodos", parametros, false);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error generando el reporte: " + e, "Error", 0);
+                }
+            }
             if (tiendaAbono.equals("Todas") && !clienteAbono.equals("Todos")) {
                 try {
-                    reportMaker.ReportMaker reporte = new reportMaker.ReportMaker(HQL, "VentaTienda", parametros, false);
+                    reportMaker.ReportMaker reporte = new reportMaker.ReportMaker(HQL, "VentaClienteEspecifico", parametros, false);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Ha ocurrido un error generando el reporte: " + e, "Error", 0);
                 }
             }
             if (!tiendaAbono.equals("Todas") && clienteAbono.equals("Todos")) {
-                try {
-                    reportMaker.ReportMaker reporte = new reportMaker.ReportMaker(HQL, "VentaCliente", parametros, false);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error generando el reporte: " + e, "Error", 0);
-                }
-            }
-            if (tiendaAbono.equals("Todas") && clienteAbono.equals("Todos")) {
 
                 try {
-                    reportMaker.ReportMaker reporte = new reportMaker.ReportMaker(HQL, "VentaTodos", parametros, false);
+                    reportMaker.ReportMaker reporte = new reportMaker.ReportMaker(HQL, "VentaTiendaEspecifica", parametros, false);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Ha ocurrido un error generando el reporte: " + e, "Error", 0);
                 }
@@ -1497,7 +1497,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
             if (!tiendaAbono.equals("Todas") && !clienteAbono.equals("Todos")) {
 
                 try {
-                    reportMaker.ReportMaker reporte = new reportMaker.ReportMaker(HQL, "VentaEspecifica", parametros, false);
+                    reportMaker.ReportMaker reporte = new reportMaker.ReportMaker(HQL, "VentaTiendaClienteEspecificos", parametros, false);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Ha ocurrido un error generando el reporte: " + e, "Error", 0);
                 }

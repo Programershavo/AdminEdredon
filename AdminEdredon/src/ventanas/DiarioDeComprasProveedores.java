@@ -45,6 +45,7 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
         jdcFecha.setDate(new Date());
         jdcFechaInicioResumen.setDate(new Date());
         jdcFechaFinResumen.setDate(new Date());
+        addActions();
     }
 
     @SuppressWarnings("unchecked")
@@ -96,8 +97,6 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
         jdcFechaInicioResumen = new com.toedter.calendar.JDateChooser();
         btnSalirResumen = new javax.swing.JButton();
         jLabel27 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        cmbProveedoresResumen = new javax.swing.JComboBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtTablaProveedoresResumen = new javax.swing.JTable();
 
@@ -439,10 +438,6 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
         jLabel27.setForeground(new java.awt.Color(0, 102, 153));
         jLabel27.setText("Salir");
 
-        jLabel34.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel34.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel34.setText("Lista de proveedores");
-
         jtTablaProveedoresResumen.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -464,10 +459,10 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
                     .addGroup(jpResumenLayout.createSequentialGroup()
                         .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel32)
-                            .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpResumenLayout.createSequentialGroup()
                                     .addComponent(jLabel31)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGap(105, 105, 105)
                                     .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jdcFechaInicioResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -482,11 +477,7 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
                                     .addGap(18, 18, 18)
                                     .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(lblResumenTotalGastos, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                                        .addComponent(lblComprasRealizadas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGap(35, 35, 35)
-                                    .addComponent(jLabel34)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(cmbProveedoresResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(lblComprasRealizadas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(jpResumenLayout.createSequentialGroup()
                                 .addComponent(btnSalirResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -495,7 +486,7 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jpResumenLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel33, jLabel34, jLabel35});
+        jpResumenLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel33, jLabel35});
 
         jpResumenLayout.setVerticalGroup(
             jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -512,9 +503,7 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
-                    .addComponent(lblComprasRealizadas)
-                    .addComponent(jLabel34)
-                    .addComponent(cmbProveedoresResumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblComprasRealizadas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel35)
@@ -618,7 +607,7 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
                     + "tabla para poder borrarla.", "Venta no seleccionada", 0);
         }
     }//GEN-LAST:event_btnBorrarCreditoActionPerformed
-    
+
     private void llenarCombos() {
         //Controles para llenar los comoboBox
         AccesoBD accesoBD = new AccesoBD();
@@ -753,7 +742,6 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
         jdcFechaFinResumen.setDate(new Date());
         lblResumenTotalGastos.setText(String.valueOf(getTotalGastos()));
         lblComprasRealizadas.setText(String.valueOf(getComprasRealizadas()));
-        getProveedores();
         String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioResumen.getDate());
         String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinResumen.getDate());
         HQL = "From Compra c WHERE c.tipoGasto = 'Compras a proveedor' AND "
@@ -787,34 +775,6 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
 
     }
 
-    private void getProveedores() {
-        AccesoBD acceso = new AccesoBD();
-        HQL = "Select COUNT(p.nombre) From Proveedores p";
-        if (acceso.rowCount(HQL) > 0) {
-            llenarCombosResumen();
-        }
-    }
-
-    private void llenarCombosResumen() {
-        //Controles para llenar los comoboBox
-        AccesoBD accesoBD = new AccesoBD();
-        crearConsultaGlobal();
-        List listaProveedores = accesoBD.select(HQL);
-        cmbProveedoresResumen.removeAllItems();
-        if (listaProveedores.size() > 0) {
-            try {
-                for (Object listaObjeto : listaProveedores) {
-                    cmbProveedoresResumen.addItem((String) listaObjeto);
-                }
-                cmbProveedoresResumen.setSelectedIndex(0);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "El error es:" + "\n" + e, "Error", 0);
-            }
-        } else {
-            cmbProveedoresResumen.setEnabled(false);
-        }
-    }
-
     private void cargaTabla(final JTable jtTabla, String HQL, String Encabezado) {
         //Reviso si que la consulta no vaya vacia
         if (!HQL.isEmpty()) {
@@ -828,37 +788,30 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
 
     public final void addActions() {
 
-        final ItemListener changeClick = new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if (cmbProveedoresResumen.getItemCount() > 0) {
-                    if (cmbProveedoresResumen.getSelectedItem().equals(e.getItem())) {
-                        crearConsultaGlobal();
-                        cargaTabla(jtTablaProveedoresResumen, HQL, "Compra");
-                    }
-                }
-            }
-        };
         if (jdcFechaInicioResumen.isVisible()) {
             jdcFechaInicioResumen.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
                 public void propertyChange(PropertyChangeEvent e) {
                     crearConsultaGlobal();
                     cargaTabla(jtTablaProveedoresResumen, HQL, "Compra");
+                    lblResumenTotalGastos.setText(String.valueOf(getTotalGastos()));
+                    lblComprasRealizadas.setText(String.valueOf(getComprasRealizadas()));
                 }
             });
             jdcFechaFinResumen.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
                 public void propertyChange(PropertyChangeEvent e) {
                     crearConsultaGlobal();
                     cargaTabla(jtTablaProveedoresResumen, HQL, "Compra");
+                    getComprasRealizadas();
+                    getTotalGastos();
                 }
             });
         }
-        this.cmbProveedoresResumen.addItemListener(changeClick);
     }
 
     private void crearConsultaGlobal() {
         String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioResumen.getDate());
         String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinResumen.getDate());
-        HQL = "Select distinct c.nombreProveedor From Compra c WHERE c.tipoGasto = 'Compras a proveedor' AND "
+        HQL = "Select distinct c From Compra c WHERE c.tipoGasto = 'Compras a proveedor' AND "
                 + "c.nombreSucursal = 'Bodega' AND c.fechaCompra BETWEEN '"
                 + fechaInicioResumen + "' AND '"
                 + fechaFinResumen + "'";
@@ -874,7 +827,6 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSalirResumen;
     private javax.swing.JComboBox cmbMetodoDePago;
     private javax.swing.JComboBox cmbProveedor;
-    private javax.swing.JComboBox cmbProveedoresResumen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -888,7 +840,6 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

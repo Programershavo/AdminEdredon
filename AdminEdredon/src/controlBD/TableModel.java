@@ -131,7 +131,7 @@ public class TableModel extends AbstractTableModel {
                             tableModel[contFila][contCol] = compra.getNombreSucursal();
                             this.isCellEditable(contFila, contCol);
                             contCol++;
-                            tableModel[contFila][contCol] = compra.getTipoDeGasto();
+                            tableModel[contFila][contCol] = compra.getTipoGasto();
                             this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = compra.getNombreProveedor();

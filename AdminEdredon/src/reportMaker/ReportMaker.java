@@ -74,16 +74,16 @@ public class ReportMaker {
                 nombreReporte = System.getProperty("user.dir") + "/reporteCompra.jrxml";
 //              nombreReporte = getClass().getResource("/reportes/Reporte/reporteCompra.jrxml").getPath();
                 break;
-            case "VentaEspecifica":
-                nombreReporte = System.getProperty("user.dir") + "/reporteVenta.jrxml";
+            case "VentaTiendaClienteEspecificos":
+                nombreReporte = System.getProperty("user.dir") + "/reporteVentaTiendaClienteEspecificos.jrxml";
 //              nombreReporte = getClass().getResource("/reportes/Reporte/reporteCompra.jrxml").getPath();
                 break;
-            case "VentaTienda":
-                nombreReporte = System.getProperty("user.dir") + "/reporteVentaTiendas.jrxml";
+            case "VentaTiendaEspecifica":
+                nombreReporte = System.getProperty("user.dir") + "/reporteVentaTiendaEspecifica.jrxml";
 //              nombreReporte = getClass().getResource("/reportes/Reporte/reporteCompra.jrxml").getPath();
                 break;
-            case "VentaCliente":
-                nombreReporte = System.getProperty("user.dir") + "/reporteVentaClientes.jrxml";
+            case "VentaClienteEspecifico":
+                nombreReporte = System.getProperty("user.dir") + "/reporteVentaClienteEspecifico.jrxml";
 //              nombreReporte = getClass().getResource("/reportes/Reporte/reporteCompra.jrxml").getPath();
                 break;
             case "VentaTodos":
@@ -114,7 +114,7 @@ public class ReportMaker {
                     reporteMaestro = JasperCompileManager.compileReport(rutaReporte);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e,
-                            "Error al cargar reporte", JOptionPane.ERROR_MESSAGE);
+                            "Error al cargar reporte, o no esta o tiene un fallo", JOptionPane.ERROR_MESSAGE);
                     System.out.println(e);
                 }
                 if (parametros.isEmpty()) {

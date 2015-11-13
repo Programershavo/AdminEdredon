@@ -10,7 +10,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select * from Venta where fechaVenta BETWEEN  $P{fechaInicio} AND $P{fechaFin};]]>
+		<![CDATA[select * from Venta where  fechaVenta BETWEEN  $P{fechaInicio} AND $P{fechaFin};]]>
 	</queryString>
 	<field name="idVenta" class="java.lang.Integer"/>
 	<field name="nota" class="java.lang.String"/>

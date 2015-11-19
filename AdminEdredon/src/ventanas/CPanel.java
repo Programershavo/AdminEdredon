@@ -26,7 +26,7 @@ public class CPanel extends javax.swing.JFrame {
      */
     public CPanel() {
         initComponents();
-        jmiGastos.setEnabled(true);
+        jmiGastosPersonales.setEnabled(true);
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setTitle("Colchas Castillo");
         this.setIconImage(imagen);
@@ -68,7 +68,7 @@ public class CPanel extends javax.swing.JFrame {
         mnuProveedores = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jmiDiarioDeCaja = new javax.swing.JMenuItem();
-        jmiGastos = new javax.swing.JMenuItem();
+        jmiGastosPersonales = new javax.swing.JMenuItem();
         jmiComprasAProveedor = new javax.swing.JMenuItem();
         jSeparator5 = new javax.swing.JPopupMenu.Separator();
         mnuProveedoresEliminarEditarProveedor = new javax.swing.JMenuItem();
@@ -79,17 +79,19 @@ public class CPanel extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jmiRegistroSublinea = new javax.swing.JMenuItem();
         jmiRegistroLinea = new javax.swing.JMenuItem();
-        mnuReporteEmpleados = new javax.swing.JMenu();
-        mnuReportesReporteVenta = new javax.swing.JMenuItem();
-        mnuReportesReporteStock = new javax.swing.JMenuItem();
-        mnuReportesReporteProductos = new javax.swing.JMenuItem();
-        mnuReportesReporteEmpleados = new javax.swing.JMenuItem();
         mnuCatalogos = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         mnuCatalogoGastos = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jSeparator7 = new javax.swing.JPopupMenu.Separator();
+        jmiVentas = new javax.swing.JMenuItem();
+        jSeparator8 = new javax.swing.JPopupMenu.Separator();
         jmiCatalogoClientes = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jSeparator9 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jmiCatalogoLineas = new javax.swing.JMenuItem();
         jmiCatalogoSublineas = new javax.swing.JMenuItem();
-        jmiVentas = new javax.swing.JMenuItem();
         mnuAcercaDe = new javax.swing.JMenu();
         mnuAcercaDeSalesTeDispatcher = new javax.swing.JMenuItem();
 
@@ -187,7 +189,7 @@ public class CPanel extends javax.swing.JFrame {
 
         jMenu1.setText("Diarios");
 
-        jmiDiarioDeCaja.setText("Ventas de Tiendas");
+        jmiDiarioDeCaja.setText("Diario de Tiendas");
         jmiDiarioDeCaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiDiarioDeCajaActionPerformed(evt);
@@ -195,14 +197,14 @@ public class CPanel extends javax.swing.JFrame {
         });
         jMenu1.add(jmiDiarioDeCaja);
 
-        jmiGastos.setMnemonic('c');
-        jmiGastos.setText("Gastos Personales");
-        jmiGastos.addActionListener(new java.awt.event.ActionListener() {
+        jmiGastosPersonales.setMnemonic('c');
+        jmiGastosPersonales.setText("Gastos Personales");
+        jmiGastosPersonales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiGastosActionPerformed(evt);
+                jmiGastosPersonalesActionPerformed(evt);
             }
         });
-        jMenu1.add(jmiGastos);
+        jMenu1.add(jmiGastosPersonales);
 
         jmiComprasAProveedor.setText("Compras a Proveedores");
         jmiComprasAProveedor.addActionListener(new java.awt.event.ActionListener() {
@@ -268,57 +270,32 @@ public class CPanel extends javax.swing.JFrame {
 
         menuBar.add(mnuProveedores);
 
-        mnuReporteEmpleados.setText("Reportes");
-        mnuReporteEmpleados.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        mnuReportesReporteVenta.setText("Ventas");
-        mnuReportesReporteVenta.setEnabled(false);
-        mnuReportesReporteVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuReportesReporteVentaActionPerformed(evt);
-            }
-        });
-        mnuReporteEmpleados.add(mnuReportesReporteVenta);
-
-        mnuReportesReporteStock.setText("Stock");
-        mnuReportesReporteStock.setEnabled(false);
-        mnuReportesReporteStock.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuReportesReporteStockActionPerformed(evt);
-            }
-        });
-        mnuReporteEmpleados.add(mnuReportesReporteStock);
-
-        mnuReportesReporteProductos.setText("Productos");
-        mnuReportesReporteProductos.setEnabled(false);
-        mnuReportesReporteProductos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuReportesReporteProductosActionPerformed(evt);
-            }
-        });
-        mnuReporteEmpleados.add(mnuReportesReporteProductos);
-
-        mnuReportesReporteEmpleados.setText("Empleados");
-        mnuReportesReporteEmpleados.setEnabled(false);
-        mnuReportesReporteEmpleados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuReportesReporteEmpleadosActionPerformed(evt);
-            }
-        });
-        mnuReporteEmpleados.add(mnuReportesReporteEmpleados);
-
-        menuBar.add(mnuReporteEmpleados);
-
         mnuCatalogos.setText("Catalogos");
         mnuCatalogos.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        mnuCatalogoGastos.setText("Gastos");
+        jMenuItem2.setText("Gastos de compras");
+        mnuCatalogos.add(jMenuItem2);
+
+        mnuCatalogoGastos.setText("Gastos personales");
         mnuCatalogoGastos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCatalogoGastosActionPerformed(evt);
             }
         });
         mnuCatalogos.add(mnuCatalogoGastos);
+
+        jMenuItem1.setText("Gastos de tiendas");
+        mnuCatalogos.add(jMenuItem1);
+        mnuCatalogos.add(jSeparator7);
+
+        jmiVentas.setText("Ventas");
+        jmiVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiVentasActionPerformed(evt);
+            }
+        });
+        mnuCatalogos.add(jmiVentas);
+        mnuCatalogos.add(jSeparator8);
 
         jmiCatalogoClientes.setText("Clientes");
         jmiCatalogoClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -327,6 +304,13 @@ public class CPanel extends javax.swing.JFrame {
             }
         });
         mnuCatalogos.add(jmiCatalogoClientes);
+
+        jMenuItem3.setText("Proveedores");
+        mnuCatalogos.add(jMenuItem3);
+        mnuCatalogos.add(jSeparator9);
+
+        jMenuItem4.setText("Productos");
+        mnuCatalogos.add(jMenuItem4);
 
         jmiCatalogoLineas.setText("Lineas");
         jmiCatalogoLineas.addActionListener(new java.awt.event.ActionListener() {
@@ -343,14 +327,6 @@ public class CPanel extends javax.swing.JFrame {
             }
         });
         mnuCatalogos.add(jmiCatalogoSublineas);
-
-        jmiVentas.setText("Ventas");
-        jmiVentas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiVentasActionPerformed(evt);
-            }
-        });
-        mnuCatalogos.add(jmiVentas);
 
         menuBar.add(mnuCatalogos);
 
@@ -438,9 +414,9 @@ public class CPanel extends javax.swing.JFrame {
         }
         return false;
     }
-    private void jmiGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGastosActionPerformed
+    private void jmiGastosPersonalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGastosPersonalesActionPerformed
         try {
-            DiarioDeGasto registroGasto = new DiarioDeGasto();
+            DiarioDeGastosPersonales registroGasto = new DiarioDeGastosPersonales();
             if (exist(registroGasto) == false) {
                 desktop.add(registroGasto);
                 registroGasto.setVisible(true);
@@ -451,7 +427,7 @@ public class CPanel extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
         }
-    }//GEN-LAST:event_jmiGastosActionPerformed
+    }//GEN-LAST:event_jmiGastosPersonalesActionPerformed
 
     private void mnuProveedoresEliminarEditarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProveedoresEliminarEditarProveedorActionPerformed
         try {
@@ -467,22 +443,6 @@ public class CPanel extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
         }
     }//GEN-LAST:event_mnuProveedoresEliminarEditarProveedorActionPerformed
-
-    private void mnuReportesReporteVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuReportesReporteVentaActionPerformed
-
-    }//GEN-LAST:event_mnuReportesReporteVentaActionPerformed
-
-    private void mnuReportesReporteStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuReportesReporteStockActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnuReportesReporteStockActionPerformed
-
-    private void mnuReportesReporteProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuReportesReporteProductosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnuReportesReporteProductosActionPerformed
-
-    private void mnuReportesReporteEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuReportesReporteEmpleadosActionPerformed
-
-    }//GEN-LAST:event_mnuReportesReporteEmpleadosActionPerformed
 
     private void mnuAcercaDeSalesTeDispatcherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAcercaDeSalesTeDispatcherActionPerformed
         try {
@@ -550,7 +510,7 @@ public class CPanel extends javax.swing.JFrame {
 
     private void mnuCatalogoGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCatalogoGastosActionPerformed
         try {
-            CatalogoGastos catalogoGastos = new CatalogoGastos();
+            CatalogoGastosTiendas catalogoGastos = new CatalogoGastosTiendas();
             if (exist(catalogoGastos) == false) {
                 desktop.add(catalogoGastos);
                 catalogoGastos.setVisible(true);
@@ -721,19 +681,26 @@ public class CPanel extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static JCDesktopPane.JCDesktopPane desktop;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator6;
+    private javax.swing.JPopupMenu.Separator jSeparator7;
+    private javax.swing.JPopupMenu.Separator jSeparator8;
+    private javax.swing.JPopupMenu.Separator jSeparator9;
     private javax.swing.JMenuItem jmiCatalogoClientes;
     private javax.swing.JMenuItem jmiCatalogoLineas;
     private javax.swing.JMenuItem jmiCatalogoSublineas;
     private javax.swing.JMenuItem jmiCliente;
     private javax.swing.JMenuItem jmiComprasAProveedor;
     private javax.swing.JMenuItem jmiDiarioDeCaja;
-    private javax.swing.JMenuItem jmiGastos;
+    private javax.swing.JMenuItem jmiGastosPersonales;
     private javax.swing.JMenuItem jmiProducto;
     private javax.swing.JMenuItem jmiRegistroLinea;
     private javax.swing.JMenuItem jmiRegistroSublinea;
@@ -755,11 +722,6 @@ public class CPanel extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuProgramaSalir;
     private javax.swing.JMenu mnuProveedores;
     private javax.swing.JMenuItem mnuProveedoresEliminarEditarProveedor;
-    private javax.swing.JMenu mnuReporteEmpleados;
-    private javax.swing.JMenuItem mnuReportesReporteEmpleados;
-    private javax.swing.JMenuItem mnuReportesReporteProductos;
-    private javax.swing.JMenuItem mnuReportesReporteStock;
-    private javax.swing.JMenuItem mnuReportesReporteVenta;
     // End of variables declaration//GEN-END:variables
 
 }

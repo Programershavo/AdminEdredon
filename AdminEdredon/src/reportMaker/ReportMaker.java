@@ -74,6 +74,12 @@ public class ReportMaker {
                 nombreReporte = System.getProperty("user.dir") + "/reporteCompra.jrxml";
 //              nombreReporte = getClass().getResource("/reportes/Reporte/reporteCompra.jrxml").getPath();
                 break;
+            case "GastoTiendaEspecificos":
+                nombreReporte = System.getProperty("user.dir") + "/reporteCompraTipoGastoTiendaEspecificos.jrxml";
+                break;
+            case "GastoTodos":
+                nombreReporte = System.getProperty("user.dir") + "/reporteCompra.jrxml";
+                break;
             case "VentaTiendaClienteEspecificos":
                 nombreReporte = System.getProperty("user.dir") + "/reporteVentaTiendaClienteEspecificos.jrxml";
 //              nombreReporte = getClass().getResource("/reportes/Reporte/reporteCompra.jrxml").getPath();

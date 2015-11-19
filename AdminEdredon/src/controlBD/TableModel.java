@@ -6,8 +6,10 @@ import javax.swing.table.AbstractTableModel;
 
 public class TableModel extends AbstractTableModel {
 
-    private String[] headerCompra = {"Clave", "Nombre Sucursal",
-        "Fecha Compra", "Tipo de gasto", "Nombre Proveedor", "Metodo pago", "Observacion", "Importe"};
+    private String[] headerCompra = {"Clave",
+        "Fecha Compra", "Nombre Sucursal", "Concepto",
+        "Tipo de gasto", "Nombre Proveedor",
+        "Metodo pago", "Observacion", "Importe"};
     private String[] headerVenta = {"Clave", "Nota", "Tienda", "Cliente", "Fecha de venta",
         "Total Abonado", "Forma de pago", "Estatus", "Importe"};
     private String[] headerProducto = {"Clave", "Codigo de Barras",
@@ -129,6 +131,9 @@ public class TableModel extends AbstractTableModel {
                             this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = compra.getNombreSucursal();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = compra.getNombreProducto();
                             this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = compra.getTipoGasto();

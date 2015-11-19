@@ -34,33 +34,33 @@
 	<title>
 		<band height="99" splitType="Stretch">
 			<textField pattern="MMMMM dd, yyyy">
-				<reportElement uuid="ed7277fe-c357-4272-a856-2c37c85bbc2f" x="442" y="11" width="100" height="20"/>
+				<reportElement uuid="ed7277fe-c357-4272-a856-2c37c85bbc2f" x="680" y="11" width="100" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="dee7d9af-81ce-412a-ae6c-a6dad2f89a3c" x="136" y="11" width="271" height="32" forecolor="#666666"/>
+				<reportElement uuid="dee7d9af-81ce-412a-ae6c-a6dad2f89a3c" x="266" y="11" width="271" height="32" forecolor="#666666"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Reporte de Ventas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="dca8641c-7d64-4150-9974-e7d1267ef401" x="102" y="57" width="82" height="26" forecolor="#F04F5A"/>
+				<reportElement uuid="dca8641c-7d64-4150-9974-e7d1267ef401" x="249" y="57" width="82" height="26" forecolor="#F04F5A"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tienda]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="dca8641c-7d64-4150-9974-e7d1267ef401" x="196" y="57" width="211" height="26" forecolor="#F04F5A"/>
+				<reportElement uuid="dca8641c-7d64-4150-9974-e7d1267ef401" x="343" y="57" width="211" height="26" forecolor="#F04F5A"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Todas]]></text>
 			</staticText>
 			<image>
-				<reportElement uuid="2b65a6fd-fd05-4701-818e-747de49a743a" x="0" y="0" width="102" height="99"/>
+				<reportElement uuid="2b65a6fd-fd05-4701-818e-747de49a743a" x="7" y="5" width="95" height="88"/>
 				<imageExpression><![CDATA["C:\\Users\\Daniel\\Documents\\NetBeansProjects\\AdminEdredon\\AdminEdredon\\src\\IconosEspecializados\\castilloLogo.jpg"]]></imageExpression>
 			</image>
 		</band>

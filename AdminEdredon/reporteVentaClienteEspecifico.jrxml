@@ -41,10 +41,6 @@ AND fechaVenta BETWEEN  $P{fechaInicio} AND $P{fechaFin};]]>
 	</background>
 	<title>
 		<band height="99" splitType="Stretch">
-			<image>
-				<reportElement uuid="642beb6e-67ea-4db4-8045-f085444a24c3" x="11" y="11" width="83" height="82"/>
-				<imageExpression><![CDATA["C:\\Users\\Daniel\\Desktop\\castilloLogo.jpg"]]></imageExpression>
-			</image>
 			<textField pattern="MMMMM dd, yyyy">
 				<reportElement uuid="ed7277fe-c357-4272-a856-2c37c85bbc2f" x="442" y="11" width="100" height="20"/>
 				<textElement/>
@@ -71,6 +67,10 @@ AND fechaVenta BETWEEN  $P{fechaInicio} AND $P{fechaFin};]]>
 				</textElement>
 				<text><![CDATA[Todas]]></text>
 			</staticText>
+			<image>
+				<reportElement uuid="3f871f9a-9911-448e-93bd-3557932c4f28" x="0" y="0" width="102" height="99"/>
+				<imageExpression><![CDATA["C:\\Users\\Daniel\\Documents\\NetBeansProjects\\AdminEdredon\\AdminEdredon\\src\\IconosEspecializados\\castilloLogo.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

@@ -46,10 +46,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jPanel2" max="32767" attributes="0"/>
-              <Group type="102" alignment="0" attributes="0">
-                  <Component id="jtpDiario" min="-2" pref="895" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
+              <Component id="jtpDiario" alignment="0" pref="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -76,7 +73,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="721" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -128,8 +125,8 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Cr&#xe9;ditos">
-                    <Property name="tabTitle" type="java.lang.String" value="Cr&#xe9;ditos"/>
+                  <JTabbedPaneConstraints tabName="Registro de ventas">
+                    <Property name="tabTitle" type="java.lang.String" value="Registro de ventas"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>
@@ -231,7 +228,7 @@
                               <Component id="cmbMetodoDePago" alignment="2" min="-2" max="-2" attributes="0"/>
                               <Component id="chkSinNota" alignment="2" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtObservacion" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -242,7 +239,7 @@
                               <Component id="txtAbonoInicial" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" pref="289" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" pref="341" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="2" attributes="0">
                               <Component id="jLabel22" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -643,8 +640,8 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Abonos">
-                    <Property name="tabTitle" type="java.lang.String" value="Abonos"/>
+                  <JTabbedPaneConstraints tabName="Abonar ventas">
+                    <Property name="tabTitle" type="java.lang.String" value="Abonar ventas"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>
@@ -690,7 +687,7 @@
                                   <Component id="jScrollPane3" alignment="0" min="-2" pref="785" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="22" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -714,7 +711,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane3" pref="352" max="32767" attributes="0"/>
+                          <Component id="jScrollPane3" pref="399" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="2" attributes="0">
                               <Component id="btnAbonar" alignment="2" min="-2" pref="28" max="-2" attributes="0"/>
@@ -962,8 +959,8 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Gastos">
-                    <Property name="tabTitle" type="java.lang.String" value="Gastos"/>
+                  <JTabbedPaneConstraints tabName="Registro de gastos">
+                    <Property name="tabTitle" type="java.lang.String" value="Registro de gastos"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>
@@ -1083,7 +1080,7 @@
                               <Component id="btnAnotarGasto" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jScrollPane4" pref="347" max="32767" attributes="0"/>
+                          <Component id="jScrollPane4" pref="394" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
@@ -1488,7 +1485,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="22" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1525,7 +1522,7 @@
                               <Component id="jLabel35" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblResumenTotalGastos" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="282" max="32767" attributes="0"/>
+                          <EmptySpace pref="321" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel27" min="-2" max="-2" attributes="0"/>
                               <Component id="btnSalirResumen" min="-2" pref="32" max="-2" attributes="0"/>

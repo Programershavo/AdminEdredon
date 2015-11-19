@@ -216,7 +216,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(721, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -480,7 +480,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                     .addComponent(jLabel9)
                     .addComponent(cmbMetodoDePago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chkSinNota))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(txtObservacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -490,7 +490,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                     .addComponent(jLabel28)
                     .addComponent(txtAbonoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel22)
@@ -502,7 +502,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jtpDiario.addTab("Créditos", jpCreditos);
+        jtpDiario.addTab("Registro de ventas", jpCreditos);
 
         jpAbonos.setBackground(new java.awt.Color(255, 255, 255));
         jpAbonos.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -649,7 +649,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                                 .addComponent(cmbSucursalAbonos, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addComponent(jLabel3)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 785, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jpAbonosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jdcFechaFin, jdcFechaInicio});
@@ -674,7 +674,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnAbonar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -684,7 +684,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jtpDiario.addTab("Abonos", jpAbonos);
+        jtpDiario.addTab("Abonar ventas", jpAbonos);
 
         jpGastos.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -906,7 +906,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                         .addComponent(txtImporteGasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnAnotarGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -917,7 +917,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jtpDiario.addTab("Gastos", jpGastos);
+        jtpDiario.addTab("Registro de gastos", jpGastos);
 
         jpResumen.setBackground(new java.awt.Color(255, 255, 255));
         jpResumen.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -1031,7 +1031,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                             .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(cmbSucursalResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpResumenLayout.setVerticalGroup(
             jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1061,7 +1061,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                 .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel35)
                     .addComponent(lblResumenTotalGastos))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 282, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 321, Short.MAX_VALUE)
                 .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel27)
                     .addComponent(btnSalirResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1075,9 +1075,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jtpDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 895, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jtpDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1557,7 +1555,6 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
 
     private void btnRegistrarGastoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarGastoActionPerformed
         AccesoBD controlBD = new AccesoBD();
-        Compra gasto = new Compra();
         String fecha = "";
         for (int i = 0; i < jtTablaGastos.getRowCount(); i++) {
             try {
@@ -1566,12 +1563,13 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                 compra.setFechaCompra(FechaHerramienta.convertirStringEnDate(fecha));
                 compra.setNombreSucursal(jtTablaGastos.getValueAt(i, 1).toString());
                 compra.setTipoDeGasto(jtTablaGastos.getValueAt(i, 2).toString());
+                compra.setNombreProducto(jtTablaGastos.getValueAt(i, 2).toString());
                 compra.setNombreProveedor(jtTablaGastos.getValueAt(i, 3).toString());
                 compra.setMetodoPago(jtTablaGastos.getValueAt(i, 4).toString());
                 compra.setObservacion(jtTablaGastos.getValueAt(i, 5).toString());
                 compra.setImporte(Double.parseDouble(jtTablaGastos.getValueAt(i, 6).toString()));
                 compra.setTipoGasto("Gastos de tienda");
-                controlBD.add(gasto);
+                controlBD.add(compra);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e, "Error", 0);
             }

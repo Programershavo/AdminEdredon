@@ -94,6 +94,8 @@ public class CPanel extends javax.swing.JFrame {
         jmiCatalogoSublineas = new javax.swing.JMenuItem();
         mnuAcercaDe = new javax.swing.JMenu();
         mnuAcercaDeSalesTeDispatcher = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jmiEstadoDeResultados = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -236,6 +238,7 @@ public class CPanel extends javax.swing.JFrame {
         mnuProveedores.add(jSeparator4);
 
         jmiProducto.setText("Producto");
+        jmiProducto.setEnabled(false);
         jmiProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiProductoActionPerformed(evt);
@@ -253,6 +256,7 @@ public class CPanel extends javax.swing.JFrame {
         mnuProveedores.add(jSeparator3);
 
         jmiRegistroSublinea.setText("Sublinea");
+        jmiRegistroSublinea.setEnabled(false);
         jmiRegistroSublinea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiRegistroSublineaActionPerformed(evt);
@@ -261,6 +265,7 @@ public class CPanel extends javax.swing.JFrame {
         mnuProveedores.add(jmiRegistroSublinea);
 
         jmiRegistroLinea.setText("Linea");
+        jmiRegistroLinea.setEnabled(false);
         jmiRegistroLinea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiRegistroLineaActionPerformed(evt);
@@ -310,9 +315,11 @@ public class CPanel extends javax.swing.JFrame {
         mnuCatalogos.add(jSeparator9);
 
         jMenuItem4.setText("Productos");
+        jMenuItem4.setEnabled(false);
         mnuCatalogos.add(jMenuItem4);
 
         jmiCatalogoLineas.setText("Lineas");
+        jmiCatalogoLineas.setEnabled(false);
         jmiCatalogoLineas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiCatalogoLineasActionPerformed(evt);
@@ -321,6 +328,7 @@ public class CPanel extends javax.swing.JFrame {
         mnuCatalogos.add(jmiCatalogoLineas);
 
         jmiCatalogoSublineas.setText("Sublineas");
+        jmiCatalogoSublineas.setEnabled(false);
         jmiCatalogoSublineas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiCatalogoSublineasActionPerformed(evt);
@@ -342,6 +350,18 @@ public class CPanel extends javax.swing.JFrame {
         mnuAcercaDe.add(mnuAcercaDeSalesTeDispatcher);
 
         menuBar.add(mnuAcercaDe);
+
+        jMenu2.setText("Informe");
+
+        jmiEstadoDeResultados.setText("Estado de Resultados");
+        jmiEstadoDeResultados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiEstadoDeResultadosActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmiEstadoDeResultados);
+
+        menuBar.add(jMenu2);
 
         setJMenuBar(menuBar);
 
@@ -643,6 +663,21 @@ public class CPanel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmiComprasAProveedorActionPerformed
 
+    private void jmiEstadoDeResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEstadoDeResultadosActionPerformed
+        try {
+            EstadoDeResultados edoResultados = new EstadoDeResultados();
+            if (exist(edoResultados) == false) {
+                desktop.add(edoResultados);
+                edoResultados.setVisible(true);
+                edoResultados.setLocation((desktop.getWidth() - edoResultados.getWidth()) / 2, (desktop.getHeight() - edoResultados.getHeight()) / 2);
+            } else {
+                edoResultados.dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+        }
+    }//GEN-LAST:event_jmiEstadoDeResultadosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -681,6 +716,7 @@ public class CPanel extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static JCDesktopPane.JCDesktopPane desktop;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
@@ -700,6 +736,7 @@ public class CPanel extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiCliente;
     private javax.swing.JMenuItem jmiComprasAProveedor;
     private javax.swing.JMenuItem jmiDiarioDeCaja;
+    private javax.swing.JMenuItem jmiEstadoDeResultados;
     private javax.swing.JMenuItem jmiGastosPersonales;
     private javax.swing.JMenuItem jmiProducto;
     private javax.swing.JMenuItem jmiRegistroLinea;

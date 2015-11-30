@@ -148,6 +148,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jmiProducto">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Producto"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiProductoActionPerformed"/>
@@ -166,6 +167,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jmiRegistroSublinea">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sublinea"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiRegistroSublineaActionPerformed"/>
@@ -174,6 +176,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jmiRegistroLinea">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Linea"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiRegistroLineaActionPerformed"/>
@@ -237,11 +240,13 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Productos"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiCatalogoLineas">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Lineas"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiCatalogoLineasActionPerformed"/>
@@ -250,6 +255,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jmiCatalogoSublineas">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sublineas"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiCatalogoSublineasActionPerformed"/>
@@ -271,6 +277,21 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuAcercaDeSalesTeDispatcherActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Informe"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jmiEstadoDeResultados">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Estado de Resultados"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiEstadoDeResultadosActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

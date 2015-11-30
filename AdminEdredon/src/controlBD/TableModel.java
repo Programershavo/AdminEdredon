@@ -9,7 +9,7 @@ public class TableModel extends AbstractTableModel {
     private String[] headerCompra = {"Clave",
         "Fecha Compra", "Nombre Sucursal", "Concepto",
         "Tipo de gasto", "Nombre Proveedor",
-        "Metodo pago", "Observacion", "Importe"};
+        "Total Abonado","Metodo pago", "Observacion", "Estatus", "Importe"};
     private String[] headerVenta = {"Clave", "Nota", "Tienda", "Cliente", "Fecha de venta",
         "Total Abonado", "Forma de pago", "Estatus", "Importe"};
     private String[] headerProducto = {"Clave", "Codigo de Barras",
@@ -142,10 +142,16 @@ public class TableModel extends AbstractTableModel {
                             tableModel[contFila][contCol] = compra.getNombreProveedor();
                             this.isCellEditable(contFila, contCol);
                             contCol++;
+                            tableModel[contFila][contCol] = compra.getAbono();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
                             tableModel[contFila][contCol] = compra.getMetodoPago();
                             this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = compra.getObservacion();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = compra.getEstatus();
                             this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = compra.getImporte();

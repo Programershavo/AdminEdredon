@@ -185,7 +185,32 @@ AND fechaVenta BETWEEN  $P{fechaInicio} AND $P{fechaFin};]]>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="45" splitType="Stretch">
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="c9b464f4-319a-4b9d-beeb-3f2be352e6d6" x="487" y="11" width="61" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{Importe_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ab1eb91b-312c-4c7e-95ec-c1dae865e9d7" x="272" y="11" width="50" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{Importe_2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="dca8641c-7d64-4150-9974-e7d1267ef401" x="107" y="11" width="149" height="20" forecolor="#F04F5A"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ventas hechas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dca8641c-7d64-4150-9974-e7d1267ef401" x="332" y="11" width="149" height="20" forecolor="#F04F5A"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de ventas]]></text>
+			</staticText>
+		</band>
 	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch">

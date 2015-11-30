@@ -40,13 +40,19 @@ and (c.fechaCompra between $P{fechaInicio} and $P{fechaFin})]]>
 	<field name="noPiezas" class="java.lang.Integer"/>
 	<field name="saldoRestante" class="java.lang.Double"/>
 	<field name="precioUnitario" class="java.lang.Double"/>
+	<variable name="importe_1" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{importe}]]></variableExpression>
+	</variable>
+	<variable name="importe_2" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{importe}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="79" splitType="Stretch">
 			<image>
-				<reportElement uuid="c4e2fc28-1c52-4861-8b34-29d1ff13c365" x="11" y="5" width="74" height="69"/>
+				<reportElement uuid="c4e2fc28-1c52-4861-8b34-29d1ff13c365" x="12" y="5" width="74" height="69"/>
 				<imageExpression><![CDATA["C:\\Users\\Daniel\\Documents\\NetBeansProjects\\AdminEdredon\\AdminEdredon\\src\\IconosEspecializados\\castilloLogo.jpg"]]></imageExpression>
 			</image>
 			<staticText>
@@ -218,7 +224,32 @@ and (c.fechaCompra between $P{fechaInicio} and $P{fechaFin})]]>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="dca8641c-7d64-4150-9974-e7d1267ef401" x="580" y="11" width="149" height="20" forecolor="#F04F5A"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de ventas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dca8641c-7d64-4150-9974-e7d1267ef401" x="355" y="11" width="149" height="20" forecolor="#F04F5A"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ventas hechas]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="57eac01b-c3d8-41ff-9e2a-d62ae4b6d227" x="506" y="12" width="74" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{importe_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d497d2f0-800d-4fb7-a4d0-8ce3d60b37c7" x="742" y="11" width="60" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{importe_2}]]></textFieldExpression>
+			</textField>
+		</band>
 	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch">

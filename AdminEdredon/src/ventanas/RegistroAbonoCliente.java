@@ -6,7 +6,9 @@
 package ventanas;
 
 import controlBD.AccesoBD;
+import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import pojos.Venta;
 
@@ -29,7 +31,7 @@ public class RegistroAbonoCliente extends javax.swing.JInternalFrame {
         if (!clave.isEmpty()) {
             AccesoBD acceso = new AccesoBD();
             venta = new Venta();
-            String HQL = "From Venta v WHERE v.nota = '" + clave + "'";
+            String HQL = "From Venta v WHERE v.idVenta = '" + clave + "'";
             venta = (Venta) acceso.select(HQL).get(0);
         }
     }
@@ -38,11 +40,7 @@ public class RegistroAbonoCliente extends javax.swing.JInternalFrame {
         lblNota.setText(venta.getNota());
         lblNombreCliente.setText(venta.getNombreCliente());
         lblFechaVenta.setText(venta.getFechaVenta().toString());
-        if (venta.getFechaVentaSaldada() != null) {
-            lblFechaSaldado.setText(venta.getFechaVentaSaldada().toString());
-        } else {
-            lblFechaSaldado.setText("");
-        }
+
         if (venta.getFechaVentaSaldada() != null) {
             lblFechaUltimoAbono.setText(venta.getFechaUltimoAbono().toString());
         } else {
@@ -69,8 +67,6 @@ public class RegistroAbonoCliente extends javax.swing.JInternalFrame {
         lblNombreCliente = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         lblFechaVenta = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        lblFechaSaldado = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         lblFechaUltimoAbono = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -159,14 +155,6 @@ public class RegistroAbonoCliente extends javax.swing.JInternalFrame {
         lblFechaVenta.setForeground(new java.awt.Color(0, 102, 153));
         lblFechaVenta.setText("Cliente");
 
-        jLabel5.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel5.setText("Fecha en que se liquidó");
-
-        lblFechaSaldado.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        lblFechaSaldado.setForeground(new java.awt.Color(0, 102, 153));
-        lblFechaSaldado.setText("Cliente");
-
         jLabel6.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 102, 153));
         jLabel6.setText("Fecha del último abono");
@@ -221,6 +209,12 @@ public class RegistroAbonoCliente extends javax.swing.JInternalFrame {
         jLabel13.setForeground(new java.awt.Color(0, 102, 51));
         jLabel13.setText("Nuevo Abono");
 
+        txtAbono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAbonoKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -241,7 +235,6 @@ public class RegistroAbonoCliente extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -257,7 +250,6 @@ public class RegistroAbonoCliente extends javax.swing.JInternalFrame {
                                         .addComponent(lblImporte, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lblNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lblFechaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblFechaSaldado, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lblFechaUltimoAbono, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lblDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lblCantidadAbono, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -271,9 +263,9 @@ public class RegistroAbonoCliente extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel10, jLabel11, jLabel12, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6, jLabel7, jLabel8});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel10, jLabel11, jLabel12, jLabel2, jLabel3, jLabel4, jLabel6, jLabel7, jLabel8});
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblCantidadAbono, lblDescripcion, lblEstatusCompra, lblFechaSaldado, lblFechaUltimoAbono, lblFechaVenta, lblImporte, lblMetodoPago, lblNombreCliente, lblNota});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblCantidadAbono, lblDescripcion, lblEstatusCompra, lblFechaUltimoAbono, lblFechaVenta, lblImporte, lblMetodoPago, lblNombreCliente, lblNota});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,10 +284,6 @@ public class RegistroAbonoCliente extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jLabel4)
                             .addComponent(lblFechaVenta))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabel5)
-                            .addComponent(lblFechaSaldado))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jLabel6)
@@ -324,7 +312,7 @@ public class RegistroAbonoCliente extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
                             .addComponent(txtAbono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAbonarConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -364,12 +352,13 @@ public class RegistroAbonoCliente extends javax.swing.JInternalFrame {
                 double abonoNuevo = Double.parseDouble(txtAbono.getText());
                 double abonoSuma = abonoAnterior + abonoNuevo;
                 if (abonoSuma > venta.getImporte()) {
-                    JOptionPane.showMessageDialog(rootPane, "El abono excede el importe");
-                } else {                   
+                    JOptionPane.showMessageDialog(rootPane, "El abono excede el importe por: " + (abonoSuma - venta.getImporte()));
+                } else {
                     if (abonoSuma >= venta.getImporte()) {
                         venta.setEstatus("Saldada");
                     }
                     venta.setAbono(abonoSuma);
+                    venta.setFechaUltimoAbono(new Date());
                     try {
                         this.setClosed(true);
                         System.gc();
@@ -381,6 +370,7 @@ public class RegistroAbonoCliente extends javax.swing.JInternalFrame {
 
             } else {
                 venta.setAbono(Double.parseDouble(txtAbono.getText()));
+                venta.setFechaUltimoAbono(new Date());
                 try {
                     this.setClosed(true);
                     System.gc();
@@ -404,6 +394,20 @@ public class RegistroAbonoCliente extends javax.swing.JInternalFrame {
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void txtAbonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAbonoKeyTyped
+        char key = evt.getKeyChar();
+        if (((key < '0') || (key > '9')) && (key != KeyEvent.VK_BACK_SPACE)
+                && (key != '.')) {
+            evt.consume();
+        }
+        if (key == '.' && txtAbono.getText().contains(".")) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo se permite un punto "
+                    + "este campo", "Validacion decimal", 0);
+            // TODO add your handling code here:
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAbonoKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAbonarConcepto;
@@ -416,7 +420,6 @@ public class RegistroAbonoCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -426,7 +429,6 @@ public class RegistroAbonoCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblCantidadAbono;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblEstatusCompra;
-    private javax.swing.JLabel lblFechaSaldado;
     private javax.swing.JLabel lblFechaUltimoAbono;
     private javax.swing.JLabel lblFechaVenta;
     private javax.swing.JLabel lblImporte;

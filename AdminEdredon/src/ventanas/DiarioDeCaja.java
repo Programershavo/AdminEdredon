@@ -7,8 +7,11 @@ package ventanas;
 
 import controlBD.AccesoBD;
 import herramienta.FechaHerramienta;
+import herramienta.FormatoTabla;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyVetoException;
@@ -47,7 +50,37 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         jdcFechaInicioResumen.setDate(new Date());
         jdcFechaFinResumen.setDate(new Date());
         cmbClienteAbono.setVisible(false);
+        //ASIGNA ACCIONES A LOS COMBOS Y CALENDARIOS
         addActions();
+        //FORMATO DE COLORES Y FUENTES PARA LAS TABLAS
+        jtTablaAbonos.setDefaultRenderer(Object.class, new FormatoTabla());
+        jtTablaCreditos.setDefaultRenderer(Object.class, new FormatoTabla());
+        jtTablaGastos.setDefaultRenderer(Object.class, new FormatoTabla());
+        jtTablaGastosResumen.setDefaultRenderer(Object.class, new FormatoTabla());
+        //EVENTO DOBLE CLIC PARA REFRESCAR LAS TABLAS
+        setEventoMouseClicked(jtTablaAbonos, "venta");
+        setEventoMouseClicked(jtTablaGastosResumen, "compra");
+    }
+
+    //EVENTO DOBLE CLIC PARA REFRESCAR LAS TABLAS
+    private void setEventoMouseClicked(JTable tabla, String esCompraOVenta) {
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    if (esCompraOVenta.equals("venta")) {
+                        crearConsultaGlobal();
+                        cargaTabla(tabla, HQL, "Venta");
+                    }
+                    if (esCompraOVenta.equals("compra")) {
+                        crearConsultaGlobalCompra();
+                        cargaTabla(tabla, HQL, "Compra");
+                    }
+
+                }
+
+            }
+        });
     }
 
     private void llenarCombos() {
@@ -109,8 +142,6 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jtpDiario = new javax.swing.JTabbedPane();
         jpCreditos = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -156,6 +187,8 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         btnPDFCreditos = new javax.swing.JButton();
         cmbSucursalAbonos = new javax.swing.JComboBox();
         jLabel19 = new javax.swing.JLabel();
+        btnCorregir = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         jpGastos = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         cmbSucursalGasto = new javax.swing.JComboBox();
@@ -191,10 +224,30 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         lblTiendasAbiertas = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         lblRecumenTotalVentas = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        lblResumenTotalGastos = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         cmbSucursalResumen = new javax.swing.JComboBox();
+        jpResumenGastosTiendas = new javax.swing.JPanel();
+        jLabel37 = new javax.swing.JLabel();
+        jdcFechaFinResumenGasto = new com.toedter.calendar.JDateChooser();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        lblGastosRealizados = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        lblResumenTotalGastosFinal = new javax.swing.JLabel();
+        jdcFechaInicioResumenGasto = new com.toedter.calendar.JDateChooser();
+        btnSalirResumen1 = new javax.swing.JButton();
+        jLabel43 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jtTablaGastosResumen = new javax.swing.JTable();
+        btnPDFGastos = new javax.swing.JButton();
+        btnCorregirConcepto = new javax.swing.JButton();
+        btnEliminar1 = new javax.swing.JButton();
+        jLabel44 = new javax.swing.JLabel();
+        cmbSucursalGastosResumen = new javax.swing.JComboBox();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -202,29 +255,6 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         setTitle("Diario de Caja");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel2.setBackground(new java.awt.Color(240, 79, 90));
-
-        jLabel1.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Diario de Caja por Tienda");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(721, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         jtpDiario.setForeground(new java.awt.Color(255, 102, 0));
         jtpDiario.setTabPlacement(javax.swing.JTabbedPane.LEFT);
@@ -266,6 +296,12 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         jLabel14.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 102, 153));
         jLabel14.setText("Importe");
+
+        txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadKeyTyped(evt);
+            }
+        });
 
         jtTablaCreditos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -380,6 +416,12 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         jLabel28.setForeground(new java.awt.Color(0, 102, 153));
         jLabel28.setText("Abono Inic.");
 
+        txtAbonoInicial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAbonoInicialKeyTyped(evt);
+            }
+        });
+
         jLabel20.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(0, 102, 153));
         jLabel20.setText("Tienda");
@@ -490,7 +532,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                     .addComponent(jLabel28)
                     .addComponent(txtAbonoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel22)
@@ -614,6 +656,23 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         jLabel19.setForeground(new java.awt.Color(0, 102, 153));
         jLabel19.setText("Tienda");
 
+        btnCorregir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/correct.png"))); // NOI18N
+        btnCorregir.setText("Corregir");
+        btnCorregir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCorregirActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/delete.png"))); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpAbonosLayout = new javax.swing.GroupLayout(jpAbonos);
         jpAbonos.setLayout(jpAbonosLayout);
         jpAbonosLayout.setHorizontalGroup(
@@ -627,8 +686,12 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                         .addComponent(jLabel25)
                         .addGap(31, 31, 31)
                         .addComponent(btnPDFCreditos)
-                        .addGap(480, 480, 480)
-                        .addComponent(btnAbonar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(232, 232, 232)
+                        .addComponent(btnEliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCorregir)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnAbonar))
                     .addGroup(jpAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jpAbonosLayout.createSequentialGroup()
                             .addGroup(jpAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -649,7 +712,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                                 .addComponent(cmbSucursalAbonos, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addComponent(jLabel3)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 785, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jpAbonosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jdcFechaFin, jdcFechaInicio});
@@ -674,13 +737,16 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnAbonar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalirAbonos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel25)
-                    .addComponent(btnPDFCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPDFCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnCorregir, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -708,6 +774,12 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         jLabel5.setForeground(new java.awt.Color(0, 102, 153));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Importe");
+
+        txtImporteGasto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtImporteGastoKeyTyped(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 0, 0));
@@ -906,7 +978,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                         .addComponent(txtImporteGasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnAnotarGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -976,16 +1048,6 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         lblRecumenTotalVentas.setText("0");
         lblRecumenTotalVentas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel35.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel35.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel35.setText("Total de gastos");
-
-        lblResumenTotalGastos.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        lblResumenTotalGastos.setForeground(new java.awt.Color(102, 102, 102));
-        lblResumenTotalGastos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblResumenTotalGastos.setText("0");
-        lblResumenTotalGastos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
         jLabel36.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel36.setForeground(new java.awt.Color(0, 102, 153));
         jLabel36.setText("Tienda");
@@ -1009,12 +1071,10 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                     .addGroup(jpResumenLayout.createSequentialGroup()
                         .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel33)
-                            .addComponent(jLabel34)
-                            .addComponent(jLabel35))
+                            .addComponent(jLabel34))
                         .addGap(18, 18, 18)
                         .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblResumenTotalGastos, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                            .addComponent(lblRecumenTotalVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblRecumenTotalVentas, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
                             .addComponent(lblTiendasAbiertas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpResumenLayout.createSequentialGroup()
@@ -1031,7 +1091,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                             .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(cmbSucursalResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jpResumenLayout.setVerticalGroup(
             jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1057,18 +1117,224 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                 .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel34)
                     .addComponent(lblRecumenTotalVentas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel35)
-                    .addComponent(lblResumenTotalGastos))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 321, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 374, Short.MAX_VALUE)
                 .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel27)
                     .addComponent(btnSalirResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        jtpDiario.addTab("Resumen", jpResumen);
+        jtpDiario.addTab("Resumen Ventas", jpResumen);
+
+        jpResumenGastosTiendas.setBackground(new java.awt.Color(255, 255, 255));
+        jpResumenGastosTiendas.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jpResumenGastosTiendasComponentShown(evt);
+            }
+        });
+
+        jLabel37.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel37.setText("Fin");
+
+        jLabel38.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(0, 51, 102));
+        jLabel38.setText("Establecer el periodo de tiempo trabajado");
+
+        jLabel39.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel39.setForeground(new java.awt.Color(0, 51, 102));
+        jLabel39.setText("Resultados");
+
+        jLabel40.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel40.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel40.setText("Número de Gastos");
+
+        lblGastosRealizados.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        lblGastosRealizados.setForeground(new java.awt.Color(102, 102, 102));
+        lblGastosRealizados.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblGastosRealizados.setText("0");
+        lblGastosRealizados.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel41.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel41.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel41.setText("Total de Gastos");
+
+        jLabel42.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel42.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel42.setText("Inicio");
+
+        lblResumenTotalGastosFinal.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        lblResumenTotalGastosFinal.setForeground(new java.awt.Color(102, 102, 102));
+        lblResumenTotalGastosFinal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblResumenTotalGastosFinal.setText("0");
+        lblResumenTotalGastosFinal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        btnSalirResumen1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSalirResumen1.setForeground(new java.awt.Color(0, 153, 51));
+        btnSalirResumen1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/exit2.png"))); // NOI18N
+        btnSalirResumen1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirResumen1ActionPerformed(evt);
+            }
+        });
+
+        jLabel43.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel43.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel43.setText("Salir");
+
+        jtTablaGastosResumen.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane5.setViewportView(jtTablaGastosResumen);
+
+        btnPDFGastos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/pdf.png"))); // NOI18N
+        btnPDFGastos.setText("Reporte");
+        btnPDFGastos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPDFGastosActionPerformed(evt);
+            }
+        });
+
+        btnCorregirConcepto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnCorregirConcepto.setForeground(new java.awt.Color(0, 153, 51));
+        btnCorregirConcepto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/correct.png"))); // NOI18N
+        btnCorregirConcepto.setText("Corregir");
+        btnCorregirConcepto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCorregirConceptoActionPerformed(evt);
+            }
+        });
+
+        btnEliminar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/delete.png"))); // NOI18N
+        btnEliminar1.setText("Eliminar");
+        btnEliminar1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnEliminar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminar1ActionPerformed(evt);
+            }
+        });
+
+        jLabel44.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel44.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel44.setText("Tienda");
+
+        cmbSucursalGastosResumen.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        cmbSucursalGastosResumen.setForeground(new java.awt.Color(0, 102, 153));
+        cmbSucursalGastosResumen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todas", "Cuaracurio 2", "General", "La Comadre", "La Flor", "La Flor Texti", "Local 2", "Local B5", "Local D7", "Local E15", "Moroleón", " " }));
+
+        javax.swing.GroupLayout jpResumenGastosTiendasLayout = new javax.swing.GroupLayout(jpResumenGastosTiendas);
+        jpResumenGastosTiendas.setLayout(jpResumenGastosTiendasLayout);
+        jpResumenGastosTiendasLayout.setHorizontalGroup(
+            jpResumenGastosTiendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpResumenGastosTiendasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpResumenGastosTiendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5)
+                    .addGroup(jpResumenGastosTiendasLayout.createSequentialGroup()
+                        .addGroup(jpResumenGastosTiendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel39)
+                            .addGroup(jpResumenGastosTiendasLayout.createSequentialGroup()
+                                .addGroup(jpResumenGastosTiendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel40)
+                                    .addComponent(jLabel41))
+                                .addGap(18, 18, 18)
+                                .addGroup(jpResumenGastosTiendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblResumenTotalGastosFinal, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                                    .addComponent(lblGastosRealizados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jpResumenGastosTiendasLayout.createSequentialGroup()
+                                .addComponent(btnSalirResumen1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel43)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnPDFGastos)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnCorregirConcepto)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEliminar1))
+                            .addGroup(jpResumenGastosTiendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jpResumenGastosTiendasLayout.createSequentialGroup()
+                                    .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(cmbSucursalGastosResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpResumenGastosTiendasLayout.createSequentialGroup()
+                                    .addComponent(jLabel38)
+                                    .addGap(105, 105, 105)
+                                    .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jdcFechaInicioResumenGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(10, 10, 10)
+                                    .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jdcFechaFinResumenGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 78, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jpResumenGastosTiendasLayout.setVerticalGroup(
+            jpResumenGastosTiendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpResumenGastosTiendasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpResumenGastosTiendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel42)
+                    .addComponent(jdcFechaInicioResumenGasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel37)
+                    .addComponent(jdcFechaFinResumenGasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel38))
+                .addGap(14, 14, 14)
+                .addGroup(jpResumenGastosTiendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbSucursalGastosResumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpResumenGastosTiendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel40)
+                    .addComponent(lblGastosRealizados))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpResumenGastosTiendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel41)
+                    .addComponent(lblResumenTotalGastosFinal))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jpResumenGastosTiendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(btnCorregirConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPDFGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel43)
+                    .addComponent(btnSalirResumen1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14))
+        );
+
+        jtpDiario.addTab("Resumen Gastos", jpResumenGastosTiendas);
+
+        jPanel2.setBackground(new java.awt.Color(240, 79, 90));
+
+        jLabel1.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Diario de Caja por Tienda");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(721, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1268,6 +1534,23 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     private void cmbClienteAbonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClienteAbonoActionPerformed
 
     }//GEN-LAST:event_cmbClienteAbonoActionPerformed
+    private void crearConsultaGlobalCompra() {
+        String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioResumen.getDate());
+        String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinResumen.getDate());
+        String nombreTienda = cmbSucursalGastosResumen.getSelectedItem().toString();
+        if (!nombreTienda.equals("Todas")) {
+            HQL = "Select distinct c From Compra c WHERE c.tipoGasto = 'Gastos de tienda' AND "
+                    + "c.nombreSucursal = '" + nombreTienda + "' AND c.fechaCompra BETWEEN '"
+                    + fechaInicioResumen + "' AND '"
+                    + fechaFinResumen + "'";
+        }
+        if (nombreTienda.equals("Todas")) {
+            HQL = "Select distinct c From Compra c WHERE c.tipoGasto = 'Gastos de tienda' "
+                    + " AND c.fechaCompra BETWEEN '"
+                    + fechaInicioResumen + "' AND '"
+                    + fechaFinResumen + "'";
+        }
+    }
 
     private void crearConsultaGlobal() {
         fechaInicioAbono = FechaHerramienta.formatoYMD(jdcFechaInicio.getDate());
@@ -1329,6 +1612,13 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                         crearResumen();
                     }
                 }
+
+                if (cmbSucursalGastosResumen.getItemCount() > 0) {
+                    if (cmbSucursalGastosResumen.getSelectedItem().equals(e.getItem())) {
+                        crearConsultaGlobalCompra();
+                        cargaTabla(jtTablaGastosResumen, HQL, "Compra");
+                    }
+                }
             }
         };
         jdcFechaInicio.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
@@ -1351,15 +1641,53 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                 }
             });
         }
+        if (jdcFechaInicioResumenGasto.isVisible()) {
+            jdcFechaInicioResumenGasto.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
+                public void propertyChange(PropertyChangeEvent e) {
+                    crearConsultaGlobalCompra();
+                    cargaTabla(jtTablaGastosResumen, HQL, "Compra");
+                    lblResumenTotalGastosFinal.setText(String.valueOf(getTotalGastos()));
+                    lblGastosRealizados.setText(String.valueOf(getComprasRealizadas()));
+                }
+            });
+            jdcFechaFinResumenGasto.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
+                public void propertyChange(PropertyChangeEvent e) {
+                    crearConsultaGlobalCompra();
+                    cargaTabla(jtTablaGastosResumen, HQL, "Compra");
+                    lblResumenTotalGastosFinal.setText(String.valueOf(getTotalGastos()));
+                    lblGastosRealizados.setText(String.valueOf(getComprasRealizadas()));
+                }
+            });
+        }
         this.cmbClienteAbono.addItemListener(changeClick);
         this.cmbSucursalAbonos.addItemListener(changeClick);
         this.cmbSucursalResumen.addItemListener(changeClick);
+        this.cmbSucursalGastosResumen.addItemListener(changeClick);
     }
 
     private void crearResumen() {
         lblTiendasAbiertas.setText(String.valueOf(getTiendasAbiertas()));
         lblRecumenTotalVentas.setText(String.valueOf(getTotalVentas()));
-        lblResumenTotalGastos.setText(String.valueOf(getTotalGastos()));
+    }
+
+    private int getComprasRealizadas() {
+        AccesoBD acceso = new AccesoBD();
+        String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioResumen.getDate());
+        String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinResumen.getDate());
+        String nombreTienda = cmbSucursalResumen.getSelectedItem().toString();
+        if (!nombreTienda.equals("Todas")) {
+            HQL = "Select COUNT(c.importe) From Compra c WHERE c.tipoGasto = 'Gastos de tienda' AND "
+                    + "c.nombreSucursal = '" + nombreTienda + "' AND c.fechaCompra BETWEEN '"
+                    + fechaInicioResumen + "' AND '"
+                    + fechaFinResumen + "'";
+            return acceso.rowCount(HQL);
+        } else {
+            HQL = "Select COUNT(c.importe)From Compra c WHERE c.tipoGasto = 'Gastos de tienda'"
+                    + " AND c.fechaCompra BETWEEN '"
+                    + fechaInicioResumen + "' AND '"
+                    + fechaFinResumen + "'";
+            return acceso.rowCount(HQL);
+        }
     }
 
     private int getTiendasAbiertas() {
@@ -1436,7 +1764,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         if (jtTablaAbonos.getSelectedRow() != -1) {
             String estatus = jtTablaAbonos.getValueAt(jtTablaAbonos.getSelectedRow(), 7).toString();
             if (!estatus.equals("Saldada")) {
-                String clave = jtTablaAbonos.getValueAt(jtTablaAbonos.getSelectedRow(), 1).toString();
+                String clave = jtTablaAbonos.getValueAt(jtTablaAbonos.getSelectedRow(), 0).toString();
                 try {
                     RegistroAbonoCliente registroAbonoCliente = new RegistroAbonoCliente(clave);
                     if (exist(registroAbonoCliente) == false) {
@@ -1576,11 +1904,12 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         }
         limpiarGastos();
         limpiarTablas(jtTablaGastos);
-        JOptionPane.showMessageDialog(this, "Ventas registradas correctamente", "Datos registrados", 1);        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Gastos registrados correctamente", "Datos registrados", 1);        // TODO add your handling code here:
     }//GEN-LAST:event_btnRegistrarGastoActionPerformed
 
     private void jpResumenComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpResumenComponentShown
-        lblTiendasAbiertas.setText(String.valueOf(getTiendasAbiertas()));
+        crearConsultaGlobal();
+        crearResumen();
     }//GEN-LAST:event_jpResumenComponentShown
 
     private void btnSalirRegistroGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirRegistroGastosActionPerformed
@@ -1602,6 +1931,193 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
             System.gc();
         }
     }//GEN-LAST:event_btnSalirResumenActionPerformed
+
+    private void txtAbonoInicialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAbonoInicialKeyTyped
+        char key = evt.getKeyChar();
+        if (((key < '0') || (key > '9')) && (key != KeyEvent.VK_BACK_SPACE)
+                && (key != '.')) {
+            evt.consume();
+        }
+        if (key == '.' && txtAbonoInicial.getText().contains(".")) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo se permite un punto "
+                    + "este campo", "Validacion decimal", 0);
+            // TODO add your handling code here:
+        }
+
+    }//GEN-LAST:event_txtAbonoInicialKeyTyped
+
+    private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
+        char key = evt.getKeyChar();
+        if (((key < '0') || (key > '9')) && (key != KeyEvent.VK_BACK_SPACE)
+                && (key != '.')) {
+            evt.consume();
+        }
+        if (key == '.' && txtAbonoInicial.getText().contains(".")) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo se permite un punto "
+                    + "este campo", "Validacion decimal", 0);
+            // TODO add your handling code here:
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadKeyTyped
+
+    private void txtImporteGastoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtImporteGastoKeyTyped
+        char key = evt.getKeyChar();
+        if (((key < '0') || (key > '9')) && (key != KeyEvent.VK_BACK_SPACE)
+                && (key != '.')) {
+            evt.consume();
+        }
+        if (key == '.' && txtAbonoInicial.getText().contains(".")) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo se permite un punto "
+                    + "este campo", "Validacion decimal", 0);
+            // TODO add your handling code here:
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_txtImporteGastoKeyTyped
+
+    private void btnCorregirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorregirActionPerformed
+        if (jtTablaAbonos.getSelectedRow() != -1) {
+
+            String clave = jtTablaAbonos.getValueAt(jtTablaAbonos.getSelectedRow(), 0).toString();
+            try {
+                CorregirVenta correcionVenta = new CorregirVenta(clave);
+                if (exist(correcionVenta) == false) {
+                    CPanel.desktop.add(correcionVenta);
+                    correcionVenta.setVisible(true);
+                    correcionVenta.setLocation((CPanel.desktop.getWidth() - correcionVenta.getWidth()) / 2,
+                            (CPanel.desktop.getHeight() - correcionVenta.getHeight()) / 2);
+                } else {
+                    correcionVenta.dispose();
+
+                }        // TODO add your handling code here:
+            } catch (Exception ex) {
+                Logger.getLogger(RegistrarProducto.class
+                        .getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCorregirActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        if (jtTablaAbonos.getSelectedRow() != -1) {
+            int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar esta compra?", "Confirmar eliminación", 0, 3);
+            if (respuesta == 0) {
+                try {
+                    AccesoBD acceso = new AccesoBD();
+                    int clave = (int) jtTablaAbonos.getValueAt(jtTablaAbonos.getSelectedRow(), 0);
+                    String query = "From Venta v WHERE v.idVenta = '" + clave + "'";
+                    Venta venta = (Venta) acceso.select(query).get(0);
+                    acceso.delete(venta);
+                    crearConsultaGlobal();
+                    cargaTabla(jtTablaAbonos, HQL, "Venta");
+                    lblRecumenTotalVentas.setText(String.valueOf(getTotalVentas()));
+                    lblTiendasAbiertas.setText(String.valueOf(getTiendasAbiertas()));
+                    JOptionPane.showMessageDialog(this, "Venta eliminada correctamente", "Cancelado", 1);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+                    System.gc();
+                }
+            }
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnSalirResumen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirResumen1ActionPerformed
+        try {
+            this.setClosed(true);
+            System.gc();
+        } catch (PropertyVetoException ex) {
+            this.dispose();
+            System.gc();
+        }
+    }//GEN-LAST:event_btnSalirResumen1ActionPerformed
+
+    private void btnPDFGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFGastosActionPerformed
+        Map parametros = new HashMap();
+        if (jtTablaGastosResumen.getRowCount() > 0) {
+            crearConsultaGlobalCompra();
+            java.sql.Date fechaInicio = new java.sql.Date(jdcFechaInicioResumenGasto.getDate().getTime());
+            java.sql.Date fechaFin = new java.sql.Date(jdcFechaFinResumenGasto.getDate().getTime());
+            parametros.put("tipoGasto", "Gastos de tienda");
+            parametros.put("fechaInicio", fechaInicio);
+            parametros.put("fechaFin", fechaFin);
+
+            try {
+                reportMaker.ReportMaker reporte = new reportMaker.ReportMaker(HQL, "GastoTodos", parametros, false);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Ha ocurrido un error generando el reporte: " + e, "Error", 0);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "No hay resultados que imprimir");
+        }
+    }//GEN-LAST:event_btnPDFGastosActionPerformed
+
+    private void btnCorregirConceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorregirConceptoActionPerformed
+        if (jtTablaGastosResumen.getSelectedRow() != -1) {
+            String clave = jtTablaGastosResumen.getValueAt(jtTablaGastosResumen.getSelectedRow(), 0).toString();
+            try {
+                CorregirGastoTienda corregirGastoTienda = new CorregirGastoTienda(clave);
+                if (exist(corregirGastoTienda) == false) {
+                    CPanel.desktop.add(corregirGastoTienda);
+                    corregirGastoTienda.setVisible(true);
+                    corregirGastoTienda.setLocation((CPanel.desktop.getWidth() - corregirGastoTienda.getWidth()) / 2,
+                            (CPanel.desktop.getHeight() - corregirGastoTienda.getHeight()) / 2);
+                } else {
+                    corregirGastoTienda.dispose();
+
+                }        // TODO add your handling code here:
+            } catch (Exception ex) {
+                Logger.getLogger(RegistrarProducto.class
+                        .getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        CorregirCompra corregirCompra = new CorregirCompra(title);
+    }//GEN-LAST:event_btnCorregirConceptoActionPerformed
+
+    private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
+        // TODO add your handling code here:
+        if (jtTablaGastosResumen.getSelectedRow() != -1) {
+            int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este gasto?", "Confirmar eliminación", 0, 3);
+            if (respuesta == 0) {
+                try {
+                    AccesoBD acceso = new AccesoBD();
+                    int clave = (int) jtTablaGastosResumen.getValueAt(jtTablaGastosResumen.getSelectedRow(), 0);
+                    String query = "From Compra c WHERE c.idCompras = '" + clave + "'";
+                    Compra compra = (Compra) acceso.select(query).get(0);
+                    acceso.delete(compra);
+                    crearConsultaGlobal();
+                    cargaTabla(jtTablaGastosResumen, HQL, "Compra");
+                    lblGastosRealizados.setText(String.valueOf(getComprasRealizadas()));
+                    JOptionPane.showMessageDialog(this, "Venta eliminada correctamente", "Cancelado", 1);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+                    System.gc();
+                }
+            }
+        }
+    }//GEN-LAST:event_btnEliminar1ActionPerformed
+
+    private void jpResumenGastosTiendasComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpResumenGastosTiendasComponentShown
+        jdcFechaInicioResumenGasto.setDate(new Date());
+        jdcFechaFinResumenGasto.setDate(new Date());
+        lblGastosRealizados.setText(String.valueOf(getComprasRealizadas()));
+        String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioResumenGasto.getDate());
+        String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinResumenGasto.getDate());
+        String tiendaGasto = cmbSucursalGastosResumen.getSelectedItem().toString();
+        if (!tiendaGasto.equals("Todas")) {
+            HQL = "From Compra c WHERE c.tipoGasto = 'Gastos de tienda' AND "
+                    + "c.nombreSucursal = '" + tiendaGasto + "' AND c.fechaCompra BETWEEN '"
+                    + fechaInicioResumen + "' AND '"
+                    + fechaFinResumen + "'";
+        } else {
+            HQL = "From Compra c WHERE c.tipoGasto = 'Gastos de tienda' AND c.fechaCompra BETWEEN '"
+                    + fechaInicioResumen + "' AND '"
+                    + fechaFinResumen + "'";
+        }
+
+        cargaTabla(jtTablaGastosResumen, HQL, "Compra");
+    }//GEN-LAST:event_jpResumenGastosTiendasComponentShown
     private void cargaTabla(final JTable jtTabla, String HQL, String Encabezado) {
         //Reviso si que la consulta no vaya vacia
         if (!HQL.isEmpty()) {
@@ -1619,7 +2135,12 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnAnotarGasto;
     private javax.swing.JButton btnBorrarCredito;
     private javax.swing.JButton btnBorrarGasto;
+    private javax.swing.JButton btnCorregir;
+    private javax.swing.JButton btnCorregirConcepto;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnEliminar1;
     private javax.swing.JButton btnPDFCreditos;
+    private javax.swing.JButton btnPDFGastos;
     private javax.swing.JButton btnRegistrarCliente;
     private javax.swing.JButton btnRegistrarGasto;
     private javax.swing.JButton btnRegistrarVentas;
@@ -1627,6 +2148,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSalirAbonos;
     private javax.swing.JButton btnSalirRegistroGastos;
     private javax.swing.JButton btnSalirResumen;
+    private javax.swing.JButton btnSalirResumen1;
     private javax.swing.JCheckBox chkSinNota;
     private javax.swing.JComboBox cmbClienteAbono;
     private javax.swing.JComboBox cmbClienteCredito;
@@ -1636,6 +2158,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cmbSucursalAbonos;
     private javax.swing.JComboBox cmbSucursalCreditos;
     private javax.swing.JComboBox cmbSucursalGasto;
+    private javax.swing.JComboBox cmbSucursalGastosResumen;
     private javax.swing.JComboBox cmbSucursalResumen;
     private javax.swing.JComboBox cmbTipoDeGasto;
     private javax.swing.JLabel jLabel1;
@@ -1666,8 +2189,15 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1678,22 +2208,28 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private com.toedter.calendar.JDateChooser jdcFechaCredito;
     private com.toedter.calendar.JDateChooser jdcFechaFin;
     private com.toedter.calendar.JDateChooser jdcFechaFinResumen;
+    private com.toedter.calendar.JDateChooser jdcFechaFinResumenGasto;
     private com.toedter.calendar.JDateChooser jdcFechaGasto;
     private com.toedter.calendar.JDateChooser jdcFechaInicio;
     private com.toedter.calendar.JDateChooser jdcFechaInicioResumen;
+    private com.toedter.calendar.JDateChooser jdcFechaInicioResumenGasto;
     private javax.swing.JPanel jpAbonos;
     private javax.swing.JPanel jpCreditos;
     private javax.swing.JPanel jpGastos;
     private javax.swing.JPanel jpResumen;
+    private javax.swing.JPanel jpResumenGastosTiendas;
     private javax.swing.JTable jtTablaAbonos;
     private javax.swing.JTable jtTablaCreditos;
     private javax.swing.JTable jtTablaGastos;
+    private javax.swing.JTable jtTablaGastosResumen;
     private javax.swing.JTabbedPane jtpDiario;
+    private javax.swing.JLabel lblGastosRealizados;
     private javax.swing.JLabel lblRecumenTotalVentas;
-    private javax.swing.JLabel lblResumenTotalGastos;
+    private javax.swing.JLabel lblResumenTotalGastosFinal;
     private javax.swing.JLabel lblTiendasAbiertas;
     private javax.swing.JTextField txtAbonoInicial;
     private javax.swing.JTextField txtCantidad;

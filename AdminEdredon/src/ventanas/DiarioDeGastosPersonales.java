@@ -7,8 +7,9 @@ package ventanas;
 
 import controlBD.AccesoBD;
 import herramienta.FechaHerramienta;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import herramienta.FormatoTabla;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyVetoException;
@@ -48,6 +49,24 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
         jdcFechaInicioResumen.setDate(new Date());
         jdcFechaFinResumen.setDate(new Date());
         addActions();
+        jtTablaAcreedoresResumen.setDefaultRenderer(Object.class, new FormatoTabla());
+        jtTablaConceptos.setDefaultRenderer(Object.class, new FormatoTabla());
+        setEventoMouseClicked(jtTablaAcreedoresResumen);
+    }
+
+    private void setEventoMouseClicked(JTable tabla) {
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    crearConsultaGlobal();
+                    cargaTabla(tabla, HQL, "Compra");
+                    lblResumenTotalGastos.setText(String.valueOf(getTotalGastos()));
+                    lblComprasRealizadas.setText(String.valueOf(getComprasRealizadas()));
+                }
+
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -64,7 +83,7 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
         txtFactura = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtTablaProductos = new javax.swing.JTable();
+        jtTablaConceptos = new javax.swing.JTable();
         btnAnotar = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         btnBorrarCredito = new javax.swing.JButton();
@@ -98,8 +117,10 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
         btnSalirResumen = new javax.swing.JButton();
         jLabel27 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jtTablaProveedoresResumen = new javax.swing.JTable();
+        jtTablaAcreedoresResumen = new javax.swing.JTable();
         btnPDFGastos = new javax.swing.JButton();
+        btnCorregirConcepto = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
@@ -155,7 +176,7 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
         jLabel3.setForeground(new java.awt.Color(0, 102, 153));
         jLabel3.setText("Acreedor");
 
-        jtTablaProductos.setModel(new javax.swing.table.DefaultTableModel(
+        jtTablaConceptos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -171,7 +192,7 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jtTablaProductos);
+        jScrollPane1.setViewportView(jtTablaConceptos);
 
         btnAnotar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnAnotar.setForeground(new java.awt.Color(0, 153, 51));
@@ -232,6 +253,12 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
         jLabel5.setForeground(new java.awt.Color(0, 102, 153));
         jLabel5.setText("Importe");
 
+        txtImporte.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtImporteKeyTyped(evt);
+            }
+        });
+
         jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 102, 153));
         jLabel8.setText("Observaciones");
@@ -239,6 +266,12 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 102, 153));
         jLabel9.setText("Abono");
+
+        txtAbonoInicial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAbonoInicialKeyTyped(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 102, 153));
@@ -394,7 +427,7 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
 
         jLabel33.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel33.setText("Número de Compras");
+        jLabel33.setText("Número de Gastos");
 
         lblComprasRealizadas.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblComprasRealizadas.setForeground(new java.awt.Color(102, 102, 102));
@@ -404,7 +437,7 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
 
         jLabel35.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel35.setText("Total de compras");
+        jLabel35.setText("Total de Gastos");
 
         jLabel21.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(0, 102, 153));
@@ -429,7 +462,7 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
         jLabel27.setForeground(new java.awt.Color(0, 102, 153));
         jLabel27.setText("Salir");
 
-        jtTablaProveedoresResumen.setModel(new javax.swing.table.DefaultTableModel(
+        jtTablaAcreedoresResumen.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -437,13 +470,32 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(jtTablaProveedoresResumen);
+        jScrollPane2.setViewportView(jtTablaAcreedoresResumen);
 
         btnPDFGastos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/pdf.png"))); // NOI18N
         btnPDFGastos.setText("Reporte");
         btnPDFGastos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPDFGastosActionPerformed(evt);
+            }
+        });
+
+        btnCorregirConcepto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnCorregirConcepto.setForeground(new java.awt.Color(0, 153, 51));
+        btnCorregirConcepto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/correct.png"))); // NOI18N
+        btnCorregirConcepto.setText("Corregir");
+        btnCorregirConcepto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCorregirConceptoActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/delete.png"))); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -481,7 +533,11 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel27)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnPDFGastos)))
+                                .addComponent(btnPDFGastos)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnCorregirConcepto)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEliminar)))
                         .addGap(0, 119, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -511,12 +567,16 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(btnCorregirConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPDFGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel27)
                     .addComponent(btnSalirResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPDFGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
         );
+
+        jpResumenLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCorregirConcepto, btnPDFGastos, btnSalirResumen, jLabel27});
 
         jtpComprasAPRoveedores.addTab("Resumen", jpResumen);
 
@@ -547,10 +607,11 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
         cmbConcepto.setSelectedIndex(0);
         txtImporte.setText("");
         txtAbonoInicial.setText("");
+        txtAcreedor.setText("");
     }
     private void btnAnotarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnotarActionPerformed
         if (!txtFactura.getText().isEmpty()) {
-            DefaultTableModel model = (DefaultTableModel) jtTablaProductos.getModel();
+            DefaultTableModel model = (DefaultTableModel) jtTablaConceptos.getModel();
             try {
                 String abonoInicial = "";
                 if (txtAbonoInicial.getText().trim().isEmpty()) {
@@ -587,9 +648,9 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAnotarActionPerformed
 
     private void btnBorrarCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarCreditoActionPerformed
-        if (jtTablaProductos.getSelectedRow() > -1) {
-            DefaultTableModel model = (DefaultTableModel) jtTablaProductos.getModel();
-            model.removeRow(jtTablaProductos.getSelectedRow());
+        if (jtTablaConceptos.getSelectedRow() > -1) {
+            DefaultTableModel model = (DefaultTableModel) jtTablaConceptos.getModel();
+            model.removeRow(jtTablaConceptos.getSelectedRow());
         } else {
             JOptionPane.showMessageDialog(this, "Selecciona una venta de la "
                     + "tabla para poder borrarla.", "Venta no seleccionada", 0);
@@ -625,28 +686,28 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
         Compra compra = new Compra();
         String fecha = "";
         txtImporte.setText("");
-        for (int i = 0; i < jtTablaProductos.getRowCount(); i++) {
+        for (int i = 0; i < jtTablaConceptos.getRowCount(); i++) {
             //NOTA
-            compra.setNota(jtTablaProductos.getValueAt(i, 0).toString());
+            compra.setNota(jtTablaConceptos.getValueAt(i, 0).toString());
             //FECHA
-            fecha = jtTablaProductos.getValueAt(i, 1).toString();
+            fecha = jtTablaConceptos.getValueAt(i, 1).toString();
             compra.setFechaCompra(FechaHerramienta.convertirStringEnDate(fecha));
             //PROVEEDOR
-            compra.setNombreProveedor(jtTablaProductos.getValueAt(i, 2).toString());
+            compra.setNombreProveedor(jtTablaConceptos.getValueAt(i, 2).toString());
             //CONCEPTO
-            compra.setNombreProducto(jtTablaProductos.getValueAt(i, 3).toString());
+            compra.setNombreProducto(jtTablaConceptos.getValueAt(i, 3).toString());
             //OBSERVACION
-            compra.setObservacion(jtTablaProductos.getValueAt(i, 4).toString());
+            compra.setObservacion(jtTablaConceptos.getValueAt(i, 4).toString());
             //PIEZAS
             compra.setNoPiezas(1);
             //ABONO INICIAL
-            double abonoInicial = Double.parseDouble(jtTablaProductos.getValueAt(i, 5).toString());
+            double abonoInicial = Double.parseDouble(jtTablaConceptos.getValueAt(i, 5).toString());
             compra.setAbono(abonoInicial);
             //FORMA DE PAGO
-            compra.setMetodoPago(jtTablaProductos.getValueAt(
+            compra.setMetodoPago(jtTablaConceptos.getValueAt(
                     i, 6).toString());
             //IMPORTE
-            importe = Double.parseDouble(jtTablaProductos.getValueAt(i, 7).toString());
+            importe = Double.parseDouble(jtTablaConceptos.getValueAt(i, 7).toString());
             compra.setImporte(importe);
             //SALDO RESTANTE
             double saldoRestante = importe - abonoInicial;
@@ -664,7 +725,7 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
             controlBD.add(compra);
         }
         limpiarCompras();
-        limpiarTablas(jtTablaProductos);
+        limpiarTablas(jtTablaConceptos);
         JOptionPane.showMessageDialog(this, "Ventas registradas correctamente", "Datos registrados", 1);
     }//GEN-LAST:event_btnRegistrarComprasActionPerformed
     private void limpiarTablas(JTable jtTabla) {
@@ -727,12 +788,12 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
                 + "c.nombreSucursal = 'Personal' AND c.fechaCompra BETWEEN '"
                 + fechaInicioResumen + "' AND '"
                 + fechaFinResumen + "'";
-        cargaTabla(jtTablaProveedoresResumen, HQL, "Compra");
+        cargaTabla(jtTablaAcreedoresResumen, HQL, "Compra");
     }//GEN-LAST:event_jpResumenComponentShown
 
     private void btnPDFGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFGastosActionPerformed
         Map parametros = new HashMap();
-        if (jtTablaProveedoresResumen.getRowCount() > 0) {
+        if (jtTablaAcreedoresResumen.getRowCount() > 0) {
             crearConsultaGlobal();
             java.sql.Date fechaInicio = new java.sql.Date(jdcFechaInicioResumen.getDate().getTime());
             java.sql.Date fechaFin = new java.sql.Date(jdcFechaFinResumen.getDate().getTime());
@@ -751,6 +812,80 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_btnPDFGastosActionPerformed
+
+    private void txtImporteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtImporteKeyTyped
+        char key = evt.getKeyChar();
+        if (((key < '0') || (key > '9')) && (key != KeyEvent.VK_BACK_SPACE)
+                && (key != '.')) {
+            evt.consume();
+        }
+        if (key == '.' && txtImporte.getText().contains(".")) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo se permite un punto "
+                    + "este campo", "Validacion decimal", 0);
+            // TODO add your handling code here:
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_txtImporteKeyTyped
+
+    private void txtAbonoInicialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAbonoInicialKeyTyped
+        char key = evt.getKeyChar();
+        if (((key < '0') || (key > '9')) && (key != KeyEvent.VK_BACK_SPACE)
+                && (key != '.')) {
+            evt.consume();
+        }
+        if (key == '.' && txtAbonoInicial.getText().contains(".")) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo se permite un punto "
+                    + "este campo", "Validacion decimal", 0);
+            // TODO add your handling code here:
+        }             // TODO add your handling code here:
+    }//GEN-LAST:event_txtAbonoInicialKeyTyped
+
+    private void btnCorregirConceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorregirConceptoActionPerformed
+        if (jtTablaAcreedoresResumen.getSelectedRow() != -1) {
+            String clave = jtTablaAcreedoresResumen.getValueAt(jtTablaAcreedoresResumen.getSelectedRow(), 0).toString();
+            try {
+                CorregirCompra corregirCompra = new CorregirCompra(clave);
+                if (exist(corregirCompra) == false) {
+                    CPanel.desktop.add(corregirCompra);
+                    corregirCompra.setVisible(true);
+                    corregirCompra.setLocation((CPanel.desktop.getWidth() - corregirCompra.getWidth()) / 2,
+                            (CPanel.desktop.getHeight() - corregirCompra.getHeight()) / 2);
+                } else {
+                    corregirCompra.dispose();
+
+                }        // TODO add your handling code here:
+            } catch (Exception ex) {
+                Logger.getLogger(RegistrarProducto.class
+                        .getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        CorregirCompra corregirCompra = new CorregirCompra(title);
+    }//GEN-LAST:event_btnCorregirConceptoActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        if (jtTablaAcreedoresResumen.getSelectedRow() != -1) {
+            int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este gasto?", "Confirmar eliminación", 0, 3);
+            if (respuesta == 0) {
+                try {
+                    AccesoBD acceso = new AccesoBD();
+                    int clave = (int) jtTablaAcreedoresResumen.getValueAt(jtTablaAcreedoresResumen.getSelectedRow(), 0);
+                    String query = "From Compra c WHERE c.idCompras = '" + clave + "'";
+                    Compra compra = (Compra) acceso.select(query).get(0);
+                    acceso.delete(compra);
+                    crearConsultaGlobal();
+                    cargaTabla(jtTablaAcreedoresResumen, HQL, "Compra");
+                    lblResumenTotalGastos.setText(String.valueOf(getTotalGastos()));
+                    lblComprasRealizadas.setText(String.valueOf(getComprasRealizadas()));
+                    JOptionPane.showMessageDialog(this, "Venta eliminada correctamente", "Cancelado", 1);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+                    System.gc();
+                }
+            }
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     private double getTotalGastos() {
         AccesoBD acceso = new AccesoBD();
@@ -793,7 +928,7 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
             jdcFechaInicioResumen.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
                 public void propertyChange(PropertyChangeEvent e) {
                     crearConsultaGlobal();
-                    cargaTabla(jtTablaProveedoresResumen, HQL, "Compra");
+                    cargaTabla(jtTablaAcreedoresResumen, HQL, "Compra");
                     lblResumenTotalGastos.setText(String.valueOf(getTotalGastos()));
                     lblComprasRealizadas.setText(String.valueOf(getComprasRealizadas()));
                 }
@@ -801,7 +936,7 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
             jdcFechaFinResumen.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
                 public void propertyChange(PropertyChangeEvent e) {
                     crearConsultaGlobal();
-                    cargaTabla(jtTablaProveedoresResumen, HQL, "Compra");
+                    cargaTabla(jtTablaAcreedoresResumen, HQL, "Compra");
                     getComprasRealizadas();
                     getTotalGastos();
                 }
@@ -822,6 +957,8 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnotar;
     private javax.swing.JButton btnBorrarCredito;
+    private javax.swing.JButton btnCorregirConcepto;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnPDFGastos;
     private javax.swing.JButton btnRegistrarCompras;
     private javax.swing.JButton btnSalir;
@@ -856,8 +993,8 @@ public class DiarioDeGastosPersonales extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser jdcFechaFinResumen;
     private com.toedter.calendar.JDateChooser jdcFechaInicioResumen;
     private javax.swing.JPanel jpResumen;
-    private javax.swing.JTable jtTablaProductos;
-    private javax.swing.JTable jtTablaProveedoresResumen;
+    private javax.swing.JTable jtTablaAcreedoresResumen;
+    private javax.swing.JTable jtTablaConceptos;
     private javax.swing.JTabbedPane jtpComprasAPRoveedores;
     private javax.swing.JLabel lblComprasRealizadas;
     private javax.swing.JLabel lblResumenTotalGastos;

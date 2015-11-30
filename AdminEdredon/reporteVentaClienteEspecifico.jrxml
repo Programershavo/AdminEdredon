@@ -36,6 +36,12 @@ AND fechaVenta BETWEEN  $P{fechaInicio} AND $P{fechaFin};]]>
 	<field name="saldoRestante" class="java.lang.Double"/>
 	<field name="Importe" class="java.lang.Double"/>
 	<field name="nombreTienda" class="java.lang.String"/>
+	<variable name="Importe_1" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{Importe}]]></variableExpression>
+	</variable>
+	<variable name="Importe_2" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{Importe}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -186,7 +192,32 @@ AND fechaVenta BETWEEN  $P{fechaInicio} AND $P{fechaFin};]]>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="dca8641c-7d64-4150-9974-e7d1267ef401" x="333" y="13" width="149" height="20" forecolor="#F04F5A"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de ventas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dca8641c-7d64-4150-9974-e7d1267ef401" x="108" y="13" width="149" height="20" forecolor="#F04F5A"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ventas hechas]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="ab42c407-debe-40bf-a63a-aba87f359311" x="262" y="13" width="59" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{Importe_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bdc058d0-ee0c-4388-824a-1823af9ebe4f" x="488" y="13" width="61" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{Importe_2}]]></textFieldExpression>
+			</textField>
+		</band>
 	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch">

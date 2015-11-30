@@ -7,13 +7,16 @@ package ventanas;
 
 import controlBD.AccesoBD;
 import herramienta.FechaHerramienta;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import herramienta.FormatoTabla;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyVetoException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
@@ -46,8 +49,27 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
         jdcFechaInicioResumen.setDate(new Date());
         jdcFechaFinResumen.setDate(new Date());
         addActions();
+        //se asigna el formato a la tabla
+        jtTablaProductos.setDefaultRenderer(Object.class, new FormatoTabla());
+        jtTablaProveedoresResumen.setDefaultRenderer(Object.class, new FormatoTabla());
+        setEventoMouseClicked(jtTablaProveedoresResumen);
     }
 
+    private void setEventoMouseClicked(JTable tabla) {
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    crearConsultaGlobal();
+                    cargaTabla(tabla, HQL, "Compra");
+                    lblResumenTotalGastos.setText(String.valueOf(getTotalGastos()));
+                    lblComprasRealizadas.setText(String.valueOf(getComprasRealizadas()));
+                }
+
+            }
+        });
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -99,6 +121,9 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
         jLabel27 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtTablaProveedoresResumen = new javax.swing.JTable();
+        btnPDFGastos = new javax.swing.JButton();
+        btnCorregirConcepto = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
@@ -237,6 +262,12 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
         jLabel6.setForeground(new java.awt.Color(0, 102, 153));
         jLabel6.setText("Piezas");
 
+        txtPiezas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPiezasKeyTyped(evt);
+            }
+        });
+
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 102, 153));
         jLabel4.setText("Modelo");
@@ -251,6 +282,12 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
         jLabel5.setForeground(new java.awt.Color(0, 102, 153));
         jLabel5.setText("Precio U.");
 
+        txtCosto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCostoKeyTyped(evt);
+            }
+        });
+
         jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 102, 153));
         jLabel8.setText("Observ.");
@@ -258,6 +295,12 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 102, 153));
         jLabel9.setText("Abono");
+
+        txtAbonoInicial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAbonoInicialKeyTyped(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 102, 153));
@@ -448,6 +491,33 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(jtTablaProveedoresResumen);
 
+        btnPDFGastos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/pdf.png"))); // NOI18N
+        btnPDFGastos.setText("Reporte");
+        btnPDFGastos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPDFGastosActionPerformed(evt);
+            }
+        });
+
+        btnCorregirConcepto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnCorregirConcepto.setForeground(new java.awt.Color(0, 153, 51));
+        btnCorregirConcepto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/correct.png"))); // NOI18N
+        btnCorregirConcepto.setText("Corregir");
+        btnCorregirConcepto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCorregirConceptoActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/delete.png"))); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpResumenLayout = new javax.swing.GroupLayout(jpResumen);
         jpResumen.setLayout(jpResumenLayout);
         jpResumenLayout.setHorizontalGroup(
@@ -459,29 +529,34 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
                     .addGroup(jpResumenLayout.createSequentialGroup()
                         .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel32)
-                            .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpResumenLayout.createSequentialGroup()
-                                    .addComponent(jLabel31)
-                                    .addGap(105, 105, 105)
-                                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jdcFechaInicioResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(10, 10, 10)
-                                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jdcFechaFinResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpResumenLayout.createSequentialGroup()
-                                    .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel33)
-                                        .addComponent(jLabel35))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(lblResumenTotalGastos, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                                        .addComponent(lblComprasRealizadas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(jpResumenLayout.createSequentialGroup()
+                                .addComponent(jLabel31)
+                                .addGap(105, 105, 105)
+                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jdcFechaInicioResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jdcFechaFinResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpResumenLayout.createSequentialGroup()
+                                .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel33)
+                                    .addComponent(jLabel35))
+                                .addGap(18, 18, 18)
+                                .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblResumenTotalGastos, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                                    .addComponent(lblComprasRealizadas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jpResumenLayout.createSequentialGroup()
                                 .addComponent(btnSalirResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel27)))
+                                .addComponent(jLabel27)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnPDFGastos)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCorregirConcepto)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnEliminar)))
                         .addGap(0, 112, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -511,9 +586,12 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpResumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(btnCorregirConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPDFGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalirResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel27)
-                    .addComponent(btnSalirResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
 
@@ -751,6 +829,115 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
         cargaTabla(jtTablaProveedoresResumen, HQL, "Compra");
     }//GEN-LAST:event_jpResumenComponentShown
 
+    private void txtCostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoKeyTyped
+        char key = evt.getKeyChar();
+        if (((key < '0') || (key > '9')) && (key != KeyEvent.VK_BACK_SPACE)
+                && (key != '.')) {
+            evt.consume();
+        }
+        if (key == '.' && txtCosto.getText().contains(".")) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo se permite un punto "
+                    + "este campo", "Validacion decimal", 0);
+            // TODO add your handling code here:
+        }         // TODO add your handling code here:
+    }//GEN-LAST:event_txtCostoKeyTyped
+
+    private void txtAbonoInicialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAbonoInicialKeyTyped
+        char key = evt.getKeyChar();
+        if (((key < '0') || (key > '9')) && (key != KeyEvent.VK_BACK_SPACE)
+                && (key != '.')) {
+            evt.consume();
+        }
+        if (key == '.' && txtAbonoInicial.getText().contains(".")) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo se permite un punto "
+                    + "este campo", "Validacion decimal", 0);
+            // TODO add your handling code here:
+        }              // TODO add your handling code here:
+    }//GEN-LAST:event_txtAbonoInicialKeyTyped
+
+    private void txtPiezasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPiezasKeyTyped
+
+        char key = evt.getKeyChar();
+
+        if (((key < '0') || (key > '9')) && (key != KeyEvent.VK_BACK_SPACE)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo se permiten números enteros"
+                    + "este campo", "Validacion números", 0);
+
+        } // TODO add your handling code here:
+    }//GEN-LAST:event_txtPiezasKeyTyped
+
+    private void btnPDFGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFGastosActionPerformed
+        Map parametros = new HashMap();
+        if (jtTablaProveedoresResumen.getRowCount() > 0) {
+            crearConsultaGlobal();
+            java.sql.Date fechaInicio = new java.sql.Date(jdcFechaInicioResumen.getDate().getTime());
+            java.sql.Date fechaFin = new java.sql.Date(jdcFechaFinResumen.getDate().getTime());
+            parametros.put("tipoGasto", "Compras a proveedor");
+            parametros.put("fechaInicio", fechaInicio);
+            parametros.put("fechaFin", fechaFin);
+
+            try {
+                reportMaker.ReportMaker reporte = new reportMaker.ReportMaker(HQL, "GastoTodos", parametros, false);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Ha ocurrido un error generando el reporte: " + e, "Error", 0);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "No hay resultados que imprimir");
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPDFGastosActionPerformed
+
+    private void btnCorregirConceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorregirConceptoActionPerformed
+        if (jtTablaProveedoresResumen.getSelectedRow() != -1) {
+            String clave = jtTablaProveedoresResumen.getValueAt(jtTablaProveedoresResumen.getSelectedRow(), 0).toString();
+            try {
+                CorregirCompra corregirCompra = new CorregirCompra(clave);
+                if (exist(corregirCompra) == false) {
+                    CPanel.desktop.add(corregirCompra);
+                    corregirCompra.setVisible(true);
+                    corregirCompra.setLocation((CPanel.desktop.getWidth() - corregirCompra.getWidth()) / 2,
+                            (CPanel.desktop.getHeight() - corregirCompra.getHeight()) / 2);
+                } else {
+                    corregirCompra.dispose();
+
+                }        // TODO add your handling code here:
+            } catch (Exception ex) {
+                Logger.getLogger(RegistrarProducto.class
+                        .getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        CorregirCompra corregirCompra = new CorregirCompra(title);
+    }//GEN-LAST:event_btnCorregirConceptoActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        if (jtTablaProveedoresResumen.getSelectedRow() != -1) {
+            int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar esta compra?", "Confirmar eliminación", 0, 3);
+            if (respuesta == 0) {
+                try {
+                    AccesoBD acceso = new AccesoBD();
+                    int clave = (int) jtTablaProveedoresResumen.getValueAt(jtTablaProveedoresResumen.getSelectedRow(), 0);
+                    String query = "From Compra c WHERE c.idCompras = '" + clave + "'";
+                    Compra compra = (Compra) acceso.select(query).get(0);
+                    acceso.delete(compra);
+                    crearConsultaGlobal();
+                    cargaTabla(jtTablaProveedoresResumen, HQL, "Compra");
+                    lblResumenTotalGastos.setText(String.valueOf(getTotalGastos()));
+                    lblComprasRealizadas.setText(String.valueOf(getComprasRealizadas()));
+                    JOptionPane.showMessageDialog(this, "Compra eliminada correctamente", "Cancelado", 1);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+                    System.gc();
+                }
+            }
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
     private double getTotalGastos() {
         AccesoBD acceso = new AccesoBD();
         String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioResumen.getDate());
@@ -821,6 +1008,9 @@ public class DiarioDeComprasProveedores extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnotar;
     private javax.swing.JButton btnBorrarCredito;
+    private javax.swing.JButton btnCorregirConcepto;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnPDFGastos;
     private javax.swing.JButton btnRegistrarCompras;
     private javax.swing.JButton btnRegistrarProveedor;
     private javax.swing.JButton btnSalir;

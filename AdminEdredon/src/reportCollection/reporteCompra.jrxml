@@ -51,6 +51,12 @@ and (c.fechaCompra between $P{fechaInicio} and $P{fechaFin})]]>
 	<field name="noPiezas" class="java.lang.Integer"/>
 	<field name="saldoRestante" class="java.lang.Double"/>
 	<field name="precioUnitario" class="java.lang.Double"/>
+	<variable name="importe_1" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{importe}]]></variableExpression>
+	</variable>
+	<variable name="importe_2" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{importe}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -131,11 +137,6 @@ and (c.fechaCompra between $P{fechaInicio} and $P{fechaFin})]]>
 				<text><![CDATA[Fecha de Compra]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="2224c34e-9366-487c-9d36-bfd5cc20f367" x="230" y="6" width="100" height="20"/>
-				<textElement/>
-				<text><![CDATA[Tipo Gasto]]></text>
-			</staticText>
-			<staticText>
 				<reportElement uuid="fb5063c8-6178-4fc4-a427-1c807fd4a2c1" x="341" y="6" width="100" height="20"/>
 				<textElement/>
 				<text><![CDATA[Proveedor]]></text>
@@ -155,6 +156,11 @@ and (c.fechaCompra between $P{fechaInicio} and $P{fechaFin})]]>
 				<textElement/>
 				<text><![CDATA[importe]]></text>
 			</staticText>
+			<staticText>
+				<reportElement uuid="71ad06b7-7120-4215-854f-4525fbd195bb" x="233" y="6" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Tipo de gasto]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -171,11 +177,6 @@ and (c.fechaCompra between $P{fechaInicio} and $P{fechaFin})]]>
 				<reportElement uuid="a8e277d4-84c5-433f-975f-51708c35d3f2" x="119" y="4" width="100" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{fechaCompra}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="e8bc1b60-839e-4e55-a22b-d610980b0389" x="230" y="4" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{tipoDeGasto}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="3762155f-80eb-4758-b221-b0f6627487d6" x="341" y="4" width="100" height="20"/>
@@ -197,8 +198,41 @@ and (c.fechaCompra between $P{fechaInicio} and $P{fechaFin})]]>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{importe}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement uuid="8e813e2a-01be-4d67-8199-b0cc39de5101" x="233" y="4" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tipoGasto}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
+	<columnFooter>
+		<band height="50">
+			<staticText>
+				<reportElement uuid="dca8641c-7d64-4150-9974-e7d1267ef401" x="247" y="15" width="149" height="20" forecolor="#F04F5A"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Compras hechas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dca8641c-7d64-4150-9974-e7d1267ef401" x="522" y="15" width="149" height="20" forecolor="#F04F5A"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de compras]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="3cd84863-0223-45cd-bf01-9956018904d3" x="410" y="15" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{importe_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9a2e9158-4116-4f50-baf8-838949feb7f4" x="691" y="15" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{importe_2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
 	<pageFooter>
 		<band height="28" splitType="Stretch">
 			<textField pattern="MMMMM dd, yyyy">

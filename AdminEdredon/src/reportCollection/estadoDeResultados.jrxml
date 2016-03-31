@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="1008" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a2214e1e-6518-4d27-ba14-d1a123fdb1eb">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nombreTienda" class="java.lang.String"/>
+	<parameter name="tipoGasto" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaInicio" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaFin" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ejercicio" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * from adminedredon.compra c where c.tipoGasto=$P{tipoGasto}
+and (c.fechaCompra between $P{fechaInicio} and $P{fechaFin})]]>
+	</queryString>
+	<field name="idCompras" class="java.lang.Integer"/>
+	<field name="nota" class="java.lang.String"/>
+	<field name="fechaCompra" class="java.sql.Timestamp"/>
+	<field name="fechaCompraSaldada" class="java.sql.Timestamp"/>
+	<field name="fechaUltimoAbono" class="java.sql.Timestamp"/>
+	<field name="nombreSucursal" class="java.lang.String"/>
+	<field name="detalleCompra" class="java.lang.Integer"/>
+	<field name="observacion" class="java.lang.String"/>
+	<field name="abono" class="java.lang.Double"/>
+	<field name="importe" class="java.lang.Double"/>
+	<field name="estatus" class="java.lang.String"/>
+	<field name="tipoDeGasto" class="java.lang.String"/>
+	<field name="nombreProveedor" class="java.lang.String"/>
+	<field name="credito" class="java.lang.Boolean"/>
+	<field name="tipoGasto" class="java.lang.String"/>
+	<field name="metodoPago" class="java.lang.String"/>
+	<field name="nombreProducto" class="java.lang.String"/>
+	<field name="noPiezas" class="java.lang.Integer"/>
+	<field name="saldoRestante" class="java.lang.Double"/>
+	<field name="precioUnitario" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="354da643-2170-49fd-94a5-be92afc729bb" x="103" y="5" width="358" height="30" forecolor="#006699"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO DE RESULTADOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="67" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" x="158" y="24" width="64" height="20" forecolor="#006699"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tienda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" x="39" y="45" width="64" height="20" forecolor="#006699"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Del]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" x="284" y="45" width="64" height="20" forecolor="#006699"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Al]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="f3846fa0-2079-4752-8355-48330cd90e74" mode="Transparent" x="222" y="23" width="181" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nombreTienda}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="false">
+				<reportElement uuid="26341324-5283-46bb-8253-a6f81dcfccc1" mode="Transparent" x="103" y="45" width="181" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechaInicio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="false">
+				<reportElement uuid="4858aac7-37d5-48ef-9d43-6cb0617ed9c9" mode="Transparent" x="348" y="45" width="181" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechaFin}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" x="158" y="3" width="64" height="20" forecolor="#006699"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ejercicio]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement uuid="2af67977-232f-46e5-891a-a6a961fd37ee" mode="Transparent" x="222" y="3" width="181" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ejercicio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="863" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" x="10" y="14" width="262" height="20" forecolor="#006699"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ventas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" x="10" y="128" width="262" height="20" forecolor="#006699"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Costo de ventas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" x="10" y="273" width="262" height="21" forecolor="#006699"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Utilidad o pérdida bruta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" x="10" y="320" width="262" height="21" forecolor="#006699"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gastos de operación:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" x="10" y="461" width="262" height="19" forecolor="#006699"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Utilidad o pérdida de operación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" x="10" y="499" width="262" height="21" forecolor="#006699"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gastos y productos financieros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" x="10" y="660" width="262" height="21" forecolor="#006699"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Utilidad o pérdida antes de impuestos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" x="10" y="700" width="262" height="20" forecolor="#006699"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Impuestos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="62" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Devoluciones sobre ventas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="40" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Descuentos sobre ventas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="85" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Ventas netas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" x="10" y="834" width="262" height="21" forecolor="#006699"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Utilidad o pérdida neta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="152" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Compras:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="176" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Materias primas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="199" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Gastos de fabricación:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="224" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Depreciación:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="248" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Total costo de ventas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="346" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Gastos de venta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="370" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Gtos. administración:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="393" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Gastos generales:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="417" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Total gastos de operación:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="597" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Otros ingresos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="525" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Gastos financieros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="549" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Otros gastos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="621" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Total gtos y productos financieros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="572" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Productos financieros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="795" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Impuestos pagados:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="724" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[ISR:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="748" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[IMPAC:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d935788-e3c5-438e-89fc-25129b42c7ac" mode="Transparent" x="10" y="771" width="262" height="20" forecolor="#333333" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Century Gothic" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[PTU:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+</jasperReport>

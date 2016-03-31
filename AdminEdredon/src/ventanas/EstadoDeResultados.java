@@ -5,17 +5,36 @@
  */
 package ventanas;
 
+import controlBD.AccesoBD;
+import herramienta.FechaHerramienta;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Daniel
  */
 public class EstadoDeResultados extends javax.swing.JInternalFrame {
 
+    String HQLVentas = "";
+    String HQLCompras = "";
+    String HQLGastosTienda = "";
+    String HQLGastosPersonales = "";
+
     /**
      * Creates new form EstadoDeResultados
      */
     public EstadoDeResultados() {
         initComponents();
+        jdcFechaInicioEstado.setDate(new Date());
+        jdcFechaFinEstado.setDate(new Date());
+        addActions();
     }
 
     /**
@@ -29,12 +48,12 @@ public class EstadoDeResultados extends javax.swing.JInternalFrame {
 
         jspEstadoDeResultados = new javax.swing.JScrollPane();
         jpEstadoDeResultados = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblTituloEstadoDeResultados = new javax.swing.JLabel();
         cmbEjercicio = new javax.swing.JComboBox();
         jLabel21 = new javax.swing.JLabel();
-        jdcFechaInicioResumen = new com.toedter.calendar.JDateChooser();
+        jdcFechaInicioEstado = new com.toedter.calendar.JDateChooser();
         jLabel26 = new javax.swing.JLabel();
-        jdcFechaFinResumen = new com.toedter.calendar.JDateChooser();
+        jdcFechaFinEstado = new com.toedter.calendar.JDateChooser();
         jLabel22 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel23 = new javax.swing.JLabel();
@@ -106,7 +125,7 @@ public class EstadoDeResultados extends javax.swing.JInternalFrame {
         lblUtilidadPerdidaAntesDeImpuestos = new javax.swing.JLabel();
         btnPDFGastos = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
-        cmbSucursalAbonos = new javax.swing.JComboBox();
+        cmbSucursalEstadoDeResultados = new javax.swing.JComboBox();
 
         setClosable(true);
         setIconifiable(true);
@@ -117,9 +136,9 @@ public class EstadoDeResultados extends javax.swing.JInternalFrame {
 
         jpEstadoDeResultados.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Cambria", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel1.setText("ESTADO DE RESULTADOS");
+        lblTituloEstadoDeResultados.setFont(new java.awt.Font("Cambria", 1, 24)); // NOI18N
+        lblTituloEstadoDeResultados.setForeground(new java.awt.Color(0, 102, 153));
+        lblTituloEstadoDeResultados.setText("ESTADO DE RESULTADOS");
 
         cmbEjercicio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1er EJERCICIO", "2do EJERCICIO", "3er EJERCICIO", "4to EJERCICIO" }));
 
@@ -317,11 +336,11 @@ public class EstadoDeResultados extends javax.swing.JInternalFrame {
 
         lblDescuentosSobreVentas.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblDescuentosSobreVentas.setForeground(new java.awt.Color(102, 102, 102));
-        lblDescuentosSobreVentas.setText("Descuento sobre ventas");
+        lblDescuentosSobreVentas.setText("-");
 
         lblDevolucionesSobreVentas.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblDevolucionesSobreVentas.setForeground(new java.awt.Color(102, 102, 102));
-        lblDevolucionesSobreVentas.setText("Descuento sobre ventas");
+        lblDevolucionesSobreVentas.setText("-");
 
         lblTotalCostoDeVentas.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblTotalCostoDeVentas.setForeground(new java.awt.Color(51, 51, 51));
@@ -335,23 +354,22 @@ public class EstadoDeResultados extends javax.swing.JInternalFrame {
 
         lblCostoDeVentas.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblCostoDeVentas.setForeground(new java.awt.Color(0, 102, 153));
-        lblCostoDeVentas.setText("Descuento sobre ventas");
 
         lblCompras.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblCompras.setForeground(new java.awt.Color(102, 102, 102));
-        lblCompras.setText("Descuento sobre ventas");
+        lblCompras.setText("-");
 
         lblMateriaPrima.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblMateriaPrima.setForeground(new java.awt.Color(102, 102, 102));
-        lblMateriaPrima.setText("Descuento sobre ventas");
+        lblMateriaPrima.setText("-");
 
         lblGastosDeFabrica.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblGastosDeFabrica.setForeground(new java.awt.Color(102, 102, 102));
-        lblGastosDeFabrica.setText("Descuento sobre ventas");
+        lblGastosDeFabrica.setText("-");
 
         lblDepreciacion.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblDepreciacion.setForeground(new java.awt.Color(102, 102, 102));
-        lblDepreciacion.setText("Descuento sobre ventas");
+        lblDepreciacion.setText("-");
 
         lblVentasNetas.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblVentasNetas.setForeground(new java.awt.Color(51, 51, 51));
@@ -365,7 +383,6 @@ public class EstadoDeResultados extends javax.swing.JInternalFrame {
 
         lblGastosDeOperacion.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblGastosDeOperacion.setForeground(new java.awt.Color(0, 102, 153));
-        lblGastosDeOperacion.setText("Descuento sobre ventas");
 
         lblGastosDeVenta.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblGastosDeVenta.setForeground(new java.awt.Color(102, 102, 102));
@@ -373,11 +390,11 @@ public class EstadoDeResultados extends javax.swing.JInternalFrame {
 
         lblGastosDeAdministracion.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblGastosDeAdministracion.setForeground(new java.awt.Color(102, 102, 102));
-        lblGastosDeAdministracion.setText("Descuento sobre ventas");
+        lblGastosDeAdministracion.setText("-");
 
         lblGastosFinancieros.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblGastosFinancieros.setForeground(new java.awt.Color(102, 102, 102));
-        lblGastosFinancieros.setText("Descuento sobre ventas");
+        lblGastosFinancieros.setText("-");
 
         lblTotalGastosOperacion.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblTotalGastosOperacion.setForeground(new java.awt.Color(51, 51, 51));
@@ -391,11 +408,10 @@ public class EstadoDeResultados extends javax.swing.JInternalFrame {
 
         lblGastosProductosFinancieros.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblGastosProductosFinancieros.setForeground(new java.awt.Color(0, 102, 153));
-        lblGastosProductosFinancieros.setText("Descuento sobre ventas");
 
         lblGastosGenerales.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblGastosGenerales.setForeground(new java.awt.Color(102, 102, 102));
-        lblGastosGenerales.setText("Descuento sobre ventas");
+        lblGastosGenerales.setText("-");
 
         lblOtrosGastos.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblOtrosGastos.setForeground(new java.awt.Color(102, 102, 102));
@@ -403,11 +419,11 @@ public class EstadoDeResultados extends javax.swing.JInternalFrame {
 
         lblProductosFinancieros.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblProductosFinancieros.setForeground(new java.awt.Color(102, 102, 102));
-        lblProductosFinancieros.setText("Descuento sobre ventas");
+        lblProductosFinancieros.setText("-");
 
         lblOtrosIngresos.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblOtrosIngresos.setForeground(new java.awt.Color(102, 102, 102));
-        lblOtrosIngresos.setText("Descuento sobre ventas");
+        lblOtrosIngresos.setText("-");
 
         lblTotalGastosProductosFinancieros.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblTotalGastosProductosFinancieros.setForeground(new java.awt.Color(51, 51, 51));
@@ -421,25 +437,25 @@ public class EstadoDeResultados extends javax.swing.JInternalFrame {
 
         lblImpuestos.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblImpuestos.setForeground(new java.awt.Color(0, 102, 153));
-        lblImpuestos.setText("Descuento sobre ventas");
+        lblImpuestos.setText("-");
 
         lblISR.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblISR.setForeground(new java.awt.Color(102, 102, 102));
-        lblISR.setText("Descuento sobre ventas");
+        lblISR.setText("-");
 
         lblIMPAC.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblIMPAC.setForeground(new java.awt.Color(102, 102, 102));
-        lblIMPAC.setText("Descuento sobre ventas");
+        lblIMPAC.setText("-");
 
         lblImpuestosPagados.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblImpuestosPagados.setForeground(new java.awt.Color(51, 51, 51));
         lblImpuestosPagados.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblImpuestosPagados.setText("Ventas netas:");
+        lblImpuestosPagados.setText("-");
         lblImpuestosPagados.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         lblPTU.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblPTU.setForeground(new java.awt.Color(102, 102, 102));
-        lblPTU.setText("Descuento sobre ventas");
+        lblPTU.setText("-");
 
         lblUtilidadPerdidaAntesDeImpuestos.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblUtilidadPerdidaAntesDeImpuestos.setForeground(new java.awt.Color(0, 102, 153));
@@ -457,9 +473,9 @@ public class EstadoDeResultados extends javax.swing.JInternalFrame {
         jLabel19.setForeground(new java.awt.Color(0, 102, 153));
         jLabel19.setText("Tienda");
 
-        cmbSucursalAbonos.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        cmbSucursalAbonos.setForeground(new java.awt.Color(0, 102, 153));
-        cmbSucursalAbonos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todas", "Cuaracurio 2", "General", "La Comadre", "La Flor", "La Flor Texti", "Local 2", "Local B5", "Local D7", "Local E15", "Moroleón", " " }));
+        cmbSucursalEstadoDeResultados.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        cmbSucursalEstadoDeResultados.setForeground(new java.awt.Color(0, 102, 153));
+        cmbSucursalEstadoDeResultados.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todas", "Cuaracurio 2", "General", "La Comadre", "La Flor", "La Flor Texti", "Local 2", "Local B5", "Local D7", "Local E15", "Moroleón", " " }));
 
         javax.swing.GroupLayout jpEstadoDeResultadosLayout = new javax.swing.GroupLayout(jpEstadoDeResultados);
         jpEstadoDeResultados.setLayout(jpEstadoDeResultadosLayout);
@@ -468,117 +484,111 @@ public class EstadoDeResultados extends javax.swing.JInternalFrame {
             .addGroup(jpEstadoDeResultadosLayout.createSequentialGroup()
                 .addGroup(jpEstadoDeResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpEstadoDeResultadosLayout.createSequentialGroup()
-                        .addGap(298, 298, 298)
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jpEstadoDeResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpEstadoDeResultadosLayout.createSequentialGroup()
+                                .addGap(298, 298, 298)
+                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpEstadoDeResultadosLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnPDFGastos)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jpEstadoDeResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpEstadoDeResultadosLayout.createSequentialGroup()
-                                .addComponent(jdcFechaInicioResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jdcFechaInicioEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jdcFechaFinResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jpEstadoDeResultadosLayout.createSequentialGroup()
-                                .addGroup(jpEstadoDeResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(jLabel1)
-                                    .addComponent(cmbEjercicio, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnPDFGastos))))
-                    .addGroup(jpEstadoDeResultadosLayout.createSequentialGroup()
-                        .addGroup(jpEstadoDeResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 936, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jpEstadoDeResultadosLayout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addGroup(jpEstadoDeResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(jLabel29)
-                                    .addComponent(jLabel30)
-                                    .addComponent(jLabel31)
-                                    .addComponent(jLabel32)
-                                    .addComponent(jLabel43)
-                                    .addComponent(jLabel45)
-                                    .addComponent(jLabel44)
-                                    .addComponent(jLabel46)
-                                    .addComponent(jLabel47)
-                                    .addComponent(jLabel48)
-                                    .addComponent(jLabel49)
-                                    .addComponent(jLabel50)
-                                    .addComponent(jLabel51)
-                                    .addComponent(jLabel52)
-                                    .addComponent(jLabel53)
-                                    .addComponent(jLabel25)
-                                    .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel41)
-                                    .addComponent(jLabel27)
-                                    .addComponent(jLabel28)
-                                    .addComponent(jLabel36)
-                                    .addComponent(jLabel40)
-                                    .addComponent(jLabel39)
-                                    .addComponent(jLabel38)
-                                    .addComponent(jLabel37)
-                                    .addComponent(jLabel23)
-                                    .addComponent(jLabel35)
-                                    .addComponent(jLabel34)
-                                    .addComponent(jLabel33)
-                                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(55, 55, 55)
-                                .addGroup(jpEstadoDeResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(lblGastosFinancieros)
-                                    .addComponent(lblTotalGastosOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblUtilidadPerdidaDeOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblGastosProductosFinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblGastosGenerales)
-                                    .addComponent(lblOtrosGastos)
-                                    .addComponent(lblProductosFinancieros)
-                                    .addComponent(lblOtrosIngresos)
-                                    .addComponent(lblTotalGastosProductosFinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblUtilidadPerdidaNeta, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblImpuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblISR)
-                                    .addComponent(lblIMPAC)
-                                    .addComponent(lblImpuestosPagados, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblPTU)
-                                    .addComponent(lblUtilidadPerdidaAntesDeImpuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblGastosDeAdministracion)
-                                    .addComponent(lblGastosDeVenta)
-                                    .addComponent(lblGastosDeOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblUtilidadPerdidaBruta, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblTotalCostoDeVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblDepreciacion)
-                                    .addComponent(lblGastosDeFabrica)
-                                    .addComponent(lblMateriaPrima)
-                                    .addComponent(lblCompras)
-                                    .addComponent(lblCostoDeVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblVentasNetas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblDevolucionesSobreVentas, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                                    .addComponent(lblDescuentosSobreVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jdcFechaFinEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jpEstadoDeResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 902, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 902, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 902, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 926, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 902, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 902, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 902, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 902, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 348, Short.MAX_VALUE)))
+                                .addComponent(lblTituloEstadoDeResultados)
+                                .addComponent(cmbEjercicio, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jSeparator7, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
+                    .addGroup(jpEstadoDeResultadosLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(jpEstadoDeResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jLabel29)
+                            .addComponent(jLabel30)
+                            .addComponent(jLabel31)
+                            .addComponent(jLabel32)
+                            .addComponent(jLabel43)
+                            .addComponent(jLabel45)
+                            .addComponent(jLabel44)
+                            .addComponent(jLabel46)
+                            .addComponent(jLabel47)
+                            .addComponent(jLabel48)
+                            .addComponent(jLabel49)
+                            .addComponent(jLabel50)
+                            .addComponent(jLabel51)
+                            .addComponent(jLabel52)
+                            .addComponent(jLabel53)
+                            .addComponent(jLabel25)
+                            .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel41)
+                            .addComponent(jLabel27)
+                            .addComponent(jLabel28)
+                            .addComponent(jLabel36)
+                            .addComponent(jLabel40)
+                            .addComponent(jLabel39)
+                            .addComponent(jLabel38)
+                            .addComponent(jLabel37)
+                            .addComponent(jLabel23)
+                            .addComponent(jLabel35)
+                            .addComponent(jLabel34)
+                            .addComponent(jLabel33)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(55, 55, 55)
+                        .addGroup(jpEstadoDeResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(lblGastosFinancieros)
+                            .addComponent(lblTotalGastosOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblUtilidadPerdidaDeOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblGastosProductosFinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblGastosGenerales)
+                            .addComponent(lblOtrosGastos)
+                            .addComponent(lblProductosFinancieros)
+                            .addComponent(lblOtrosIngresos)
+                            .addComponent(lblTotalGastosProductosFinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblUtilidadPerdidaNeta, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblImpuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblISR)
+                            .addComponent(lblIMPAC)
+                            .addComponent(lblImpuestosPagados, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPTU)
+                            .addComponent(lblUtilidadPerdidaAntesDeImpuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblGastosDeAdministracion)
+                            .addComponent(lblGastosDeVenta)
+                            .addComponent(lblGastosDeOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblUtilidadPerdidaBruta, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTotalCostoDeVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDepreciacion)
+                            .addComponent(lblGastosDeFabrica)
+                            .addComponent(lblMateriaPrima)
+                            .addComponent(lblCompras)
+                            .addComponent(lblCostoDeVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblVentasNetas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblDevolucionesSobreVentas, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                            .addComponent(lblDescuentosSobreVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
+                    .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
+                    .addComponent(jSeparator8, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
+                    .addComponent(jSeparator9, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
+                    .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
+                    .addGroup(jpEstadoDeResultadosLayout.createSequentialGroup()
+                        .addGap(343, 343, 343)
+                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbSucursalEstadoDeResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(jpEstadoDeResultadosLayout.createSequentialGroup()
-                .addGap(343, 343, 343)
-                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbSucursalAbonos, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jpEstadoDeResultadosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel21, jLabel26});
 
-        jpEstadoDeResultadosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jdcFechaFinResumen, jdcFechaInicioResumen});
+        jpEstadoDeResultadosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jdcFechaFinEstado, jdcFechaInicioEstado});
 
         jpEstadoDeResultadosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel22, jLabel23, jLabel25, jLabel27, jLabel28, jLabel29, jLabel30, jLabel31, jLabel32, jLabel33, jLabel34, jLabel35, jLabel36, jLabel37, jLabel38, jLabel39, jLabel40, jLabel41, jLabel42, jLabel43, jLabel44, jLabel45, jLabel46, jLabel47, jLabel48, jLabel49, jLabel50, jLabel51, jLabel52, jLabel53});
-
-        jpEstadoDeResultadosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jSeparator1, jSeparator2, jSeparator3, jSeparator4, jSeparator5, jSeparator6, jSeparator7, jSeparator8, jSeparator9});
 
         jpEstadoDeResultadosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblCompras, lblCostoDeVentas, lblDepreciacion, lblDescuentosSobreVentas, lblDevolucionesSobreVentas, lblGastosDeAdministracion, lblGastosDeFabrica, lblGastosDeOperacion, lblGastosDeVenta, lblGastosFinancieros, lblGastosGenerales, lblGastosProductosFinancieros, lblIMPAC, lblISR, lblImpuestos, lblImpuestosPagados, lblMateriaPrima, lblOtrosGastos, lblOtrosIngresos, lblPTU, lblProductosFinancieros, lblTotalCostoDeVentas, lblTotalGastosOperacion, lblTotalGastosProductosFinancieros, lblUtilidadPerdidaAntesDeImpuestos, lblUtilidadPerdidaBruta, lblUtilidadPerdidaDeOperacion, lblUtilidadPerdidaNeta, lblVentas, lblVentasNetas});
 
@@ -587,20 +597,20 @@ public class EstadoDeResultados extends javax.swing.JInternalFrame {
             .addGroup(jpEstadoDeResultadosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpEstadoDeResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
+                    .addComponent(lblTituloEstadoDeResultados)
                     .addComponent(btnPDFGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cmbEjercicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addGroup(jpEstadoDeResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbSucursalAbonos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbSucursalEstadoDeResultados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel19))
                 .addGap(18, 18, 18)
                 .addGroup(jpEstadoDeResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel21)
-                    .addComponent(jdcFechaInicioResumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jdcFechaInicioEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel26)
-                    .addComponent(jdcFechaFinResumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jdcFechaFinEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jpEstadoDeResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -772,32 +782,200 @@ public class EstadoDeResultados extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPDFGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFGastosActionPerformed
-//        Map parametros = new HashMap();
-//        if (jtTablaAcreedoresResumen.getRowCount() > 0) {
-//            crearConsultaGlobal();
-//            java.sql.Date fechaInicio = new java.sql.Date(jdcFechaInicioResumen.getDate().getTime());
-//            java.sql.Date fechaFin = new java.sql.Date(jdcFechaFinResumen.getDate().getTime());
-//            parametros.put("tipoGasto", "Gastos personales");
-//            parametros.put("fechaInicio", fechaInicio);
-//            parametros.put("fechaFin", fechaFin);
-//
-//            try {
-//                reportMaker.ReportMaker reporte = new reportMaker.ReportMaker(HQL, "GastoTodos", parametros, false);
-//            } catch (Exception e) {
-//                JOptionPane.showMessageDialog(this, "Ha ocurrido un error generando el reporte: " + e, "Error", 0);
-//            }
-//
-//        } else {
-//            JOptionPane.showMessageDialog(rootPane, "No hay resultados que imprimir");
-//        }
+        Map parametros = new HashMap();
+        String ejercicio = cmbEjercicio.getSelectedItem().toString();
+        String nombreTienda = cmbSucursalEstadoDeResultados.getSelectedItem().toString();
+        java.sql.Date fechaInicio = new java.sql.Date(jdcFechaInicioEstado.getDate().getTime());
+        java.sql.Date fechaFin = new java.sql.Date(jdcFechaFinEstado.getDate().getTime());
+        parametros.put("tipoGasto", "Gastos de tienda");
+        parametros.put("fechaInicio", fechaInicio);
+        parametros.put("fechaFin", fechaFin);
+        parametros.put("nombreTienda", nombreTienda);
+        parametros.put("ejercicio", ejercicio);
+
+        try {
+            reportMaker.ReportMaker reporte = new reportMaker.ReportMaker(consultaGlobal(), "estadoDeResultados", parametros, false);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error generando el reporte: " + e, "Error", 0);
+        }
+
     }//GEN-LAST:event_btnPDFGastosActionPerformed
 
+    public final void addActions() {
 
+        final ItemListener changeClick = new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+
+                if (cmbSucursalEstadoDeResultados.getItemCount() > 0) {
+                    if (cmbSucursalEstadoDeResultados.getSelectedItem().equals(e.getItem())) {
+
+                        llenarEtiquetas();
+
+                    }
+                }
+
+            }
+        };
+
+        if (jdcFechaInicioEstado.isVisible()) {
+            jdcFechaInicioEstado.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
+                public void propertyChange(PropertyChangeEvent e) {
+
+                    llenarEtiquetas();
+
+                }
+            });
+            jdcFechaFinEstado.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
+                public void propertyChange(PropertyChangeEvent e) {
+
+                    llenarEtiquetas();
+
+                }
+            });
+        }
+
+        this.cmbSucursalEstadoDeResultados.addItemListener(changeClick);
+
+    }
+
+    private void llenarEtiquetas() {
+        String tituloEstado = cmbSucursalEstadoDeResultados.getSelectedItem().toString();
+        if (!tituloEstado.equals("Todas")) {
+            lblTituloEstadoDeResultados.setText("Estados de Resultados");
+        }else{
+            lblTituloEstadoDeResultados.setText("Flujo de Efectivo");
+        }
+        double ventaNeta = 0;
+        double costoVenta = 0;
+        double utilidadPerdida = 0;
+        double gastoOperacion = 0;
+        double utilidadPerdidaOperacion = 0;
+        double utilidadPerdidaAntesImpuestos = 0;
+        double otrosGastos = 0;
+
+        ventaNeta = getTotalVentas();
+        lblVentas.setText(String.valueOf(ventaNeta));
+        lblVentasNetas.setText(lblVentas.getText());
+
+        costoVenta = getTotalGastosCompra();
+        lblCompras.setText(String.valueOf(costoVenta));
+        lblTotalCostoDeVentas.setText(lblCompras.getText());
+
+        utilidadPerdida = ventaNeta - costoVenta;
+        lblUtilidadPerdidaBruta.setText(String.valueOf(utilidadPerdida));
+
+        gastoOperacion = getTotalGastosDeTienda();
+        lblGastosDeVenta.setText(String.valueOf(gastoOperacion));
+        lblTotalGastosOperacion.setText(String.valueOf(gastoOperacion));
+
+        utilidadPerdidaOperacion = utilidadPerdida - gastoOperacion;
+        lblUtilidadPerdidaDeOperacion.setText(String.valueOf(utilidadPerdidaOperacion));
+
+        otrosGastos = getTotalGastosPersonales();
+        lblOtrosGastos.setText(String.valueOf(otrosGastos));
+        lblTotalGastosProductosFinancieros.setText(lblOtrosGastos.getText());
+
+        utilidadPerdidaAntesImpuestos = utilidadPerdidaOperacion - otrosGastos;
+        lblUtilidadPerdidaAntesDeImpuestos.setText(String.valueOf(utilidadPerdidaAntesImpuestos));
+
+        lblUtilidadPerdidaNeta.setText(lblUtilidadPerdidaAntesDeImpuestos.getText());
+    }
+
+    private String consultaGlobal() {
+        String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinEstado.getDate());
+        String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioEstado.getDate());
+        String nombreTienda = cmbSucursalEstadoDeResultados.getSelectedItem().toString();
+        String HQL = "";
+        if (cmbSucursalEstadoDeResultados.equals("Todas")) {
+            HQL = "Select SUM(v.importe) From Venta v WHERE "
+                    + "v.fechaVenta BETWEEN '"
+                    + fechaInicioResumen + "' AND '"
+                    + fechaFinResumen + "'";
+            return HQL;
+        } else {
+            HQL = "Select SUM(v.importe) From Venta v WHERE "
+                    + "v.nombreTienda = '"
+                    + nombreTienda
+                    + "' AND v.fechaVenta BETWEEN '"
+                    + fechaInicioResumen + "' AND '"
+                    + fechaFinResumen + "'";
+            return HQL;
+        }
+    }
+
+    private double getTotalVentas() {
+        AccesoBD acceso = new AccesoBD();
+        String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioEstado.getDate());
+        String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinEstado.getDate());
+        String nombreTienda = cmbSucursalEstadoDeResultados.getSelectedItem().toString();
+        String HQL = "";
+        if (nombreTienda.equals("Todas")) {
+            HQL = "Select SUM(v.importe) From Venta v WHERE "
+                    + "v.fechaVenta BETWEEN '"
+                    + fechaInicioResumen + "' AND '"
+                    + fechaFinResumen + "'";
+            return acceso.sumRows(HQL);
+        } else {
+            HQL = "Select SUM(v.importe) From Venta v WHERE "
+                    + "v.nombreTienda = '"
+                    + nombreTienda
+                    + "' AND v.fechaVenta BETWEEN '"
+                    + fechaInicioResumen + "' AND '"
+                    + fechaFinResumen + "'";
+            return acceso.sumRows(HQL);
+        }
+    }
+
+    private double getTotalGastosCompra() {
+        AccesoBD acceso = new AccesoBD();
+        String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioEstado.getDate());
+        String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinEstado.getDate());
+        String HQL = "";
+        HQL = "Select SUM(c.importe) From Compra c WHERE c.tipoGasto = 'Compras a proveedor' AND "
+                + "c.nombreSucursal = 'Bodega' AND c.fechaCompra BETWEEN '"
+                + fechaInicioResumen + "' AND '"
+                + fechaFinResumen + "'";
+        return acceso.sumRows(HQL);
+    }
+
+    private double getTotalGastosDeTienda() {
+        AccesoBD acceso = new AccesoBD();
+        String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioEstado.getDate());
+        String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinEstado.getDate());
+        String nombreTienda = cmbSucursalEstadoDeResultados.getSelectedItem().toString();
+        String HQL = "";
+        if (nombreTienda.equals("Todas")) {
+            HQL = "Select SUM(c.importe) From Compra c WHERE c.tipoGasto = 'Gastos de tienda' AND "
+                    + "c.fechaCompra BETWEEN '"
+                    + fechaInicioResumen + "' AND '"
+                    + fechaFinResumen + "'";
+            return acceso.sumRows(HQL);
+        } else {
+            HQL = "Select SUM(c.importe) From Compra c WHERE c.tipoGasto = 'Gastos de tienda' AND "
+                    + "c.nombreSucursal = '"
+                    + nombreTienda
+                    + "' AND c.fechaCompra BETWEEN '"
+                    + fechaInicioResumen + "' AND '"
+                    + fechaFinResumen + "'";
+            return acceso.sumRows(HQL);
+        }
+    }
+
+    private double getTotalGastosPersonales() {
+        AccesoBD acceso = new AccesoBD();
+        String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioEstado.getDate());
+        String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinEstado.getDate());
+        String HQL = "";
+        HQL = "Select SUM(c.importe) From Compra c WHERE c.tipoGasto = 'Gastos personales' AND "
+                + "c.nombreSucursal = 'Personal' AND c.fechaCompra BETWEEN '"
+                + fechaInicioResumen + "' AND '"
+                + fechaFinResumen + "'";
+        return acceso.sumRows(HQL);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPDFGastos;
     private javax.swing.JComboBox cmbEjercicio;
-    private javax.swing.JComboBox cmbSucursalAbonos;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox cmbSucursalEstadoDeResultados;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -840,8 +1018,8 @@ public class EstadoDeResultados extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private com.toedter.calendar.JDateChooser jdcFechaFinResumen;
-    private com.toedter.calendar.JDateChooser jdcFechaInicioResumen;
+    private com.toedter.calendar.JDateChooser jdcFechaFinEstado;
+    private com.toedter.calendar.JDateChooser jdcFechaInicioEstado;
     private javax.swing.JPanel jpEstadoDeResultados;
     private javax.swing.JScrollPane jspEstadoDeResultados;
     private javax.swing.JLabel lblCompras;
@@ -865,6 +1043,7 @@ public class EstadoDeResultados extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblOtrosIngresos;
     private javax.swing.JLabel lblPTU;
     private javax.swing.JLabel lblProductosFinancieros;
+    private javax.swing.JLabel lblTituloEstadoDeResultados;
     private javax.swing.JLabel lblTotalCostoDeVentas;
     private javax.swing.JLabel lblTotalGastosOperacion;
     private javax.swing.JLabel lblTotalGastosProductosFinancieros;

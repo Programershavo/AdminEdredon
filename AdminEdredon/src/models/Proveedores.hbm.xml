@@ -1,53 +1,54 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 7/11/2015 02:25:33 PM by Hibernate Tools 4.3.1 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/03/2016 06:15:08 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="adminedredon" name="pojos.Proveedores" optimistic-lock="version" table="proveedores">
-    <id name="idProveedor" type="java.lang.Integer">
-      <column name="idProveedor"/>
-      <generator class="identity"/>
-    </id>
-    <property name="folio" type="java.lang.Integer">
-      <column name="folio"/>
-    </property>
-    <property name="nombre" type="string">
-      <column length="45" name="nombre"/>
-    </property>
-    <property name="rfc" type="string">
-      <column length="20" name="RFC"/>
-    </property>
-    <property name="calle" type="string">
-      <column length="45" name="calle"/>
-    </property>
-    <property name="noExterior" type="java.lang.Integer">
-      <column name="noExterior"/>
-    </property>
-    <property name="noInterior" type="java.lang.Integer">
-      <column name="noInterior"/>
-    </property>
-    <property name="colonia" type="string">
-      <column length="50" name="colonia"/>
-    </property>
-    <property name="cp" type="string">
-      <column length="10" name="cp"/>
-    </property>
-    <property name="telFijo" type="string">
-      <column length="45" name="telFijo"/>
-    </property>
-    <property name="telMovil" type="string">
-      <column length="45" name="telMovil"/>
-    </property>
-    <property name="email" type="string">
-      <column length="45" name="email"/>
-    </property>
-    <property name="pais" type="string">
-      <column length="45" name="pais"/>
-    </property>
-    <property name="estado" type="string">
-      <column length="45" name="estado"/>
-    </property>
-    <property name="municipio" type="string">
-      <column length="45" name="municipio"/>
-    </property>
-  </class>
+    <class name="pojos.Proveedores" table="proveedores" catalog="adminedredon" optimistic-lock="version">
+        <id name="idProveedor" type="java.lang.Integer">
+            <column name="idProveedor" />
+            <generator class="identity" />
+        </id>
+        <property name="folio" type="java.lang.Integer">
+            <column name="folio" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" />
+        </property>
+        <property name="rfc" type="string">
+            <column name="RFC" length="20" />
+        </property>
+        <property name="calle" type="string">
+            <column name="calle" length="45" />
+        </property>
+        <property name="noExterior" type="java.lang.Integer">
+            <column name="noExterior" />
+        </property>
+        <property name="noInterior" type="java.lang.Integer">
+            <column name="noInterior" />
+        </property>
+        <property name="colonia" type="string">
+            <column name="colonia" length="50" />
+        </property>
+        <property name="cp" type="string">
+            <column name="cp" length="10" />
+        </property>
+        <property name="telFijo" type="string">
+            <column name="telFijo" length="45" />
+        </property>
+        <property name="telMovil" type="string">
+            <column name="telMovil" length="45" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="45" />
+        </property>
+        <property name="pais" type="string">
+            <column name="pais" length="45" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="45" />
+        </property>
+        <property name="municipio" type="string">
+            <column name="municipio" length="45" />
+        </property>
+    </class>
 </hibernate-mapping>

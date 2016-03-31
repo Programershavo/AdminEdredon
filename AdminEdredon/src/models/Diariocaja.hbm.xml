@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/03/2016 06:15:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.Diariocaja" table="diariocaja" catalog="adminedredon" optimistic-lock="version">
+        <id name="idDiarioCaja" type="java.lang.Integer">
+            <column name="idDiarioCaja" />
+            <generator class="identity" />
+        </id>
+        <property name="local" type="string">
+            <column name="local" length="45" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="10" />
+        </property>
+        <property name="notas" type="string">
+            <column name="notas" length="45" />
+        </property>
+        <property name="ventaConNota" type="java.lang.Double">
+            <column name="ventaConNota" precision="22" scale="0" />
+        </property>
+        <property name="ventaSinNota" type="java.lang.Double">
+            <column name="ventaSinNota" precision="22" scale="0" />
+        </property>
+        <property name="abonoCredito" type="java.lang.Double">
+            <column name="abonoCredito" precision="22" scale="0" />
+        </property>
+        <property name="gastos" type="java.lang.Double">
+            <column name="gastos" precision="22" scale="0" />
+        </property>
+        <property name="comentario" type="string">
+            <column name="comentario" length="150" />
+        </property>
+    </class>
+</hibernate-mapping>

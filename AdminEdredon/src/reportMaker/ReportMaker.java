@@ -72,7 +72,6 @@ public class ReportMaker {
         switch (nombreReporte) {
             case "Compra":
                 nombreReporte = System.getProperty("user.dir") + "/reporteCompra.jrxml";
-//              nombreReporte = getClass().getResource("/reportes/Reporte/reporteCompra.jrxml").getPath();
                 break;
             case "GastoTiendaEspecificos":
                 nombreReporte = System.getProperty("user.dir") + "/reporteCompraTipoGastoTiendaEspecificos.jrxml";
@@ -82,19 +81,18 @@ public class ReportMaker {
                 break;
             case "VentaTiendaClienteEspecificos":
                 nombreReporte = System.getProperty("user.dir") + "/reporteVentaTiendaClienteEspecificos.jrxml";
-//              nombreReporte = getClass().getResource("/reportes/Reporte/reporteCompra.jrxml").getPath();
                 break;
             case "VentaTiendaEspecifica":
                 nombreReporte = System.getProperty("user.dir") + "/reporteVentaTiendaEspecifica.jrxml";
-//              nombreReporte = getClass().getResource("/reportes/Reporte/reporteCompra.jrxml").getPath();
                 break;
             case "VentaClienteEspecifico":
                 nombreReporte = System.getProperty("user.dir") + "/reporteVentaClienteEspecifico.jrxml";
-//              nombreReporte = getClass().getResource("/reportes/Reporte/reporteCompra.jrxml").getPath();
                 break;
             case "VentaTodos":
                 nombreReporte = System.getProperty("user.dir") + "/reporteVentaTodos.jrxml";
-//              nombreReporte = getClass().getResource("/reportes/Reporte/reporteCompra.jrxml").getPath();
+                break;
+            case "estadoDeResultados":
+                nombreReporte = System.getProperty("user.dir") + "/estadoDeResultados.jrxml";
                 break;
         }
         return nombreReporte;

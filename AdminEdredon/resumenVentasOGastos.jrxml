@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="864" pageHeight="612" orientation="Landscape" columnWidth="824" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ebfbaf8-4378-40cf-bf77-ca1c57ec675a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="razonDelResumen" class="java.lang.String"/>
+	<parameter name="enero" class="java.lang.String"/>
+	<parameter name="febrero" class="java.lang.String"/>
+	<parameter name="marzo" class="java.lang.String"/>
+	<parameter name="abril" class="java.lang.String"/>
+	<parameter name="mayo" class="java.lang.String"/>
+	<parameter name="junio" class="java.lang.String"/>
+	<parameter name="julio" class="java.lang.String"/>
+	<parameter name="agosto" class="java.lang.String"/>
+	<parameter name="septiembre" class="java.lang.String"/>
+	<parameter name="octubre" class="java.lang.String"/>
+	<parameter name="noviembre" class="java.lang.String"/>
+	<parameter name="diciembre" class="java.lang.String"/>
+	<parameter name="totalAnual" class="java.lang.String"/>
+	<field name="tienda" class="java.lang.String"/>
+	<field name="enero" class="java.lang.String"/>
+	<field name="febrero" class="java.lang.String"/>
+	<field name="marzo" class="java.lang.String"/>
+	<field name="abril" class="java.lang.String"/>
+	<field name="mayo" class="java.lang.String"/>
+	<field name="junio" class="java.lang.String"/>
+	<field name="julio" class="java.lang.String"/>
+	<field name="agosto" class="java.lang.String"/>
+	<field name="septiembre" class="java.lang.String"/>
+	<field name="octubre" class="java.lang.String"/>
+	<field name="noviembre" class="java.lang.String"/>
+	<field name="diciembre" class="java.lang.String"/>
+	<field name="totalAnualPorTienda" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="92" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="dee7d9af-81ce-412a-ae6c-a6dad2f89a3c" x="199" y="21" width="418" height="32" forecolor="#666666"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resumen Anual]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="db9ff6a5-21bb-402f-a8e5-b849c770f9f2" mode="Transparent" x="306" y="58" width="212" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{razonDelResumen}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="f4f503a6-1a89-4105-9c12-811a17821570" mode="Transparent" x="14" y="2" width="55" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[tienda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5c709ebc-da59-4527-856b-2ef8432058f7" mode="Transparent" x="72" y="2" width="52" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[enero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6e6614b6-c770-4d61-9447-6ace2206387a" mode="Transparent" x="127" y="2" width="52" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[febrero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3d2a88d6-8db0-46b3-a195-b013e9ad8371" mode="Transparent" x="182" y="2" width="52" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[marzo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dc491367-fb63-46bb-8539-96db8868fd71" mode="Transparent" x="237" y="2" width="52" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[abril]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="80c9b15d-1fa5-49c5-8f2a-f3899615e874" mode="Transparent" x="292" y="2" width="52" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[mayo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="164d4554-70b6-47d2-9c54-7bcf53510c2f" mode="Transparent" x="347" y="2" width="52" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[junio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="09a73d1d-3ac1-4c8d-acc6-cefe85e45717" mode="Transparent" x="402" y="2" width="54" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[agosto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9c1f3376-b13a-4a03-9655-97df3d03aae5" mode="Transparent" x="459" y="2" width="73" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[septiembre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e709ed39-5ef9-4463-9305-559989ae3daa" mode="Transparent" x="535" y="2" width="54" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[octubre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4677a5bf-571d-42c6-9f1a-3bb25d0620bf" mode="Transparent" x="592" y="2" width="69" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[noviembre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c1aad93c-77f4-40dc-b1b7-1ef84b86c375" mode="Transparent" x="664" y="2" width="69" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[diciembre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="17110518-8eb8-4bbb-bf51-00597d07d47d" mode="Transparent" x="745" y="2" width="64" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Total Anual]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement uuid="92ae6504-e773-4550-b323-6032022a71b3" x="13" y="5" width="55" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{tienda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5d678490-4314-46c0-a333-63b661ba6c63" x="71" y="5" width="52" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{enero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="217b1a8c-cdb3-4491-b19f-ad9fd2d05304" x="126" y="5" width="52" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{febrero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8de5af17-7960-44fe-87af-6b4f479e68e9" x="181" y="5" width="52" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{marzo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2b797ee5-f4a6-40e5-a176-58f9c407f0cc" x="236" y="5" width="52" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{abril}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7de7098a-7b09-4732-83b5-94cdd87b380a" x="291" y="5" width="52" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{mayo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="252fdce5-b402-4983-8950-7ba65dc28527" x="346" y="5" width="52" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{junio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cefbcf43-2c03-4d78-9c4e-0613c0e3d487" x="401" y="5" width="54" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{agosto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8904201f-910a-44b2-88f1-c315536084f0" x="458" y="5" width="73" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{septiembre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="392fc4a1-d201-4b7c-b29b-c21d55e7e3b3" x="534" y="5" width="54" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{octubre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="012aff8b-84cb-4e21-adc3-15ac769bb081" x="591" y="5" width="69" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{noviembre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="45bfa43f-70ff-4704-b76e-dd81ce16f904" x="663" y="5" width="69" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{diciembre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c451f46e-84b2-46ca-b716-97161f11130b" x="744" y="5" width="64" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{totalAnualPorTienda}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="214" splitType="Stretch">
+			<textField>
+				<reportElement uuid="00751a24-1c95-4483-938e-ceee7ed3fcda" x="22" y="49" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{enero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d258eda2-8dcb-45bd-af37-7da4cc671d31" x="129" y="49" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{febrero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="40ddab56-49ea-440b-a325-4e280275cea5" x="235" y="49" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{marzo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ce0a6a6a-f226-4a42-a6ca-c522565af572" x="342" y="49" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{abril}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="257b5329-6b0a-4f15-bec8-4f68e2ccfd2a" x="448" y="49" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{mayo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e945edaa-d17c-4c3b-bc69-ed34f40df757" x="558" y="49" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{junio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="73c0f3cf-9c6d-4b62-acd7-1f9f4dd69cd7" x="22" y="122" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{julio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b4769c56-4ecf-4bf8-b997-0d2e86377c02" x="129" y="122" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{agosto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="787e56ea-4e92-4204-9996-2690ae2e9b9b" x="235" y="122" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{septiembre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="38bde122-56ba-487e-8937-eb3add46ec7e" x="342" y="122" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{octubre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2183828f-51fd-4a65-814e-c40b305ecc67" x="448" y="122" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{noviembre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c1b8be5d-5ab1-4892-b3de-34cda19c2836" x="558" y="122" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{diciembre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="7f2a950c-4a97-4962-9df8-b1bc44516927" mode="Transparent" x="23" y="7" width="176" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Primer semestre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7f2a950c-4a97-4962-9df8-b1bc44516927" mode="Transparent" x="20" y="79" width="135" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Segundo Semestre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7f2a950c-4a97-4962-9df8-b1bc44516927" mode="Transparent" x="23" y="102" width="98" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Julio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7f2a950c-4a97-4962-9df8-b1bc44516927" mode="Transparent" x="130" y="102" width="98" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Agosto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7f2a950c-4a97-4962-9df8-b1bc44516927" mode="Transparent" x="236" y="102" width="98" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Septiembre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7f2a950c-4a97-4962-9df8-b1bc44516927" mode="Transparent" x="343" y="102" width="98" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Octubre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7f2a950c-4a97-4962-9df8-b1bc44516927" mode="Transparent" x="449" y="102" width="98" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Noviembre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7f2a950c-4a97-4962-9df8-b1bc44516927" mode="Transparent" x="559" y="102" width="98" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Diciembre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7f2a950c-4a97-4962-9df8-b1bc44516927" mode="Transparent" x="23" y="29" width="98" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Enero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7f2a950c-4a97-4962-9df8-b1bc44516927" mode="Transparent" x="130" y="29" width="98" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Febrero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7f2a950c-4a97-4962-9df8-b1bc44516927" mode="Transparent" x="236" y="29" width="98" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Marzo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7f2a950c-4a97-4962-9df8-b1bc44516927" mode="Transparent" x="559" y="29" width="98" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Junio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7f2a950c-4a97-4962-9df8-b1bc44516927" mode="Transparent" x="449" y="29" width="98" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Mayo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7f2a950c-4a97-4962-9df8-b1bc44516927" mode="Transparent" x="343" y="29" width="98" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Abril]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7f2a950c-4a97-4962-9df8-b1bc44516927" mode="Transparent" x="23" y="153" width="135" height="20" forecolor="#666666" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Total anual]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="532daff0-42c4-4a82-acef-d69c19be0146" x="24" y="178" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{totalAnual}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="37">
+			<textField evaluationTime="Report">
+				<reportElement uuid="34586cf7-060b-4d6c-8054-800a22dcd80d" x="764" y="10" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d48603ce-07ee-418f-a61b-fd0202859b3f" x="684" y="10" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement uuid="ed7277fe-c357-4272-a856-2c37c85bbc2f" x="10" y="10" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

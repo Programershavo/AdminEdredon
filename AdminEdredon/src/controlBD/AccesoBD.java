@@ -41,7 +41,11 @@ public class AccesoBD {
         int count = 0;
         try {
             iniciaSF();
-            count = ((Long) session.createQuery(HQL).uniqueResult()).intValue();
+            if (session.createQuery(HQL).uniqueResult() != null) {
+                count = ((Long) session.createQuery(HQL).uniqueResult()).intValue();
+            } else {
+                count = 0;
+            }
         } catch (HibernateException e) {
             JOptionPane.showMessageDialog(null, "error: " + e, "Ha ocurrido un error", 0);
         } finally {

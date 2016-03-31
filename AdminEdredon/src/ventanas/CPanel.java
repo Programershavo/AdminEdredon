@@ -5,9 +5,12 @@
  */
 package ventanas;
 
+import controlBD.AccesoBD;
 import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
@@ -36,10 +39,7 @@ public class CPanel extends javax.swing.JFrame {
                 mensajeSalir();
             }
         });
-        //hacer invisibles los menus de respaldar y restablecer DB
-        //funcionalidad agregada posteriormente
-        mnuProgramaRespaldo.setVisible(false);
-        mnuProgramaRestaurar.setVisible(false);
+
     }
 
     /**
@@ -55,12 +55,7 @@ public class CPanel extends javax.swing.JFrame {
         desktop = new JCDesktopPane.JCDesktopPane();
         menuBar = new javax.swing.JMenuBar();
         mnuPrograma = new javax.swing.JMenu();
-        mnuProgramaAbrirPV = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        mnuProgramaRespaldo = new javax.swing.JMenuItem();
-        mnuProgramaRestaurar = new javax.swing.JMenuItem();
-        mnuProgramaDevoluciones = new javax.swing.JMenuItem();
-        mnuProgramaCorteCaja = new javax.swing.JMenuItem();
         jSeparator6 = new javax.swing.JPopupMenu.Separator();
         mnuProgramaCerrarSesion = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -69,33 +64,18 @@ public class CPanel extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jmiDiarioDeCaja = new javax.swing.JMenuItem();
         jmiGastosPersonales = new javax.swing.JMenuItem();
-        jmiComprasAProveedor = new javax.swing.JMenuItem();
+        jmiResumen = new javax.swing.JMenuItem();
         jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        jMenu3 = new javax.swing.JMenu();
         mnuProveedoresEliminarEditarProveedor = new javax.swing.JMenuItem();
         jmiCliente = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
-        jmiProducto = new javax.swing.JMenuItem();
         jmiRegistroSucursales = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
-        jmiRegistroSublinea = new javax.swing.JMenuItem();
-        jmiRegistroLinea = new javax.swing.JMenuItem();
-        mnuCatalogos = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        mnuCatalogoGastos = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jSeparator7 = new javax.swing.JPopupMenu.Separator();
-        jmiVentas = new javax.swing.JMenuItem();
-        jSeparator8 = new javax.swing.JPopupMenu.Separator();
-        jmiCatalogoClientes = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jSeparator9 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jmiCatalogoLineas = new javax.swing.JMenuItem();
-        jmiCatalogoSublineas = new javax.swing.JMenuItem();
-        mnuAcercaDe = new javax.swing.JMenu();
-        mnuAcercaDeSalesTeDispatcher = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jmiEstadoDeResultados = new javax.swing.JMenuItem();
+        mnuAcercaDe = new javax.swing.JMenu();
+        mnuAcercaDeSalesTeDispatcher = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -123,47 +103,7 @@ public class CPanel extends javax.swing.JFrame {
 
         mnuPrograma.setText("Programa");
         mnuPrograma.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        mnuProgramaAbrirPV.setText("Abrir punto de venta");
-        mnuProgramaAbrirPV.setEnabled(false);
-        mnuProgramaAbrirPV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuProgramaAbrirPVActionPerformed(evt);
-            }
-        });
-        mnuPrograma.add(mnuProgramaAbrirPV);
         mnuPrograma.add(jSeparator2);
-
-        mnuProgramaRespaldo.setText("Crear respaldo de la base de datos");
-        mnuProgramaRespaldo.setEnabled(false);
-        mnuProgramaRespaldo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuProgramaRespaldoActionPerformed(evt);
-            }
-        });
-        mnuPrograma.add(mnuProgramaRespaldo);
-
-        mnuProgramaRestaurar.setText("Restaurar base de datos");
-        mnuProgramaRestaurar.setEnabled(false);
-        mnuPrograma.add(mnuProgramaRestaurar);
-
-        mnuProgramaDevoluciones.setText("Devoluciones");
-        mnuProgramaDevoluciones.setEnabled(false);
-        mnuProgramaDevoluciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuProgramaDevolucionesActionPerformed(evt);
-            }
-        });
-        mnuPrograma.add(mnuProgramaDevoluciones);
-
-        mnuProgramaCorteCaja.setText("Corte de caja");
-        mnuProgramaCorteCaja.setEnabled(false);
-        mnuProgramaCorteCaja.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuProgramaCorteCajaActionPerformed(evt);
-            }
-        });
-        mnuPrograma.add(mnuProgramaCorteCaja);
         mnuPrograma.add(jSeparator6);
 
         mnuProgramaCerrarSesion.setText("Cerrar sesion");
@@ -189,9 +129,9 @@ public class CPanel extends javax.swing.JFrame {
         mnuProveedores.setText("Registros");
         mnuProveedores.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jMenu1.setText("Diarios");
+        jMenu1.setText("Notas de venta/Gastos");
 
-        jmiDiarioDeCaja.setText("Diario de Tiendas");
+        jmiDiarioDeCaja.setText("Notas de venta");
         jmiDiarioDeCaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiDiarioDeCajaActionPerformed(evt);
@@ -200,7 +140,7 @@ public class CPanel extends javax.swing.JFrame {
         jMenu1.add(jmiDiarioDeCaja);
 
         jmiGastosPersonales.setMnemonic('c');
-        jmiGastosPersonales.setText("Gastos Personales");
+        jmiGastosPersonales.setText("Gastos generales");
         jmiGastosPersonales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiGastosPersonalesActionPerformed(evt);
@@ -208,16 +148,18 @@ public class CPanel extends javax.swing.JFrame {
         });
         jMenu1.add(jmiGastosPersonales);
 
-        jmiComprasAProveedor.setText("Compras a Proveedores");
-        jmiComprasAProveedor.addActionListener(new java.awt.event.ActionListener() {
+        jmiResumen.setText("Resumen general");
+        jmiResumen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiComprasAProveedorActionPerformed(evt);
+                jmiResumenActionPerformed(evt);
             }
         });
-        jMenu1.add(jmiComprasAProveedor);
+        jMenu1.add(jmiResumen);
 
         mnuProveedores.add(jMenu1);
         mnuProveedores.add(jSeparator5);
+
+        jMenu3.setText("Expedientes");
 
         mnuProveedoresEliminarEditarProveedor.setMnemonic('a');
         mnuProveedoresEliminarEditarProveedor.setText("Proveedor");
@@ -226,7 +168,7 @@ public class CPanel extends javax.swing.JFrame {
                 mnuProveedoresEliminarEditarProveedorActionPerformed(evt);
             }
         });
-        mnuProveedores.add(mnuProveedoresEliminarEditarProveedor);
+        jMenu3.add(mnuProveedoresEliminarEditarProveedor);
 
         jmiCliente.setText("Cliente");
         jmiCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -234,19 +176,12 @@ public class CPanel extends javax.swing.JFrame {
                 jmiClienteActionPerformed(evt);
             }
         });
-        mnuProveedores.add(jmiCliente);
+        jMenu3.add(jmiCliente);
+
+        mnuProveedores.add(jMenu3);
         mnuProveedores.add(jSeparator4);
 
-        jmiProducto.setText("Producto");
-        jmiProducto.setEnabled(false);
-        jmiProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiProductoActionPerformed(evt);
-            }
-        });
-        mnuProveedores.add(jmiProducto);
-
-        jmiRegistroSucursales.setText("Sucursal");
+        jmiRegistroSucursales.setText("Conceptos");
         jmiRegistroSucursales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiRegistroSucursalesActionPerformed(evt);
@@ -255,88 +190,19 @@ public class CPanel extends javax.swing.JFrame {
         mnuProveedores.add(jmiRegistroSucursales);
         mnuProveedores.add(jSeparator3);
 
-        jmiRegistroSublinea.setText("Sublinea");
-        jmiRegistroSublinea.setEnabled(false);
-        jmiRegistroSublinea.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiRegistroSublineaActionPerformed(evt);
-            }
-        });
-        mnuProveedores.add(jmiRegistroSublinea);
-
-        jmiRegistroLinea.setText("Linea");
-        jmiRegistroLinea.setEnabled(false);
-        jmiRegistroLinea.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiRegistroLineaActionPerformed(evt);
-            }
-        });
-        mnuProveedores.add(jmiRegistroLinea);
-
         menuBar.add(mnuProveedores);
 
-        mnuCatalogos.setText("Catalogos");
-        mnuCatalogos.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenu2.setText("Informe");
 
-        jMenuItem2.setText("Gastos de compras");
-        mnuCatalogos.add(jMenuItem2);
-
-        mnuCatalogoGastos.setText("Gastos personales");
-        mnuCatalogoGastos.addActionListener(new java.awt.event.ActionListener() {
+        jmiEstadoDeResultados.setText("Estado de Resultados");
+        jmiEstadoDeResultados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCatalogoGastosActionPerformed(evt);
+                jmiEstadoDeResultadosActionPerformed(evt);
             }
         });
-        mnuCatalogos.add(mnuCatalogoGastos);
+        jMenu2.add(jmiEstadoDeResultados);
 
-        jMenuItem1.setText("Gastos de tiendas");
-        mnuCatalogos.add(jMenuItem1);
-        mnuCatalogos.add(jSeparator7);
-
-        jmiVentas.setText("Ventas");
-        jmiVentas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiVentasActionPerformed(evt);
-            }
-        });
-        mnuCatalogos.add(jmiVentas);
-        mnuCatalogos.add(jSeparator8);
-
-        jmiCatalogoClientes.setText("Clientes");
-        jmiCatalogoClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiCatalogoClientesActionPerformed(evt);
-            }
-        });
-        mnuCatalogos.add(jmiCatalogoClientes);
-
-        jMenuItem3.setText("Proveedores");
-        mnuCatalogos.add(jMenuItem3);
-        mnuCatalogos.add(jSeparator9);
-
-        jMenuItem4.setText("Productos");
-        jMenuItem4.setEnabled(false);
-        mnuCatalogos.add(jMenuItem4);
-
-        jmiCatalogoLineas.setText("Lineas");
-        jmiCatalogoLineas.setEnabled(false);
-        jmiCatalogoLineas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiCatalogoLineasActionPerformed(evt);
-            }
-        });
-        mnuCatalogos.add(jmiCatalogoLineas);
-
-        jmiCatalogoSublineas.setText("Sublineas");
-        jmiCatalogoSublineas.setEnabled(false);
-        jmiCatalogoSublineas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiCatalogoSublineasActionPerformed(evt);
-            }
-        });
-        mnuCatalogos.add(jmiCatalogoSublineas);
-
-        menuBar.add(mnuCatalogos);
+        menuBar.add(jMenu2);
 
         mnuAcercaDe.setText("Acerca de...");
         mnuAcercaDe.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -350,18 +216,6 @@ public class CPanel extends javax.swing.JFrame {
         mnuAcercaDe.add(mnuAcercaDeSalesTeDispatcher);
 
         menuBar.add(mnuAcercaDe);
-
-        jMenu2.setText("Informe");
-
-        jmiEstadoDeResultados.setText("Estado de Resultados");
-        jmiEstadoDeResultados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiEstadoDeResultadosActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jmiEstadoDeResultados);
-
-        menuBar.add(jMenu2);
 
         setJMenuBar(menuBar);
 
@@ -380,34 +234,6 @@ public class CPanel extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void mnuProgramaAbrirPVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProgramaAbrirPVActionPerformed
-
-    }//GEN-LAST:event_mnuProgramaAbrirPVActionPerformed
-
-    private void mnuProgramaRespaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProgramaRespaldoActionPerformed
-
-    }//GEN-LAST:event_mnuProgramaRespaldoActionPerformed
-
-    private void mnuProgramaDevolucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProgramaDevolucionesActionPerformed
-
-    }//GEN-LAST:event_mnuProgramaDevolucionesActionPerformed
-
-    private void mnuProgramaCorteCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProgramaCorteCajaActionPerformed
-
-    }//GEN-LAST:event_mnuProgramaCorteCajaActionPerformed
-
-    private void mnuProgramaCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProgramaCerrarSesionActionPerformed
-        Icon icono = new ImageIcon(getClass().getResource("/IconosEspecializados/iconCastillo.png"));
-        JOptionPane.showMessageDialog(this, "Sales Tea Dispatcher te desea" + "\n" + "Que tengas un excelente día.", "Gracias por tu trabajo", JOptionPane.PLAIN_MESSAGE, icono);
-        Login log = new Login();
-        log.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_mnuProgramaCerrarSesionActionPerformed
-
-    private void mnuProgramaSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProgramaSalirActionPerformed
-        mensajeSalir();
-    }//GEN-LAST:event_mnuProgramaSalirActionPerformed
     private void mensajeSalir() {
         int res = JOptionPane.showConfirmDialog(this, "¿Estas seguro que quieres cerrar el programa?", "Salir", 0);
         if (res == 0) {
@@ -434,36 +260,6 @@ public class CPanel extends javax.swing.JFrame {
         }
         return false;
     }
-    private void jmiGastosPersonalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGastosPersonalesActionPerformed
-        try {
-            DiarioDeGastosPersonales registroGasto = new DiarioDeGastosPersonales();
-            if (exist(registroGasto) == false) {
-                desktop.add(registroGasto);
-                registroGasto.setVisible(true);
-                registroGasto.setLocation((desktop.getWidth() - registroGasto.getWidth()) / 2, (desktop.getHeight() - registroGasto.getHeight()) / 2);
-            } else {
-                registroGasto.dispose();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
-        }
-    }//GEN-LAST:event_jmiGastosPersonalesActionPerformed
-
-    private void mnuProveedoresEliminarEditarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProveedoresEliminarEditarProveedorActionPerformed
-        try {
-            RegistroProveedor regProveedor = new RegistroProveedor();
-            if (exist(regProveedor) == false) {
-                desktop.add(regProveedor);
-                regProveedor.setVisible(true);
-                regProveedor.setLocation((desktop.getWidth() - regProveedor.getWidth()) / 2, (desktop.getHeight() - regProveedor.getHeight()) / 2);
-            } else {
-                regProveedor.dispose();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
-        }
-    }//GEN-LAST:event_mnuProveedoresEliminarEditarProveedorActionPerformed
-
     private void mnuAcercaDeSalesTeDispatcherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAcercaDeSalesTeDispatcherActionPerformed
         try {
             AcercaDe ad = new AcercaDe();
@@ -480,21 +276,114 @@ public class CPanel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mnuAcercaDeSalesTeDispatcherActionPerformed
 
-    private void jmiClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiClienteActionPerformed
+    private void jmiEstadoDeResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEstadoDeResultadosActionPerformed
         try {
-            RegistroCliente registroCliente = new RegistroCliente();
-            if (exist(registroCliente) == false) {
-                desktop.add(registroCliente);
-                registroCliente.setVisible(true);
-                registroCliente.setLocation((desktop.getWidth() - registroCliente.getWidth()) / 2,
-                        (desktop.getHeight() - registroCliente.getHeight()) / 2);
+            EstadoDeResultados edoResultados = new EstadoDeResultados();
+            if (exist(edoResultados) == false) {
+                desktop.add(edoResultados);
+                edoResultados.setVisible(true);
+                edoResultados.setLocation((desktop.getWidth() - edoResultados.getWidth()) / 2, (desktop.getHeight() - edoResultados.getHeight()) / 2);
             } else {
-                registroCliente.dispose();
+                edoResultados.dispose();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
         }
+    }//GEN-LAST:event_jmiEstadoDeResultadosActionPerformed
+
+    private void jmiRegistroSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRegistroSucursalesActionPerformed
+//        try {
+//            RegistroSucursal registroSucursales = new RegistroSucursal();
+//            if (exist(registroSucursales) == false) {
+//                desktop.add(registroSucursales);
+//                registroSucursales.setVisible(true);
+//                registroSucursales.setLocation((desktop.getWidth() - registroSucursales.getWidth()) / 2, (desktop.getHeight() - registroSucursales.getHeight()) / 2);
+//            } else {
+//                registroSucursales.dispose();
+//            }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+//        }
+    }//GEN-LAST:event_jmiRegistroSucursalesActionPerformed
+
+    private void jmiClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiClienteActionPerformed
+//        try {
+//            RegistroCliente registroCliente = new RegistroCliente();
+//            if (exist(registroCliente) == false) {
+//                desktop.add(registroCliente);
+//                registroCliente.setVisible(true);
+//                registroCliente.setLocation((desktop.getWidth() - registroCliente.getWidth()) / 2,
+//                    (desktop.getHeight() - registroCliente.getHeight()) / 2);
+//            } else {
+//                registroCliente.dispose();
+//            }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+//        }
     }//GEN-LAST:event_jmiClienteActionPerformed
+
+    private void mnuProveedoresEliminarEditarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProveedoresEliminarEditarProveedorActionPerformed
+        try {
+            ExpedienteProveedor pagosProveedor = new ExpedienteProveedor();
+            if (exist(pagosProveedor) == false) {
+                desktop.add(pagosProveedor);
+                pagosProveedor.setVisible(true);
+                pagosProveedor.setLocation((desktop.getWidth() - pagosProveedor.getWidth()) / 2, (desktop.getHeight() - pagosProveedor.getHeight()) / 2);
+            } else {
+                pagosProveedor.dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+        }
+    }//GEN-LAST:event_mnuProveedoresEliminarEditarProveedorActionPerformed
+
+    private void jmiResumenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiResumenActionPerformed
+        try {
+            VentasGastosTotales resumenVentasGastos = new VentasGastosTotales();
+            if (exist(resumenVentasGastos) == false) {
+                desktop.add(resumenVentasGastos);
+                resumenVentasGastos.setVisible(true);
+                resumenVentasGastos.setLocation((desktop.getWidth() - resumenVentasGastos.getWidth()) / 2, (desktop.getHeight() - resumenVentasGastos.getHeight()) / 2);
+            } else {
+                resumenVentasGastos.dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+        }
+    }//GEN-LAST:event_jmiResumenActionPerformed
+    private int consultarVentasDeDiarioPorMes() {
+        String consultaVentasHQL = "FROM Diariocaja d WHERE "
+                + "d.fecha = '"
+                + herramienta.FechaHerramienta.formatoYMD(new Date())
+                + "'";
+        AccesoBD acceso = new AccesoBD();
+        return acceso.rowCount(consultaVentasHQL);
+    }
+    private void jmiGastosPersonalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGastosPersonalesActionPerformed
+        //Fecha actual desglosada:
+//        Calendar fecha = Calendar.getInstance();
+//        int año = fecha.get(Calendar.YEAR);
+//        int mes = fecha.get(Calendar.MONTH) + 1;
+//        if (consultarVentasDeDiarioPorMes() > 0) {
+        try {
+            DiarioDeGasto registroGasto = new DiarioDeGasto();
+            if (exist(registroGasto) == false) {
+                desktop.add(registroGasto);
+                registroGasto.setVisible(true);
+                registroGasto.setLocation((desktop.getWidth() - registroGasto.getWidth()) / 2, (desktop.getHeight() - registroGasto.getHeight()) / 2);
+            } else {
+                registroGasto.dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e,
+                    "Error", 0);
+        }
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Para registrar cualquier gasto:"
+//                    + "\n-Debe haber una venta con fecha del dia de hoy: ", "Aviso", 1);
+//        }
+
+    }//GEN-LAST:event_jmiGastosPersonalesActionPerformed
 
     private void jmiDiarioDeCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiDiarioDeCajaActionPerformed
         try {
@@ -512,171 +401,17 @@ public class CPanel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmiDiarioDeCajaActionPerformed
 
-    private void jmiProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiProductoActionPerformed
-        try {
-            RegistrarProducto registroProducto = new RegistrarProducto();
-            if (exist(registroProducto) == false) {
-                desktop.add(registroProducto);
-                registroProducto.setVisible(true);
-                registroProducto.setLocation((desktop.getWidth() - registroProducto.getWidth()) / 2,
-                        (desktop.getHeight() - registroProducto.getHeight()) / 2);
-            } else {
-                registroProducto.dispose();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
-        }
-    }//GEN-LAST:event_jmiProductoActionPerformed
+    private void mnuProgramaSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProgramaSalirActionPerformed
+        mensajeSalir();
+    }//GEN-LAST:event_mnuProgramaSalirActionPerformed
 
-    private void mnuCatalogoGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCatalogoGastosActionPerformed
-        try {
-            CatalogoGastosTiendas catalogoGastos = new CatalogoGastosTiendas();
-            if (exist(catalogoGastos) == false) {
-                desktop.add(catalogoGastos);
-                catalogoGastos.setVisible(true);
-                catalogoGastos.setLocation((desktop.getWidth() - catalogoGastos.getWidth()) / 2, (desktop.getHeight() - catalogoGastos.getHeight()) / 2);
-            } else {
-                catalogoGastos.dispose();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
-        }
-    }//GEN-LAST:event_mnuCatalogoGastosActionPerformed
-
-    private void jmiCatalogoClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCatalogoClientesActionPerformed
-        try {
-            CatalogoClientes catalogoClientes = new CatalogoClientes();
-            if (exist(catalogoClientes) == false) {
-                desktop.add(catalogoClientes);
-                catalogoClientes.setVisible(true);
-                catalogoClientes.setLocation((desktop.getWidth() - catalogoClientes.getWidth()) / 2, (desktop.getHeight() - catalogoClientes.getHeight()) / 2);
-            } else {
-                catalogoClientes.dispose();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
-        }
-    }//GEN-LAST:event_jmiCatalogoClientesActionPerformed
-
-    private void jmiCatalogoLineasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCatalogoLineasActionPerformed
-        try {
-            CatalogoLineas catalogoLineas = new CatalogoLineas();
-            if (exist(catalogoLineas) == false) {
-                desktop.add(catalogoLineas);
-                catalogoLineas.setVisible(true);
-                catalogoLineas.setLocation((desktop.getWidth() - catalogoLineas.getWidth()) / 2, (desktop.getHeight() - catalogoLineas.getHeight()) / 2);
-            } else {
-                catalogoLineas.dispose();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
-        }
-    }//GEN-LAST:event_jmiCatalogoLineasActionPerformed
-
-    private void jmiCatalogoSublineasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCatalogoSublineasActionPerformed
-        try {
-            CatalogoSublineas catalogoSublineas = new CatalogoSublineas();
-            if (exist(catalogoSublineas) == false) {
-                desktop.add(catalogoSublineas);
-                catalogoSublineas.setVisible(true);
-                catalogoSublineas.setLocation((desktop.getWidth() - catalogoSublineas.getWidth()) / 2, (desktop.getHeight() - catalogoSublineas.getHeight()) / 2);
-            } else {
-                catalogoSublineas.dispose();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
-        }
-    }//GEN-LAST:event_jmiCatalogoSublineasActionPerformed
-
-    private void jmiRegistroSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRegistroSucursalesActionPerformed
-        try {
-            RegistroSucursal registroSucursales = new RegistroSucursal();
-            if (exist(registroSucursales) == false) {
-                desktop.add(registroSucursales);
-                registroSucursales.setVisible(true);
-                registroSucursales.setLocation((desktop.getWidth() - registroSucursales.getWidth()) / 2, (desktop.getHeight() - registroSucursales.getHeight()) / 2);
-            } else {
-                registroSucursales.dispose();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
-        }
-    }//GEN-LAST:event_jmiRegistroSucursalesActionPerformed
-
-    private void jmiRegistroSublineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRegistroSublineaActionPerformed
-        try {
-            RegistroSublinea registroSublinea = new RegistroSublinea();
-            if (exist(registroSublinea) == false) {
-                desktop.add(registroSublinea);
-                registroSublinea.setVisible(true);
-                registroSublinea.setLocation((desktop.getWidth() - registroSublinea.getWidth()) / 2, (desktop.getHeight() - registroSublinea.getHeight()) / 2);
-            } else {
-                registroSublinea.dispose();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
-        }
-    }//GEN-LAST:event_jmiRegistroSublineaActionPerformed
-
-    private void jmiRegistroLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRegistroLineaActionPerformed
-        try {
-            RegistroLinea registroLinea = new RegistroLinea();
-            if (exist(registroLinea) == false) {
-                desktop.add(registroLinea);
-                registroLinea.setVisible(true);
-                registroLinea.setLocation((desktop.getWidth() - registroLinea.getWidth()) / 2, (desktop.getHeight() - registroLinea.getHeight()) / 2);
-            } else {
-                registroLinea.dispose();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
-        }
-    }//GEN-LAST:event_jmiRegistroLineaActionPerformed
-
-    private void jmiVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiVentasActionPerformed
-        try {
-            CatalogoVentas catalogoVentas = new CatalogoVentas();
-            if (exist(catalogoVentas) == false) {
-                desktop.add(catalogoVentas);
-                catalogoVentas.setVisible(true);
-                catalogoVentas.setLocation((desktop.getWidth() - catalogoVentas.getWidth()) / 2, (desktop.getHeight() - catalogoVentas.getHeight()) / 2);
-            } else {
-                catalogoVentas.dispose();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
-        }
-    }//GEN-LAST:event_jmiVentasActionPerformed
-
-    private void jmiComprasAProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiComprasAProveedorActionPerformed
-        try {
-            DiarioDeComprasProveedores diarioComprasProveedor = new DiarioDeComprasProveedores();
-            if (exist(diarioComprasProveedor) == false) {
-                desktop.add(diarioComprasProveedor);
-                diarioComprasProveedor.setVisible(true);
-                diarioComprasProveedor.setLocation((desktop.getWidth() - diarioComprasProveedor.getWidth()) / 2, (desktop.getHeight() - diarioComprasProveedor.getHeight()) / 2);
-            } else {
-                diarioComprasProveedor.dispose();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
-        }
-    }//GEN-LAST:event_jmiComprasAProveedorActionPerformed
-
-    private void jmiEstadoDeResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEstadoDeResultadosActionPerformed
-        try {
-            EstadoDeResultados edoResultados = new EstadoDeResultados();
-            if (exist(edoResultados) == false) {
-                desktop.add(edoResultados);
-                edoResultados.setVisible(true);
-                edoResultados.setLocation((desktop.getWidth() - edoResultados.getWidth()) / 2, (desktop.getHeight() - edoResultados.getHeight()) / 2);
-            } else {
-                edoResultados.dispose();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
-        }
-    }//GEN-LAST:event_jmiEstadoDeResultadosActionPerformed
+    private void mnuProgramaCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProgramaCerrarSesionActionPerformed
+        Icon icono = new ImageIcon(getClass().getResource("/IconosEspecializados/iconCastillo.png"));
+        JOptionPane.showMessageDialog(this, "AdminEdredon te desea" + "\n" + "Que tengas un excelente día.", "Gracias por tu trabajo", JOptionPane.PLAIN_MESSAGE, icono);
+        Login log = new Login();
+        log.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_mnuProgramaCerrarSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -717,45 +452,25 @@ public class CPanel extends javax.swing.JFrame {
     public static JCDesktopPane.JCDesktopPane desktop;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator6;
-    private javax.swing.JPopupMenu.Separator jSeparator7;
-    private javax.swing.JPopupMenu.Separator jSeparator8;
-    private javax.swing.JPopupMenu.Separator jSeparator9;
-    private javax.swing.JMenuItem jmiCatalogoClientes;
-    private javax.swing.JMenuItem jmiCatalogoLineas;
-    private javax.swing.JMenuItem jmiCatalogoSublineas;
     private javax.swing.JMenuItem jmiCliente;
-    private javax.swing.JMenuItem jmiComprasAProveedor;
     private javax.swing.JMenuItem jmiDiarioDeCaja;
     private javax.swing.JMenuItem jmiEstadoDeResultados;
     private javax.swing.JMenuItem jmiGastosPersonales;
-    private javax.swing.JMenuItem jmiProducto;
-    private javax.swing.JMenuItem jmiRegistroLinea;
-    private javax.swing.JMenuItem jmiRegistroSublinea;
     private javax.swing.JMenuItem jmiRegistroSucursales;
-    private javax.swing.JMenuItem jmiVentas;
+    private javax.swing.JMenuItem jmiResumen;
     private javax.swing.JPanel jpPrincipal;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu mnuAcercaDe;
     private javax.swing.JMenuItem mnuAcercaDeSalesTeDispatcher;
-    private javax.swing.JMenuItem mnuCatalogoGastos;
-    private javax.swing.JMenu mnuCatalogos;
     private javax.swing.JMenu mnuPrograma;
-    private javax.swing.JMenuItem mnuProgramaAbrirPV;
     private javax.swing.JMenuItem mnuProgramaCerrarSesion;
-    private javax.swing.JMenuItem mnuProgramaCorteCaja;
-    private javax.swing.JMenuItem mnuProgramaDevoluciones;
-    private javax.swing.JMenuItem mnuProgramaRespaldo;
-    private javax.swing.JMenuItem mnuProgramaRestaurar;
     private javax.swing.JMenuItem mnuProgramaSalir;
     private javax.swing.JMenu mnuProveedores;
     private javax.swing.JMenuItem mnuProveedoresEliminarEditarProveedor;

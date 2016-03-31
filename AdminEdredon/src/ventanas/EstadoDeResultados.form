@@ -57,121 +57,116 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="298" max="-2" attributes="0"/>
-                              <Component id="jLabel21" linkSize="1" min="-2" pref="46" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jdcFechaInicioResumen" linkSize="2" min="-2" pref="124" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jLabel26" linkSize="1" min="-2" pref="32" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jdcFechaFinResumen" linkSize="2" min="-2" pref="118" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="298" max="-2" attributes="0"/>
+                                      <Component id="jLabel21" linkSize="1" min="-2" pref="46" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="2" attributes="0">
-                                          <Component id="jLabel1" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cmbEjercicio" alignment="2" min="-2" pref="146" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btnPDFGastos" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                          </Group>
-                          <Group type="102" attributes="0">
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jSeparator7" linkSize="6" alignment="0" min="-2" pref="936" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="2" attributes="0">
-                                          <Component id="jLabel29" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel30" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel31" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel32" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel43" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel45" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel44" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel46" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel47" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel48" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel49" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel50" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel51" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel52" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel53" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel25" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel42" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel41" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel27" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel28" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel36" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel40" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel39" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel38" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel37" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel23" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel35" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel34" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel33" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel22" linkSize="3" alignment="2" min="-2" pref="72" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="2" attributes="0">
-                                          <Component id="lblGastosFinancieros" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblTotalGastosOperacion" linkSize="7" alignment="2" min="-2" pref="178" max="-2" attributes="0"/>
-                                          <Component id="lblUtilidadPerdidaDeOperacion" linkSize="7" alignment="2" min="-2" pref="165" max="-2" attributes="0"/>
-                                          <Component id="lblGastosProductosFinancieros" linkSize="7" alignment="2" min="-2" pref="165" max="-2" attributes="0"/>
-                                          <Component id="lblGastosGenerales" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblOtrosGastos" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblProductosFinancieros" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblOtrosIngresos" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblTotalGastosProductosFinancieros" linkSize="7" alignment="2" min="-2" pref="178" max="-2" attributes="0"/>
-                                          <Component id="lblUtilidadPerdidaNeta" linkSize="7" alignment="2" min="-2" pref="165" max="-2" attributes="0"/>
-                                          <Component id="lblImpuestos" linkSize="7" alignment="2" min="-2" pref="165" max="-2" attributes="0"/>
-                                          <Component id="lblISR" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblIMPAC" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblImpuestosPagados" linkSize="7" alignment="2" min="-2" pref="178" max="-2" attributes="0"/>
-                                          <Component id="lblPTU" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblUtilidadPerdidaAntesDeImpuestos" linkSize="7" alignment="2" min="-2" pref="165" max="-2" attributes="0"/>
-                                          <Component id="lblGastosDeAdministracion" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblGastosDeVenta" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblGastosDeOperacion" linkSize="7" alignment="2" min="-2" pref="165" max="-2" attributes="0"/>
-                                          <Component id="lblUtilidadPerdidaBruta" linkSize="7" alignment="2" min="-2" pref="165" max="-2" attributes="0"/>
-                                          <Component id="lblTotalCostoDeVentas" linkSize="7" alignment="2" min="-2" pref="178" max="-2" attributes="0"/>
-                                          <Component id="lblDepreciacion" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblGastosDeFabrica" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblMateriaPrima" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblCompras" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblCostoDeVentas" linkSize="7" alignment="2" min="-2" pref="165" max="-2" attributes="0"/>
-                                          <Component id="lblVentasNetas" linkSize="7" alignment="2" max="32767" attributes="0"/>
-                                          <Component id="lblDevolucionesSobreVentas" linkSize="7" alignment="2" pref="178" max="32767" attributes="0"/>
-                                          <Component id="lblDescuentosSobreVentas" linkSize="7" alignment="2" max="32767" attributes="0"/>
-                                          <Component id="lblVentas" linkSize="7" alignment="2" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="jdcFechaInicioEstado" linkSize="2" min="-2" pref="124" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jLabel26" linkSize="1" min="-2" pref="32" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jdcFechaFinEstado" linkSize="2" min="-2" pref="118" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="103" groupAlignment="2" attributes="0">
-                                      <Component id="jSeparator5" linkSize="6" alignment="2" min="-2" pref="902" max="-2" attributes="0"/>
-                                      <Component id="jSeparator6" linkSize="6" alignment="2" min="-2" pref="902" max="-2" attributes="0"/>
-                                      <Component id="jSeparator8" linkSize="6" alignment="2" min="-2" pref="902" max="-2" attributes="0"/>
-                                      <Component id="jSeparator9" linkSize="6" alignment="2" min="-2" pref="926" max="-2" attributes="0"/>
-                                      <Component id="jSeparator4" linkSize="6" alignment="2" min="-2" pref="902" max="-2" attributes="0"/>
-                                      <Component id="jSeparator3" linkSize="6" alignment="2" min="-2" pref="902" max="-2" attributes="0"/>
-                                      <Component id="jSeparator2" linkSize="6" alignment="2" min="-2" pref="902" max="-2" attributes="0"/>
-                                      <Component id="jSeparator1" linkSize="6" alignment="2" min="-2" pref="902" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="2" attributes="0">
+                                      <Component id="lblTituloEstadoDeResultados" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cmbEjercicio" alignment="2" min="-2" pref="146" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="348" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jSeparator7" alignment="0" pref="936" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="2" attributes="0">
+                                  <Component id="jLabel29" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel30" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel31" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel32" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel43" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel45" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel44" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel46" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel47" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel48" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel49" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel50" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel51" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel52" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel53" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel25" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel42" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel41" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel27" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel28" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel36" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel40" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel39" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel38" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel37" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel23" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel35" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel34" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel33" linkSize="3" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel22" linkSize="3" alignment="2" min="-2" pref="72" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="2" attributes="0">
+                                  <Component id="lblGastosFinancieros" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblTotalGastosOperacion" linkSize="7" alignment="2" min="-2" pref="178" max="-2" attributes="0"/>
+                                  <Component id="lblUtilidadPerdidaDeOperacion" linkSize="7" alignment="2" min="-2" pref="165" max="-2" attributes="0"/>
+                                  <Component id="lblGastosProductosFinancieros" linkSize="7" alignment="2" min="-2" pref="165" max="-2" attributes="0"/>
+                                  <Component id="lblGastosGenerales" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblOtrosGastos" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblProductosFinancieros" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblOtrosIngresos" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblTotalGastosProductosFinancieros" linkSize="7" alignment="2" min="-2" pref="178" max="-2" attributes="0"/>
+                                  <Component id="lblUtilidadPerdidaNeta" linkSize="7" alignment="2" min="-2" pref="165" max="-2" attributes="0"/>
+                                  <Component id="lblImpuestos" linkSize="7" alignment="2" min="-2" pref="165" max="-2" attributes="0"/>
+                                  <Component id="lblISR" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblIMPAC" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblImpuestosPagados" linkSize="7" alignment="2" min="-2" pref="178" max="-2" attributes="0"/>
+                                  <Component id="lblPTU" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblUtilidadPerdidaAntesDeImpuestos" linkSize="7" alignment="2" min="-2" pref="165" max="-2" attributes="0"/>
+                                  <Component id="lblGastosDeAdministracion" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblGastosDeVenta" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblGastosDeOperacion" linkSize="7" alignment="2" min="-2" pref="165" max="-2" attributes="0"/>
+                                  <Component id="lblUtilidadPerdidaBruta" linkSize="7" alignment="2" min="-2" pref="165" max="-2" attributes="0"/>
+                                  <Component id="lblTotalCostoDeVentas" linkSize="7" alignment="2" min="-2" pref="178" max="-2" attributes="0"/>
+                                  <Component id="lblDepreciacion" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblGastosDeFabrica" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblMateriaPrima" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblCompras" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblCostoDeVentas" linkSize="7" alignment="2" min="-2" pref="165" max="-2" attributes="0"/>
+                                  <Component id="lblVentasNetas" linkSize="7" alignment="2" max="32767" attributes="0"/>
+                                  <Component id="lblDevolucionesSobreVentas" linkSize="7" alignment="2" pref="178" max="32767" attributes="0"/>
+                                  <Component id="lblDescuentosSobreVentas" linkSize="7" alignment="2" max="32767" attributes="0"/>
+                                  <Component id="lblVentas" linkSize="7" alignment="2" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="jSeparator5" alignment="2" pref="936" max="32767" attributes="0"/>
+                          <Component id="jSeparator6" alignment="2" pref="936" max="32767" attributes="0"/>
+                          <Component id="jSeparator8" alignment="2" pref="936" max="32767" attributes="0"/>
+                          <Component id="jSeparator9" alignment="2" pref="936" max="32767" attributes="0"/>
+                          <Component id="jSeparator4" alignment="2" pref="936" max="32767" attributes="0"/>
+                          <Component id="jSeparator3" alignment="2" pref="936" max="32767" attributes="0"/>
+                          <Component id="jSeparator2" alignment="2" pref="936" max="32767" attributes="0"/>
+                          <Component id="jSeparator1" alignment="2" pref="936" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="343" max="-2" attributes="0"/>
+                              <Component id="jLabel19" min="-2" pref="74" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cmbSucursalEstadoDeResultados" min="-2" pref="147" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="343" max="-2" attributes="0"/>
-                      <Component id="jLabel19" min="-2" pref="74" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cmbSucursalAbonos" min="-2" pref="147" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -180,22 +175,22 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblTituloEstadoDeResultados" min="-2" max="-2" attributes="0"/>
                           <Component id="btnPDFGastos" min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="cmbEjercicio" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="cmbSucursalAbonos" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbSucursalEstadoDeResultados" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="2" attributes="0">
                           <Component id="jLabel21" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jdcFechaInicioResumen" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jdcFechaInicioEstado" alignment="2" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel26" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jdcFechaFinResumen" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jdcFechaFinEstado" alignment="2" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                       <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
@@ -392,7 +387,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="lblTituloEstadoDeResultados">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Cambria" size="24" style="1"/>
@@ -428,7 +423,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
               </Properties>
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="jdcFechaInicioResumen">
+            <Component class="com.toedter.calendar.JDateChooser" name="jdcFechaInicioEstado">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel26">
               <Properties>
@@ -443,7 +438,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
               </Properties>
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="jdcFechaFinResumen">
+            <Component class="com.toedter.calendar.JDateChooser" name="jdcFechaFinEstado">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel22">
               <Properties>
@@ -861,7 +856,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descuento sobre ventas"/>
+                <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblDevolucionesSobreVentas">
@@ -872,7 +867,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descuento sobre ventas"/>
+                <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblTotalCostoDeVentas">
@@ -907,7 +902,6 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="66" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descuento sobre ventas"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblCompras">
@@ -918,7 +912,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descuento sobre ventas"/>
+                <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblMateriaPrima">
@@ -929,7 +923,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descuento sobre ventas"/>
+                <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblGastosDeFabrica">
@@ -940,7 +934,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descuento sobre ventas"/>
+                <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblDepreciacion">
@@ -951,7 +945,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descuento sobre ventas"/>
+                <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblVentasNetas">
@@ -986,7 +980,6 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="66" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descuento sobre ventas"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblGastosDeVenta">
@@ -1008,7 +1001,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descuento sobre ventas"/>
+                <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblGastosFinancieros">
@@ -1019,7 +1012,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descuento sobre ventas"/>
+                <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblTotalGastosOperacion">
@@ -1054,7 +1047,6 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="66" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descuento sobre ventas"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblGastosGenerales">
@@ -1065,7 +1057,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descuento sobre ventas"/>
+                <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblOtrosGastos">
@@ -1087,7 +1079,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descuento sobre ventas"/>
+                <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblOtrosIngresos">
@@ -1098,7 +1090,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descuento sobre ventas"/>
+                <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblTotalGastosProductosFinancieros">
@@ -1133,7 +1125,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="66" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descuento sobre ventas"/>
+                <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblISR">
@@ -1144,7 +1136,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descuento sobre ventas"/>
+                <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblIMPAC">
@@ -1155,7 +1147,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descuento sobre ventas"/>
+                <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblImpuestosPagados">
@@ -1167,7 +1159,7 @@
                   <Color blue="33" green="33" red="33" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="text" type="java.lang.String" value="Ventas netas:"/>
+                <Property name="text" type="java.lang.String" value="-"/>
                 <Property name="horizontalTextPosition" type="int" value="4"/>
               </Properties>
             </Component>
@@ -1179,7 +1171,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descuento sobre ventas"/>
+                <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblUtilidadPerdidaAntesDeImpuestos">
@@ -1215,7 +1207,7 @@
                 <Property name="text" type="java.lang.String" value="Tienda"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cmbSucursalAbonos">
+            <Component class="javax.swing.JComboBox" name="cmbSucursalEstadoDeResultados">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="12" style="1"/>

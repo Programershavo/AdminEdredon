@@ -45,7 +45,7 @@
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="dee7d9af-81ce-412a-ae6c-a6dad2f89a3c" x="266" y="11" width="271" height="32" forecolor="#666666"/>
+				<reportElement uuid="dee7d9af-81ce-412a-ae6c-a6dad2f89a3c" x="267" y="11" width="271" height="32" forecolor="#666666"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="24" isBold="true"/>
 				</textElement>

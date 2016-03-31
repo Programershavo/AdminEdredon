@@ -163,7 +163,7 @@ public class CatalogoVentas extends javax.swing.JInternalFrame {
         //Verifico que la tabla no este vacia
         if (jtTabla.getRowCount() > 0) {
             //Si hay registros en la BD genero el reporte
-            reportMaker.ReportMakerNDB reporte = new reportMaker.ReportMakerNDB(jtTabla, "Compra");
+//            reportMaker.ReportMakerNDB reporte = new reportMaker.ReportMakerNDB(jtTabla, "Compra");
         } else {
             //Si no existen registros en la base de datos lo reporto al usuario
             JOptionPane.showMessageDialog(this, "No hay pagos de gasto"

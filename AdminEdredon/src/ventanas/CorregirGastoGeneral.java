@@ -41,7 +41,7 @@ public class CorregirGastoGeneral extends javax.swing.JInternalFrame {
         jdcFechaGasto.setDate(gastoGeneral.getFecha());
         txtConcepto.setText(gastoGeneral.getConcepto());
         txtSubConcepto.setText(String.valueOf(gastoGeneral.getSubconcepto()));
-        txtMotivo.setText(String.valueOf(gastoGeneral.getAcreedor()));
+        txtMotivo.setText(String.valueOf(gastoGeneral.getIdTienda()));
         txtComentario.setText(String.valueOf(gastoGeneral.getComentario()));
         txtImporte.setText(String.valueOf(gastoGeneral.getImporte()));
 
@@ -312,7 +312,7 @@ public class CorregirGastoGeneral extends javax.swing.JInternalFrame {
             gastoGeneral.setFecha(FechaHerramienta.convertirStringEnDate(fecha));
             gastoGeneral.setConcepto(txtConcepto.getText());
             gastoGeneral.setSubconcepto(txtSubConcepto.getText());
-            gastoGeneral.setAcreedor(txtMotivo.getText());
+            gastoGeneral.setTienda(txtMotivo.getText());
             gastoGeneral.setImporte(Double.parseDouble(txtImporte.getText()));
             gastoGeneral.setComentario(txtComentario.getText());
             acceso.Update(gastoGeneral);

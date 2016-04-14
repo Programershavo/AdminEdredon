@@ -1,5 +1,5 @@
 package pojos;
-// Generated 30/03/2016 06:14:56 PM by Hibernate Tools 4.3.1
+// Generated 14/04/2016 03:19:14 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -28,6 +28,7 @@ public class Diariocaja  implements java.io.Serializable {
      private String notas;
      private Double ventaConNota;
      private Double ventaSinNota;
+     private Double ventaConTarjeta;
      private Double abonoCredito;
      private Double gastos;
      private String comentario;
@@ -35,12 +36,13 @@ public class Diariocaja  implements java.io.Serializable {
     public Diariocaja() {
     }
 
-    public Diariocaja(String local, Date fecha, String notas, Double ventaConNota, Double ventaSinNota, Double abonoCredito, Double gastos, String comentario) {
+    public Diariocaja(String local, Date fecha, String notas, Double ventaConNota, Double ventaSinNota, Double ventaConTarjeta, Double abonoCredito, Double gastos, String comentario) {
        this.local = local;
        this.fecha = fecha;
        this.notas = notas;
        this.ventaConNota = ventaConNota;
        this.ventaSinNota = ventaSinNota;
+       this.ventaConTarjeta = ventaConTarjeta;
        this.abonoCredito = abonoCredito;
        this.gastos = gastos;
        this.comentario = comentario;
@@ -106,6 +108,16 @@ public class Diariocaja  implements java.io.Serializable {
     
     public void setVentaSinNota(Double ventaSinNota) {
         this.ventaSinNota = ventaSinNota;
+    }
+
+    
+    @Column(name="ventaConTarjeta", precision=22, scale=0)
+    public Double getVentaConTarjeta() {
+        return this.ventaConTarjeta;
+    }
+    
+    public void setVentaConTarjeta(Double ventaConTarjeta) {
+        this.ventaConTarjeta = ventaConTarjeta;
     }
 
     

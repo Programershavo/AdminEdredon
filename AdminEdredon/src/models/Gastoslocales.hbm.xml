@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/04/2016 03:19:24 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="adminedredon" name="pojos.Gastoslocales" optimistic-lock="version" table="gastoslocales">
+    <id name="idGastosLocales" type="java.lang.Integer">
+      <column name="idGastosLocales"/>
+      <generator class="identity"/>
+    </id>
+    <property name="idLocal" type="java.lang.Integer">
+      <column name="idLocal"/>
+    </property>
+    <property name="local" type="string">
+      <column length="45" name="local"/>
+    </property>
+    <property name="fecha" type="date">
+      <column length="10" name="fecha"/>
+    </property>
+    <property name="concepto" type="string">
+      <column length="45" name="concepto"/>
+    </property>
+    <property name="importe" type="java.lang.Double">
+      <column name="importe" precision="22" scale="0"/>
+    </property>
+    <property name="comentario" type="string">
+      <column length="45" name="comentario"/>
+    </property>
+  </class>
+</hibernate-mapping>

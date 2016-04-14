@@ -1,30 +1,32 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 30/03/2016 06:15:08 PM by Hibernate Tools 4.3.1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/04/2016 03:19:24 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="pojos.Gastosgenerales" table="gastosgenerales" catalog="adminedredon" optimistic-lock="version">
-        <id name="idGastosGenerales" type="java.lang.Integer">
-            <column name="idGastosGenerales" />
-            <generator class="identity" />
-        </id>
-        <property name="fecha" type="date">
-            <column name="fecha" length="10" />
-        </property>
-        <property name="concepto" type="string">
-            <column name="concepto" length="45" />
-        </property>
-        <property name="subconcepto" type="string">
-            <column name="subconcepto" length="45" />
-        </property>
-        <property name="acreedor" type="string">
-            <column name="acreedor" length="45" />
-        </property>
-        <property name="importe" type="java.lang.Double">
-            <column name="importe" precision="22" scale="0" />
-        </property>
-        <property name="comentario" type="string">
-            <column name="comentario" length="100" />
-        </property>
-    </class>
+  <class catalog="adminedredon" name="pojos.Gastosgenerales" optimistic-lock="version" table="gastosgenerales">
+    <id name="idGastosGenerales" type="java.lang.Integer">
+      <column name="idGastosGenerales"/>
+      <generator class="identity"/>
+    </id>
+    <property name="idTienda" type="java.lang.Integer">
+      <column name="idTienda"/>
+    </property>
+    <property name="fecha" type="date">
+      <column length="10" name="fecha"/>
+    </property>
+    <property name="tienda" type="string">
+      <column length="45" name="tienda"/>
+    </property>
+    <property name="concepto" type="string">
+      <column length="45" name="concepto"/>
+    </property>
+    <property name="subconcepto" type="string">
+      <column length="45" name="subconcepto"/>
+    </property>
+    <property name="comentario" type="string">
+      <column length="100" name="comentario"/>
+    </property>
+    <property name="importe" type="java.lang.Double">
+      <column name="importe" precision="22" scale="0"/>
+    </property>
+  </class>
 </hibernate-mapping>

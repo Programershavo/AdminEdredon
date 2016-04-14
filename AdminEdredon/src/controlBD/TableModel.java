@@ -9,12 +9,17 @@ public class TableModel extends AbstractTableModel {
 
     private String[] headerDiarioCaja = {"Clave", "Local", "Fecha", "Notas", "Ventas con Nota", "Ventas Sin Nota", "Abono Credito", "Gastos"};
     private String[] headerGastosGenerales = {"Clave", "Fecha", "Concepto", "Subconcepto", "Motivo", "Comentario", "Importe"};
-    private String[] headerExpedienteProveedor = {"Fecha", "Folio", "Proveedor", "Importe"};
-    private String[] headerContenidoExpediente = {"claveExpediente", "fecha", "producto", "piezas", "importe", "forma de pago", "estado"};
+    private String[] headerExpedienteProveedor = {"CE", "CP", "Proveedor", "Fecha", "Estado"};
+    private String[] headerContenidoExpediente = {"Clave ConExp", /*"Clave Exp", "Clave Pro", */ "fecha", "folio", "Proveedor", "piezas", "importe"/*, "forma de pago", "abono", "estado", "saldo"*/};
+    private String[] headerConExpRes = {"Clave ConExp", "Fecha", "Folio", "Piezas", "Cargo", "Abono", "Saldo", "Estado"};
+    private String[] headerAbonoProveedores = {"Clave Abono", "Fecha", "Folio", "Cargo", "Abono", "Saldo", "Forma de pago"};
     private String[] headerLinea = {"clave", "Nombre"};
     private String[] headerSucursal = {"clave", "Nombre"};
     private String[] headerProveedor = {"clave", "Nombre"};
     private String[] headerCliente = {"clave", "Nombre"};
+    private String[] headerGastosOficina = {"ClaGasOfi", "fecha", "concepto", "concpeto", "importe", "comentarios"};
+    private String[] headerGastosLocales = {"Clave", "claveLocal", "local", "fecha", "concepto", "importe", "comentario"};
+    private String[] headerGastosPersonales = {"Clave", "fecha", "concepto", "comentario", "importe"};
 
     //Este arreglo guarda los encabezados y lo registros
     public Object[][] tableModel;
@@ -73,14 +78,23 @@ public class TableModel extends AbstractTableModel {
             case "Diariocaja":
                 titulosDeColumnas = headerDiarioCaja;
                 break;
-            case "Gastosgenerales":
-                titulosDeColumnas = headerGastosGenerales;
+            case "GastosOficinaBodega":
+                titulosDeColumnas = headerGastosOficina;
+                break;
+            case "GastosLocales":
+                titulosDeColumnas = headerGastosLocales;
+                break;
+            case "GastosPersonales":
+                titulosDeColumnas = headerGastosPersonales;
                 break;
             case "Expediente":
                 titulosDeColumnas = headerExpedienteProveedor;
                 break;
             case "ContenidoExpediente":
                 titulosDeColumnas = headerContenidoExpediente;
+                break;
+            case "ContenidoExpediente2":
+                titulosDeColumnas = headerConExpRes;
                 break;
             case "Linea":
                 titulosDeColumnas = headerLinea;
@@ -94,6 +108,8 @@ public class TableModel extends AbstractTableModel {
             case "Cliente":
                 titulosDeColumnas = headerCliente;
                 break;
+            case "AbonoProveedores":
+                titulosDeColumnas = headerAbonoProveedores;
         }
         return titulosDeColumnas;
     }
@@ -147,6 +163,96 @@ public class TableModel extends AbstractTableModel {
                     throw e;
                 }
                 break;
+            case "GastosOficinaBodega":
+                try {
+                    while (listaDeObjetos.hasNext()) {
+                        while (contCol < numColumnas && listaDeObjetos.hasNext()) {
+                            pojos.Gastosoficinabodega concepto = (pojos.Gastosoficinabodega) listaDeObjetos.next();
+                            tableModel[contFila][contCol] = concepto.getIdGastosOficinaBodega();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = FechaHerramienta.formatoYMD(concepto.getFecha());
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getConcepto();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getImporte();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getComentarios();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                        }
+                        contCol = 0;
+                        contFila++;
+                    }
+                } catch (Exception e) {
+                    throw e;
+                }
+                break;
+            case "GastosLocales":
+                try {
+                    while (listaDeObjetos.hasNext()) {
+                        while (contCol < numColumnas && listaDeObjetos.hasNext()) {
+                            pojos.Gastoslocales concepto = (pojos.Gastoslocales) listaDeObjetos.next();
+                            tableModel[contFila][contCol] = concepto.getIdGastosLocales();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getIdLocal();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getLocal();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = FechaHerramienta.formatoYMD(concepto.getFecha());
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getConcepto();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getImporte();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getComentario();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                        }
+                        contCol = 0;
+                        contFila++;
+                    }
+                } catch (Exception e) {
+                    throw e;
+                }
+                break;
+            case "GastosPersonales":
+                try {
+                    while (listaDeObjetos.hasNext()) {
+                        while (contCol < numColumnas && listaDeObjetos.hasNext()) {
+                            pojos.Gastospersonales concepto = (pojos.Gastospersonales) listaDeObjetos.next();
+                            tableModel[contFila][contCol] = concepto.getIdGastosPersonales();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = FechaHerramienta.formatoYMD(concepto.getFecha());
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getConcepto();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getComentarios();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getImporte();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;                            
+                        }
+                        contCol = 0;
+                        contFila++;
+                    }
+                } catch (Exception e) {
+                    throw e;
+                }
+                break;
             case "Gastosgenerales":
                 try {
                     while (listaDeObjetos.hasNext()) {
@@ -164,7 +270,7 @@ public class TableModel extends AbstractTableModel {
                             tableModel[contFila][contCol] = concepto.getSubconcepto();
                             this.isCellEditable(contFila, contCol);
                             contCol++;
-                            tableModel[contFila][contCol] = concepto.getAcreedor();
+                            tableModel[contFila][contCol] = concepto.getTienda();
                             this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = String.valueOf(concepto.getImporte());
@@ -186,13 +292,16 @@ public class TableModel extends AbstractTableModel {
                     while (listaDeObjetos.hasNext()) {
                         while (contCol < numColumnas && listaDeObjetos.hasNext()) {
                             pojos.Expediente expediente = (pojos.Expediente) listaDeObjetos.next();
+                            tableModel[contFila][contCol] = expediente.getIdExpediente();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = expediente.getIdProveedor();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
                             tableModel[contFila][contCol] = expediente.getNombreProveedor();
                             this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = String.valueOf(expediente.getFechaApertura());
-                            this.isCellEditable(contFila, contCol);
-                            contCol++;
-                            tableModel[contFila][contCol] = expediente.getFolio();
                             this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = expediente.getEstadoGeneral();
@@ -211,16 +320,22 @@ public class TableModel extends AbstractTableModel {
                     while (listaDeObjetos.hasNext()) {
                         while (contCol < numColumnas && listaDeObjetos.hasNext()) {
                             pojos.Contenidoexpediente contenidoExpediente = (pojos.Contenidoexpediente) listaDeObjetos.next();
-                            tableModel[contFila][contCol] = contenidoExpediente.getIdExpediente();
+                            tableModel[contFila][contCol] = contenidoExpediente.getIdContenidoExpediente();
                             this.isCellEditable(contFila, contCol);
                             contCol++;
+//                            tableModel[contFila][contCol] = contenidoExpediente.getIdExpediente();
+//                            this.isCellEditable(contFila, contCol);
+//                            contCol++;
+//                            tableModel[contFila][contCol] = contenidoExpediente.getIdProveedor();
+//                            this.isCellEditable(contFila, contCol);
+//                            contCol++;
                             tableModel[contFila][contCol] = String.valueOf(contenidoExpediente.getFecha());
                             this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = contenidoExpediente.getFolio();
                             this.isCellEditable(contFila, contCol);
                             contCol++;
-                            tableModel[contFila][contCol] = contenidoExpediente.getProducto();
+                            tableModel[contFila][contCol] = contenidoExpediente.getProveedor();
                             this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = String.valueOf(contenidoExpediente.getPiezas());
@@ -229,10 +344,87 @@ public class TableModel extends AbstractTableModel {
                             tableModel[contFila][contCol] = String.valueOf(contenidoExpediente.getImporte());
                             this.isCellEditable(contFila, contCol);
                             contCol++;
-                            tableModel[contFila][contCol] = contenidoExpediente.getFormaDePago();
+//                            tableModel[contFila][contCol] = contenidoExpediente.getFormaDePago();
+//                            this.isCellEditable(contFila, contCol);
+//                            contCol++;
+//                            tableModel[contFila][contCol] = String.valueOf(contenidoExpediente.getAbono());
+//                            this.isCellEditable(contFila, contCol);
+//                            contCol++;
+//                            tableModel[contFila][contCol] = contenidoExpediente.getEstadoIndividualFolio();
+//                            this.isCellEditable(contFila, contCol);
+//                            contCol++;
+//                            tableModel[contFila][contCol] = contenidoExpediente.getSaldo();
+//                            this.isCellEditable(contFila, contCol);
+//                            contCol++;
+                        }
+                        contCol = 0;
+                        contFila++;
+                    }
+                } catch (Exception e) {
+                    throw e;
+                }
+                break;
+            case "ContenidoExpediente2":
+                try {
+                    while (listaDeObjetos.hasNext()) {
+                        while (contCol < numColumnas && listaDeObjetos.hasNext()) {
+                            pojos.Contenidoexpediente contenidoExpediente = (pojos.Contenidoexpediente) listaDeObjetos.next();
+                            tableModel[contFila][contCol] = contenidoExpediente.getIdContenidoExpediente();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = String.valueOf(contenidoExpediente.getFecha());
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = contenidoExpediente.getFolio();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = contenidoExpediente.getPiezas();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = String.valueOf(contenidoExpediente.getImporte());
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = String.valueOf(contenidoExpediente.getAbono());
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = contenidoExpediente.getSaldo();
                             this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = contenidoExpediente.getEstadoIndividualFolio();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                        }
+                        contCol = 0;
+                        contFila++;
+                    }
+                } catch (Exception e) {
+                    throw e;
+                }
+                break;
+            case "AbonoProveedores":
+                try {
+                    while (listaDeObjetos.hasNext()) {
+                        while (contCol < numColumnas && listaDeObjetos.hasNext()) {
+                            pojos.Abonoproveedor abonoProveedor = (pojos.Abonoproveedor) listaDeObjetos.next();
+                            tableModel[contFila][contCol] = abonoProveedor.getIdContenidoExpediente();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = String.valueOf(abonoProveedor.getFecha());
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = abonoProveedor.getFolio();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = String.valueOf(abonoProveedor.getCargo());
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = String.valueOf(abonoProveedor.getAbono());
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = abonoProveedor.getSaldo();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = abonoProveedor.getFormaDePago();
                             this.isCellEditable(contFila, contCol);
                             contCol++;
                         }

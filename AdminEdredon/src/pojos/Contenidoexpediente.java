@@ -1,10 +1,12 @@
 package pojos;
-// Generated 30/03/2016 06:14:56 PM by Hibernate Tools 4.3.1
+// Generated 14/04/2016 03:19:14 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,44 +22,45 @@ import javax.persistence.TemporalType;
 public class Contenidoexpediente  implements java.io.Serializable {
 
 
-     private int idContenidoExpediente;
+     private Integer idContenidoExpediente;
      private Integer idExpediente;
+     private Integer idProveedor;
+     private String proveedor;
      private Date fecha;
      private String folio;
-     private String producto;
      private Integer piezas;
      private Double importe;
      private String formaDePago;
+     private Double abono;
      private String estadoIndividualFolio;
+     private Double saldo;
 
     public Contenidoexpediente() {
     }
 
-	
-    public Contenidoexpediente(int idContenidoExpediente) {
-        this.idContenidoExpediente = idContenidoExpediente;
-    }
-    public Contenidoexpediente(int idContenidoExpediente, Integer idExpediente, Date fecha, String folio, String producto, Integer piezas, Double importe, String formaDePago, String estadoIndividualFolio) {
-       this.idContenidoExpediente = idContenidoExpediente;
+    public Contenidoexpediente(Integer idExpediente, Integer idProveedor, String proveedor, Date fecha, String folio, Integer piezas, Double importe, String formaDePago, Double abono, String estadoIndividualFolio, Double saldo) {
        this.idExpediente = idExpediente;
+       this.idProveedor = idProveedor;
+       this.proveedor = proveedor;
        this.fecha = fecha;
        this.folio = folio;
-       this.producto = producto;
        this.piezas = piezas;
        this.importe = importe;
        this.formaDePago = formaDePago;
+       this.abono = abono;
        this.estadoIndividualFolio = estadoIndividualFolio;
+       this.saldo = saldo;
     }
    
-     @Id 
+     @Id @GeneratedValue(strategy=IDENTITY)
 
     
     @Column(name="idContenidoExpediente", unique=true, nullable=false)
-    public int getIdContenidoExpediente() {
+    public Integer getIdContenidoExpediente() {
         return this.idContenidoExpediente;
     }
     
-    public void setIdContenidoExpediente(int idContenidoExpediente) {
+    public void setIdContenidoExpediente(Integer idContenidoExpediente) {
         this.idContenidoExpediente = idContenidoExpediente;
     }
 
@@ -69,6 +72,26 @@ public class Contenidoexpediente  implements java.io.Serializable {
     
     public void setIdExpediente(Integer idExpediente) {
         this.idExpediente = idExpediente;
+    }
+
+    
+    @Column(name="idProveedor")
+    public Integer getIdProveedor() {
+        return this.idProveedor;
+    }
+    
+    public void setIdProveedor(Integer idProveedor) {
+        this.idProveedor = idProveedor;
+    }
+
+    
+    @Column(name="proveedor", length=45)
+    public String getProveedor() {
+        return this.proveedor;
+    }
+    
+    public void setProveedor(String proveedor) {
+        this.proveedor = proveedor;
     }
 
     @Temporal(TemporalType.DATE)
@@ -89,16 +112,6 @@ public class Contenidoexpediente  implements java.io.Serializable {
     
     public void setFolio(String folio) {
         this.folio = folio;
-    }
-
-    
-    @Column(name="producto", length=45)
-    public String getProducto() {
-        return this.producto;
-    }
-    
-    public void setProducto(String producto) {
-        this.producto = producto;
     }
 
     
@@ -132,6 +145,16 @@ public class Contenidoexpediente  implements java.io.Serializable {
     }
 
     
+    @Column(name="abono", precision=22, scale=0)
+    public Double getAbono() {
+        return this.abono;
+    }
+    
+    public void setAbono(Double abono) {
+        this.abono = abono;
+    }
+
+    
     @Column(name="estadoIndividualFolio", length=45)
     public String getEstadoIndividualFolio() {
         return this.estadoIndividualFolio;
@@ -139,6 +162,16 @@ public class Contenidoexpediente  implements java.io.Serializable {
     
     public void setEstadoIndividualFolio(String estadoIndividualFolio) {
         this.estadoIndividualFolio = estadoIndividualFolio;
+    }
+
+    
+    @Column(name="saldo", precision=22, scale=0)
+    public Double getSaldo() {
+        return this.saldo;
+    }
+    
+    public void setSaldo(Double saldo) {
+        this.saldo = saldo;
     }
 
 

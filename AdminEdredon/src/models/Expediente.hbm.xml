@@ -1,30 +1,23 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 30/03/2016 06:15:08 PM by Hibernate Tools 4.3.1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/04/2016 03:19:24 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="pojos.Expediente" table="expediente" catalog="adminedredon" optimistic-lock="version">
-        <id name="idExpediente" type="int">
-            <column name="idExpediente" />
-            <generator class="assigned" />
-        </id>
-        <property name="idProveedor" type="java.lang.Integer">
-            <column name="idProveedor" />
-        </property>
-        <property name="nombreProveedor" type="string">
-            <column name="nombreProveedor" length="45" />
-        </property>
-        <property name="fechaApertura" type="date">
-            <column name="fechaApertura" length="10" />
-        </property>
-        <property name="folio" type="string">
-            <column name="folio" length="45" />
-        </property>
-        <property name="importeGeneral" type="java.lang.Double">
-            <column name="importeGeneral" precision="22" scale="0" />
-        </property>
-        <property name="estadoGeneral" type="string">
-            <column name="estadoGeneral" length="45" />
-        </property>
-    </class>
+  <class catalog="adminedredon" name="pojos.Expediente" optimistic-lock="version" table="expediente">
+    <id name="idExpediente" type="java.lang.Integer">
+      <column name="idExpediente"/>
+      <generator class="identity"/>
+    </id>
+    <property name="idProveedor" type="java.lang.Integer">
+      <column name="idProveedor"/>
+    </property>
+    <property name="nombreProveedor" type="string">
+      <column length="45" name="nombreProveedor"/>
+    </property>
+    <property name="fechaApertura" type="date">
+      <column length="10" name="fechaApertura"/>
+    </property>
+    <property name="estadoGeneral" type="string">
+      <column length="45" name="estadoGeneral"/>
+    </property>
+  </class>
 </hibernate-mapping>

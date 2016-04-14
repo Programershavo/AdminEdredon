@@ -1,10 +1,12 @@
 package pojos;
-// Generated 30/03/2016 06:14:56 PM by Hibernate Tools 4.3.1
+// Generated 14/04/2016 03:19:14 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,40 +22,31 @@ import javax.persistence.TemporalType;
 public class Expediente  implements java.io.Serializable {
 
 
-     private int idExpediente;
+     private Integer idExpediente;
      private Integer idProveedor;
      private String nombreProveedor;
      private Date fechaApertura;
-     private String folio;
-     private Double importeGeneral;
      private String estadoGeneral;
 
     public Expediente() {
     }
 
-	
-    public Expediente(int idExpediente) {
-        this.idExpediente = idExpediente;
-    }
-    public Expediente(int idExpediente, Integer idProveedor, String nombreProveedor, Date fechaApertura, String folio, Double importeGeneral, String estadoGeneral) {
-       this.idExpediente = idExpediente;
+    public Expediente(Integer idProveedor, String nombreProveedor, Date fechaApertura, String estadoGeneral) {
        this.idProveedor = idProveedor;
        this.nombreProveedor = nombreProveedor;
        this.fechaApertura = fechaApertura;
-       this.folio = folio;
-       this.importeGeneral = importeGeneral;
        this.estadoGeneral = estadoGeneral;
     }
    
-     @Id 
+     @Id @GeneratedValue(strategy=IDENTITY)
 
     
     @Column(name="idExpediente", unique=true, nullable=false)
-    public int getIdExpediente() {
+    public Integer getIdExpediente() {
         return this.idExpediente;
     }
     
-    public void setIdExpediente(int idExpediente) {
+    public void setIdExpediente(Integer idExpediente) {
         this.idExpediente = idExpediente;
     }
 
@@ -85,26 +78,6 @@ public class Expediente  implements java.io.Serializable {
     
     public void setFechaApertura(Date fechaApertura) {
         this.fechaApertura = fechaApertura;
-    }
-
-    
-    @Column(name="folio", length=45)
-    public String getFolio() {
-        return this.folio;
-    }
-    
-    public void setFolio(String folio) {
-        this.folio = folio;
-    }
-
-    
-    @Column(name="importeGeneral", precision=22, scale=0)
-    public Double getImporteGeneral() {
-        return this.importeGeneral;
-    }
-    
-    public void setImporteGeneral(Double importeGeneral) {
-        this.importeGeneral = importeGeneral;
     }
 
     

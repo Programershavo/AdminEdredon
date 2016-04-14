@@ -409,39 +409,39 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                         .addComponent(jSeparator1)
                         .addContainerGap())
                     .addGroup(jpCreditosLayout.createSequentialGroup()
-                        .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpCreditosLayout.createSequentialGroup()
+                        .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel35, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNotas, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                            .addComponent(cmbConceptoLocales, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpCreditosLayout.createSequentialGroup()
                                 .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel35, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtNotas, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                                    .addComponent(cmbConceptoLocales, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jdcFechaRegistroDiario, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblLocal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblLocal1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtVentaSinNota, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtVentaConNota, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpCreditosLayout.createSequentialGroup()
+                                .addComponent(lblLocal3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblLocal4, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpCreditosLayout.createSequentialGroup()
+                                .addComponent(txtCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jpCreditosLayout.createSequentialGroup()
-                                        .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jdcFechaRegistroDiario, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-                                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lblLocal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(lblLocal1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtVentaSinNota, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(txtVentaConNota, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jpCreditosLayout.createSequentialGroup()
-                                        .addComponent(lblLocal3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblLocal4, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jpCreditosLayout.createSequentialGroup()
-                                        .addComponent(txtCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jpCreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnAnotar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtGastosDeVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addContainerGap(111, Short.MAX_VALUE))))
+                                    .addComponent(btnAnotar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtGastosDeVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(111, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCreditosLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2)
+                        .addContainerGap())))
         );
 
         jpCreditosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jdcFechaRegistroDiario, txtVentaConNota});
@@ -1477,7 +1477,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         crearConsultaGlobal();
         cargaTabla(jtTablaDiarioCorrecion, HQL, "Diariocaja");
         String query = "FROM Sucursal s ORDER BY s.nombre";
-        llenarCombo(cmbDiarioCorregir, query, "local",true);
+        llenarCombo(cmbDiarioCorregir, query, "local", true);
         //jdcFechaRegistroDiario.setDate(new Date());
         // jdcFechaCorreccionInicio.setDate(new Date());
         //jdcFechaCorreccionFin.setDate(new Date());
@@ -1485,7 +1485,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
 
     private void jpCreditosComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpCreditosComponentShown
         String query = "FROM Sucursal s ORDER BY s.nombre";
-        llenarCombo(cmbConceptoLocales, query, "local",false);
+        llenarCombo(cmbConceptoLocales, query, "local", false);
         //jdcFechaRegistroDiario.setDate(new Date());
 //        jdcFechaCorreccionInicio.setDate(new Date());
 //        jdcFechaCorreccionFin.setDate(new Date());
@@ -1502,7 +1502,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
                 if (todas) {
                     combo.addItem("Todas");
                 }
-                
+
                 for (int i = 0; i < listaItems.size(); i++) {
                     switch (tipoLista) {
                         case "concepto":
@@ -1765,7 +1765,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         crearConsultaGlobal();
         crearResumen();
         String query = "FROM Sucursal s ORDER BY s.nombre";
-        llenarCombo(cmbTiendaResumen, query, "local",true);
+        llenarCombo(cmbTiendaResumen, query, "local", true);
     }//GEN-LAST:event_jpResumenComponentShown
 
     private void btnSalirResumenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirResumenActionPerformed

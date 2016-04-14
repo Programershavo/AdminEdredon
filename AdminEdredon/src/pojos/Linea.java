@@ -1,5 +1,5 @@
 package pojos;
-// Generated 30/03/2016 06:14:56 PM by Hibernate Tools 4.3.1
+// Generated 14/04/2016 03:19:14 PM by Hibernate Tools 4.3.1
 
 
 import javax.persistence.Column;
@@ -20,12 +20,14 @@ public class Linea  implements java.io.Serializable {
 
 
      private Integer idLinea;
+     private Integer idLocal;
      private String nombre;
 
     public Linea() {
     }
 
-    public Linea(String nombre) {
+    public Linea(Integer idLocal, String nombre) {
+       this.idLocal = idLocal;
        this.nombre = nombre;
     }
    
@@ -39,6 +41,16 @@ public class Linea  implements java.io.Serializable {
     
     public void setIdLinea(Integer idLinea) {
         this.idLinea = idLinea;
+    }
+
+    
+    @Column(name="idLocal")
+    public Integer getIdLocal() {
+        return this.idLocal;
+    }
+    
+    public void setIdLocal(Integer idLocal) {
+        this.idLocal = idLocal;
     }
 
     

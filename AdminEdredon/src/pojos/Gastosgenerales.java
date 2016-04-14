@@ -1,5 +1,5 @@
 package pojos;
-// Generated 30/03/2016 06:14:56 PM by Hibernate Tools 4.3.1
+// Generated 14/04/2016 03:19:14 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -23,23 +23,25 @@ public class Gastosgenerales  implements java.io.Serializable {
 
 
      private Integer idGastosGenerales;
+     private Integer idTienda;
      private Date fecha;
+     private String tienda;
      private String concepto;
      private String subconcepto;
-     private String acreedor;
-     private Double importe;
      private String comentario;
+     private Double importe;
 
     public Gastosgenerales() {
     }
 
-    public Gastosgenerales(Date fecha, String concepto, String subconcepto, String acreedor, Double importe, String comentario) {
+    public Gastosgenerales(Integer idTienda, Date fecha, String tienda, String concepto, String subconcepto, String comentario, Double importe) {
+       this.idTienda = idTienda;
        this.fecha = fecha;
+       this.tienda = tienda;
        this.concepto = concepto;
        this.subconcepto = subconcepto;
-       this.acreedor = acreedor;
-       this.importe = importe;
        this.comentario = comentario;
+       this.importe = importe;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -54,6 +56,16 @@ public class Gastosgenerales  implements java.io.Serializable {
         this.idGastosGenerales = idGastosGenerales;
     }
 
+    
+    @Column(name="idTienda")
+    public Integer getIdTienda() {
+        return this.idTienda;
+    }
+    
+    public void setIdTienda(Integer idTienda) {
+        this.idTienda = idTienda;
+    }
+
     @Temporal(TemporalType.DATE)
     @Column(name="fecha", length=10)
     public Date getFecha() {
@@ -62,6 +74,16 @@ public class Gastosgenerales  implements java.io.Serializable {
     
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    
+    @Column(name="tienda", length=45)
+    public String getTienda() {
+        return this.tienda;
+    }
+    
+    public void setTienda(String tienda) {
+        this.tienda = tienda;
     }
 
     
@@ -85,13 +107,13 @@ public class Gastosgenerales  implements java.io.Serializable {
     }
 
     
-    @Column(name="acreedor", length=45)
-    public String getAcreedor() {
-        return this.acreedor;
+    @Column(name="comentario", length=100)
+    public String getComentario() {
+        return this.comentario;
     }
     
-    public void setAcreedor(String acreedor) {
-        this.acreedor = acreedor;
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
 
     
@@ -102,16 +124,6 @@ public class Gastosgenerales  implements java.io.Serializable {
     
     public void setImporte(Double importe) {
         this.importe = importe;
-    }
-
-    
-    @Column(name="comentario", length=100)
-    public String getComentario() {
-        return this.comentario;
-    }
-    
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
     }
 
 

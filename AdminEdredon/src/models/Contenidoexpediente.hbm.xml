@@ -1,36 +1,44 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 30/03/2016 06:15:08 PM by Hibernate Tools 4.3.1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/04/2016 03:19:24 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="pojos.Contenidoexpediente" table="contenidoexpediente" catalog="adminedredon" optimistic-lock="version">
-        <id name="idContenidoExpediente" type="int">
-            <column name="idContenidoExpediente" />
-            <generator class="assigned" />
-        </id>
-        <property name="idExpediente" type="java.lang.Integer">
-            <column name="idExpediente" />
-        </property>
-        <property name="fecha" type="date">
-            <column name="fecha" length="10" />
-        </property>
-        <property name="folio" type="string">
-            <column name="folio" length="45" />
-        </property>
-        <property name="producto" type="string">
-            <column name="producto" length="45" />
-        </property>
-        <property name="piezas" type="java.lang.Integer">
-            <column name="piezas" />
-        </property>
-        <property name="importe" type="java.lang.Double">
-            <column name="importe" precision="22" scale="0" />
-        </property>
-        <property name="formaDePago" type="string">
-            <column name="formaDePago" length="45" />
-        </property>
-        <property name="estadoIndividualFolio" type="string">
-            <column name="estadoIndividualFolio" length="45" />
-        </property>
-    </class>
+  <class catalog="adminedredon" name="pojos.Contenidoexpediente" optimistic-lock="version" table="contenidoexpediente">
+    <id name="idContenidoExpediente" type="java.lang.Integer">
+      <column name="idContenidoExpediente"/>
+      <generator class="identity"/>
+    </id>
+    <property name="idExpediente" type="java.lang.Integer">
+      <column name="idExpediente"/>
+    </property>
+    <property name="idProveedor" type="java.lang.Integer">
+      <column name="idProveedor"/>
+    </property>
+    <property name="proveedor" type="string">
+      <column length="45" name="proveedor"/>
+    </property>
+    <property name="fecha" type="date">
+      <column length="10" name="fecha"/>
+    </property>
+    <property name="folio" type="string">
+      <column length="45" name="folio"/>
+    </property>
+    <property name="piezas" type="java.lang.Integer">
+      <column name="piezas"/>
+    </property>
+    <property name="importe" type="java.lang.Double">
+      <column name="importe" precision="22" scale="0"/>
+    </property>
+    <property name="formaDePago" type="string">
+      <column length="45" name="formaDePago"/>
+    </property>
+    <property name="abono" type="java.lang.Double">
+      <column name="abono" precision="22" scale="0"/>
+    </property>
+    <property name="estadoIndividualFolio" type="string">
+      <column length="45" name="estadoIndividualFolio"/>
+    </property>
+    <property name="saldo" type="java.lang.Double">
+      <column name="saldo" precision="22" scale="0"/>
+    </property>
+  </class>
 </hibernate-mapping>

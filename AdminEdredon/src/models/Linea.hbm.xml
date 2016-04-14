@@ -1,15 +1,17 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 30/03/2016 06:15:08 PM by Hibernate Tools 4.3.1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/04/2016 03:19:24 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="pojos.Linea" table="linea" catalog="adminedredon" optimistic-lock="version">
-        <id name="idLinea" type="java.lang.Integer">
-            <column name="idLinea" />
-            <generator class="identity" />
-        </id>
-        <property name="nombre" type="string">
-            <column name="nombre" length="45" />
-        </property>
-    </class>
+  <class catalog="adminedredon" name="pojos.Linea" optimistic-lock="version" table="linea">
+    <id name="idLinea" type="java.lang.Integer">
+      <column name="idLinea"/>
+      <generator class="identity"/>
+    </id>
+    <property name="idLocal" type="java.lang.Integer">
+      <column name="idLocal"/>
+    </property>
+    <property name="nombre" type="string">
+      <column length="45" name="nombre"/>
+    </property>
+  </class>
 </hibernate-mapping>

@@ -4,21 +4,26 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/adminEdredon?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/Adminedredon?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">root</property>
     <mapping resource="models/Expediente.hbm.xml"/>
     <mapping resource="models/Gastosoficinabodega.hbm.xml"/>
     <mapping resource="models/Abonoproveedor.hbm.xml"/>
+    <mapping resource="models/Gastogasolina.hbm.xml"/>
+    <mapping resource="models/Mantenimiento.hbm.xml"/>
     <mapping resource="models/Linea.hbm.xml"/>
     <mapping resource="models/Gastoslocales.hbm.xml"/>
     <mapping resource="models/Contenidoexpediente.hbm.xml"/>
     <mapping resource="models/Sucursal.hbm.xml"/>
     <mapping resource="models/Proveedores.hbm.xml"/>
     <mapping resource="models/Clientes.hbm.xml"/>
+    <mapping resource="models/Gastosfinancieros.hbm.xml"/>
     <mapping resource="models/Gastospersonales.hbm.xml"/>
     <mapping resource="models/Diariocaja.hbm.xml"/>
     <mapping resource="models/Detalledegasto.hbm.xml"/>
     <mapping resource="models/Gastosgenerales.hbm.xml"/>
+    <mapping resource="models/Gastomantenimientov.hbm.xml"/>
+    <mapping resource="models/Vehiculo.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

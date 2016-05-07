@@ -20,6 +20,11 @@ public class TableModel extends AbstractTableModel {
     private String[] headerGastosOficina = {"ClaGasOfi", "fecha", "concepto", "concpeto", "importe", "comentarios"};
     private String[] headerGastosLocales = {"Clave", "claveLocal", "local", "fecha", "concepto", "importe", "comentario"};
     private String[] headerGastosPersonales = {"Clave", "fecha", "concepto", "comentario", "importe"};
+    private String[] headerVehiculo = {"Clave", "Vehiculo", "Dueño", "Color", "Año", "Placas"};
+    private String[] headerGastogasolina = {"Clave", "Fecha", "Vehiculo", "Comentario", "Importe"};
+    private String[] headerMantenimiento = {"Clave", "Mantenimiento"};
+    private String[] headerGastomantenimientov = {"Clave", "Fecha", "Vehiculo", "Mantenimiento", "Coementario", "Importe"};
+    private String[] headerGastosFinancieros = {"id", "Fecha", "Concepto", "Importe", "Coementario", "Generado por"};
 
     //Este arreglo guarda los encabezados y lo registros
     public Object[][] tableModel;
@@ -78,6 +83,9 @@ public class TableModel extends AbstractTableModel {
             case "Diariocaja":
                 titulosDeColumnas = headerDiarioCaja;
                 break;
+            case "Mantenimiento":
+                titulosDeColumnas = headerMantenimiento;
+                break;
             case "GastosOficinaBodega":
                 titulosDeColumnas = headerGastosOficina;
                 break;
@@ -110,6 +118,19 @@ public class TableModel extends AbstractTableModel {
                 break;
             case "AbonoProveedores":
                 titulosDeColumnas = headerAbonoProveedores;
+                break;
+            case "Vehiculo":
+                titulosDeColumnas = headerVehiculo;
+                break;
+            case "Gastogasolina":
+                titulosDeColumnas = headerGastogasolina;
+                break;
+            case "Gastomantenimientov":
+                titulosDeColumnas = headerGastomantenimientov;
+                break;
+            case "Gastofinanciero":
+                titulosDeColumnas = headerGastosFinancieros;
+                break;
         }
         return titulosDeColumnas;
     }
@@ -191,6 +212,96 @@ public class TableModel extends AbstractTableModel {
                     throw e;
                 }
                 break;
+            case "Gastofinanciero":
+                try {
+                    while (listaDeObjetos.hasNext()) {
+                        while (contCol < numColumnas && listaDeObjetos.hasNext()) {
+                            pojos.Gastosfinancieros concepto = (pojos.Gastosfinancieros) listaDeObjetos.next();
+                            tableModel[contFila][contCol] = concepto.getIdGastosFinancieros();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = FechaHerramienta.formatoYMD(concepto.getFecha());
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getConcepto();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getImporte();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getComentarios();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getAcreedor();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                        }
+                        contCol = 0;
+                        contFila++;
+                    }
+                } catch (Exception e) {
+                    throw e;
+                }
+                break;
+            case "Gastomantenimientov":
+                try {
+                    while (listaDeObjetos.hasNext()) {
+                        while (contCol < numColumnas && listaDeObjetos.hasNext()) {
+                            pojos.Gastomantenimientov concepto = (pojos.Gastomantenimientov) listaDeObjetos.next();
+                            tableModel[contFila][contCol] = concepto.getIdGastoMantenimientoV();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = FechaHerramienta.formatoYMD(concepto.getFecha());
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getVehiculo();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getMantenimiento();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getComentario();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getImporte();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                        }
+                        contCol = 0;
+                        contFila++;
+                    }
+                } catch (Exception e) {
+                    throw e;
+                }
+                break;
+            case "Gastogasolina":
+                try {
+                    while (listaDeObjetos.hasNext()) {
+                        while (contCol < numColumnas && listaDeObjetos.hasNext()) {
+                            pojos.Gastogasolina concepto = (pojos.Gastogasolina) listaDeObjetos.next();
+                            tableModel[contFila][contCol] = concepto.getIdGastoGasolina();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = FechaHerramienta.formatoYMD(concepto.getFecha());
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getVehiculo();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getComentario();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = concepto.getImporte();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                        }
+                        contCol = 0;
+                        contFila++;
+                    }
+                } catch (Exception e) {
+                    throw e;
+                }
+                break;
             case "GastosLocales":
                 try {
                     while (listaDeObjetos.hasNext()) {
@@ -244,7 +355,7 @@ public class TableModel extends AbstractTableModel {
                             contCol++;
                             tableModel[contFila][contCol] = concepto.getImporte();
                             this.isCellEditable(contFila, contCol);
-                            contCol++;                            
+                            contCol++;
                         }
                         contCol = 0;
                         contFila++;
@@ -277,6 +388,37 @@ public class TableModel extends AbstractTableModel {
                             this.isCellEditable(contFila, contCol);
                             contCol++;
                             tableModel[contFila][contCol] = concepto.getComentario();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                        }
+                        contCol = 0;
+                        contFila++;
+                    }
+                } catch (Exception e) {
+                    throw e;
+                }
+                break;
+            case "Vehiculo":
+                try {
+                    while (listaDeObjetos.hasNext()) {
+                        while (contCol < numColumnas && listaDeObjetos.hasNext()) {
+                            pojos.Vehiculo vehiculo = (pojos.Vehiculo) listaDeObjetos.next();
+                            tableModel[contFila][contCol] = vehiculo.getIdvehiculo();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = vehiculo.getVehiculo();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = vehiculo.getDuenio();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = vehiculo.getColor();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = vehiculo.getAnio();
+                            this.isCellEditable(contFila, contCol);
+                            contCol++;
+                            tableModel[contFila][contCol] = vehiculo.getPlacas();
                             this.isCellEditable(contFila, contCol);
                             contCol++;
                         }
@@ -560,6 +702,23 @@ public class TableModel extends AbstractTableModel {
                             tableModel[contFila][contCol] = sucursal.getIdSucursal();
                             contCol++;
                             tableModel[contFila][contCol] = sucursal.getNombre();
+                            contCol++;
+                        }
+                        contCol = 0;
+                        contFila++;
+                    }
+                } catch (Exception e) {
+                    throw e;
+                }
+                break;
+            case "Mantenimiento":
+                try {
+                    while (listaDeObjetos.hasNext()) {
+                        while (contCol < numColumnas && listaDeObjetos.hasNext()) {
+                            pojos.Mantenimiento mantenimiento = (pojos.Mantenimiento) listaDeObjetos.next();
+                            tableModel[contFila][contCol] = mantenimiento.getIdMantenimiento();
+                            contCol++;
+                            tableModel[contFila][contCol] = mantenimiento.getMantenimiento();
                             contCol++;
                         }
                         contCol = 0;

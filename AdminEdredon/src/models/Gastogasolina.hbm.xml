@@ -2,22 +2,22 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 1/05/2016 12:22:41 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="adminedredon" name="pojos.Gastosoficinabodega" optimistic-lock="version" table="gastosoficinabodega">
-    <id name="idGastosOficinaBodega" type="java.lang.Integer">
-      <column name="idGastosOficinaBodega"/>
+  <class catalog="adminedredon" name="pojos.Gastogasolina" optimistic-lock="version" table="gastogasolina">
+    <id name="idGastoGasolina" type="java.lang.Integer">
+      <column name="idGastoGasolina"/>
       <generator class="identity"/>
     </id>
     <property name="fecha" type="date">
       <column length="10" name="fecha"/>
     </property>
-    <property name="concepto" type="string">
-      <column length="45" name="concepto"/>
+    <property name="vehiculo" type="string">
+      <column length="45" name="vehiculo"/>
+    </property>
+    <property name="comentario" type="string">
+      <column length="45" name="comentario"/>
     </property>
     <property name="importe" type="java.lang.Double">
       <column name="importe" precision="22" scale="0"/>
-    </property>
-    <property name="comentarios" type="string">
-      <column length="45" name="comentarios"/>
     </property>
   </class>
 </hibernate-mapping>

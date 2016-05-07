@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="Adminedredon"/>
+  <table-filter match-name="gastoslocales"/>
+  <table-filter match-name="vehiculo"/>
+  <table-filter match-name="detalledegasto"/>
+  <table-filter match-name="gastogasolina"/>
+  <table-filter match-name="sucursal"/>
+  <table-filter match-name="linea"/>
+  <table-filter match-name="expediente"/>
+  <table-filter match-name="gastospersonales"/>
+  <table-filter match-name="diariocaja"/>
+  <table-filter match-name="mantenimiento"/>
+  <table-filter match-name="gastosoficinabodega"/>
+  <table-filter match-name="gastomantenimientov"/>
+  <table-filter match-name="contenidoexpediente"/>
+  <table-filter match-name="gastosgenerales"/>
+  <table-filter match-name="proveedores"/>
+  <table-filter match-name="gastosfinancieros"/>
+  <table-filter match-name="clientes"/>
+  <table-filter match-name="abonoproveedor"/>
+</hibernate-reverse-engineering>

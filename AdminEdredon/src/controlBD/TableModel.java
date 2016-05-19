@@ -19,6 +19,7 @@ public class TableModel extends AbstractTableModel {
     private String[] headerCliente = {"clave", "Nombre"};
     private String[] headerGastosOficina = {"ClaGasOfi", "fecha", "concepto", "concpeto", "importe", "comentarios"};
     private String[] headerGastosLocales = {"Clave", "claveLocal", "local", "fecha", "concepto", "importe", "comentario"};
+    private String[] headerGastosBodega = {"Clave", "fecha", "concepto", "importe", "comentario"};
     private String[] headerGastosPersonales = {"Clave", "fecha", "concepto", "comentario", "importe"};
     private String[] headerVehiculo = {"Clave", "Vehiculo", "Dueño", "Color", "Año", "Placas"};
     private String[] headerGastogasolina = {"Clave", "Fecha", "Vehiculo", "Comentario", "Importe"};

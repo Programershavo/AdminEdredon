@@ -15,6 +15,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import pojos.Mantenimiento;
 
 /**
  *
@@ -75,6 +76,8 @@ public class CPanel extends javax.swing.JFrame {
         jmiClientes = new javax.swing.JMenuItem();
         jmiTiendas = new javax.swing.JMenuItem();
         jmiGastos = new javax.swing.JMenuItem();
+        jmiVehiculos = new javax.swing.JMenuItem();
+        jmiMtoAutos = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jmiEstadoDeResultados = new javax.swing.JMenuItem();
         mnuAcercaDe = new javax.swing.JMenu();
@@ -217,6 +220,22 @@ public class CPanel extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jmiGastos);
+
+        jmiVehiculos.setText("Vehiculos");
+        jmiVehiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiVehiculosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jmiVehiculos);
+
+        jmiMtoAutos.setText("Mantenimiento de autos");
+        jmiMtoAutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiMtoAutosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jmiMtoAutos);
 
         mnuProveedores.add(jMenu4);
 
@@ -488,6 +507,36 @@ public class CPanel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmiTiendasActionPerformed
 
+    private void jmiVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiVehiculosActionPerformed
+        try {
+            CatalogoVehiculos registroVehiculos = new CatalogoVehiculos();
+            if (exist(registroVehiculos) == false) {
+                desktop.add(registroVehiculos);
+                registroVehiculos.setVisible(true);
+                registroVehiculos.setLocation((desktop.getWidth() - registroVehiculos.getWidth()) / 2, (desktop.getHeight() - registroVehiculos.getHeight()) / 2);
+            } else {
+                registroVehiculos.dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+        }
+    }//GEN-LAST:event_jmiVehiculosActionPerformed
+
+    private void jmiMtoAutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiMtoAutosActionPerformed
+        try {
+            CatalogoMtoVehicular registroMantenimiento = new CatalogoMtoVehicular();
+            if (exist(registroMantenimiento) == false) {
+                desktop.add(registroMantenimiento);
+                registroMantenimiento.setVisible(true);
+                registroMantenimiento.setLocation((desktop.getWidth() - registroMantenimiento.getWidth()) / 2, (desktop.getHeight() - registroMantenimiento.getHeight()) / 2);
+            } else {
+                registroMantenimiento.dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+        }
+    }//GEN-LAST:event_jmiMtoAutosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -540,9 +589,11 @@ public class CPanel extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiEstadoDeResultados;
     private javax.swing.JMenuItem jmiGastos;
     private javax.swing.JMenuItem jmiGastosPersonales;
+    private javax.swing.JMenuItem jmiMtoAutos;
     private javax.swing.JMenuItem jmiProvedores;
     private javax.swing.JMenuItem jmiResumen;
     private javax.swing.JMenuItem jmiTiendas;
+    private javax.swing.JMenuItem jmiVehiculos;
     private javax.swing.JPanel jpPrincipal;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu mnuAcercaDe;

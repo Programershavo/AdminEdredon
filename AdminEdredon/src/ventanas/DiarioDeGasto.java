@@ -14,7 +14,9 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyVetoException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -856,6 +858,7 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
         cmbLocalResumen = new javax.swing.JComboBox();
         btnBorrrar = new javax.swing.JButton();
         btnCorregir = new javax.swing.JButton();
+        btnImprimirResumenGeneral = new javax.swing.JButton();
         jpGastosLocales1 = new javax.swing.JPanel();
         btnBorrarGasto1 = new javax.swing.JButton();
         btnRegistrarGastosPersonales = new javax.swing.JButton();
@@ -1307,6 +1310,14 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
             }
         });
 
+        btnImprimirResumenGeneral.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/pdf.png"))); // NOI18N
+        btnImprimirResumenGeneral.setText("RESULTADOS");
+        btnImprimirResumenGeneral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirResumenGeneralActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpResumenLocalesLayout = new javax.swing.GroupLayout(jpResumenLocales);
         jpResumenLocales.setLayout(jpResumenLocalesLayout);
         jpResumenLocalesLayout.setHorizontalGroup(
@@ -1314,13 +1325,11 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
             .addGroup(jpResumenLocalesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpResumenLocalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBorrrar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jpResumenLocalesLayout.createSequentialGroup()
                         .addComponent(jLabel64, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(3, 3, 3))
-                    .addComponent(btnCorregir, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane11)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 827, Short.MAX_VALUE)
                     .addGroup(jpResumenLocalesLayout.createSequentialGroup()
                         .addComponent(jLabel98, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1332,7 +1341,14 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Concepto1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(cmbLocalResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cmbLocalResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jpResumenLocalesLayout.createSequentialGroup()
+                        .addComponent(btnBorrrar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnImprimirResumenGeneral)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCorregir)))
                 .addGap(28, 28, 28))
         );
 
@@ -1355,11 +1371,12 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel44)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpResumenLocalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBorrrar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCorregir))
+                    .addComponent(btnCorregir)
+                    .addComponent(btnImprimirResumenGeneral))
                 .addGap(23, 23, 23))
         );
 
@@ -4388,6 +4405,25 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbLocalResumen1ItemStateChanged
 
+    private void btnImprimirResumenGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirResumenGeneralActionPerformed
+        if (!cmbLocalResumen.getSelectedItem().toString().equals("Todos")) {
+            if (jtLocalesResumen.getRowCount() > 0) {
+                Map parametros = new HashMap();
+                parametros.put("local", cmbLocalResumen.getSelectedItem().toString());
+                java.sql.Date dtInicio = new java.sql.Date(jdcLocalInicio.getDate().getTime());
+                parametros.put("dtInicio", dtInicio);
+                java.sql.Date dtFin = new java.sql.Date(jdcLocalFin.getDate().getTime());
+                parametros.put("dtFin", dtFin);
+                reportMaker.ReportMaker reporte = new reportMaker.ReportMaker("FROM Gastoslocales", "GastosLocales", parametros, false);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "No hay resultados que imprimir");
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Selecciona una tienda");
+        }
+
+    }//GEN-LAST:event_btnImprimirResumenGeneralActionPerformed
+
     private void quitarFila(JTable tabla) {
         if (tabla.getSelectedRow() > -1) {
             DefaultTableModel model = (DefaultTableModel) tabla.getModel();
@@ -4476,6 +4512,7 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCorregirGastoGasolina;
     private javax.swing.JButton btnCorregirGastoMantenimiento;
     private javax.swing.JButton btnEliminarConcepto;
+    private javax.swing.JButton btnImprimirResumenGeneral;
     private javax.swing.JButton btnRegistrarGasolina;
     private javax.swing.JButton btnRegistrarGastosPersonales;
     private javax.swing.JButton btnRegistrarLocales;

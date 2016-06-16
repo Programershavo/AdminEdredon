@@ -70,8 +70,8 @@ public class ReportMaker {
 
     public String obtenRutaReporte(String nombreReporte) {
         switch (nombreReporte) {
-            case "Compra":
-                nombreReporte = System.getProperty("user.dir") + "/reporteCompra.jrxml";
+            case "GastosLocales":
+                nombreReporte = System.getProperty("user.dir") + "/gastosLocales.jrxml";
                 break;
             case "GastoTiendaEspecificos":
                 nombreReporte = System.getProperty("user.dir") + "/reporteCompraTipoGastoTiendaEspecificos.jrxml";

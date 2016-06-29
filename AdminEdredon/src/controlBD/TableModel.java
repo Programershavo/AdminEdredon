@@ -17,7 +17,6 @@ public class TableModel extends AbstractTableModel {
     private String[] headerSucursal = {"clave", "Nombre"};
     private String[] headerProveedor = {"clave", "Nombre"};
     private String[] headerCliente = {"clave", "Nombre"};
-    private String[] headerGastosOficina = {"ClaGasOfi", "fecha", "concepto", "concpeto", "importe", "comentarios"};
     private String[] headerGastosLocales = {"Clave", "claveLocal", "local", "fecha", "concepto", "importe", "comentario"};
     private String[] headerGastosBodega = {"Clave", "fecha", "concepto", "importe", "comentario"};
     private String[] headerGastosPersonales = {"Clave", "fecha", "concepto", "comentario", "importe"};
@@ -88,7 +87,7 @@ public class TableModel extends AbstractTableModel {
                 titulosDeColumnas = headerMantenimiento;
                 break;
             case "GastosOficinaBodega":
-                titulosDeColumnas = headerGastosOficina;
+                titulosDeColumnas = headerGastosBodega;
                 break;
             case "GastosLocales":
                 titulosDeColumnas = headerGastosLocales;

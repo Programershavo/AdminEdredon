@@ -36,58 +36,84 @@
 	<field name="comentario" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<variable name="importe_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{importe}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="79" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="79" forecolor="#0066CC" backcolor="#0099CC" uuid="e944dd0f-aa19-42b9-bf64-6a6726b8e152"/>
+			</rectangle>
 			<textField>
-				<reportElement x="272" y="26" width="177" height="38" uuid="99d9f5ba-dfaa-4a53-ade2-65e276b1c4eb"/>
+				<reportElement x="258" y="17" width="191" height="46" forecolor="#CCFFFF" uuid="99d9f5ba-dfaa-4a53-ade2-65e276b1c4eb"/>
 				<textElement>
-					<font size="24"/>
+					<font size="28" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{local}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="144" y="31" width="114" height="33" forecolor="#000000" backcolor="#FFFFFF" uuid="cf1ebc31-c1ad-4d65-b95c-00d54e146b39"/>
+				<reportElement mode="Transparent" x="26" y="17" width="232" height="46" forecolor="#CCFFFF" backcolor="#FFFFFF" uuid="cf1ebc31-c1ad-4d65-b95c-00d54e146b39"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="SansSerif" size="24" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<font fontName="SansSerif" size="28" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[LOCAL]]></text>
+				<text><![CDATA[Gastos del local]]></text>
 			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="227" y="7" width="100" height="20" forecolor="#3366FF" uuid="bfaf420d-5fed-493a-875a-1df74f0bc4c3"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESULTADOS]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="38" splitType="Stretch">
 			<staticText>
-				<reportElement x="147" y="9" width="100" height="20" uuid="b3e57ec5-44e0-417b-a1f9-e60b3c0c984c"/>
-				<text><![CDATA[concepto]]></text>
+				<reportElement x="147" y="9" width="100" height="20" forecolor="#0099FF" uuid="b3e57ec5-44e0-417b-a1f9-e60b3c0c984c"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Concepto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="279" y="9" width="100" height="20" uuid="7dfe5308-fa80-4a27-bbf2-dc94876d2cab"/>
-				<text><![CDATA[importe]]></text>
+				<reportElement x="279" y="9" width="100" height="20" forecolor="#0099FF" uuid="7dfe5308-fa80-4a27-bbf2-dc94876d2cab"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="411" y="9" width="100" height="20" uuid="1ea3dd1b-8916-4ca6-b0c1-82c0df60a1b9"/>
-				<text><![CDATA[comentario]]></text>
+				<reportElement x="411" y="9" width="100" height="20" forecolor="#0099FF" uuid="1ea3dd1b-8916-4ca6-b0c1-82c0df60a1b9"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Observación]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="15" y="9" width="100" height="20" uuid="11efdddc-797d-49c4-97bf-1e27c3a0c64e"/>
-				<text><![CDATA[fecha]]></text>
+				<reportElement x="15" y="9" width="100" height="20" forecolor="#0099FF" uuid="11efdddc-797d-49c4-97bf-1e27c3a0c64e"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="33" splitType="Stretch">
 			<textField>
 				<reportElement x="147" y="6" width="100" height="20" uuid="59c263a0-395d-479e-9ebd-f8804548eeb4"/>
 				<textFieldExpression><![CDATA[$F{concepto}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="¤ #,##0.00">
 				<reportElement x="279" y="6" width="100" height="20" uuid="326f3dbf-9f99-40a1-995f-182f4d4d0745"/>
 				<textFieldExpression><![CDATA[$F{importe}]]></textFieldExpression>
 			</textField>
@@ -95,17 +121,49 @@
 				<reportElement x="411" y="6" width="100" height="20" uuid="dca05be7-d33c-4db4-af2e-4033ff5e20bc"/>
 				<textFieldExpression><![CDATA[$F{comentario}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="MMMMM dd, yyyy">
 				<reportElement x="15" y="6" width="100" height="20" uuid="e1b17095-28f5-4488-b9bc-a65ee15ef3d1"/>
 				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="29" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="-39" width="555" height="1" forecolor="#0066CC" uuid="128f95bc-9191-4c44-838a-4146d785c202"/>
+			</line>
+			<staticText>
+				<reportElement x="279" y="5" width="100" height="20" forecolor="#0066CC" uuid="4689461b-aa17-4b38-82b4-1b2978e4e622"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="411" y="5" width="100" height="20" uuid="1ba8c6c9-69f1-451e-ae3d-186b6d2f1d43"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{importe_1}]]></textFieldExpression>
+			</textField>
+		</band>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="54" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="491" y="10" width="40" height="20" uuid="40b0a432-fd14-4308-b3cf-7961c44411a5"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="411" y="10" width="80" height="20" uuid="3d0fba01-1890-4f99-93f5-fd2d80ec9008"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="10" y="10" width="100" height="20" uuid="d66e1d63-2a43-4a21-a289-b7f1890d22eb"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>

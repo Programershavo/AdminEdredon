@@ -73,26 +73,23 @@ public class ReportMaker {
             case "GastosLocales":
                 nombreReporte = System.getProperty("user.dir") + "/gastosLocales.jrxml";
                 break;
-            case "GastoTiendaEspecificos":
-                nombreReporte = System.getProperty("user.dir") + "/reporteCompraTipoGastoTiendaEspecificos.jrxml";
+            case "GastosPersonales":
+                nombreReporte = System.getProperty("user.dir") + "/gastosPersonales.jrxml";
                 break;
-            case "GastoTodos":
-                nombreReporte = System.getProperty("user.dir") + "/reporteCompra.jrxml";
+            case "GastosOficinaBodega":
+                nombreReporte = System.getProperty("user.dir") + "/GastosOficinaBodega.jrxml";
                 break;
-            case "VentaTiendaClienteEspecificos":
-                nombreReporte = System.getProperty("user.dir") + "/reporteVentaTiendaClienteEspecificos.jrxml";
+            case "GastoGasolina":
+                nombreReporte = System.getProperty("user.dir") + "/GastosGasolina.jrxml";
                 break;
-            case "VentaTiendaEspecifica":
-                nombreReporte = System.getProperty("user.dir") + "/reporteVentaTiendaEspecifica.jrxml";
+            case "GastoMantenimiento":
+                nombreReporte = System.getProperty("user.dir") + "/Gastomantenimiento.jrxml";
                 break;
-            case "VentaClienteEspecifico":
-                nombreReporte = System.getProperty("user.dir") + "/reporteVentaClienteEspecifico.jrxml";
+            case "GastoProveedores":
+                nombreReporte = System.getProperty("user.dir") + "/GastoProveedores.jrxml";
                 break;
-            case "VentaTodos":
-                nombreReporte = System.getProperty("user.dir") + "/reporteVentaTodos.jrxml";
-                break;
-            case "estadoDeResultados":
-                nombreReporte = System.getProperty("user.dir") + "/estadoDeResultados.jrxml";
+            case "GastosFinancieros":
+                nombreReporte = System.getProperty("user.dir") + "/Gastosfinancieros.jrxml";
                 break;
         }
         return nombreReporte;

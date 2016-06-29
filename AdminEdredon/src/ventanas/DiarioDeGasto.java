@@ -725,8 +725,8 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
         limpiarCampos();
         limpiarTablas(tabla);
         JOptionPane.showMessageDialog(this, "Gastos registrados correctamente", "Datos registrados", 1);        // TODO add your handling code here:
-    }    
-    
+    }
+
     private void guardarGastosGasolina(JTable tabla) {
         AccesoBD controlBD = new AccesoBD();
         String fecha = "";
@@ -4589,7 +4589,21 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnGasolinaActionPerformed
 
     private void btnMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantenimientoActionPerformed
-        // TODO add your handling code here:
+        if (!cmbVehiculoMResumen.getSelectedItem().toString().equals("Todos")) {
+            if (jtMantenimientoResumen.getRowCount() > 0) {
+                Map parametros = new HashMap();
+                parametros.put("vehiculo", cmbVehiculoMResumen.getSelectedItem().toString());
+                java.sql.Date dtInicio = new java.sql.Date(jdcMantenimientoInicio.getDate().getTime());
+                parametros.put("dtInicio", dtInicio);
+                java.sql.Date dtFin = new java.sql.Date(jdcMantenimientoFin.getDate().getTime());
+                parametros.put("dtFin", dtFin);
+                reportMaker.ReportMaker reporte = new reportMaker.ReportMaker("FROM Mantenimiento", "GastoMantenimiento", parametros, false);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "No hay resultados que imprimir");
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Selecciona un concepto");
+        }
     }//GEN-LAST:event_btnMantenimientoActionPerformed
 
     private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed

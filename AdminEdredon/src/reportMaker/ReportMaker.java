@@ -83,7 +83,7 @@ public class ReportMaker {
                 nombreReporte = System.getProperty("user.dir") + "/GastosGasolina.jrxml";
                 break;
             case "GastoMantenimiento":
-                nombreReporte = System.getProperty("user.dir") + "/Gastomantenimiento.jrxml";
+                nombreReporte = System.getProperty("user.dir") + "/gastosMantenimiento.jrxml";
                 break;
             case "GastoProveedores":
                 nombreReporte = System.getProperty("user.dir") + "/GastoProveedores.jrxml";

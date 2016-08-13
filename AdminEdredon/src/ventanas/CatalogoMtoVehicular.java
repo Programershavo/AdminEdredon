@@ -5,7 +5,8 @@
  */
 package ventanas;
 
-import controlBD.AccesoBD;
+import controlBD.DAOUniversalHibernate;
+import java.awt.event.KeyEvent;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -31,7 +32,7 @@ public class CatalogoMtoVehicular extends javax.swing.JInternalFrame {
     private void cargaTabla(final JTable jtTabla, String HQL, String Encabezado, int NoColOcultar) {
         //Reviso si que la consulta no vaya vacia
         if (!HQL.isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             jtTabla.setVisible(false);
             jtTabla.removeAll();
             jtTabla.setModel(acceso.retornaModelo(Encabezado, HQL));
@@ -55,20 +56,20 @@ public class CatalogoMtoVehicular extends javax.swing.JInternalFrame {
 
         jpMantenimiento = new javax.swing.JPanel();
         jLabel112 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jScrollPane19 = new javax.swing.JScrollPane();
         jtMantenimiento = new javax.swing.JTable();
-        btnBorrarMantenimiento = new javax.swing.JButton();
-        btnEditarMantenimiento = new javax.swing.JButton();
         txtMantenimiento = new javax.swing.JTextField();
-        btnMantenimiento = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
         jLabel113 = new javax.swing.JLabel();
+        jLabel114 = new javax.swing.JLabel();
+        jLabel115 = new javax.swing.JLabel();
+        jLabel116 = new javax.swing.JLabel();
+        jLabel117 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
-        setTitle("Mantenimiento");
+        setTitle("TIPOS DE MANTENIMIENTO Y REPARACIONES");
 
         jpMantenimiento.setBackground(new java.awt.Color(255, 255, 255));
         jpMantenimiento.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -78,12 +79,8 @@ public class CatalogoMtoVehicular extends javax.swing.JInternalFrame {
         });
 
         jLabel112.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jLabel112.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel112.setForeground(new java.awt.Color(102, 102, 102));
         jLabel112.setText("TIPOS DE MANTENIMIENTO Y REPARACIONES");
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/car3.png"))); // NOI18N
-
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/mto1.png"))); // NOI18N
 
         jtMantenimiento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -93,42 +90,80 @@ public class CatalogoMtoVehicular extends javax.swing.JInternalFrame {
 
             }
         ));
+        jtMantenimiento.setToolTipText("Elije uno, ENTER para cambiar, SUPRIMIR para borrar");
+        jtMantenimiento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtMantenimientoKeyPressed(evt);
+            }
+        });
         jScrollPane19.setViewportView(jtMantenimiento);
 
-        btnBorrarMantenimiento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnBorrarMantenimiento.setForeground(new java.awt.Color(0, 153, 51));
-        btnBorrarMantenimiento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/delete.png"))); // NOI18N
-        btnBorrarMantenimiento.setText("Eliminar");
-        btnBorrarMantenimiento.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnBorrarMantenimiento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBorrarMantenimientoActionPerformed(evt);
+        txtMantenimiento.setToolTipText("Escribe el concepto, luego da enter");
+        txtMantenimiento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMantenimientoKeyPressed(evt);
             }
         });
 
-        btnEditarMantenimiento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnEditarMantenimiento.setForeground(new java.awt.Color(0, 153, 51));
-        btnEditarMantenimiento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/correct.png"))); // NOI18N
-        btnEditarMantenimiento.setText("Corregir");
-        btnEditarMantenimiento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarMantenimientoActionPerformed(evt);
-            }
-        });
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnMantenimiento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnMantenimiento.setForeground(new java.awt.Color(0, 153, 51));
-        btnMantenimiento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/New.png"))); // NOI18N
-        btnMantenimiento.setText("Nuevo");
-        btnMantenimiento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMantenimientoActionPerformed(evt);
-            }
-        });
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/car3.png"))); // NOI18N
 
-        jLabel113.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel113.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel113.setText("CONCEPTO");
+        jLabel113.setFont(new java.awt.Font("Comic Sans MS", 1, 10)); // NOI18N
+        jLabel113.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel113.setText("TEXTO + ENTER = NUEVO");
+
+        jLabel114.setFont(new java.awt.Font("Comic Sans MS", 1, 10)); // NOI18N
+        jLabel114.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel114.setText("TABLA + ENTER = CAMBIAR");
+
+        jLabel115.setFont(new java.awt.Font("Comic Sans MS", 1, 10)); // NOI18N
+        jLabel115.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel115.setText("TABLA + SUPR   = BORRAR");
+
+        jLabel116.setFont(new java.awt.Font("Comic Sans MS", 1, 10)); // NOI18N
+        jLabel116.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel116.setText("<---------------------");
+
+        jLabel117.setFont(new java.awt.Font("Comic Sans MS", 1, 10)); // NOI18N
+        jLabel117.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel117.setText("<---------------------");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel114, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                    .addComponent(jLabel115, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel116, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel117, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel113, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel113)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel117)
+                .addGap(51, 51, 51)
+                .addComponent(jLabel114)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel115)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel116)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jpMantenimientoLayout = new javax.swing.GroupLayout(jpMantenimiento);
         jpMantenimiento.setLayout(jpMantenimientoLayout);
@@ -136,160 +171,54 @@ public class CatalogoMtoVehicular extends javax.swing.JInternalFrame {
             jpMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpMantenimientoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel112, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpMantenimientoLayout.createSequentialGroup()
-                .addGap(231, 231, 231)
-                .addGroup(jpMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpMantenimientoLayout.createSequentialGroup()
-                        .addGroup(jpMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jpMantenimientoLayout.createSequentialGroup()
-                                .addComponent(btnBorrarMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
-                                .addComponent(btnEditarMantenimiento))
-                            .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGap(66, 66, 66)
-                        .addComponent(jLabel9))
-                    .addGroup(jpMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel113, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jpMantenimientoLayout.createSequentialGroup()
-                            .addComponent(txtMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(19, 19, 19))
-            .addGroup(jpMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jpMantenimientoLayout.createSequentialGroup()
-                    .addGap(41, 41, 41)
-                    .addComponent(jLabel11)
-                    .addContainerGap(696, Short.MAX_VALUE)))
+                .addGroup(jpMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)
+                    .addComponent(txtMantenimiento)
+                    .addComponent(jLabel112, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jpMantenimientoLayout.setVerticalGroup(
             jpMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpMantenimientoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel112)
-                .addGap(31, 31, 31)
-                .addComponent(jLabel113)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpMantenimientoLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(txtMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpMantenimientoLayout.createSequentialGroup()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpMantenimientoLayout.createSequentialGroup()
-                        .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jpMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnBorrarMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEditarMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27))))
-            .addGroup(jpMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jpMantenimientoLayout.createSequentialGroup()
-                    .addGap(84, 84, 84)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(248, Short.MAX_VALUE)))
+                        .addComponent(jLabel112)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 865, Short.MAX_VALUE)
+            .addGap(0, 676, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jpMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jpMantenimiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGap(0, 482, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jpMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jpMantenimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 private void llenarTabla(JTable jtTabla, String nombreTabla, String consulta) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         jtTabla.setVisible(false);
         jtTabla.removeAll();
         //_________________________ NOMBRE DE LA TABLA, CONSULTA
         jtTabla.setModel(acceso.retornaModelo(nombreTabla, consulta));
         jtTabla.setVisible(true);
-    }
-    private void btnBorrarMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarMantenimientoActionPerformed
-        if (jtMantenimiento.getSelectedRow() != -1) {
-            int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este concepto?", "Confirmar eliminación", 0, 3);
-            if (respuesta == 0) {
-                try {
-                    AccesoBD acceso = new AccesoBD();
-                    int clave = (int) jtMantenimiento.getValueAt(jtMantenimiento.getSelectedRow(), 0);
-                    String query = "From Mantenimiento v WHERE v.idMantenimiento='" + clave + "'";
-                    Mantenimiento concepto = (Mantenimiento) acceso.select(query).get(0);
-                    acceso.delete(concepto);
-                    query = "From Mantenimiento v";
-                    llenarTabla(jtMantenimiento, "Mantenimiento", query);
-                    JOptionPane.showMessageDialog(this, "Concepto eliminado correctamente", "Cancelado", 1);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
-                    System.gc();
-                }
-            }
-        }
-    }//GEN-LAST:event_btnBorrarMantenimientoActionPerformed
-
-    private void btnEditarMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarMantenimientoActionPerformed
-        if (jtMantenimiento.getSelectedRow() != -1) {
-            int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea editar este concepto?", "Confirmar editar", 0, 3);
-            if (respuesta == 0) {
-                try {
-                    AccesoBD acceso = new AccesoBD();
-                    int clave = (int) jtMantenimiento.getValueAt(jtMantenimiento.getSelectedRow(), 0);
-                    String query = "From Mantenimiento l WHERE l.idMantenimiento = '" + clave + "'";
-                    Mantenimiento concepto = (Mantenimiento) acceso.select(query).get(0);
-                    String nombre = JOptionPane.showInputDialog(this, "Nuevo nombre");
-                    concepto.setMantenimiento(nombre);
-                    acceso.Update(concepto);
-                    query = "From Mantenimiento m ORDER BY m.mantenimiento";
-                    cargaTabla(jtMantenimiento, query, "Mantenimiento", 1);
-                    JOptionPane.showMessageDialog(this, "Concepto editado correctamente", "Cancelado", 1);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
-                    System.gc();
-                }
-            }
-        }
-    }//GEN-LAST:event_btnEditarMantenimientoActionPerformed
-
-    private void btnMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantenimientoActionPerformed
-        AccesoBD control = new AccesoBD();
-        try {
-            if (!txtMantenimiento.getText().isEmpty()) {
-                pojos.Mantenimiento mantenimiento = new pojos.Mantenimiento();
-                //                mantenimiento.setSucursal(cmbConceptoXLocal.getSelectedItem().toString());
-                mantenimiento.setMantenimiento(txtMantenimiento.getText());
-                control.add(mantenimiento);
-                limpiarCampos();
-                JOptionPane.showMessageDialog(this, "Concepto registrado correctamente", "Datos registrados", 1);
-                String Query = "FROM Mantenimiento m ORDER BY m.mantenimiento";
-                cargaTabla(jtMantenimiento, Query, "Mantenimiento", 1);
-            } else {
-                JOptionPane.showMessageDialog(this, "Favor de llenar el campo Nombre", "Datos incompletos", 1);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e, "Error", 0);
-        }
-    }//GEN-LAST:event_btnMantenimientoActionPerformed
-    private void limpiarCampos() {
+    }    private void limpiarCampos() {
         this.txtMantenimiento.setText("");
     }
     private void jpMantenimientoComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpMantenimientoComponentShown
@@ -297,6 +226,74 @@ private void llenarTabla(JTable jtTabla, String nombreTabla, String consulta) {
         query = "From Mantenimiento m ORDER BY m.idMantenimiento";
         cargaTabla(jtMantenimiento, query, "Mantenimiento", 1);
     }//GEN-LAST:event_jpMantenimientoComponentShown
+
+    private void txtMantenimientoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMantenimientoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            DAOUniversalHibernate control = new DAOUniversalHibernate();
+            try {
+                if (!txtMantenimiento.getText().isEmpty()) {
+                    pojos.Mantenimiento mantenimiento = new pojos.Mantenimiento();
+                    mantenimiento.setMantenimiento(txtMantenimiento.getText());
+                    control.add(mantenimiento);
+                    limpiarCampos();
+                    String Query = "FROM Mantenimiento m ORDER BY m.mantenimiento";
+                    cargaTabla(jtMantenimiento, Query, "Mantenimiento", 1);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Favor de llenar el campo Nombre", "Datos incompletos", 1);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e, "Error", 0);
+            }
+
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMantenimientoKeyPressed
+
+    private void jtMantenimientoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtMantenimientoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (jtMantenimiento.getSelectedRow() != -1) {
+                int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea editar este concepto?", "Confirmar editar", 0, 3);
+                if (respuesta == 0) {
+                    try {
+                        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
+                        int clave = (int) jtMantenimiento.getValueAt(jtMantenimiento.getSelectedRow(), 0);
+                        String query = "From Mantenimiento l WHERE l.idMantenimiento = '" + clave + "'";
+                        Mantenimiento concepto = (Mantenimiento) acceso.select(query).get(0);
+                        String nombre = JOptionPane.showInputDialog(this, "Nuevo nombre");
+                        concepto.setMantenimiento(nombre);
+                        acceso.Update(concepto);
+                        query = "From Mantenimiento m ORDER BY m.mantenimiento";
+                        cargaTabla(jtMantenimiento, query, "Mantenimiento", 1);
+                        JOptionPane.showMessageDialog(this, "Concepto editado correctamente", "Cancelado", 1);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+                        System.gc();
+                    }
+                }
+            }
+        }
+        //-------------------------------------------------------------------------->
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            if (jtMantenimiento.getSelectedRow() != -1) {
+                int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este concepto?", "Confirmar eliminación", 0, 3);
+                if (respuesta == 0) {
+                    try {
+                        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
+                        int clave = (int) jtMantenimiento.getValueAt(jtMantenimiento.getSelectedRow(), 0);
+                        String query = "From Mantenimiento v WHERE v.idMantenimiento='" + clave + "'";
+                        Mantenimiento concepto = (Mantenimiento) acceso.select(query).get(0);
+                        acceso.delete(concepto);
+                        query = "From Mantenimiento v";
+                        llenarTabla(jtMantenimiento, "Mantenimiento", query);
+                        JOptionPane.showMessageDialog(this, "Concepto eliminado correctamente", "Cancelado", 1);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+                        System.gc();
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_jtMantenimientoKeyPressed
 
     public boolean exist(JInternalFrame frame) throws Exception {
 
@@ -318,13 +315,14 @@ private void llenarTabla(JTable jtTabla, String nombreTabla, String consulta) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBorrarMantenimiento;
-    private javax.swing.JButton btnEditarMantenimiento;
-    private javax.swing.JButton btnMantenimiento;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel112;
     private javax.swing.JLabel jLabel113;
+    private javax.swing.JLabel jLabel114;
+    private javax.swing.JLabel jLabel115;
+    private javax.swing.JLabel jLabel116;
+    private javax.swing.JLabel jLabel117;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane19;
     private javax.swing.JPanel jpMantenimiento;
     private javax.swing.JTable jtMantenimiento;

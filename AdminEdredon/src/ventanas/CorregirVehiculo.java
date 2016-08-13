@@ -5,7 +5,7 @@
  */
 package ventanas;
 
-import controlBD.AccesoBD;
+import controlBD.DAOUniversalHibernate;
 import java.beans.PropertyVetoException;
 import java.util.List;
 import javax.swing.JComboBox;
@@ -34,7 +34,7 @@ public class CorregirVehiculo extends javax.swing.JInternalFrame {
     private void cargaDatos(String clave) {
 //        Reviso si que la consulta no vaya vacia
         if (!clave.isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             vehiculo = new Vehiculo();
             String HQL = "From Vehiculo gl WHERE gl.idvehiculo = '" + clave + "'";
             vehiculo = (Vehiculo) acceso.select(HQL).get(0);
@@ -208,7 +208,7 @@ public class CorregirVehiculo extends javax.swing.JInternalFrame {
 
     private void btnCorregirConceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorregirConceptoActionPerformed
 
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         vehiculo.setVehiculo(txtvehiculo.getText());
         vehiculo.setDuenio(txtDuenio.getText());
         vehiculo.setColor(txtColor.getText());

@@ -5,7 +5,7 @@
  */
 package ventanas;
 
-import controlBD.AccesoBD;
+import controlBD.DAOUniversalHibernate;
 import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -32,7 +32,7 @@ public class CPanel extends javax.swing.JFrame {
         initComponents();
         jmiGastosPersonales.setEnabled(true);
         this.setExtendedState(MAXIMIZED_BOTH);
-        this.setTitle("Colchas Castillo");
+        this.setTitle("Control");
         this.setIconImage(imagen);
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -89,7 +89,7 @@ public class CPanel extends javax.swing.JFrame {
         jpPrincipal.setBackground(new java.awt.Color(255, 255, 255));
 
         desktop.setBackground(new java.awt.Color(255, 255, 255));
-        desktop.setImagenDeFondo(new javax.swing.ImageIcon(getClass().getResource("/IconosEspecializados/castilloLogo.png"))); // NOI18N
+        desktop.setImagenDeFondo(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/engine.png"))); // NOI18N
         desktop.setOpaque(false);
 
         javax.swing.GroupLayout jpPrincipalLayout = new javax.swing.GroupLayout(jpPrincipal);
@@ -286,8 +286,8 @@ public class CPanel extends javax.swing.JFrame {
     private void mensajeSalir() {
         int res = JOptionPane.showConfirmDialog(this, "¿Estas seguro que quieres cerrar el programa?", "Salir", 0);
         if (res == 0) {
-            Icon icono = new ImageIcon(getClass().getResource("/IconosEspecializados/castilloLogo.png"));
-            JOptionPane.showMessageDialog(this, "Colchas Castillo te desea" + "\n" + "un excelente día.", "Gracias por tu trabajo", JOptionPane.PLAIN_MESSAGE, icono);
+            Icon icono = new ImageIcon(getClass().getResource("/IconosGenerales/exitBig.png"));
+            JOptionPane.showMessageDialog(this, "Gracias por tu trabajo" + "\n" + "se te desea un excelente día.", "Sesion finalizada", JOptionPane.PLAIN_MESSAGE, icono);
             System.exit(0);
         }
     }
@@ -405,7 +405,7 @@ public class CPanel extends javax.swing.JFrame {
                 + "d.fecha = '"
                 + herramienta.FechaHerramienta.formatoYMD(new Date())
                 + "'";
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         return acceso.rowCount(consultaVentasHQL);
     }
     private void jmiGastosPersonalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGastosPersonalesActionPerformed

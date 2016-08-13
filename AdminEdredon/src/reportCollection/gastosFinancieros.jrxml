@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9bce3f52-636b-445f-8fe2-a36c968f9b84">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9bce3f52-636b-445f-8fe2-a36c968f9b84">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="14"/>
 	<parameter name="dtInicio" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="dtFin" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<parameter name="local" class="java.lang.String">
+	<parameter name="concepto" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select * from gastoslocales where local = $P{local} and  fecha between $P{dtInicio} and $P{dtFin};]]>
+		<![CDATA[SELECT * FROM adminedredon.gastosfinancieros where concepto = $P{concepto} and  fecha between $P{dtInicio} and $P{dtFin};]]>
 	</queryString>
-	<field name="idGastosLocales" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="idLocal" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="local" class="java.lang.String">
+	<field name="idGastosFinancieros" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="fecha" class="java.sql.Date">
@@ -33,10 +27,16 @@
 	<field name="importe" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="comentario" class="java.lang.String">
+	<field name="comentarios" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="acreedor" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<variable name="importe_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{importe}]]></variableExpression>
+	</variable>
+	<variable name="importe_2" class="java.lang.Double" resetType="Column" calculation="Sum">
 		<variableExpression><![CDATA[$F{importe}]]></variableExpression>
 	</variable>
 	<background>
@@ -45,23 +45,24 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="0" width="555" height="79" forecolor="#0066CC" backcolor="#0099CC" uuid="e944dd0f-aa19-42b9-bf64-6a6726b8e152"/>
+				<reportElement x="0" y="0" width="802" height="79" forecolor="#0066CC" backcolor="#0099CC" uuid="e944dd0f-aa19-42b9-bf64-6a6726b8e152"/>
 			</rectangle>
-			<textField>
-				<reportElement x="258" y="17" width="191" height="46" forecolor="#CCFFFF" uuid="99d9f5ba-dfaa-4a53-ade2-65e276b1c4eb"/>
-				<textElement>
-					<font size="28" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{local}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement mode="Transparent" x="26" y="17" width="232" height="46" forecolor="#CCFFFF" backcolor="#FFFFFF" uuid="cf1ebc31-c1ad-4d65-b95c-00d54e146b39"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
 					<font fontName="SansSerif" size="28" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Gastos del local]]></text>
+				<text><![CDATA[Gasto financiero]]></text>
 			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="268" y="17" width="456" height="46" forecolor="#CCFFFF" backcolor="#FFFFFF" uuid="0021aa39-8466-4f99-bcee-6d12f17d4618"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="28" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{concepto}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
@@ -78,52 +79,43 @@
 	<columnHeader>
 		<band height="38" splitType="Stretch">
 			<staticText>
-				<reportElement x="147" y="9" width="100" height="20" forecolor="#0099FF" uuid="b3e57ec5-44e0-417b-a1f9-e60b3c0c984c"/>
-				<textElement>
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Concepto]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="279" y="9" width="100" height="20" forecolor="#0099FF" uuid="7dfe5308-fa80-4a27-bbf2-dc94876d2cab"/>
-				<textElement>
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Importe]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="411" y="9" width="100" height="20" forecolor="#0099FF" uuid="1ea3dd1b-8916-4ca6-b0c1-82c0df60a1b9"/>
-				<textElement>
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Observación]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="15" y="9" width="100" height="20" forecolor="#0099FF" uuid="11efdddc-797d-49c4-97bf-1e27c3a0c64e"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="147" y="2" width="100" height="20" uuid="a2863879-6ca2-42c4-934c-ff04d7a02ad4"/>
+				<text><![CDATA[acreedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="2" width="100" height="20" uuid="2ec10284-5426-4d6e-a54f-cf559b1faf0b"/>
+				<text><![CDATA[comentarios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="2" width="100" height="20" uuid="60fcff6d-7750-4d0e-8519-779833545dd3"/>
+				<text><![CDATA[importe]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="33" splitType="Stretch">
 			<textField>
-				<reportElement x="147" y="6" width="100" height="20" uuid="59c263a0-395d-479e-9ebd-f8804548eeb4"/>
-				<textFieldExpression><![CDATA[$F{concepto}]]></textFieldExpression>
-			</textField>
-			<textField pattern="¤ #,##0.00">
-				<reportElement x="279" y="6" width="100" height="20" uuid="326f3dbf-9f99-40a1-995f-182f4d4d0745"/>
-				<textFieldExpression><![CDATA[$F{importe}]]></textFieldExpression>
+				<reportElement x="15" y="13" width="100" height="20" uuid="7c2c5edf-64b1-4bc0-9f6a-229b232aa44f"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="411" y="6" width="100" height="20" uuid="dca05be7-d33c-4db4-af2e-4033ff5e20bc"/>
-				<textFieldExpression><![CDATA[$F{comentario}]]></textFieldExpression>
+				<reportElement x="147" y="13" width="100" height="20" uuid="a30976c6-4359-453c-a4d2-31ee64c163db"/>
+				<textFieldExpression><![CDATA[$F{acreedor}]]></textFieldExpression>
 			</textField>
-			<textField pattern="MMMMM dd, yyyy">
-				<reportElement x="15" y="6" width="100" height="20" uuid="e1b17095-28f5-4488-b9bc-a65ee15ef3d1"/>
-				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			<textField>
+				<reportElement x="282" y="13" width="100" height="20" uuid="e626eb65-4899-47ae-be18-91f6c87f643b"/>
+				<textFieldExpression><![CDATA[$F{comentarios}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="13" width="100" height="20" uuid="b517cf18-1033-4f74-afff-e0625b8ef605"/>
+				<textFieldExpression><![CDATA[$F{importe}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

@@ -5,7 +5,7 @@
  */
 package ventanas;
 
-import controlBD.AccesoBD;
+import controlBD.DAOUniversalHibernate;
 import herramienta.FechaHerramienta;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -2248,7 +2248,7 @@ public class VentasGastosTotales extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jsResumenVentasComponentShown
     private void llenaResumen() {
         limpiarTablas(jtResumenGeneral);
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         consultarVentasDeDiario();
         List<Object> listaDeDiarioDeVentas = acceso.select(tiendasHQL);
         double totalVentasDelDia = 0;
@@ -2389,7 +2389,7 @@ public class VentasGastosTotales extends javax.swing.JInternalFrame {
         lblTituloGastosGenerales.setText("Gastos generales de: " + anioGastoGeneral);
         lblYearGastoGeneral.setText(anioGastoGeneral);
         limpiarTablas(jtGastosGenerales);
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         DefaultTableModel model = (DefaultTableModel) jtGastosGenerales.getModel();
         List<Object> listaNombreTiendas = getNombreTiendasAbiertas();
         inializarMeses();
@@ -2449,7 +2449,7 @@ public class VentasGastosTotales extends javax.swing.JInternalFrame {
         lblTituloCompras.setText("Compras de: " + anioGDV);
         lblYearComprasAnio.setText(anioGDV);
         limpiarTablas(jtCompras);
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         DefaultTableModel model = (DefaultTableModel) jtCompras.getModel();
         List<Object> listaNombreTiendas = getNombreTiendasAbiertas();
         inializarMeses();
@@ -2730,7 +2730,7 @@ public class VentasGastosTotales extends javax.swing.JInternalFrame {
                 + "'"
                 + " AND YEAR(d.fecha) ="
                 + anio;
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         if (acceso.select(HQL).get(0) != null) {
             return (double) acceso.select(HQL).get(0);
         } else {
@@ -2750,7 +2750,7 @@ public class VentasGastosTotales extends javax.swing.JInternalFrame {
                 + "'"
                 + " AND YEAR(d.fecha) ="
                 + year;
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         if (acceso.select(HQL).get(0) != null) {
             return (double) acceso.select(HQL).get(0);
         } else {
@@ -2793,7 +2793,7 @@ public class VentasGastosTotales extends javax.swing.JInternalFrame {
     }
 
     private int getNoTiendasAbiertas(Date fecha) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         HQL = "SELECT COUNT(DISTINCT d.local) FROM Diariocaja d WHERE "
                 + " d.fecha = '"
                 + fecha.toString()
@@ -2806,7 +2806,7 @@ public class VentasGastosTotales extends javax.swing.JInternalFrame {
     }
 
     private String getNombreTiendasAbiertas(Date fecha) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         String nombreTiendaHQL = "SELECT DISTINCT d.local FROM Diariocaja d WHERE "
                 + " d.fecha = '"
                 + fecha.toString()
@@ -2821,14 +2821,14 @@ public class VentasGastosTotales extends javax.swing.JInternalFrame {
     }
 
     private List<Object> getNombreTiendasAbiertas() {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         String nombreTiendaHQL = "SELECT DISTINCT d.local FROM Diariocaja d ";
         List<Object> listaDeDiarioDeVentas = acceso.select(nombreTiendaHQL);
         return listaDeDiarioDeVentas;
     }
 
     private double getLocales(Date fecha) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         HQL = "Select SUM(g.importe) FROM Gastosgenerales g WHERE "
                 + " g.concepto = 'LOCALES' AND"
                 + " (g.fecha BETWEEN '"
@@ -2838,7 +2838,7 @@ public class VentasGastosTotales extends javax.swing.JInternalFrame {
     }
 
     private double getGastosPersonales(Date fecha) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         HQL = "Select SUM(g.importe) FROM Gastosgenerales g WHERE "
                 + " g.concepto = 'GASTOS PERSONALES' AND"
                 + " (g.fecha BETWEEN '"
@@ -2848,7 +2848,7 @@ public class VentasGastosTotales extends javax.swing.JInternalFrame {
     }
 
     private double getOficinaBodega(Date fecha) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         HQL = "Select SUM(g.importe) FROM Gastosgenerales g WHERE "
                 + " g.concepto = 'OFICINA BODEGA' AND"
                 + " (g.fecha BETWEEN '"
@@ -2858,7 +2858,7 @@ public class VentasGastosTotales extends javax.swing.JInternalFrame {
     }
 
     private double getGasolina(Date fecha) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         HQL = "Select SUM(g.importe) FROM Gastosgenerales g WHERE "
                 + " g.concepto = 'GASOLINA' AND"
                 + " (g.fecha BETWEEN '"
@@ -2868,7 +2868,7 @@ public class VentasGastosTotales extends javax.swing.JInternalFrame {
     }
 
     private double getMantenimientoV(Date fecha) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         HQL = "Select SUM(g.importe) FROM Gastosgenerales g WHERE "
                 + " g.concepto = 'MANTENIMIENTO V' AND"
                 + " (g.fecha BETWEEN '"
@@ -2878,7 +2878,7 @@ public class VentasGastosTotales extends javax.swing.JInternalFrame {
     }
 
     private double getSueldoPrestamos(Date fecha) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         HQL = "Select SUM(g.importe) FROM Gastosgenerales g WHERE "
                 + " g.concepto = 'SUELDOS PRESTAMOS' AND"
                 + " (g.fecha BETWEEN '"
@@ -2888,7 +2888,7 @@ public class VentasGastosTotales extends javax.swing.JInternalFrame {
     }
 
     private double getCompras(Date fecha) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         HQL = "Select SUM(g.importe) FROM Gastosgenerales g WHERE "
                 + " g.concepto = 'PROVEEDORES' AND"
                 + " (g.fecha BETWEEN '"

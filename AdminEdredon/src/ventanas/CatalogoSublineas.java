@@ -5,7 +5,7 @@
  */
 package ventanas;
 
-import controlBD.AccesoBD;
+import controlBD.DAOUniversalHibernate;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,7 +28,7 @@ public class CatalogoSublineas extends javax.swing.JInternalFrame {
         HQL = "From Sublinea";
         //Reviso si que la consulta no vaya vacia
         if (!HQL.isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             jtTabla.setVisible(false);
             jtTabla.removeAll();
             jtTabla.setModel(acceso.retornaModelo("Sublinea", HQL));

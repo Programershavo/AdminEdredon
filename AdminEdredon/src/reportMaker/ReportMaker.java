@@ -1,6 +1,6 @@
 package reportMaker;
 
-import controlBD.AccesoBD;
+import controlBD.DAOUniversalHibernate;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -97,7 +97,7 @@ public class ReportMaker {
 
     //Revisa si la tabla tiene registros
     private boolean hayRegistrosEnTabla(String HQL) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         listTablaConsultada = acceso.select(HQL);
         return !listTablaConsultada.isEmpty();
     }

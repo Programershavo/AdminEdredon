@@ -5,7 +5,7 @@
  */
 package ventanas;
 
-import controlBD.AccesoBD;
+import controlBD.DAOUniversalHibernate;
 import herramienta.FechaHerramienta;
 import herramienta.FormatoTabla;
 import java.awt.event.ItemEvent;
@@ -1426,7 +1426,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
 
         if (jtTablaDiarioRegistro.getRowCount() > 0) {
 
-            AccesoBD controlBD = new AccesoBD();
+            DAOUniversalHibernate controlBD = new DAOUniversalHibernate();
             Diariocaja venta = new Diariocaja();
             String fecha = "";
             for (int i = 0; i < jtTablaDiarioRegistro.getRowCount(); i++) {
@@ -1492,7 +1492,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jpCreditosComponentShown
     private void llenarCombo(JComboBox combo, String query, String tipoLista, boolean todas) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         combo.removeAllItems();
         List listaItems = acceso.select(query);
         //combo = new JComboBox();
@@ -1621,7 +1621,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     }
 
 //    private int getTiendasAbiertas() {
-//        AccesoBD acceso = new AccesoBD();
+//        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
 //        String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioResumen.getDate());
 //        String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinResumen.getDate());
 //        String nombreTienda = cmbSucursalResumen.getSelectedItem().toString();
@@ -1642,7 +1642,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
 //        }
 //    }
     private double getVentasConNota() {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioResumen.getDate());
         String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinResumen.getDate());
         String nombreTienda = cmbTiendaResumen.getSelectedItem().toString();
@@ -1664,7 +1664,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     }
 
     private double getVentasSinNota() {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioResumen.getDate());
         String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinResumen.getDate());
         String nombreTienda = cmbTiendaResumen.getSelectedItem().toString();
@@ -1686,7 +1686,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     }
 
     private double getVentasAbonoCredito() {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioResumen.getDate());
         String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinResumen.getDate());
         String nombreTienda = cmbTiendaResumen.getSelectedItem().toString();
@@ -1708,7 +1708,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     }
 
     private double getGastosDeVenta() {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioResumen.getDate());
         String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinResumen.getDate());
         String nombreTienda = cmbTiendaResumen.getSelectedItem().toString();
@@ -1807,7 +1807,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar esta venta?", "Confirmar eliminación", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
                     int clave = (int) jtTablaDiarioCorrecion.getValueAt(jtTablaDiarioCorrecion.getSelectedRow(), 0);
                     String query = "FROM Diariocaja d WHERE d.idDiarioCaja = '" + clave + "'";
                     Diariocaja venta = (Diariocaja) acceso.select(query).get(0);
@@ -1884,7 +1884,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea editar este local?", "Confirmar editar", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
                     int clave = (int) jtLocal.getValueAt(jtLocal.getSelectedRow(), 0);
                     String query = "From Sucursal s WHERE s.idSucursal = '" + clave + "'";
                     Sucursal concepto = (Sucursal) acceso.select(query).get(0);
@@ -1907,7 +1907,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este local?", "Confirmar eliminación", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
                     int clave = (int) jtLocal.getValueAt(jtLocal.getSelectedRow(), 0);
                     String query = "From Sucursal s WHERE s.idSucursal = '" + clave + "'";
                     Sucursal concepto = (Sucursal) acceso.select(query).get(0);
@@ -1923,7 +1923,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnEliminarLocalActionPerformed
     private void llenarTabla(JTable jtTabla, String nombreTabla, String consulta) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         jtTabla.setVisible(false);
         jtTabla.removeAll();
         //_________________________ NOMBRE DE LA TABLA, CONSULTA
@@ -1939,7 +1939,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     }
 
     private void btnNuevoLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoLocalActionPerformed
-        AccesoBD control = new AccesoBD();
+        DAOUniversalHibernate control = new DAOUniversalHibernate();
         try {
             if (!txtLocalNuevo.getText().isEmpty()) {
                 pojos.Sucursal local = new pojos.Sucursal();
@@ -1960,7 +1960,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNuevoLocalActionPerformed
 
     private void btnNuevoConceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoConceptoActionPerformed
-        AccesoBD control = new AccesoBD();
+        DAOUniversalHibernate control = new DAOUniversalHibernate();
         try {
             if (!txtConceptoNuevo.getText().isEmpty()) {
                 pojos.Linea concepto = new pojos.Linea();
@@ -1987,7 +1987,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea editar este concepto?", "Confirmar editar", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
                     int clave = (int) jtConceptos.getValueAt(jtConceptos.getSelectedRow(), 0);
                     String query = "From Linea l WHERE l.idLinea = '" + clave + "'";
                     Linea concepto = (Linea) acceso.select(query).get(0);
@@ -2010,7 +2010,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este concepto?", "Confirmar eliminación", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
                     int clave = (int) jtConceptos.getValueAt(jtConceptos.getSelectedRow(), 0);
                     String query = "From Linea l WHERE l.idLinea = '" + clave + "'";
                     Linea linea = (Linea) acceso.select(query).get(0);
@@ -2031,7 +2031,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea editar este proveedor?", "Confirmar editar", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
                     int clave = (int) jtProveedor.getValueAt(jtProveedor.getSelectedRow(), 0);
                     String query = "From Proveedores s WHERE s.idProveedor = '" + clave + "'";
                     Proveedores proveedor = (Proveedores) acceso.select(query).get(0);
@@ -2054,7 +2054,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este proveedor?", "Confirmar eliminación", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
                     int clave = (int) jtProveedor.getValueAt(jtProveedor.getSelectedRow(), 0);
                     String query = "From Proveedores s WHERE s.idProveedor = '" + clave + "'";
                     Proveedores proveedor = (Proveedores) acceso.select(query).get(0);
@@ -2071,7 +2071,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEliminarProveedorActionPerformed
 
     private void btnNuevoProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoProveedorActionPerformed
-        AccesoBD control = new AccesoBD();
+        DAOUniversalHibernate control = new DAOUniversalHibernate();
         try {
             if (!txtProveedorNuevo.getText().isEmpty()) {
                 pojos.Proveedores proveedor = new pojos.Proveedores();
@@ -2092,7 +2092,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNuevoProveedorActionPerformed
 
     private void btnNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoClienteActionPerformed
-        AccesoBD control = new AccesoBD();
+        DAOUniversalHibernate control = new DAOUniversalHibernate();
         try {
             if (!txtClienteNuevo.getText().isEmpty()) {
                 pojos.Clientes cliente = new pojos.Clientes();
@@ -2121,7 +2121,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea editar este cliente?", "Confirmar editar", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
                     int clave = (int) jtClientes.getValueAt(jtClientes.getSelectedRow(), 0);
                     String query = "From Clientes s WHERE s.idCliente = '" + clave + "'";
                     Clientes cliente = (Clientes) acceso.select(query).get(0);
@@ -2144,7 +2144,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este cliente?", "Confirmar eliminación", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
                     int clave = (int) jtClientes.getValueAt(jtClientes.getSelectedRow(), 0);
                     String query = "From Clientes c WHERE c.idCliente = '" + clave + "'";
                     Clientes cliente = (Clientes) acceso.select(query).get(0);
@@ -2182,7 +2182,7 @@ public class DiarioDeCaja extends javax.swing.JInternalFrame {
     private void cargaTabla(final JTable jtTabla, String HQL, String Encabezado) {
         //Reviso si que la consulta no vaya vacia
         if (!HQL.isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             jtTabla.setVisible(false);
             jtTabla.removeAll();
             jtTabla.setModel(acceso.retornaModelo(Encabezado, HQL));

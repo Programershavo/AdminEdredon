@@ -5,7 +5,7 @@
  */
 package ventanas;
 
-import controlBD.AccesoBD;
+import controlBD.DAOUniversalHibernate;
 import herramienta.FechaHerramienta;
 import java.util.Date;
 import java.util.List;
@@ -48,7 +48,7 @@ public class ExpedienteProveedor extends javax.swing.JInternalFrame {
         String Query = "FROM Proveedores p ORDER BY p.nombre";
         llenarCombo(cmbProveedorBuscar, Query, "proveedor", true);
         //ASIGNA ACCIONES A LOS COMBOS Y CALENDARIOS
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         if (acceso.select(Query) != null) {
             addActions();
         }
@@ -273,7 +273,7 @@ public class ExpedienteProveedor extends javax.swing.JInternalFrame {
 
     private void cargaTabla(final JTable jtTabla, String HQL, String Encabezado, int NoColOcultar) {
         if (!HQL.isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             jtTabla.setVisible(false);
             jtTabla.removeAll();
             jtTabla.setModel(acceso.retornaModelo(Encabezado, HQL));
@@ -290,7 +290,7 @@ public class ExpedienteProveedor extends javax.swing.JInternalFrame {
 
     private void cargaTabla2(final JTable jtTabla, String HQL, String Encabezado, int NoColOcultar) {
         if (!HQL.isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             jtTabla.setVisible(false);
             jtTabla.removeAll();
             jtTabla.setModel(acceso.retornaModelo(Encabezado, HQL));
@@ -1294,7 +1294,7 @@ public class ExpedienteProveedor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPiezasAsignarActionPerformed
 
     private void btnAnotarProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnotarProveedoresActionPerformed
-        AccesoBD control = new AccesoBD();
+        DAOUniversalHibernate control = new DAOUniversalHibernate();
         String Query = "";
         try {
             if (cmbProveedorBuscar.getItemCount() > 0) {
@@ -1346,7 +1346,7 @@ public class ExpedienteProveedor extends javax.swing.JInternalFrame {
     }
 
     private void llenarCombo(JComboBox combo, String query, String tipoLista, boolean todas) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         combo.removeAllItems();
         if (acceso.select(query) != null) {
 
@@ -1393,7 +1393,7 @@ public class ExpedienteProveedor extends javax.swing.JInternalFrame {
 
     private void btnAsignarFolioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarFolioActionPerformed
         if (jtExpedienteAsignar.getSelectedRow() != -1) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             String Query = "";
             try {
 
@@ -1458,7 +1458,7 @@ public class ExpedienteProveedor extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este folio?", "Confirmar eliminación", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
 
                     int clave = (int) jtExpedienteAsignar.getValueAt(jtExpedienteAsignar.getSelectedRow(), 0);
                     String query = "FROM Contenidoexpediente e WHERE e.idExpediente = '" + clave + "'";
@@ -1552,7 +1552,7 @@ public class ExpedienteProveedor extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea editar este proveedor?", "Confirmar editar", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
                     int clave = (int) jtProveedor.getValueAt(jtProveedor.getSelectedRow(), 0);
                     String query = "From Proveedores s WHERE s.idProveedor = '" + clave + "'";
                     Proveedores proveedor = (Proveedores) acceso.select(query).get(0);
@@ -1575,7 +1575,7 @@ public class ExpedienteProveedor extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este proveedor?", "Confirmar eliminación", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
                     int clave = (int) jtProveedor.getValueAt(jtProveedor.getSelectedRow(), 0);
                     String query = "From Proveedores s WHERE s.idProveedor = '" + clave + "'";
                     Proveedores proveedor = (Proveedores) acceso.select(query).get(0);
@@ -1592,7 +1592,7 @@ public class ExpedienteProveedor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEliminarProveedorActionPerformed
 
     private void btnNuevoProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoProveedorActionPerformed
-        AccesoBD control = new AccesoBD();
+        DAOUniversalHibernate control = new DAOUniversalHibernate();
         try {
             if (!txtProveedorNuevo.getText().isEmpty()) {
                 pojos.Proveedores proveedor = new pojos.Proveedores();
@@ -1613,7 +1613,7 @@ public class ExpedienteProveedor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNuevoProveedorActionPerformed
 
     private void btnNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoClienteActionPerformed
-        AccesoBD control = new AccesoBD();
+        DAOUniversalHibernate control = new DAOUniversalHibernate();
         try {
             if (!txtClienteNuevo.getText().isEmpty()) {
                 pojos.Clientes cliente = new pojos.Clientes();
@@ -1642,7 +1642,7 @@ public class ExpedienteProveedor extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea editar este cliente?", "Confirmar editar", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
                     int clave = (int) jtClientes.getValueAt(jtClientes.getSelectedRow(), 0);
                     String query = "From Clientes s WHERE s.idCliente = '" + clave + "'";
                     Clientes cliente = (Clientes) acceso.select(query).get(0);
@@ -1665,7 +1665,7 @@ public class ExpedienteProveedor extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este cliente?", "Confirmar eliminación", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
                     int clave = (int) jtClientes.getValueAt(jtClientes.getSelectedRow(), 0);
                     String query = "From Clientes c WHERE c.idCliente = '" + clave + "'";
                     Clientes cliente = (Clientes) acceso.select(query).get(0);
@@ -1695,7 +1695,7 @@ public class ExpedienteProveedor extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este expediente?", "Confirmar eliminación", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
                     int clave = (int) jtExpedienteAsignar.getValueAt(jtExpedienteAsignar.getSelectedRow(), 1);
                     String query = "FROM Expediente e WHERE e.idProveedor = '" + clave + "'";
                     Expediente expediente = (Expediente) acceso.select(query).get(0);

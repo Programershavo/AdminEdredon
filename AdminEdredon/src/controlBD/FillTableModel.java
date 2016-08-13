@@ -5,26 +5,26 @@ import java.util.Iterator;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-public class TableModel extends AbstractTableModel {
+public class FillTableModel extends AbstractTableModel {
 
-    private String[] headerDiarioCaja = {"Clave", "Local", "Fecha", "Notas", "Ventas con Nota", "Ventas Sin Nota", "Abono Credito", "Gastos"};
-    private String[] headerGastosGenerales = {"Clave", "Fecha", "Concepto", "Subconcepto", "Motivo", "Comentario", "Importe"};
-    private String[] headerExpedienteProveedor = {"CE", "CP", "Proveedor", "Fecha", "Estado"};
-    private String[] headerContenidoExpediente = {"Clave ConExp", /*"Clave Exp", "Clave Pro", */ "fecha", "folio", "Proveedor", "piezas", "importe"/*, "forma de pago", "abono", "estado", "saldo"*/};
-    private String[] headerConExpRes = {"Clave ConExp", "Fecha", "Folio", "Piezas", "Cargo", "Abono", "Saldo", "Estado"};
-    private String[] headerAbonoProveedores = {"Clave Abono", "Fecha", "Folio", "Cargo", "Abono", "Saldo", "Forma de pago"};
-    private String[] headerLinea = {"clave", "Nombre"};
-    private String[] headerSucursal = {"clave", "Nombre"};
-    private String[] headerProveedor = {"clave", "Nombre"};
-    private String[] headerCliente = {"clave", "Nombre"};
-    private String[] headerGastosLocales = {"Clave", "claveLocal", "local", "fecha", "concepto", "importe", "comentario"};
-    private String[] headerGastosBodega = {"Clave", "fecha", "concepto", "importe", "comentario"};
-    private String[] headerGastosPersonales = {"Clave", "fecha", "concepto", "comentario", "importe"};
-    private String[] headerVehiculo = {"Clave", "Vehiculo", "Dueño", "Color", "Año", "Placas"};
-    private String[] headerGastogasolina = {"Clave", "Fecha", "Vehiculo", "Comentario", "Importe"};
-    private String[] headerMantenimiento = {"Clave", "Mantenimiento"};
-    private String[] headerGastomantenimientov = {"Clave", "Fecha", "Vehiculo", "Mantenimiento", "Coementario", "Importe"};
-    private String[] headerGastosFinancieros = {"id", "Fecha", "Concepto", "Importe", "Coementario", "Generado por"};
+    private final String[] headerDiarioCaja = {"Clave", "Local", "Fecha", "Notas", "Ventas con Nota", "Ventas Sin Nota", "Abono Credito", "Gastos"};
+    private final String[] headerGastosGenerales = {"Clave", "Fecha", "Concepto", "Subconcepto", "Motivo", "Comentario", "Importe"};
+    private final String[] headerExpedienteProveedor = {"CE", "CP", "Proveedor", "Fecha", "Estado"};
+    private final String[] headerContenidoExpediente = {"Clave ConExp", /*"Clave Exp", "Clave Pro", */ "fecha", "folio", "Proveedor", "piezas", "importe"/*, "forma de pago", "abono", "estado", "saldo"*/};
+    private final String[] headerConExpRes = {"Clave ConExp", "Fecha", "Folio", "Piezas", "Cargo", "Abono", "Saldo", "Estado"};
+    private final String[] headerAbonoProveedores = {"Clave Abono", "Fecha", "Folio", "Cargo", "Abono", "Saldo", "Forma de pago"};
+    private final String[] headerLinea = {"clave", "Nombre"};
+    private final String[] headerSucursal = {"clave", "Nombre"};
+    private final String[] headerProveedor = {"clave", "Nombre"};
+    private final String[] headerCliente = {"clave", "Nombre"};
+    private final String[] headerGastosLocales = {"Clave", "claveLocal", "local", "fecha", "concepto", "importe", "comentario"};
+    private final String[] headerGastosBodega = {"Clave", "fecha", "concepto", "importe", "comentario"};
+    private final String[] headerGastosPersonales = {"Clave", "fecha", "concepto", "comentario", "importe"};
+    private final String[] headerVehiculo = {"Clave", "Vehiculo", "Dueño", "Color", "Año", "Placas"};
+    private final String[] headerGastogasolina = {"Clave", "Fecha", "Vehiculo", "Comentario", "Importe"};
+    private final String[] headerMantenimiento = {"Clave", "Mantenimiento"};
+    private final String[] headerGastomantenimientov = {"Clave", "Fecha", "Vehiculo", "Mantenimiento", "Coementario", "Importe"};
+    private final String[] headerGastosFinancieros = {"id", "Fecha", "Concepto", "Importe", "Coementario", "Generado por"};
 
     //Este arreglo guarda los encabezados y lo registros
     public Object[][] tableModel;
@@ -33,7 +33,7 @@ public class TableModel extends AbstractTableModel {
     //Estos son los encabezados que tendrá el modelo
     private String[] titulosDeColumnas = null;
 
-    public TableModel(String nombreTabla, List registrosConsulta) {
+    public FillTableModel(String nombreTabla, List registrosConsulta) {
         this.tablaACargar = nombreTabla;
         getColumnNames();
         this.llenaModelo(registrosConsulta);
@@ -146,7 +146,7 @@ public class TableModel extends AbstractTableModel {
         tableModel = new Object[registrosConsulta.size()][numColumnas];
         //Elige la accion por el nombre de la pestaña activa
         switch (tablaACargar) {
-            //Carga los pagos de los clietes
+            //Carga los pagos de los clientes
             case "Diariocaja":
                 try {
                     while (listaDeObjetos.hasNext()) {
@@ -465,12 +465,6 @@ public class TableModel extends AbstractTableModel {
                             tableModel[contFila][contCol] = contenidoExpediente.getIdContenidoExpediente();
                             this.isCellEditable(contFila, contCol);
                             contCol++;
-//                            tableModel[contFila][contCol] = contenidoExpediente.getIdExpediente();
-//                            this.isCellEditable(contFila, contCol);
-//                            contCol++;
-//                            tableModel[contFila][contCol] = contenidoExpediente.getIdProveedor();
-//                            this.isCellEditable(contFila, contCol);
-//                            contCol++;
                             tableModel[contFila][contCol] = String.valueOf(contenidoExpediente.getFecha());
                             this.isCellEditable(contFila, contCol);
                             contCol++;
@@ -486,18 +480,6 @@ public class TableModel extends AbstractTableModel {
                             tableModel[contFila][contCol] = String.valueOf(contenidoExpediente.getImporte());
                             this.isCellEditable(contFila, contCol);
                             contCol++;
-//                            tableModel[contFila][contCol] = contenidoExpediente.getFormaDePago();
-//                            this.isCellEditable(contFila, contCol);
-//                            contCol++;
-//                            tableModel[contFila][contCol] = String.valueOf(contenidoExpediente.getAbono());
-//                            this.isCellEditable(contFila, contCol);
-//                            contCol++;
-//                            tableModel[contFila][contCol] = contenidoExpediente.getEstadoIndividualFolio();
-//                            this.isCellEditable(contFila, contCol);
-//                            contCol++;
-//                            tableModel[contFila][contCol] = contenidoExpediente.getSaldo();
-//                            this.isCellEditable(contFila, contCol);
-//                            contCol++;
                         }
                         contCol = 0;
                         contFila++;
@@ -577,33 +559,6 @@ public class TableModel extends AbstractTableModel {
                     throw e;
                 }
                 break;
-//            case "Producto":
-//                try {
-//                    while (listaDeObjetos.hasNext()) {
-//                        while (contCol < numColumnas && listaDeObjetos.hasNext()) {
-//                            pojos.Producto producto = (pojos.Producto) listaDeObjetos.next();
-//                            tableModel[contFila][contCol] = producto.getCodigoDeBarras();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = producto.getNombre();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = producto.getSize();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = producto.getLinea();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = producto.getSublinea();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = producto.getPrecioVenta();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = producto.getPrecioCompra();
-//                            contCol++;
-//                        }
-//                        contCol = 0;
-//                        contFila++;
-//                    }
-//                } catch (Exception e) {
-//                    throw e;
-//                }
-//                break;
             case "Cliente":
                 try {
                     while (listaDeObjetos.hasNext()) {
@@ -611,35 +566,8 @@ public class TableModel extends AbstractTableModel {
                             pojos.Clientes cliente = (pojos.Clientes) listaDeObjetos.next();
                             tableModel[contFila][contCol] = cliente.getIdCliente();
                             contCol++;
-//                            tableModel[contFila][contCol] = cliente.getFolio();
-//                            contCol++;
                             tableModel[contFila][contCol] = cliente.getNombre();
                             contCol++;
-//                            tableModel[contFila][contCol] = cliente.getRfc();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = cliente.getCalle();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = cliente.getNoExterior();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = cliente.getNoInterior();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = cliente.getColonia();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = cliente.getCp();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = cliente.getTelFijo();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = cliente.getTelMovil();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = cliente.getEmail();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = cliente.getPais();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = cliente.getEstado();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = cliente.getMunicipio();
-//                            contCol++;
-
                         }
                         contCol = 0;
                         contFila++;
@@ -654,38 +582,9 @@ public class TableModel extends AbstractTableModel {
                         while (contCol < numColumnas && listaDeObjetos.hasNext()) {
                             pojos.Proveedores proveedor = (pojos.Proveedores) listaDeObjetos.next();
                             tableModel[contFila][contCol] = proveedor.getIdProveedor();
-                            contCol++;
-//                            tableModel[contFila][contCol] = proveedor.getFolio();
-//                            contCol++;
+                            contCol++;;
                             tableModel[contFila][contCol] = proveedor.getNombre();
                             contCol++;
-//                            tableModel[contFila][contCol] = proveedor.getRfc();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = proveedor.getCalle();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = proveedor.getNoExterior();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = proveedor.getNoInterior();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = proveedor.getColonia();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = proveedor.getCp();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = proveedor.getTelFijo();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = proveedor.getTelMovil();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = proveedor.getTelMovil();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = proveedor.getEmail();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = proveedor.getPais();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = proveedor.getEstado();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = proveedor.getMunicipio();
-//                            contCol++;
-
                         }
                         contCol = 0;
                         contFila++;
@@ -745,23 +644,6 @@ public class TableModel extends AbstractTableModel {
                     throw e;
                 }
                 break;
-//            case "Sublinea":
-//                try {
-//                    while (listaDeObjetos.hasNext()) {
-//                        while (contCol < numColumnas && listaDeObjetos.hasNext()) {
-//                            pojos.Sublinea sublinea = (pojos.Sublinea) listaDeObjetos.next();
-//                            tableModel[contFila][contCol] = sublinea.getIdSublinea();
-//                            contCol++;
-//                            tableModel[contFila][contCol] = sublinea.getNombre();
-//                            contCol++;
-//                        }
-//                        contCol = 0;
-//                        contFila++;
-//                    }
-//                } catch (Exception e) {
-//                    throw e;
-//                }
-//                break;
         }
 
     }

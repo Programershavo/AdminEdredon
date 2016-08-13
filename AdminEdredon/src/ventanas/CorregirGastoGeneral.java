@@ -5,7 +5,7 @@
  */
 package ventanas;
 
-import controlBD.AccesoBD;
+import controlBD.DAOUniversalHibernate;
 import herramienta.FechaHerramienta;
 import java.beans.PropertyVetoException;
 import javax.swing.JOptionPane;
@@ -29,7 +29,7 @@ public class CorregirGastoGeneral extends javax.swing.JInternalFrame {
     private void cargaDatos(String clave) {
         //Reviso si que la consulta no vaya vacia
         if (!clave.isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             gastoGeneral = new Gastosgenerales();
             String HQL = "From Gastosgenerales g WHERE g.idGastosGenerales = '" + clave + "'";
             gastoGeneral = (Gastosgenerales) acceso.select(HQL).get(0);
@@ -307,7 +307,7 @@ public class CorregirGastoGeneral extends javax.swing.JInternalFrame {
                 && !txtConcepto.getText().isEmpty()
                 && !txtComentario.getText().isEmpty()
                 && !txtImporte.getText().isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             String fecha = FechaHerramienta.formatoYMD(jdcFechaGasto.getDate());
             gastoGeneral.setFecha(FechaHerramienta.convertirStringEnDate(fecha));
             gastoGeneral.setConcepto(txtConcepto.getText());

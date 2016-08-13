@@ -1,6 +1,5 @@
 package controlBD;
 
-import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
@@ -8,20 +7,21 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.SessionFactory;
 
-public class AccesoBD {
+public class DAOUniversalHibernate {
 
     private Session session;
     private Transaction transaction;
     private SessionFactory sessionFactory;
 
-    public AccesoBD() {
+    public DAOUniversalHibernate() {
     }
 
-    public TableModel retornaModelo(String nombreTabla, String consulta) {
+    public FillTableModel retornaModelo(String nombreTabla, String consulta) {
         //Creo el modelo para cargarlo en el Grid
-        TableModel tableModel = new TableModel(nombreTabla, select(consulta));
+        FillTableModel tableModel = new FillTableModel(nombreTabla, select(consulta));
         return tableModel;
     }
+
 
     public List select(String HQL) {
         List listaObjetos;
@@ -110,7 +110,7 @@ public class AccesoBD {
     public void iniciaSF() {
         try {
             session = null;
-            sessionFactory = PersonFactory.getSessionFactory();
+            sessionFactory = HibernateUtil.getSessionFactory();
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
         } catch (HibernateException e) {

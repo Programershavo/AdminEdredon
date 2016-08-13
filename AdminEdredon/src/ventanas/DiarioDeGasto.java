@@ -5,7 +5,7 @@
  */
 package ventanas;
 
-import controlBD.AccesoBD;
+import controlBD.DAOUniversalHibernate;
 import herramienta.FechaHerramienta;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -115,7 +115,7 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
     }
 
     private void llenarTabla(JTable jtTabla, String nombreTabla, String consulta) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         jtTabla.setVisible(false);
         jtTabla.removeAll();
         //_________________________ NOMBRE DE LA TABLA, CONSULTA
@@ -124,7 +124,7 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
     }
 
     private void llenarCombo(JComboBox combo, String query, String tipoLista, boolean todas) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         combo.removeAllItems();
         if (acceso.select(query) != null) {
 
@@ -645,7 +645,7 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
     }
 
     private void guardarGastosLocales(JTable tabla) {
-        AccesoBD controlBD = new AccesoBD();
+        DAOUniversalHibernate controlBD = new DAOUniversalHibernate();
         String fecha = "";
         for (int i = 0; i < tabla.getRowCount(); i++) {
             try {
@@ -676,7 +676,7 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
     }
 
     private void guardarGastosPersonales(JTable tabla) {
-        AccesoBD controlBD = new AccesoBD();
+        DAOUniversalHibernate controlBD = new DAOUniversalHibernate();
         String fecha = "";
         for (int i = 0; i < tabla.getRowCount(); i++) {
             try {
@@ -702,7 +702,7 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
     }
 
     private void guardarGastosBodega(JTable tabla) {
-        AccesoBD controlBD = new AccesoBD();
+        DAOUniversalHibernate controlBD = new DAOUniversalHibernate();
         String fecha = "";
         for (int i = 0; i < tabla.getRowCount(); i++) {
             try {
@@ -728,7 +728,7 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
     }
 
     private void guardarGastosGasolina(JTable tabla) {
-        AccesoBD controlBD = new AccesoBD();
+        DAOUniversalHibernate controlBD = new DAOUniversalHibernate();
         String fecha = "";
         for (int i = 0; i < tabla.getRowCount(); i++) {
             try {
@@ -754,7 +754,7 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
     }
 
     private void guardarGastosMantenimiento(JTable tabla) {
-        AccesoBD controlBD = new AccesoBD();
+        DAOUniversalHibernate controlBD = new DAOUniversalHibernate();
         String fecha = "";
         for (int i = 0; i < tabla.getRowCount(); i++) {
             try {
@@ -782,7 +782,7 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
     }
 
     private void guardarConceptoLocal(JTable tabla, String concepto, String tienda) {
-        AccesoBD controlBD = new AccesoBD();
+        DAOUniversalHibernate controlBD = new DAOUniversalHibernate();
         String fecha = "";
         for (int i = 0; i < tabla.getRowCount(); i++) {
             try {
@@ -817,7 +817,7 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
 
     private boolean abonarFolio(double abono) {
 
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         int clave = (int) jtFoliosAsignados.getValueAt(jtFoliosAsignados.getSelectedRow(), 0);
         String Query = "FROM Contenidoexpediente ce WHERE ce.idContenidoExpediente="
                 + clave
@@ -3496,7 +3496,7 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
         limpiarCampos();
     }//GEN-LAST:event_btnRegistrarSueldoPrestamosActionPerformed
     private void guardarGastosFinancieros(JTable tabla) {
-        AccesoBD controlBD = new AccesoBD();
+        DAOUniversalHibernate controlBD = new DAOUniversalHibernate();
         String fecha = "";
         for (int i = 0; i < tabla.getRowCount(); i++) {
             try {
@@ -3545,7 +3545,7 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
 // TODO add your handling code here:
         if (jtFoliosAsignados.getSelectedRow() != -1) {
             //REGISTRAR EL ABONO
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             Abonoproveedor abono = new Abonoproveedor();
             //ID EXPEDIENTE
             int id = Integer.parseInt(jtFoliosAsignados.getValueAt(jtFoliosAsignados.getSelectedRow(), 0).toString());
@@ -3879,7 +3879,7 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este gasto?", "Confirmar eliminación", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
                     int clave = (int) jtFinancierosResumen.getValueAt(jtFinancierosResumen.getSelectedRow(), 0);
                     String HQL = "From Gastosfinancieros gl WHERE gl.idGastosFinancieros = '" + clave + "'";
                     Gastosfinancieros concepto = (Gastosfinancieros) acceso.select(HQL).get(0);
@@ -4120,7 +4120,7 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este gasto?", "Confirmar eliminación", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
                     int clave = (int) jtLocalesR.getValueAt(jtLocalesR.getSelectedRow(), 0);
                     String query = "FROM Gastoslocales gl WHERE gl.idGastosLocales = '" + clave + "'";
                     Gastoslocales concepto = (Gastoslocales) acceso.select(query).get(0);
@@ -4191,7 +4191,7 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este gasto?", "Confirmar eliminación", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
                     int clave = (int) jtPersonalesR.getValueAt(jtPersonalesR.getSelectedRow(), 0);
                     String query = "From Gastospersonales gp WHERE gp.idGastosPersonales = '" + clave + "'";
                     Gastospersonales concepto = (Gastospersonales) acceso.select(query).get(0);
@@ -4344,7 +4344,7 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este gasto?", "Confirmar eliminación", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
                     int clave = (int) jtGasolinaResumen.getValueAt(jtGasolinaResumen.getSelectedRow(), 0);
                     String query = "FROM Gastogasolina gl WHERE gl.idGastoGasolina = '" + clave + "'";
                     Gastogasolina concepto = (Gastogasolina) acceso.select(query).get(0);
@@ -4646,7 +4646,7 @@ public class DiarioDeGasto extends javax.swing.JInternalFrame {
     private void cargaTabla(final JTable jtTabla, String HQL, String Encabezado, int NoColOcultar) {
         //Reviso si que la consulta no vaya vacia
         if (!HQL.isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             jtTabla.setVisible(false);
             jtTabla.removeAll();
             jtTabla.setModel(acceso.retornaModelo(Encabezado, HQL));

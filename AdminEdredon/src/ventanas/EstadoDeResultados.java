@@ -5,7 +5,7 @@
  */
 package ventanas;
 
-import controlBD.AccesoBD;
+import controlBD.DAOUniversalHibernate;
 import herramienta.FechaHerramienta;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -904,7 +904,7 @@ public class EstadoDeResultados extends javax.swing.JInternalFrame {
     }
 
     private double getTotalVentas() {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioEstado.getDate());
         String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinEstado.getDate());
         String nombreTienda = cmbSucursalEstadoDeResultados.getSelectedItem().toString();
@@ -927,7 +927,7 @@ public class EstadoDeResultados extends javax.swing.JInternalFrame {
     }
 
     private double getTotalGastosCompra() {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioEstado.getDate());
         String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinEstado.getDate());
         String HQL = "";
@@ -939,7 +939,7 @@ public class EstadoDeResultados extends javax.swing.JInternalFrame {
     }
 
     private double getTotalGastosDeTienda() {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioEstado.getDate());
         String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinEstado.getDate());
         String nombreTienda = cmbSucursalEstadoDeResultados.getSelectedItem().toString();
@@ -962,7 +962,7 @@ public class EstadoDeResultados extends javax.swing.JInternalFrame {
     }
 
     private double getTotalGastosPersonales() {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         String fechaInicioResumen = FechaHerramienta.formatoYMD(jdcFechaInicioEstado.getDate());
         String fechaFinResumen = FechaHerramienta.formatoYMD(jdcFechaFinEstado.getDate());
         String HQL = "";

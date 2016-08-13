@@ -5,7 +5,7 @@
  */
 package ventanas;
 
-import controlBD.AccesoBD;
+import controlBD.DAOUniversalHibernate;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
@@ -263,7 +263,7 @@ public class CatalogoGastos extends javax.swing.JInternalFrame {
 
     }
     private void btnNuevoConceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoConceptoActionPerformed
-        AccesoBD control = new AccesoBD();
+        DAOUniversalHibernate control = new DAOUniversalHibernate();
         try {
             if (!txtConceptoNuevo.getText().isEmpty()) {
                 pojos.Linea concepto = new pojos.Linea();
@@ -284,7 +284,7 @@ public class CatalogoGastos extends javax.swing.JInternalFrame {
     private void cargaTabla(final JTable jtTabla, String HQL, String Encabezado, int NoColOcultar) {
         //Reviso si que la consulta no vaya vacia
         if (!HQL.isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             jtTabla.setVisible(false);
             jtTabla.removeAll();
             jtTabla.setModel(acceso.retornaModelo(Encabezado, HQL));
@@ -301,7 +301,7 @@ public class CatalogoGastos extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este concepto?", "Confirmar eliminación", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
                     int clave = (int) jtConceptos.getValueAt(jtConceptos.getSelectedRow(), 0);
                     String query = "From Linea l WHERE l.idLinea = '" + clave + "'";
                     Linea concepto = (Linea) acceso.select(query).get(0);
@@ -317,7 +317,7 @@ public class CatalogoGastos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnBorrarConceptoActionPerformed
 private void llenarTabla(JTable jtTabla, String nombreTabla, String consulta) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         jtTabla.setVisible(false);
         jtTabla.removeAll();
         //_________________________ NOMBRE DE LA TABLA, CONSULTA
@@ -329,7 +329,7 @@ private void llenarTabla(JTable jtTabla, String nombreTabla, String consulta) {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea editar este concepto?", "Confirmar editar", 0, 3);
             if (respuesta == 0) {
                 try {
-                    AccesoBD acceso = new AccesoBD();
+                    DAOUniversalHibernate acceso = new DAOUniversalHibernate();
                     int clave = (int) jtConceptos.getValueAt(jtConceptos.getSelectedRow(), 0);
                     String query = "From Linea l WHERE l.idLinea = '" + clave + "'";
                     Linea concepto = (Linea) acceso.select(query).get(0);
@@ -355,7 +355,7 @@ private void llenarTabla(JTable jtTabla, String nombreTabla, String consulta) {
     private void cargaTabla(final JTable jtTabla, String HQL, String Encabezado) {
         //Reviso si que la consulta no vaya vacia
         if (!HQL.isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             jtTabla.setVisible(false);
             jtTabla.removeAll();
             jtTabla.setModel(acceso.retornaModelo(Encabezado, HQL));

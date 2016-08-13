@@ -271,7 +271,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="imagenDeFondo" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/IconosEspecializados/castilloLogo.png"/>
+              <Image iconType="3" name="/IconosGenerales/engine.png"/>
             </Property>
             <Property name="opaque" type="boolean" value="false"/>
           </Properties>

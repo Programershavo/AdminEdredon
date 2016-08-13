@@ -5,7 +5,8 @@
  */
 package ventanas;
 
-import controlBD.AccesoBD;
+import controlBD.DAOUniversalHibernate;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
@@ -39,15 +40,15 @@ public class CatalogoProveedores extends javax.swing.JInternalFrame {
         jpProveedoresClientes = new javax.swing.JPanel();
         jsProvedorCliente = new javax.swing.JScrollPane();
         jtProveedor = new javax.swing.JTable();
-        jLabel85 = new javax.swing.JLabel();
-        btnCorregirProveedor = new javax.swing.JButton();
-        btnEliminarProveedor = new javax.swing.JButton();
-        jLabel89 = new javax.swing.JLabel();
-        btnNuevoProveedor = new javax.swing.JButton();
         txtProveedorNuevo = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel113 = new javax.swing.JLabel();
+        jLabel114 = new javax.swing.JLabel();
+        jLabel115 = new javax.swing.JLabel();
+        jLabel116 = new javax.swing.JLabel();
+        jLabel117 = new javax.swing.JLabel();
+        jLabel112 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -77,98 +78,42 @@ public class CatalogoProveedores extends javax.swing.JInternalFrame {
             }
         });
         jtProveedor.setOpaque(false);
+        jtProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtProveedorKeyPressed(evt);
+            }
+        });
         jsProvedorCliente.setViewportView(jtProveedor);
 
-        jLabel85.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jLabel85.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel85.setText("MIS PROVEEDORES");
-
-        btnCorregirProveedor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnCorregirProveedor.setForeground(new java.awt.Color(0, 153, 51));
-        btnCorregirProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/correct.png"))); // NOI18N
-        btnCorregirProveedor.setText("Corregir");
-        btnCorregirProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCorregirProveedorActionPerformed(evt);
+        txtProveedorNuevo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtProveedorNuevoKeyPressed(evt);
             }
         });
 
-        btnEliminarProveedor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnEliminarProveedor.setForeground(new java.awt.Color(0, 153, 51));
-        btnEliminarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/delete.png"))); // NOI18N
-        btnEliminarProveedor.setText("Eliminar");
-        btnEliminarProveedor.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnEliminarProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarProveedorActionPerformed(evt);
-            }
-        });
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel89.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel89.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel89.setText("ADMINISTRAS MIS PROVEEDORES");
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/proveedor.png"))); // NOI18N
 
-        btnNuevoProveedor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnNuevoProveedor.setForeground(new java.awt.Color(0, 153, 51));
-        btnNuevoProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/New.png"))); // NOI18N
-        btnNuevoProveedor.setText("Nuevo");
-        btnNuevoProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoProveedorActionPerformed(evt);
-            }
-        });
+        jLabel113.setFont(new java.awt.Font("Comic Sans MS", 1, 10)); // NOI18N
+        jLabel113.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel113.setText("TEXTO + ENTER = NUEVO");
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/provider.png"))); // NOI18N
+        jLabel114.setFont(new java.awt.Font("Comic Sans MS", 1, 10)); // NOI18N
+        jLabel114.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel114.setText("TABLA + ENTER = CAMBIAR");
 
-        javax.swing.GroupLayout jpProveedoresClientesLayout = new javax.swing.GroupLayout(jpProveedoresClientes);
-        jpProveedoresClientes.setLayout(jpProveedoresClientesLayout);
-        jpProveedoresClientesLayout.setHorizontalGroup(
-            jpProveedoresClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpProveedoresClientesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpProveedoresClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jpProveedoresClientesLayout.createSequentialGroup()
-                        .addComponent(btnEliminarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel89, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addComponent(btnCorregirProveedor))
-                    .addComponent(jLabel85, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpProveedoresClientesLayout.createSequentialGroup()
-                        .addComponent(txtProveedorNuevo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNuevoProveedor))
-                    .addComponent(jsProvedorCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
-        );
-        jpProveedoresClientesLayout.setVerticalGroup(
-            jpProveedoresClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpProveedoresClientesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel85)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpProveedoresClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnNuevoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtProveedorNuevo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpProveedoresClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jsProvedorCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpProveedoresClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEliminarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCorregirProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel89))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel115.setFont(new java.awt.Font("Comic Sans MS", 1, 10)); // NOI18N
+        jLabel115.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel115.setText("TABLA + SUPR   = BORRAR");
 
-        jPanel1.setBackground(new java.awt.Color(240, 79, 90));
+        jLabel116.setFont(new java.awt.Font("Comic Sans MS", 1, 10)); // NOI18N
+        jLabel116.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel116.setText("<---------------------");
 
-        jLabel1.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Cátalogo de Proveedores");
+        jLabel117.setFont(new java.awt.Font("Comic Sans MS", 1, 10)); // NOI18N
+        jLabel117.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel117.setText("<---------------------");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -176,14 +121,70 @@ public class CatalogoProveedores extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(550, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel114, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel115, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel116, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel117, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel113, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel113)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel117)
+                .addGap(51, 51, 51)
+                .addComponent(jLabel114)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel115)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel116)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addContainerGap())
+        );
+
+        jLabel112.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel112.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel112.setText("Proveedores");
+
+        javax.swing.GroupLayout jpProveedoresClientesLayout = new javax.swing.GroupLayout(jpProveedoresClientes);
+        jpProveedoresClientes.setLayout(jpProveedoresClientesLayout);
+        jpProveedoresClientesLayout.setHorizontalGroup(
+            jpProveedoresClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpProveedoresClientesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpProveedoresClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpProveedoresClientesLayout.createSequentialGroup()
+                        .addGroup(jpProveedoresClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtProveedorNuevo)
+                            .addComponent(jsProvedorCliente))
+                        .addGap(8, 8, 8))
+                    .addComponent(jLabel112, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jpProveedoresClientesLayout.setVerticalGroup(
+            jpProveedoresClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpProveedoresClientesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpProveedoresClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpProveedoresClientesLayout.createSequentialGroup()
+                        .addComponent(jLabel112)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtProveedorNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jsProvedorCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -191,78 +192,28 @@ public class CatalogoProveedores extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jpProveedoresClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jpProveedoresClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 431, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 45, Short.MAX_VALUE)
-                    .addComponent(jpProveedoresClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addComponent(jpProveedoresClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 private void llenarTabla(JTable jtTabla, String nombreTabla, String consulta) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         jtTabla.setVisible(false);
         jtTabla.removeAll();
         //_________________________ NOMBRE DE LA TABLA, CONSULTA
         jtTabla.setModel(acceso.retornaModelo(nombreTabla, consulta));
         jtTabla.setVisible(true);
     }
-    private void btnCorregirProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorregirProveedorActionPerformed
-        if (jtProveedor.getSelectedRow() != -1) {
-            int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea editar este proveedor?", "Confirmar editar", 0, 3);
-            if (respuesta == 0) {
-                try {
-                    AccesoBD acceso = new AccesoBD();
-                    int clave = (int) jtProveedor.getValueAt(jtProveedor.getSelectedRow(), 0);
-                    String query = "From Proveedores s WHERE s.idProveedor = '" + clave + "'";
-                    Proveedores proveedor = (Proveedores) acceso.select(query).get(0);
-                    String nombre = JOptionPane.showInputDialog(this, "Nuevo nombre");
-                    proveedor.setNombre(nombre);
-                    acceso.Update(proveedor);
-                    query = "From Proveedores s ORDER BY s.idProveedor";
-                    llenarTabla(jtProveedor, "Proveedor", query);
-                    JOptionPane.showMessageDialog(this, "Proveedor editada correctamente", "Cancelado", 1);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
-                    System.gc();
-                }
-            }
-        }
-    }//GEN-LAST:event_btnCorregirProveedorActionPerformed
 
-    private void btnEliminarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProveedorActionPerformed
-        if (jtProveedor.getSelectedRow() != -1) {
-            int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este proveedor?", "Confirmar eliminación", 0, 3);
-            if (respuesta == 0) {
-                try {
-                    AccesoBD acceso = new AccesoBD();
-                    int clave = (int) jtProveedor.getValueAt(jtProveedor.getSelectedRow(), 0);
-                    String query = "From Proveedores s WHERE s.idProveedor = '" + clave + "'";
-                    Proveedores proveedor = (Proveedores) acceso.select(query).get(0);
-                    acceso.delete(proveedor);
-                    query = "From Proveedores s";
-                    llenarTabla(jtProveedor, "Proveedor", query);
-                    JOptionPane.showMessageDialog(this, "Proveedor eliminada correctamente", "Cancelado", 1);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
-                    System.gc();
-                }
-            }
-        }
-    }//GEN-LAST:event_btnEliminarProveedorActionPerformed
     private void cargaTabla(final JTable jtTabla, String HQL, String Encabezado, int NoColOcultar) {
         //Reviso si que la consulta no vaya vacia
         if (!HQL.isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             jtTabla.setVisible(false);
             jtTabla.removeAll();
             jtTabla.setModel(acceso.retornaModelo(Encabezado, HQL));
@@ -280,42 +231,90 @@ private void llenarTabla(JTable jtTabla, String nombreTabla, String consulta) {
         txtProveedorNuevo.setText("");
 
     }
-    private void btnNuevoProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoProveedorActionPerformed
-        AccesoBD control = new AccesoBD();
-        try {
-            if (!txtProveedorNuevo.getText().isEmpty()) {
-                pojos.Proveedores proveedor = new pojos.Proveedores();
-                proveedor.setNombre(txtProveedorNuevo.getText());
-                control.add(proveedor);
-
-                limpiarCampos();
-                JOptionPane.showMessageDialog(this, "Proveedor registrado correctamente", "Datos registrados", 1);
-                String Query = "";
-                Query = "FROM Proveedores p ORDER BY p.nombre";
-                cargaTabla(jtProveedor, Query, "Proveedor", 1);
-            } else {
-                JOptionPane.showMessageDialog(this, "Favor de llenar el campo Nombre", "Datos incompletos", 1);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e, "Error", 0);
-        }
-    }//GEN-LAST:event_btnNuevoProveedorActionPerformed
-
     private void jpProveedoresClientesComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpProveedoresClientesComponentShown
         String Query = "";
         Query = "FROM Proveedores p ORDER BY p.nombre";
         cargaTabla(jtProveedor, Query, "Proveedor", 1);
     }//GEN-LAST:event_jpProveedoresClientesComponentShown
 
+    private void txtProveedorNuevoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProveedorNuevoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            DAOUniversalHibernate control = new DAOUniversalHibernate();
+            try {
+                if (!txtProveedorNuevo.getText().isEmpty()) {
+                    pojos.Proveedores proveedor = new pojos.Proveedores();
+                    proveedor.setNombre(txtProveedorNuevo.getText());
+                    control.add(proveedor);
+
+                    limpiarCampos();
+                   
+                    String Query = "";
+                    Query = "FROM Proveedores p ORDER BY p.nombre";
+                    cargaTabla(jtProveedor, Query, "Proveedor", 1);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Favor de llenar el campo Nombre", "Datos incompletos", 1);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e, "Error", 0);
+            }
+        }
+    }//GEN-LAST:event_txtProveedorNuevoKeyPressed
+
+    private void jtProveedorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtProveedorKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (jtProveedor.getSelectedRow() != -1) {
+                int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea editar este proveedor?", "Confirmar editar", 0, 3);
+                if (respuesta == 0) {
+                    try {
+                        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
+                        int clave = (int) jtProveedor.getValueAt(jtProveedor.getSelectedRow(), 0);
+                        String query = "From Proveedores s WHERE s.idProveedor = '" + clave + "'";
+                        Proveedores proveedor = (Proveedores) acceso.select(query).get(0);
+                        String nombre = JOptionPane.showInputDialog(this, "Nuevo nombre");
+                        proveedor.setNombre(nombre);
+                        acceso.Update(proveedor);
+                        query = "From Proveedores s ORDER BY s.idProveedor";
+                        llenarTabla(jtProveedor, "Proveedor", query);
+                        JOptionPane.showMessageDialog(this, "Proveedor editada correctamente", "Cancelado", 1);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+                        System.gc();
+                    }
+                }
+            }
+        }
+//----------------------------------------------------------------------->
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            if (jtProveedor.getSelectedRow() != -1) {
+                int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este proveedor?", "Confirmar eliminación", 0, 3);
+                if (respuesta == 0) {
+                    try {
+                        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
+                        int clave = (int) jtProveedor.getValueAt(jtProveedor.getSelectedRow(), 0);
+                        String query = "From Proveedores s WHERE s.idProveedor = '" + clave + "'";
+                        Proveedores proveedor = (Proveedores) acceso.select(query).get(0);
+                        acceso.delete(proveedor);
+                        query = "From Proveedores s";
+                        llenarTabla(jtProveedor, "Proveedor", query);
+                        JOptionPane.showMessageDialog(this, "Proveedor eliminada correctamente", "Cancelado", 1);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+                        System.gc();
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_jtProveedorKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCorregirProveedor;
-    private javax.swing.JButton btnEliminarProveedor;
-    private javax.swing.JButton btnNuevoProveedor;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel85;
-    private javax.swing.JLabel jLabel89;
+    private javax.swing.JLabel jLabel112;
+    private javax.swing.JLabel jLabel113;
+    private javax.swing.JLabel jLabel114;
+    private javax.swing.JLabel jLabel115;
+    private javax.swing.JLabel jLabel116;
+    private javax.swing.JLabel jLabel117;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jpProveedoresClientes;
     private javax.swing.JScrollPane jsProvedorCliente;

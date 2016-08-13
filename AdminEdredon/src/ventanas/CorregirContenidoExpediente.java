@@ -5,7 +5,7 @@
  */
 package ventanas;
 
-import controlBD.AccesoBD;
+import controlBD.DAOUniversalHibernate;
 import herramienta.FechaHerramienta;
 import java.beans.PropertyVetoException;
 import java.util.List;
@@ -35,7 +35,7 @@ public class CorregirContenidoExpediente extends javax.swing.JInternalFrame {
     }
 
     private void llenarCombo(JComboBox combo, String query, String tipoLista, boolean todas) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         combo.removeAllItems();
         List listaItems = acceso.select(query);
         //combo = new JComboBox();
@@ -72,7 +72,7 @@ public class CorregirContenidoExpediente extends javax.swing.JInternalFrame {
     private void cargaDatos(String clave) {
         //Reviso si que la consulta no vaya vacia
         if (!clave.isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             conExpediente = new Contenidoexpediente();
             String query = "FROM Contenidoexpediente ce WHERE ce.idContenidoExpediente = '" + clave + "'";
             conExpediente = (Contenidoexpediente) acceso.select(query).get(0);
@@ -280,7 +280,7 @@ public class CorregirContenidoExpediente extends javax.swing.JInternalFrame {
         if (!txtFolioExpedienteAsignar.getText().isEmpty()
                 && !txtImporte.getText().isEmpty()
                 && !txtPiezasAsignar.getText().isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
 
             conExpediente.setFecha(jdcFechaAsignarFolio.getDate());
             conExpediente.setFolio(txtFolioExpedienteAsignar.getText());

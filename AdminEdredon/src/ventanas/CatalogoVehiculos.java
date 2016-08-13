@@ -5,12 +5,14 @@
  */
 package ventanas;
 
-import controlBD.AccesoBD;
+import controlBD.DAOUniversalHibernate;
+import java.awt.event.KeyEvent;
 import javax.swing.JInternalFrame;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import pojos.Vehiculo;
 import javax.swing.JOptionPane;
+import pojos.Sucursal;
 
 /**
  *
@@ -38,12 +40,10 @@ public class CatalogoVehiculos extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jpVehiculos = new javax.swing.JPanel();
-        jLabel90 = new javax.swing.JLabel();
         txtvehiculo = new javax.swing.JTextField();
         btnNuevoVehiculo = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         jtVehiculo = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
         jLabel91 = new javax.swing.JLabel();
         jLabel103 = new javax.swing.JLabel();
         txtDuenio = new javax.swing.JTextField();
@@ -53,14 +53,16 @@ public class CatalogoVehiculos extends javax.swing.JInternalFrame {
         txtAnio = new javax.swing.JTextField();
         jLabel106 = new javax.swing.JLabel();
         txtPlacas = new javax.swing.JTextField();
-        btnBorrarVehiculo = new javax.swing.JButton();
-        jLabel107 = new javax.swing.JLabel();
-        btnCorregirVehiculo = new javax.swing.JButton();
+        jLabel112 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel119 = new javax.swing.JLabel();
+        jLabel120 = new javax.swing.JLabel();
+        jLabel121 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
-        setTitle("Mis Vehiculos");
+        setTitle("Vehiculos");
 
         jpVehiculos.setBackground(new java.awt.Color(255, 255, 255));
         jpVehiculos.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -68,10 +70,6 @@ public class CatalogoVehiculos extends javax.swing.JInternalFrame {
                 jpVehiculosComponentShown(evt);
             }
         });
-
-        jLabel90.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jLabel90.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel90.setText("MIS VEHICULOS");
 
         btnNuevoVehiculo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnNuevoVehiculo.setForeground(new java.awt.Color(0, 153, 51));
@@ -113,60 +111,82 @@ public class CatalogoVehiculos extends javax.swing.JInternalFrame {
             }
         });
         jtVehiculo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtVehiculoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtVehiculoKeyTyped(evt);
             }
         });
         jScrollPane7.setViewportView(jtVehiculo);
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/car2.png"))); // NOI18N
-
-        jLabel91.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel91.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel91.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel91.setForeground(new java.awt.Color(51, 51, 51));
         jLabel91.setText("VEHICULO");
 
-        jLabel103.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel103.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel103.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel103.setForeground(new java.awt.Color(51, 51, 51));
         jLabel103.setText("DUEÑO");
 
-        jLabel104.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel104.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel104.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel104.setForeground(new java.awt.Color(51, 51, 51));
         jLabel104.setText("COLOR");
 
-        jLabel105.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel105.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel105.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel105.setForeground(new java.awt.Color(51, 51, 51));
         jLabel105.setText("AÑO");
 
-        jLabel106.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel106.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel106.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel106.setForeground(new java.awt.Color(51, 51, 51));
         jLabel106.setText("PLACAS");
 
-        btnBorrarVehiculo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnBorrarVehiculo.setForeground(new java.awt.Color(0, 153, 51));
-        btnBorrarVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/delete.png"))); // NOI18N
-        btnBorrarVehiculo.setText("Eliminar");
-        btnBorrarVehiculo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnBorrarVehiculo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBorrarVehiculoActionPerformed(evt);
-            }
-        });
+        jLabel112.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel112.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel112.setText("Automóviles");
 
-        jLabel107.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel107.setForeground(new java.awt.Color(0, 153, 0));
-        jLabel107.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel107.setText("ADMINISTRAS MIS VEHICULOS");
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnCorregirVehiculo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnCorregirVehiculo.setForeground(new java.awt.Color(0, 153, 51));
-        btnCorregirVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/correct.png"))); // NOI18N
-        btnCorregirVehiculo.setText("Corregir");
-        btnCorregirVehiculo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCorregirVehiculoActionPerformed(evt);
-            }
-        });
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconosGenerales/volante.png"))); // NOI18N
+
+        jLabel119.setFont(new java.awt.Font("Comic Sans MS", 1, 10)); // NOI18N
+        jLabel119.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel119.setText("TABLA + ENTER = CAMBIAR");
+
+        jLabel120.setFont(new java.awt.Font("Comic Sans MS", 1, 10)); // NOI18N
+        jLabel120.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel120.setText("TABLA + SUPR   = BORRAR");
+
+        jLabel121.setFont(new java.awt.Font("Comic Sans MS", 1, 10)); // NOI18N
+        jLabel121.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel121.setText("<---------------------");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel119, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel120, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel121, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addComponent(jLabel119)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel120)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel121)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10))
+        );
 
         javax.swing.GroupLayout jpVehiculosLayout = new javax.swing.GroupLayout(jpVehiculos);
         jpVehiculos.setLayout(jpVehiculosLayout);
@@ -175,83 +195,69 @@ public class CatalogoVehiculos extends javax.swing.JInternalFrame {
             .addGroup(jpVehiculosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpVehiculosLayout.createSequentialGroup()
-                        .addGroup(jpVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel90, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jpVehiculosLayout.createSequentialGroup()
-                                .addGroup(jpVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel91, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtvehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jpVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel103, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtDuenio, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jpVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel104, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jpVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel105, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jpVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtPlacas)
-                                    .addComponent(jLabel106, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnNuevoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpVehiculosLayout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addComponent(btnBorrarVehiculo)
-                                .addGap(104, 104, 104)
-                                .addComponent(jLabel107, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(122, 122, 122)
-                                .addComponent(btnCorregirVehiculo)
-                                .addGap(75, 75, 75)))
-                        .addGap(10, 10, 10))
                     .addGroup(jpVehiculosLayout.createSequentialGroup()
-                        .addGroup(jpVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 845, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 805, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                        .addGroup(jpVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                .addComponent(txtvehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel91, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel104, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPlacas, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                .addComponent(jLabel103, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtDuenio, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                .addComponent(jLabel105, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel106, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNuevoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel112, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jpVehiculosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtAnio, txtColor, txtDuenio, txtPlacas, txtvehiculo});
+        jpVehiculosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel103, jLabel104, jLabel105, jLabel106, jLabel91, txtAnio, txtColor, txtDuenio, txtPlacas, txtvehiculo});
 
         jpVehiculosLayout.setVerticalGroup(
             jpVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpVehiculosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel90)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel91)
-                    .addComponent(jLabel103)
-                    .addComponent(jLabel104)
-                    .addComponent(jLabel105)
-                    .addComponent(jLabel106))
-                .addGap(7, 7, 7)
-                .addGroup(jpVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(txtvehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDuenio, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPlacas, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCorregirVehiculo)
-                    .addGroup(jpVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnBorrarVehiculo)
-                        .addComponent(jLabel107)))
-                .addGap(27, 27, 27))
-            .addGroup(javax.swing.GroupLayout.Alignment.CENTER, jpVehiculosLayout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(btnNuevoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(371, 371, 371))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpVehiculosLayout.createSequentialGroup()
+                .addGroup(jpVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpVehiculosLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpVehiculosLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel112)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addComponent(jLabel91)
+                        .addGap(7, 7, 7)
+                        .addGroup(jpVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jpVehiculosLayout.createSequentialGroup()
+                                .addComponent(txtvehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(13, 13, 13)
+                                .addComponent(jLabel104)
+                                .addGap(7, 7, 7)
+                                .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel106)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtPlacas, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel103)
+                                .addGap(7, 7, 7)
+                                .addComponent(txtDuenio, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(13, 13, 13)
+                                .addComponent(jLabel105)
+                                .addGap(7, 7, 7)
+                                .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnNuevoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                .addGap(54, 54, 54))
         );
 
         jpVehiculosLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtAnio, txtColor, txtDuenio, txtPlacas, txtvehiculo});
@@ -260,28 +266,20 @@ public class CatalogoVehiculos extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 865, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jpVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(jpVehiculos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jpVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jpVehiculos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoVehiculoActionPerformed
-        AccesoBD control = new AccesoBD();
+        DAOUniversalHibernate control = new DAOUniversalHibernate();
         try {
             if (!txtvehiculo.getText().isEmpty()
                     || !txtDuenio.getText().isEmpty()
@@ -295,7 +293,6 @@ public class CatalogoVehiculos extends javax.swing.JInternalFrame {
                 control.add(vehiculo);
 
                 limpiarCampos();
-                JOptionPane.showMessageDialog(this, "Vehiculo registrado correctamente", "Datos registrados", 1);
                 String Query = "";
                 Query = "FROM Vehiculo v ORDER BY v.vehiculo";
                 cargaTabla(jtVehiculo, Query, "Vehiculo", 1);
@@ -323,31 +320,10 @@ public class CatalogoVehiculos extends javax.swing.JInternalFrame {
     private void jtVehiculoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtVehiculoKeyTyped
 
     }//GEN-LAST:event_jtVehiculoKeyTyped
-
-    private void btnBorrarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarVehiculoActionPerformed
-        if (jtVehiculo.getSelectedRow() != -1) {
-            int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este concepto?", "Confirmar eliminación", 0, 3);
-            if (respuesta == 0) {
-                try {
-                    AccesoBD acceso = new AccesoBD();
-                    int clave = (int) jtVehiculo.getValueAt(jtVehiculo.getSelectedRow(), 0);
-                    String query = "From Vehiculo v WHERE v.idvehiculo = '" + clave + "'";
-                    Vehiculo concepto = (Vehiculo) acceso.select(query).get(0);
-                    acceso.delete(concepto);
-                    query = "From Vehiculo v";
-                    cargaTabla(jtVehiculo, query, "Vehiculo", 1);
-                    JOptionPane.showMessageDialog(this, "Concepto eliminado correctamente", "Cancelado", 1);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
-                    System.gc();
-                }
-            }
-        }
-    }//GEN-LAST:event_btnBorrarVehiculoActionPerformed
     private void cargaTabla(final JTable jtTabla, String HQL, String Encabezado, int NoColOcultar) {
         //Reviso si que la consulta no vaya vacia
         if (!HQL.isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             jtTabla.setVisible(false);
             jtTabla.removeAll();
             jtTabla.setModel(acceso.retornaModelo(Encabezado, HQL));
@@ -380,52 +356,83 @@ public class CatalogoVehiculos extends javax.swing.JInternalFrame {
     }
 
     private void llenarTabla(JTable jtTabla, String nombreTabla, String consulta) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         jtTabla.setVisible(false);
         jtTabla.removeAll();
         //_________________________ NOMBRE DE LA TABLA, CONSULTA
         jtTabla.setModel(acceso.retornaModelo(nombreTabla, consulta));
         jtTabla.setVisible(true);
     }
-    private void btnCorregirVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorregirVehiculoActionPerformed
-        if (jtVehiculo.getSelectedRow() != -1) {
-            String clave = jtVehiculo.getValueAt(jtVehiculo.getSelectedRow(), 0).toString();
-            try {
-                CorregirVehiculo corrigeVehiculo = new CorregirVehiculo(clave);
-                if (exist(corrigeVehiculo) == false) {
-                    CPanel.desktop.add(corrigeVehiculo);
-                    corrigeVehiculo.setVisible(true);
-                    corrigeVehiculo.setLocation((CPanel.desktop.getWidth() - corrigeVehiculo.getWidth()) / 2,
-                            (CPanel.desktop.getHeight() - corrigeVehiculo.getHeight()) / 2);
-                } else {
-                    corrigeVehiculo.dispose();
-
-                }
-            } catch (Exception ex) {
-
-            }
-        }
-    }//GEN-LAST:event_btnCorregirVehiculoActionPerformed
-
     private void jpVehiculosComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpVehiculosComponentShown
         String query = "";
         query = "FROM Vehiculo v ORDER BY v.vehiculo";
         cargaTabla(jtVehiculo, query, "Vehiculo", 1);
     }//GEN-LAST:event_jpVehiculosComponentShown
 
+    private void jtVehiculoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtVehiculoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (jtVehiculo.getSelectedRow() != -1) {
+                String clave = jtVehiculo.getValueAt(jtVehiculo.getSelectedRow(), 0).toString();
+                try {
+                    CorregirVehiculo corrigeVehiculo = new CorregirVehiculo(clave);
+                    if (exist(corrigeVehiculo) == false) {
+                        CPanel.desktop.add(corrigeVehiculo);
+                        corrigeVehiculo.setVisible(true);
+                        corrigeVehiculo.setLocation((CPanel.desktop.getWidth() - corrigeVehiculo.getWidth()) / 2,
+                                (CPanel.desktop.getHeight() - corrigeVehiculo.getHeight()) / 2);
+                    } else {
+                        corrigeVehiculo.dispose();
+
+                    }
+                } catch (Exception ex) {
+
+                }
+            }
+        }
+//----------------------------------------------------------------------->
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            if (jtVehiculo.getSelectedRow() != -1) {
+                int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este concepto?", "Confirmar eliminación", 0, 3);
+                if (respuesta == 0) {
+                    try {
+                        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
+                        int clave = (int) jtVehiculo.getValueAt(jtVehiculo.getSelectedRow(), 0);
+                        String query = "From Vehiculo v WHERE v.idvehiculo = '" + clave + "'";
+                        Vehiculo concepto = (Vehiculo) acceso.select(query).get(0);
+                        acceso.delete(concepto);
+                        query = "From Vehiculo v";
+                        cargaTabla(jtVehiculo, query, "Vehiculo", 1);
+                        JOptionPane.showMessageDialog(this, "Concepto eliminado correctamente", "Cancelado", 1);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e, "Error", 0);
+                        System.gc();
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_jtVehiculoKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBorrarVehiculo;
-    private javax.swing.JButton btnCorregirVehiculo;
     private javax.swing.JButton btnNuevoVehiculo;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel103;
     private javax.swing.JLabel jLabel104;
     private javax.swing.JLabel jLabel105;
     private javax.swing.JLabel jLabel106;
-    private javax.swing.JLabel jLabel107;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel90;
+    private javax.swing.JLabel jLabel112;
+    private javax.swing.JLabel jLabel113;
+    private javax.swing.JLabel jLabel114;
+    private javax.swing.JLabel jLabel115;
+    private javax.swing.JLabel jLabel116;
+    private javax.swing.JLabel jLabel117;
+    private javax.swing.JLabel jLabel119;
+    private javax.swing.JLabel jLabel120;
+    private javax.swing.JLabel jLabel121;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel91;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JPanel jpVehiculos;
     private javax.swing.JTable jtVehiculo;

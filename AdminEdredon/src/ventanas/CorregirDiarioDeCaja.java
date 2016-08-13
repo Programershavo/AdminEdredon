@@ -5,7 +5,7 @@
  */
 package ventanas;
 
-import controlBD.AccesoBD;
+import controlBD.DAOUniversalHibernate;
 import herramienta.FechaHerramienta;
 import java.beans.PropertyVetoException;
 import javax.swing.JOptionPane;
@@ -28,7 +28,7 @@ public class CorregirDiarioDeCaja extends javax.swing.JInternalFrame {
     private void cargaDatos(String clave) {
         //Reviso si que la consulta no vaya vacia
         if (!clave.isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             diarioDeCaja = new Diariocaja();
             String HQL = "FROM Diariocaja d WHERE d.idDiarioCaja = '" + clave + "'";
             diarioDeCaja = (Diariocaja) acceso.select(HQL).get(0);
@@ -305,7 +305,7 @@ public class CorregirDiarioDeCaja extends javax.swing.JInternalFrame {
                 && !txtNotas.getText().isEmpty()
                 && !txtCredito.getText().isEmpty()
                 && !txtGastosDeVenta.getText().isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             diarioDeCaja.setNotas(txtNotas.getText());
             String fecha = FechaHerramienta.formatoYMD(jdcFechaCredito.getDate());
             diarioDeCaja.setFecha(FechaHerramienta.convertirStringEnDate(fecha));

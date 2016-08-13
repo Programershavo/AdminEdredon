@@ -5,7 +5,7 @@
  */
 package ventanas;
 
-import controlBD.AccesoBD;
+import controlBD.DAOUniversalHibernate;
 import herramienta.FechaHerramienta;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
@@ -40,7 +40,7 @@ public class CorregirGastoFinanciero extends javax.swing.JInternalFrame {
     private void cargaDatos(String clave) {
 //        Reviso si que la consulta no vaya vacia
         if (!clave.isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             gastoFinanciero = new Gastosfinancieros();
             String HQL = "From Gastosfinancieros gl WHERE gl.idGastosFinancieros = '" + clave + "'";
             gastoFinanciero = (Gastosfinancieros) acceso.select(HQL).get(0);
@@ -236,7 +236,7 @@ public class CorregirGastoFinanciero extends javax.swing.JInternalFrame {
 
     private void btnCorregirConceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorregirConceptoActionPerformed
 
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         gastoFinanciero.setConcepto(cmbConceptoSueldoPrestamo.getSelectedItem().toString());
         String fecha = FechaHerramienta.formatoYMD(jdcGastoGasolina.getDate());
         gastoFinanciero.setFecha(FechaHerramienta.convertirStringEnDate(fecha));

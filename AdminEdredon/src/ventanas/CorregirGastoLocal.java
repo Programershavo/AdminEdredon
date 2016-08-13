@@ -5,7 +5,7 @@
  */
 package ventanas;
 
-import controlBD.AccesoBD;
+import controlBD.DAOUniversalHibernate;
 import herramienta.FechaHerramienta;
 import java.beans.PropertyVetoException;
 import java.util.List;
@@ -36,7 +36,7 @@ public class CorregirGastoLocal extends javax.swing.JInternalFrame {
     }
 
     private void llenarCombo(JComboBox combo, String query, String tipoLista, boolean todas) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         combo.removeAllItems();
         if (acceso.select(query) != null) {
 
@@ -82,7 +82,7 @@ public class CorregirGastoLocal extends javax.swing.JInternalFrame {
     private void cargaDatos(String clave) {
         //Reviso si que la consulta no vaya vacia
         if (!clave.isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             gastoLocal = new Gastoslocales();
             String query = "FROM Gastoslocales gl WHERE gl.idGastosLocales = '" + clave + "'";
             gastoLocal = (Gastoslocales) acceso.select(query).get(0);
@@ -302,7 +302,7 @@ public class CorregirGastoLocal extends javax.swing.JInternalFrame {
     private void btnCorregirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorregirActionPerformed
         if (!txtComentario.getText().isEmpty()
                 && !txtImporte.getText().isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             String fecha = FechaHerramienta.formatoYMD(jdcFechaGasto.getDate());
             gastoLocal.setFecha(FechaHerramienta.convertirStringEnDate(fecha));
             gastoLocal.setConcepto(cmbConcepto.getSelectedItem().toString());

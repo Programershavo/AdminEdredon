@@ -5,7 +5,7 @@
  */
 package ventanas;
 
-import controlBD.AccesoBD;
+import controlBD.DAOUniversalHibernate;
 import herramienta.FechaHerramienta;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
@@ -39,7 +39,7 @@ public class CorregirGastoGasolina extends javax.swing.JInternalFrame {
     }
 
     private void llenarCombo(JComboBox combo, String query, String tipoLista, boolean todas) {
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         combo.removeAllItems();
         if (acceso.select(query) != null) {
 
@@ -82,7 +82,7 @@ public class CorregirGastoGasolina extends javax.swing.JInternalFrame {
     private void cargaDatos(String clave) {
 //        Reviso si que la consulta no vaya vacia
         if (!clave.isEmpty()) {
-            AccesoBD acceso = new AccesoBD();
+            DAOUniversalHibernate acceso = new DAOUniversalHibernate();
             gastoGasolina = new Gastogasolina();
             String HQL = "From Gastogasolina gl WHERE gl.idGastoGasolina = '" + clave + "'";
             gastoGasolina = (Gastogasolina) acceso.select(HQL).get(0);
@@ -255,7 +255,7 @@ public class CorregirGastoGasolina extends javax.swing.JInternalFrame {
 
     private void btnCorregirConceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorregirConceptoActionPerformed
 
-        AccesoBD acceso = new AccesoBD();
+        DAOUniversalHibernate acceso = new DAOUniversalHibernate();
         gastoGasolina.setVehiculo(cmbVehiculo.getSelectedItem().toString());
         String fecha = FechaHerramienta.formatoYMD(jdcGastoGasolina.getDate());
         gastoGasolina.setFecha(FechaHerramienta.convertirStringEnDate(fecha));
